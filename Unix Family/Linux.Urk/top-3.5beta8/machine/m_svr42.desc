@@ -1,0 +1,14 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For Intel based System V Release 4.2 (DESTINY)
+
+DESCRIPTION:
+System V release 4.2.x for i[3][4]86
+
+LIBS:  -lelf
+
+AUTHORS:  David Cutter       <dpc@grail.com>
+Andrew Herbert     <andrew@werple.apana.org.au>
+Robert Boucher     <boucher@sofkin.ca>
+

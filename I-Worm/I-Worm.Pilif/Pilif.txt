@@ -1,0 +1,75 @@
+--------------------------------------------------------------------
+|Dark Coderz Alliance's Materials / Rott_En's code/work can not    |		 
+|be used in any type of illegal actions. Do not spread, study from |
+|our work and learn how to code a virus and how viruses work.      |
+|Dont rip, learn and give back to the community! peace!            |
+--------------------------------------------------------------------
+
+Virus Name: Pilif
+AV Assigned: <undetected>
+Language: Visual Basic 6
+Author: Rott_En/DCA 
+Purpose: Manifesto Anti-Censore
+Payload: Anti-Censore Message and Disabling of system-wide shell capabilities
+
+---------------------------
+|Detailed Virus procedures|
+---------------------------
+
+	The virus uses a registry value to store the number of times that it has been
+executed on the infected system. When this value reaches "10" it is beeing reset and a
+msgbox is displayed with the following text:
+
+	"Only two things are infinite : The Universe and Human Stupidity. 
+		And I am not sure about the Universe - A.Einstein"
+
+	The main virus engine is then loaded, wich checks if %system32% contains the
+file "pilif.exe". If not, the virus copies itself to this location and adds a registry 
+startup key that points to this copy. Autorun key is:
+
+	"HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN\" & "Pilif"
+
+	The virus disables Windows Task Manager and attempts to shutdown the following
+software:
+	"Kaspersky Anti-Virus"
+	Kaspersky AV Control Centre"
+	"Agnitium Firewall"
+	"Kaspersky AV Monitor"
+	"Kaspersky Anti-Virus Scanner"
+	"McAfee"
+	"Norton Anti-Virus"
+	"Norton Firewall"
+	"Sygate Personal Firewall"
+	"Windows Updater"
+	"Zone Alarm"	
+
+	The retro function will be called once at every 10 seconds, assuring proper
+closing of the targeted windows and rendering those products useless. (also displays
+shutdown screen when this is enabled)
+	Spreading consists of LAN,Mail,P2P and IRC. By lan it copies itself via maped 
+network drives.
+	Mass mailing capabilities with 10 random message subjects,bodies and attachement
+names. Also it has 6 random attachement extensions for the mail spreading method. 
+Attachement name: "Manifesto Anti Pilif.pif". Mail addresses are "leeched" from local
+files, the worm using a scan method and outputing the found email addresses stored on the local
+hdd in < %system32& / adrbook > (tks dr3f! :)
+	As for P2P spreading it copies itself under random fake names like 
+"Kasperky AV Universal Key.exe","Dark Coderz Alliance.exe","Cracks mega warez collection.exe" and
+"Webmail official hacker.exe" into the sharing folders of 10 known P2P file-sharing applications.
+	Again random names and extension for the generated worm files.
+	IRC spreading is done by first messaging all the users in a common IRC channel as the
+infected host and then attempting to DCC transfer the infected file. 
+
+	Its payload is triggered based on date. If the current day is greater than 25 the visual 
+payload is displayed and systemwide shell capabilities are disabled. (the visual payload is an
+anti-censore manifesto regarding not respected basic human rights in .ro)
+Another message is displayed on 6.04 every year, with the text: "Happy birthday Ombladon! Fuck you Pilif..."
+
+--------------------------------------------------------------------
+|Dark Coderz Alliance's Materials / Rott_En's code/work can not    |		 
+|be used in any type of illegal actions. Do not spread, study from |
+|our work and learn how to code a virus and how viruses work.      |
+|Dont rip, learn and give back to the community! peace!            |
+--------------------------------------------------------------------
+
+

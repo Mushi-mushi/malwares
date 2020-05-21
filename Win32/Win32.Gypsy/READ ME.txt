@@ -1,0 +1,90 @@
+                         *** the bare Basic information for W32.Gypsy@mm *** 
+                         ===================================================
+
+
+
+  Warning : 
+  =========
+    Do Not Release this worm out in the wild..(the internet) 
+    this is STRICTLY for educational perpose`s only..! But you can
+    use any part of my source codes that i post to make your own
+    stuff if it`s useful to you..
+
+  *** I WILL TAKE NO RESPONSEABILTY FOR ANY ONE ELSE`S STUPID ACTIONS..!!! ***
+  ============================================================================
+
+
+
+As soon as the virus is executed it will do the following actions
+
+- Hides it self from the user
+- Only Allows one copy of it self to run at a time
+- Checks if the systems folder is WINNT or WINDOWS
+- Coppies it self into the SYSTEM32 folder on the system as Regverif32.exe and then
+  it will hide that copy.
+- Creates another copy of it self as GoogleEarthSetup.exe this is what it sends via email
+  but will delete that file once the emails have been sent.
+- Checks to see it the operating system is WINDOWS_NT, IF it is then it will run these
+  certian functions below 
+
+  -- Check_RegValues
+  ==================
+   check to see if certian registry keys exist and if they dont it will create them
+   by dropping *.reg files
+
+  -- Start_NetShare
+  =================
+   With this function all it will do is create a folder called System Security in 
+   the WindowsUpdate folder and from there it will copy it self a few times under
+   different file names and once that is completed then the virus will share the 
+   folder it created and also share the c:\ drive and adds an administrator share
+   privileges (ADMIN$) so you can access the infected computers via port 139.
+ 
+  -- Edit_HostFile
+  ================
+   The virus just edits the systems host file so the user cannot visit certian 
+   web sites.
+  
+  -- Stop_AntiVirus
+  =================
+   Well just stops X amount of antivirus processes just so the virus can prepare
+   to send it self via email. 
+
+  -- Collect_Emails
+  =================
+   Just checks certian types of file extentions to collect all the email addresses 
+   it can.
+
+  -- SendEmails
+  =============
+   Sends a copy of it self to all the emails it has collected on the infected system 
+   via outlook express using VB sendkeys.
+   
+  -- Check_TaskFolder
+  ===================
+   All this will do is just check and delete any tasks that is in the task folder
+   once that is completed it will create a task to shutdown the system in 1 minutes
+   time from the current infected systems time frame.   
+
+
+- And if the system is NOT WINDOWS_NT then it will just run these certian functions below 
+
+  -- Check_RegValues
+  ==================
+   check to see if certian registry keys exist and if they dont it will create them
+   by dropping *.reg files
+
+  -- Stop_AntiVirus
+  =================
+   Well just stops X amount of antivirus processes just so the virus can prepare
+   to send it self via email.
+
+  -- Collect_Emails
+  =================
+   Just checks certian types of file extentions to collect all the email addresses 
+   it can. 
+
+  -- SendEmails
+  =============
+   Sends a copy of it self to all the emails it has collected on the infected system 
+   via outlook express using VB sendkeys.

@@ -1,0 +1,456 @@
+SSH 2.0.13
+==============
+
+        Timo J. Rinne <tri@ssh.fi>
+	Sami Lehtinen <sjl@ssh.fi>
+        29 April 1999
+	
+	See file LICENSING for licensing terms.
+
+	See file SSH2.QUICKSTART for Mr. Yamamoto's guide on
+	installing and using ssh2 and ssh1 in compatibility mode.
+
+	See file FAQ for Frequently Asked Questions.
+
+   What has changed since ssh 1 ?
+   ------------------------------
+
+      - ssh has been 98% rewritten
+
+      - support other key-exchange methods besides double-encrypting
+        rsa key exchange. The current distribution comes with Diffie-Hellman
+        key exchange.
+
+      - support for DSA and other public key algorithms besides RSA.
+
+      - the protocol is more secure and allows future integration into
+        public key infrastructures
+
+      - the protocol complies with upcoming `secsh' internet standard.
+
+      - support for "subsystems", platform-independent modules that
+        implement particular functions such as file transfers
+
+      - built-in SOCKS support
+
+      - new feature: sftp, the secure file transfer protocol (name will
+        probably change)
+
+
+   Feedback
+   --------
+
+      bugs:   www-form: http://www.ssh.fi/support/bug-report.html
+              email:    ssh2-bugs@ssh.fi
+
+      other: ssh2@ssh.fi
+
+      feature-requests can also be submitted via
+      http://www.ssh.fi/support/feature-request.html
+
+   Commercial Inquries
+   -------------------
+
+      If you have questions about the commercial version, for example
+      about availability, versions, etc. direct them to
+      DataFellows. SSH Communications Security only distributes the
+      non-commercial version.
+
+SSH2 Binaries
+=============
+
+      ssh2            ssh2 client.
+
+      sshd2           ssh2 daemon.
+
+      sftp2           sftp client (needs ssh2). Type "?" in the command line
+                      for help.
+
+      sftp-server2    sftp server (executed by sshd2).
+
+      scp2            scp client
+
+      ssh-keygen2     utility for generating keys. -h for help.
+
+      ssh-add2        add identities to the authentication agent.
+
+      ssh-agent2      the authentication agent
+
+      ssh-askpass2    X11 utility for querying passwords.
+
+      ssh-signer2     Small program that signs
+                      "hostbased"-authentication packets. Executed by
+                      ssh2, and for proper function, must be suid root.
+                      (this is done by 'make install')
+
+Installation
+============
+
+   1. uncompress the distribution
+   ------------------------------
+
+      > zcat ssh-2.0.x.tar.gz | tar xf -
+
+      This should create a subdirectory ssh-2.0.x.
+
+      > cd ssh-2.0.x
+
+
+   2. compile ssh2
+   ---------------
+
+      Read the NOTES-section found in the end of this file.
+
+
+      > ./configure
+      > make
+
+      If this fails, find and fix the problem. Report it to ssh2-bugs@ssh.fi.
+      Try again :-) Look at section REPORTING BUGS for more
+      information, before submitting a bug report.
+
+   3. run the install script
+   -------------------------
+
+      Get a root shell and change to the ssh-2.0.x directory.
+
+      # make install
+
+      This should set everything up and create the host key.
+
+      The old files are moved to *.old names. If you don't want them
+      around, goto apps/ssh and run 
+
+      # make clean-up-old
+
+      which will delete them.
+
+      NOTE: This host key has relatively little entropy. We'll have
+            to actually stir in more randomness to create strong
+            keys (this is a problem, if your system doesn't have
+	    /dev/random). If your system doesn't have /dev/random, you
+            might want to generate a couple of keys with ssh-keygen,
+            and after that install a new hostkey. We'll fix this later..
+
+   4. configure sshd2
+   ------------------
+
+      Set up the following files:
+
+
+ssh 2 files
+===========
+
+      Public keys have a .pub suffix, private keys have none. Example:
+
+         id_dsa_1024_a        A 1024-bit DSA private key
+         id_dsa_1024_a.pub    Corresponding public key
+
+      There is no "known_hosts", as in ssh1. The host keys are stored
+      in separate files in ~/.ssh2/hostkeys .
+
+
+   ~/.ssh2/hostkeys/key_xxxx_yyyy.pub
+   -----------------------------
+
+      would be the public host key of the ssh2 daemon running in port xxxx
+      of the host yyyy.
+
+
+   /etc/ssh2/hostkey.pub  and  /etc/ssh2/hostkey
+   -----------------------------------------
+
+      Public and private hostkeys for sshd2. Created by "make install".
+
+
+   ~/.ssh2/identification
+   ----------------------
+
+      Lists the private keys that can be used for authentication.
+
+         # identification
+         IdKey  id_dsa_1024_a
+
+      This means that the private key in the file ~/.ssh2/id_dsa_1024_a
+      is used for public key authentication.
+
+
+   ~/.ssh2/authorization
+   ---------------------
+
+      Lists the public keys that are accepted for authentication on this
+      host.
+
+         # authorization
+         Key     id_dsa_1024_a.pub
+
+      This means that anyone, who holds the matching private key to the
+      public key in the file $USER/.ssh2/id_dsa_1024_a.pub can log in as
+      $USER.
+
+
+   /etc/ssh2/sshd2_config
+   --------------------
+
+      Server configuration file. Copied here by "make install". See man
+      page for details.
+
+      The line:
+
+         subsystem-sftp                  sftp-server
+
+      means that when when a subsystem "sftp" is requested, the
+      command "sftp-server" is started. For example, if our sshd2_config
+      read:
+
+         subsystem-quux                  echo "fiu poks pam"
+
+      the command "ssh2 host -s quux" would simply print the text
+      "fiu poks pam".
+
+
+   ~/.ssh2/ssh2_config
+   -------------------
+
+       Client configuration file. See the global client config file
+       ssh2_config in /etc/ssh2.
+
+   ~/.ssh2/knownhosts/xxxxyyyy.pub
+   -------------------------------
+
+      These are the public hostkeys of hosts that a user wants to log
+      from using hostbased-authentication (equivalent with ssh1's
+      RhostsRSAAuthentication). Also, a user has to set up her/his
+      ~/.shosts (which only ssh uses) or ~/.rhosts file (insecure, as
+      it is used by the r*-commands also). If username is the same in
+      both hosts, it is adequate to put the public hostkey to
+      /etc/ssh2/knownhosts and add the host's name to
+      /etc/shosts.equiv (or /etc/hosts.equiv). 
+
+      xxxx denotes the hostname (FQDN) and yyyy the publickey
+      algorithm of the key.
+
+      For example, zappa.foo.fi's hostkey algorithm is ssh-dss. The
+      hostkey would be named 
+
+          zappa.foo.fi.ssh-dss.pub
+
+      in the knowhosts-directory.
+
+      Possible values for publickey-algorithms are "ssh-dss" and
+      "ssh-rsa" (without the quotes).
+
+   /etc/ssh2/knownhosts/xxxxyyyy.pub
+   ---------------------------------
+
+      As above, but system-wide. These can be overridden by the user
+      by putting a file with the same name to her/his ~/.ssh2/knownhosts
+      directory. 
+
+   /etc/hosts.equiv and /etc/shosts.equiv
+   --------------------------------------
+
+      Used to check whether authentication from host is allowed using
+      hostbased-authentication. In the simplest form, contains
+      hostnames, one per line.
+
+      For more information, check 'man sshd2'.
+
+   ~/.rhosts and ~/.shosts
+   -----------------------
+
+      This file contains host-username-pairs, separated by spaces, one
+      per line. The given user from the specified host is allowed to
+      log in without a password. 
+
+      For more information, check 'man ssh2' and 'man sshd2'.
+
+Platforms
+=========
+
+	Ssh 2.0 has been reportedly successfully compiled and
+	run on the following platforms (there are more):
+
+	Processor	OS		OS-Versions
+	-------------------------------------------------------------
+	ix86,m68k	NetBSD		1.2, 1.3
+	ix86		FreeBSD		2.2.x, 3.0-current
+	ix86		Linux		2.0.3x
+	sparc		Solaris		2.6, 2.5.1
+	PowerPC		AIX		4.1, 4.2.x
+	hppa1.1		HPUX		10.20
+	mips		IRIX		6.5, 6.3, 6.2, 5.3 (with SGI cc)
+	
+
+NOTES ON INSTALLATION AND USE
+=============================
+
+	* Use 'scp2 -1' to enable compatibility with scp1.
+
+	* If your system doesn't support, or has a broken version of
+	  non-blocking connect, run ./configure with
+	  -enable-blocking-connect .
+
+	* If you get errors when compiling assembler files, configure
+	  with --disable-asm and recompile.
+
+	* compatibility with ssh1 works correctly ONLY IF your ssh1-version
+	  is 1.2.26 or better (1.2.26 is the latest). So be sure you have
+	  that!
+
+	* If your Sun boots during a connect to sshd2, do the following.
+	  Fetch the latest patches from Sun, generate a new hostkey with the
+	  patched version, and try again (also, you might want to try
+	  --enable-blocking-connect etc).
+
+	* if configure complains 'configure: error: configuring with X
+	  but xauth not found - aborting', try 
+
+		./configure --without-x
+
+	  or, add path of xauth to your PATH before running
+	  configure. You can find xauth's location like this:
+
+		find / -name xauth
+
+	* Use 'ssh-keygen -P' to create keys without passphrases (for
+	  use with rsync etc.).
+
+	* configure option --disable-crypt-asm no longer exists (use
+	  --disable-asm instead).
+
+KNOWN BUGS
+==========
+
+	* When using the '-p' option together with '-r' option,
+	  directory modification times are not properly set. 
+
+	* Assembler-optimizations don't compile on BSDI. configure
+	  with --disable-asm.
+
+	* Reportedly sshd2 child process can sometimes end up in a
+	  busy loop on the server side, consuming CPU-time. (this has been
+	  reported mainly on Solaris, and some other systems as well). Haven't
+	  been able to reproduce this, so no fix is currently available.
+
+	* Reportedly sshd2 doesn't fork correctly to background on some
+	  AIX systems. We haven't been able to reproduce this.
+	
+	* ssh-keygen2 dumps core on Linux/PowerPC environments. This
+	  is probably due to egcs's different arg_list. Matter is
+	  being investigated, and a patch/release will be released as
+	  soon as this bug is found and fixed.
+
+	* With C2 security package, all the C2 characteristics are not
+	  properly used.
+
+	* If gcc complains about undefined references to tgetent and
+	  tgetstr etc., configure didn't find your libtermcap
+	  library. Either it isn't in a standard place, or you don't
+	  have it.
+
+REPORTING BUGS
+==============
+
+   When reporting bugs, please attach to you mail atleast the
+   following:
+
+	a) your system type (preferably by running config.guess which
+           is in the root of ssh2 sourcedir, and runnning the command 
+		% uname -a
+		).
+
+	b) detailed description of bug
+
+	c) how to repeat
+
+	d) config.log, which is left to the root of ssh2 sourcedir
+	   after running configure.
+
+	e) possibly even make.log, if you've encountered a problem
+	   with compilation. You can do this by running the following
+	   sequence:
+
+		% script make.log
+		% make
+		  [.... lots of output ...]
+		% exit
+
+	   If your system doesn't have script, use shell redirects
+	   etc. For example, in Bourne shell-variants:
+
+		% make > make.log 2>&1
+	
+	   Note, that you need to redirect also stderr (2) to stdout
+	   (1). We need those warnings and errors to appear in the log
+           too.
+
+   See template in file BUG.REPORT .
+
+REMEMBER
+========
+
+* Ssh compilation success/failure web-page. You can fill in the reply
+  form about your compilation at
+  <URL:http://www.ssh.fi/tech/ssh_form.html>. You can query about the
+  success/failure database from
+  <URL:http://www.ssh.fi/tech/ssh_query.html>.
+
+* Latest news about ssh can be found in
+  <URL:http://www.ssh.fi/sshprotocols2/>
+
+LEGAL ISSUES
+============
+
+See the file COPYING for licensing and distribution conditions.
+THERE IS NO WARRANTY FOR THIS PROGRAM.
+
+In some countries, particularly Russia, Iraq, Pakistan, and France, it
+may be illegal to use any encryption at all without a special permit.
+
+This software may be freely imported into the United States; however,
+the United States Government may consider re-exporting it a criminal
+offense.  Thus, if you are outside the US, please retrieve this
+software from outside the US.
+
+Note that any information and cryptographic algorithms used in this
+software are publicly available on the Internet and at any major
+bookstore, scientific library, or patent office worldwide.
+
+SSH, SSH2 and Secure shell are a registered trademarks or trademarks
+of SSH Communications Security.
+
+THANKS
+======	
+	...to everyone who contributed to ssh2. If you feel that your
+	name should be in this list, write mail to ssh2@ssh.fi. These
+	are in no particular order.
+
+	Dug Song
+	Andreas Ley
+	Troy Barbee
+	Simon Burge
+	Luigi Pugnetti
+	Youki Kadobayashi
+	Georgi Kuzmanov
+	Hirotaka Yamamoto
+	Martin Buchholz
+	John David Anglin
+	David Mansfield
+	Goran Gajic
+	Niko Tyni
+	Eugene Krainov
+	William C. Ray
+	Andrew Libby
+	Alexander Savelyev
+	Aldo Ramos
+	Sigurdur Asgeirsson
+	Cedomir Igaly
+	Jeremy Buhler
+	Per Allansson
+	Andre Cornelis van Veen
+	Tom Woodburn
+
+	... and everyone else who submitted bug-reports,
+	feature-requests and patches.
+

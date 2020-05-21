@@ -1,0 +1,14 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For FTX based System V Release 4
+
+DESCRIPTION:
+System V release 4.0.x for FTX (FTX 2.3 and greater)
+
+LIBS:  -lelf
+
+AUTHORS:  Andrew Herbert     <andrew@werple.apana.org.au>
+Robert Boucher     <boucher@sofkin.ca>
+Steve Scherf	<scherf@swdc.stratus.com>
+

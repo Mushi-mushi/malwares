@@ -1,0 +1,35 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  Any Sun running SunOS 5.x (Solaris 2.x)
+
+DESCRIPTION:
+This is the machine-dependent module for SunOS 5.x (Solaris 2).
+There is some support for MP architectures.
+This makes top work on the following systems:
+SunOS 5.0 (not tested)
+SunOS 5.1
+SunOS 5.2
+SunOS 5.3
+SunOS 5.4
+SunOS 5.5
+SunOS 5.6
+SunOS 5.7 (beta)
+
+Tested on a SPARCclassic with SunOS 5.1, using gcc-2.3.3, and
+SPARCsystem 600 with SunOS 5.2, using Sun C
+
+LIBS: -lelf -lkvm -lkstat
+
+CFLAGS: -DHAVE_GETOPT -DORDER -DHAVE_STRERROR
+
+
+AUTHORS:      Torsten Kasch 		<torsten@techfak.uni-bielefeld.de>
+Robert Boucher		<boucher@sofkin.ca>
+CONTRIBUTORS: Marc Cohen 		<marc@aai.com>
+Charles Hedrick 	<hedrick@geneva.rutgers.edu>
+	         William L. Jones 	<jones@chpc>
+Petri Kutvonen         <kutvonen@cs.helsinki.fi>
+	         Casper Dik             <casper.dik@sun.com>
+Tim Pugh               <tpugh@oce.orst.edu>
+

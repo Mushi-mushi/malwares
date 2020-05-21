@@ -1,0 +1,213 @@
+# Generated automatically from Makefile.in by configure.
+# Makefile.in generated automatically by automake 1.1l from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+
+SHELL = /bin/sh
+
+srcdir = .
+top_srcdir = ..
+prefix = /usr/local
+exec_prefix = ${prefix}
+
+bindir = ${exec_prefix}/bin
+sbindir = ${exec_prefix}/sbin
+libexecdir = ${exec_prefix}/libexec
+datadir = ${prefix}/share
+sysconfdir = ${prefix}/etc
+sharedstatedir = ${prefix}/com
+localstatedir = ${prefix}/var
+libdir = ${exec_prefix}/lib
+infodir = ${prefix}/info
+mandir = ${prefix}/man
+includedir = ${prefix}/include
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/sh-utils
+pkglibdir = $(libdir)/sh-utils
+pkgincludedir = $(includedir)/sh-utils
+
+top_builddir = ..
+
+INSTALL = /usr/bin/ginstall -c
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_SCRIPT = ${INSTALL_PROGRAM}
+transform = s,x,x,
+YACC = bison -y
+RANLIB = ranlib
+GENCAT = 
+PERL = /usr/bin/perl
+GMSGFMT = /usr/local/bin/msgfmt
+CC = gcc
+
+TESTS = nice
+
+EXTRA_DIST = README Makefile.am.in $(TESTS)
+SUBDIRS = date
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+CONFIG_CLEAN_FILES = 
+DIST_COMMON =  README Makefile.am Makefile.in README
+
+
+PACKAGE = sh-utils
+VERSION = 1.16
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(MANS) $(EXTRA_DIST)
+
+TAR = tar
+default: all
+
+.SUFFIXES:
+$(srcdir)/Makefile.in: #M# Makefile.am $(top_srcdir)/configure.in $(ACLOCAL) 
+	cd $(top_srcdir) && automake --gnits tests/Makefile
+
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status $(BUILT_SOURCES)
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+# This directory's subdirectories are mostly independent; you can cd
+# into them and run `make' without going through this Makefile.
+# To change the values of `make' variables: instead of editing Makefiles,
+# (1) if the variable is set in `config.status', edit `config.status'
+#     (which will cause the Makefiles to be regenerated when you run `make');
+# (2) otherwise, pass the desired values on the `make' command line.
+
+
+
+all-recursive install-data-recursive install-exec-recursive \
+installdirs-recursive install-recursive uninstall-recursive  \
+check-recursive installcheck-recursive info-recursive dvi-recursive \
+mostlyclean-recursive clean-recursive distclean-recursive \
+maintainer-clean-recursive:
+	@for subdir in $(SUBDIRS); do \
+	  target=`echo $@ | sed s/-recursive//`; \
+	  echo "Making $$target in $$subdir"; \
+	  (cd $$subdir && $(MAKE) $$target) \
+	   || case "$(MFLAGS)" in *k*) fail=yes;; *) exit 1;; esac; \
+	done && test -z "$$fail"
+tags-recursive:
+	list="$(SUBDIRS)"; for subdir in $$list; do \
+	  (cd $$subdir && $(MAKE) tags); \
+	done
+tags: TAGS
+TAGS:
+
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = tests
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  test -f $(distdir)/$$file \
+	  || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $$d/$$file $(distdir)/$$file; \
+	done
+	for subdir in $(SUBDIRS); do		\
+	  test -d $(distdir)/$$subdir		\
+	  || mkdir $(distdir)/$$subdir		\
+	  || exit 1;				\
+	  chmod 755 $(distdir)/$$subdir;	\
+	  (cd $$subdir && $(MAKE) distdir=../$(distdir)/$$subdir distdir) \
+	    || exit 1; \
+	done
+check-TESTS: $(TESTS)
+	@failed=0; all=0; \
+	srcdir=$(srcdir); export srcdir; \
+	for tst in $(TESTS); do \
+	  all=`expr $$all + 1`; \
+	  if test -f $$tst; then dir=.; \
+	  else dir="$(srcdir)"; fi; \
+	  if $(TESTS_ENVIRONMENT) $$dir/$$tst; then \
+	    echo "PASS: $$tst"; \
+	  else \
+	    failed=`expr $$failed + 1`; \
+	    echo "FAIL: $$tst"; \
+	  fi; \
+	done; \
+	if test "$$failed" -eq 0; then \
+	  echo "========================"; \
+	  echo "All $$all tests passed"; \
+	  echo "========================"; \
+	else \
+	  echo "$$failed of $$all tests failed"; \
+	fi
+info: info-recursive
+dvi: dvi-recursive
+check: all-am
+	$(MAKE) check-recursive check-TESTS
+installcheck: installcheck-recursive
+all-am: Makefile
+
+install-exec: install-exec-recursive
+	$(NORMAL_INSTALL)
+
+install-data: install-data-recursive
+	$(NORMAL_INSTALL)
+
+install: install-recursive
+	@:
+
+uninstall: uninstall-recursive
+
+all: all-recursive all-am
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' install
+installdirs: installdirs-recursive
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log stamp-h
+	test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean-am:  mostlyclean-generic
+
+clean-am:  clean-generic mostlyclean-am
+
+distclean-am:  distclean-generic clean-am
+
+maintainer-clean-am:  maintainer-clean-generic distclean-am
+
+mostlyclean:  mostlyclean-am mostlyclean-recursive
+
+clean:  clean-am clean-recursive
+
+distclean:  distclean-am distclean-recursive
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-am maintainer-clean-recursive
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default install-data-recursive uninstall-data-recursive \
+install-exec-recursive uninstall-exec-recursive installdirs-recursive \
+uninstalldirs-recursive all-recursive check-recursive \
+installcheck-recursive info-recursive dvi-recursive \
+mostlyclean-recursive distclean-recursive clean-recursive \
+maintainer-clean-recursive tags tags-recursive distdir check-TESTS info \
+dvi installcheck all-am install-exec install-data install uninstall all \
+installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

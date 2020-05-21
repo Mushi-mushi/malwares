@@ -1,0 +1,171 @@
+.\"  -*- nroff -*-
+.\"
+.\" ssh-keygen2.1
+.\"
+.\" Authors:	Tatu Ylonen <ylo@ssh.fi>
+.\"		Markku-Juhani Saarinen <mjos@ssh.fi>
+.\"		Sami Lehtinen <sjl@ssh.fi>
+.\"
+.\" Copyright (c) 1997 SSH Communications Security, Finland
+.\" All rights reserved
+.\"
+.nr CO 0
+.ie \n(CO .TH SSH-KEYGEN2 1 "June 30, 1998" "SSH 2" "SSH 2"
+.el .TH SSH-KEYGEN2 1 "June 30, 1998" "SSH2" "SSH2"
+
+.SH NAME
+ssh-keygen2 \- authentication key pair generation
+
+.SH SYNOPSIS
+.LP
+.B ssh-keygen2
+[\c
+.BI \-b \ bits\fR\c
+]
+[\c
+.BI \-t \ key_algorithm\fR\c
+]
+[
+.BI \-c \ comment_string\fR\c
+]
+[
+.BI \-e \ file \fR\c
+]
+[
+.BI \-p \ passphrase\fR\c
+]
+[
+.B \-P
+]
+[
+.BI \-l \ file\fR\c
+]
+[
+.BI \-o \ output_file\fR\c
+]
+[
+.B \-v
+]
+[
+.B \-h
+]
+[
+.B \-\e?
+]
+[
+.B \-q
+]
+[
+.B \-r
+]
+[
+.B \-i
+]
+[key1 key2 ...]
+
+.SH DESCRIPTION 
+.LP
+.B ssh-keygen2
+generates and manages authentication keys for 
+.BR ssh2 (1).
+Normally each user wishing to use
+.B ssh2
+with public key authentication runs this to create authentication
+keys. Additionally, the system administrator may use this to generate host 
+keys for
+.BR sshd2 (8).
+
+.SH OPTIONS
+.ne 3
+.TP
+.BI \-b \ bits\fR\c
+Length of the key in bits, for example 1024 bits.
+.ne 3
+.TP
+.BI \-t \ key_algorithm\fR\c
+The algorithm used in key generation. Currently only DSS (Digital
+Signature Standard) is supported. (in some distributions, RSA is,
+too)
+.ne 3
+.TP
+.BI \-c \ comment_string\fR\c
+Specify the key's comment string.
+.ne 3
+.TP
+.BI \-e \ file \fR\c
+Edit specified key. Makes 
+.B ssh-keygen2
+interactive. You can change the key's passphrase or comment.
+.ne 3
+.TP
+.BI \-p \ passphrase\fR\c
+Specify the passphrase used.
+.ne 3
+.TP
+.B \-P
+Specify that key will be saved with an empty passphrase.
+.ne 3
+.TP
+.BI \-l \ file\fR\c
+Convert key from
+.B ssh1
+format to
+.B ssh2
+format.
+.ne 3
+.TP
+.BI \-o \ output_file\fR\c
+Specify the output filename used.
+.ne 3
+.TP
+.B \-v
+Print version string and exit.
+.ne 3
+.TP
+.B \-h | \-\e?
+Print a short summary of ssh-keygen2 commands.
+.TP
+.B \-q
+Hide the progress indicator.
+.ne 3
+.TP
+.B \-r
+Stir in data from stdin to the random pool.
+.ne 3
+.TP
+.B \-i
+Display (all) information about a key. (not yet implemented)
+
+.SH FILES
+.TP
+.I \&$HOME/\s+2.\s0ssh2/random_seed
+Used for seeding the random number generator.  This file should not be
+readable by anyone but the user.  This file is created the first time
+the program is run, and is updated every time.
+.TP
+.I \&$HOME/\s+2.\s0ssh2/id_KEYTYPE_KEYLEN_X
+Private authentication keys.
+.TP
+.I \&$HOME/\s+2.\s0ssh2/id_KEYTYPE_KEYLEN_X.pub
+Public authentication keys.
+.TP
+.I /etc/ssh2/hostkey 
+.TP
+.I /etc/ssh2/hostkey.pub
+Private and public 
+.BR sshd2 (8)
+host keys.
+
+.SH AUTHORS
+.LP
+
+SSH Communications Security Oy
+
+For more information, see http://www.ssh.fi.
+
+.SH SEE ALSO
+.LP
+.BR ssh2 (1),
+.BR sshd2 (8),
+.BR ssh-agent2 (1),
+.BR ssh-add2 (1)

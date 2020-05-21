@@ -1,0 +1,23 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any multi-processor Sun running SunOS versions 4.1.2 or later
+
+DESCRIPTION:
+This is the machine-dependent module for SunOS 4.x with multi-processor
+support.  This module always compiles code for multiprocessors and
+assumes that it is being compiled on a multiprocessor architecture
+such as sun4m).  This makes top work on the following systems:
+	SunOS 4.1.2 (MP architectures only)
+	SunOS 4.1.3 (MP architectures only)
+SunOS 4.1.3_U1 (MP architectures only)
+SunOS 4.1.4 (MP architectures only)
+	Solbourne running os/mp 4.1b or later only
+
+LIBS:  -lkvm
+
+CFLAGS: -DHAVE_GETOPT -DORDER
+
+AUTHOR:  William LeFebvre <wnl@groupsys.com>
+Solbourne support by David MacKenzie <djm@eng.umd.edu>
+

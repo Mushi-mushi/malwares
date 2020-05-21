@@ -1,0 +1,19 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a BSD/386 system
+	      Note memory statistic and process sizes could be wrong,
+	      but ps gets them wrong too...
+
+DESCRIPTION:
+This is the machine-dependent module for BSD/386
+Works for:
+	hp300
+	i386
+
+CFLAGS: -DHAVE_GETOPT
+
+LIBS: -lkvm
+
+AUTHOR:  Christos Zoulas <christos@ee.cornell.edu>
+

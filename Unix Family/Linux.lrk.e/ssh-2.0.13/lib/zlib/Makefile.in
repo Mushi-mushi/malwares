@@ -1,0 +1,341 @@
+# Makefile.in generated automatically by automake 1.3 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+#
+# lib/zlib Makefile.am
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1996 SSH Communications Security, Finland
+#                    All rights reserved
+#
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DISTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ../..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+build_alias = @build_alias@
+build_triplet = @build@
+host_alias = @host_alias@
+host_triplet = @host@
+target_alias = @target_alias@
+target_triplet = @target@
+AR = @AR@
+CC = @CC@
+CONFPROGRAMS = @CONFPROGRAMS@
+COPY_INCLUDE = @COPY_INCLUDE@
+CRYPTO_CONF_OBJS = @CRYPTO_CONF_OBJS@
+ETCDIR = @ETCDIR@
+IPSEC_ARCH_INTC = @IPSEC_ARCH_INTC@
+IPSEC_ARCH_ROUTE = @IPSEC_ARCH_ROUTE@
+LN_S = @LN_S@
+M4 = @M4@
+MAKEINFO = @MAKEINFO@
+MATH_CONF_OBJS = @MATH_CONF_OBJS@
+NM_PATH = @NM_PATH@
+PACKAGE = @PACKAGE@
+RANLIB = @RANLIB@
+SSH1_PATH = @SSH1_PATH@
+SSHSESSION_CONFOBJS = @SSHSESSION_CONFOBJS@
+SSHSIGNERINSTALLMODE = @SSHSIGNERINSTALLMODE@
+VERSION = @VERSION@
+X11_DIR = @X11_DIR@
+XAUTH_PATH = @XAUTH_PATH@
+
+AUTOMAKE_OPTIONS = 1.0 foreign dist-zip no-dependencies
+
+noinst_LIBRARIES = libz.a
+
+libz_a_SOURCES = adler32.c deflate.c infblock.c infcodes.c inffast.c \
+  inflate.c inftrees.c infutil.c trees.c zutil.c
+
+noinst_HEADERS = deflate.h infblock.h infcodes.h inffast.h inftrees.h \
+  infutil.h zconf.h zlib.h zutil.h
+
+EXTRA_DIST = ChangeLog FAQ INDEX Make_vms.com Makefile.riscos README \
+	algorithm.txt compress.c configure crc32.c descrip.mms example.c \
+	gzio.c inffixed.h maketree.c minigzip.c trees.h uncompr.c \
+	zlib.3 amiga/Makefile.pup amiga/Makefile.sas \
+	contrib/README.contrib contrib/visual-basic.txt \
+	contrib/asm386/gvmat32.asm contrib/asm386/mkgvmt32.bat \
+	contrib/asm386/zlibvc.dsp contrib/asm386/gvmat32c.c \
+	contrib/asm386/zlibvc.def contrib/asm386/zlibvc.dsw \
+	contrib/asm586/README.586 contrib/asm586/match.S \
+	contrib/asm686/README.686 contrib/asm686/match.S \
+	contrib/delphi/zlib.mak contrib/delphi/zlibdef.pas \
+	contrib/delphi2/d_zlib.bpr contrib/delphi2/readme.txt \
+	contrib/delphi2/zlib.bpr contrib/delphi2/zlib.pas \
+	contrib/delphi2/zlib32.cpp contrib/delphi2/d_zlib.cpp \
+	contrib/delphi2/zlib.bpg contrib/delphi2/zlib.cpp \
+	contrib/delphi2/zlib32.bpr contrib/iostream/test.cpp \
+	contrib/iostream/zfstream.cpp contrib/iostream/zfstream.h \
+	contrib/iostream2/zstream.h contrib/iostream2/zstream_test.cpp \
+	contrib/minizip/ChangeLogUnzip contrib/minizip/minizip.c \
+	contrib/minizip/unzip.def contrib/minizip/zip.def \
+	contrib/minizip/zlibvc.dsp contrib/minizip/Makefile \
+	contrib/minizip/readme.txt contrib/minizip/unzip.h \
+	contrib/minizip/zip.h contrib/minizip/zlibvc.dsw \
+	contrib/minizip/miniunz.c contrib/minizip/unzip.c \
+	contrib/minizip/zip.c contrib/minizip/zlibvc.def \
+	contrib/untgz/Makefile contrib/untgz/makefile.w32 \
+	contrib/untgz/untgz.c \
+	msdos/Makefile.b32 msdos/Makefile.bor msdos/Makefile.dj2 \
+	msdos/Makefile.emx msdos/Makefile.msc msdos/Makefile.tc \
+	msdos/Makefile.w32 msdos/Makefile.wat msdos/zlib.def \
+	msdos/zlib.rc \
+	nt/Makefile.emx nt/Makefile.gcc nt/Makefile.nt nt/zlib.dnt \
+	os2/Makefile.os2 os2/zlib.def
+
+# TESTS = t-basic
+# EXTRA_SCRIPTS = t-basic
+# t_basic_DEPENDENCIES = minigzip
+
+EXTRA_PROGRAMS = minigzip
+minigzip_SOURCES = minigzip.c gzio.c
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../../sshconf.h
+CONFIG_CLEAN_FILES = 
+LIBRARIES =  $(noinst_LIBRARIES)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I../..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+X_CFLAGS = @X_CFLAGS@
+X_LIBS = @X_LIBS@
+X_EXTRA_LIBS = @X_EXTRA_LIBS@
+X_PRE_LIBS = @X_PRE_LIBS@
+libz_a_LIBADD = 
+libz_a_OBJECTS =  adler32.o deflate.o infblock.o infcodes.o inffast.o \
+inflate.o inftrees.o infutil.o trees.o zutil.o
+minigzip_OBJECTS =  minigzip.o gzio.o
+minigzip_LDADD = $(LDADD)
+minigzip_DEPENDENCIES = 
+minigzip_LDFLAGS = 
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LINK = $(CC) $(CFLAGS) $(LDFLAGS) -o $@
+HEADERS =  $(noinst_HEADERS)
+
+DIST_COMMON =  README ChangeLog Makefile.am Makefile.in configure
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = tar
+GZIP = --best
+SOURCES = $(libz_a_SOURCES) $(minigzip_SOURCES)
+OBJECTS = $(libz_a_OBJECTS) $(minigzip_OBJECTS)
+
+all: Makefile $(LIBRARIES) $(HEADERS)
+
+.SUFFIXES:
+.SUFFIXES: .S .c .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign lib/zlib/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-noinstLIBRARIES:
+
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+
+distclean-noinstLIBRARIES:
+
+maintainer-clean-noinstLIBRARIES:
+
+.c.o:
+	$(COMPILE) -c $<
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+libz.a: $(libz_a_OBJECTS) $(libz_a_DEPENDENCIES)
+	-rm -f libz.a
+	$(AR) cru libz.a $(libz_a_OBJECTS) $(libz_a_LIBADD)
+	$(RANLIB) libz.a
+
+minigzip: $(minigzip_OBJECTS) $(minigzip_DEPENDENCIES)
+	@rm -f minigzip
+	$(LINK) $(minigzip_LDFLAGS) $(minigzip_OBJECTS) $(minigzip_LDADD) $(LIBS)
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $(SOURCES) $(HEADERS) $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = lib/zlib
+
+distdir: $(DISTFILES)
+	$(mkinstalldirs) $(distdir)/amiga $(distdir)/contrib \
+	   $(distdir)/contrib/asm386 $(distdir)/contrib/asm586 \
+	   $(distdir)/contrib/asm686 $(distdir)/contrib/delphi \
+	   $(distdir)/contrib/delphi2 $(distdir)/contrib/iostream \
+	   $(distdir)/contrib/iostream2 $(distdir)/contrib/minizip \
+	   $(distdir)/contrib/untgz $(distdir)/msdos $(distdir)/nt \
+	   $(distdir)/os2
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  test -f $(distdir)/$$file \
+	  || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $$d/$$file $(distdir)/$$file; \
+	done
+info:
+dvi:
+check: all
+	$(MAKE)
+installcheck:
+install-exec: 
+	@$(NORMAL_INSTALL)
+
+install-data: 
+	@$(NORMAL_INSTALL)
+
+install: install-exec install-data all
+	@:
+
+uninstall: 
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' INSTALL_SCRIPT='$(INSTALL_PROGRAM)' install
+installdirs:
+
+
+mostlyclean-generic:
+	-test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	-rm -f Makefile $(DISTCLEANFILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+
+maintainer-clean-generic:
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-noinstLIBRARIES mostlyclean-compile \
+		mostlyclean-tags mostlyclean-generic
+
+clean:  clean-noinstLIBRARIES clean-compile clean-tags clean-generic \
+		mostlyclean
+
+distclean:  distclean-noinstLIBRARIES distclean-compile distclean-tags \
+		distclean-generic clean
+	-rm -f config.status
+
+maintainer-clean:  maintainer-clean-noinstLIBRARIES \
+		maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-generic distclean
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: mostlyclean-noinstLIBRARIES distclean-noinstLIBRARIES \
+clean-noinstLIBRARIES maintainer-clean-noinstLIBRARIES \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir info dvi installcheck \
+install-exec install-data install uninstall all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+list_libssh_a_objects:
+	@echo BEGIN_FILE_LIST: $(libz_a_OBJECTS) $(libz_a_LIBADD) :END_FILE_LIST
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

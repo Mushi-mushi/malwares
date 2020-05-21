@@ -1,0 +1,68 @@
+[script]
+n0=; ------------------------------------------------------------------- Scan de puertos usando una Wingate -------------------------------------------------------
+n1=alias wgoob {
+n2=  if $1 != $null { set %WGgate $1 } | if $2 != $null { set %wgoob $2 } | if $3 != $null { set %wgpt $3 }
+n3=  if ( $window(@WGscan).state != normal ) { 
+n4=    cvent 370 150 | window -k @WGscan %vent.x %vent.y %vent.w %vent.h @wgmenu
+n5=    wgdat
+n6=  }
+n7=  if $1 == $null halt
+n8=  sockclose wgoob* | sockopen wgoob %WGgate 23
+n9=  echo @wgscan 0- | aline @wgscan 4 $str(150,-)
+n10=  titlebar @WGscan %WGgate >> %wgoob ( %wgpt )
+n11=}
+n12=
+n13=alias wgdat {
+n14=  lsombra 8 2 Scanner de puertos a través de 7WinGate | echo @wgscan %texto
+n15=  echo @wgscan 1 WinGate IP: %wggate | echo @wgscan 1 Objetivo IP: %wgoob | echo @wgscan 0- | echo @wgscan 0-
+n16=}
+n17=
+n18=on 1:sockopen:wgoob: {
+n19=  if $sockerr > 0 { echo 4 @wgscan ERROR 12 No se puede conectar. | return }
+n20=  sockwrite -tn wgoob %wgoob %wgpt
+n21=  echo @wgscan 4>>>>>>12 $sock($sockname,1).ip 4>>1 %wgoob 12( %wgpt )
+n22=}
+n23=;
+n24=on 1:sockread:wgoob: {
+n25=  sockread %tnet 
+n26=  echo @wgscan 4>2 %tnet
+n27=  if ( ..connected isin %tnet ) { echo 12 @wgscan >>>> Conexión realizada. Puerto4 %wgpt 12abierto. | unset %tnet | sockclose $sockname | halt }
+n28=  if ( refused isin %tnet ) || ( unreachable isin %tnet ) { echo 12 @wgscan >>>> Conexión rechazada. Puerto  %wgpt cerrado. | unset %tnet | sockclose $sockname | halt }
+n29=  if ( out isin %tnet ) { echo 12 @wgscan >>>> %wgoob no responde. | unset %tnet | sockclose $sockname | halt }
+n30=}
+n31=on 1:sockclose:wgoob: echo 6 @wgscan Conexión cerrada
+n32=;
+n33=on 1:close:@wgscan: echo 12 -se WinGate Scan cerrado | .unload -rs wgscan.ini
+n34=;
+n35=menu @wgmenu {
+n36=  dclick: wgoob %WGgate %wgoob %wgpt
+n37=  WinGate ( %WGgate )
+n38=  .nueva: set %WGgate $$?=" WinGate IP ?" | klista %WGgate %wglista | set %wglista $result | wgdat
+n39=  .-
+n40=  .$gettok(%wglista,1,32): set %WGgate $gettok(%wglista,1,32) | wgdat
+n41=  .$gettok(%wglista,2,32): set %WGgate $gettok(%wglista,2,32) | wgdat
+n42=  .$gettok(%wglista,3,32): set %WGgate $gettok(%wglista,3,32) | wgdat
+n43=  .$gettok(%wglista,4,32): set %WGgate $gettok(%wglista,4,32) | wgdat
+n44=  .$gettok(%wglista,5,32): set %WGgate $gettok(%wglista,5,32) | wgdat
+n45=  .$gettok(%wglista,6,32): set %WGgate $gettok(%wglista,6,32) | wgdat
+n46=  .$gettok(%wglista,7,32): set %WGgate $gettok(%wglista,7,32) | wgdat
+n47=  .$gettok(%wglista,8,32): set %WGgate $gettok(%wglista,8,32) | wgdat
+n48=  comprobar WinGate: iping %WGgate WinGate
+n49=  buscar WinGates: sockclose PTAB* | set %canal #$$?="Canal ?" | set %ptaca 1080 | .enable #ptacanal | ptabw | who %canal
+n50=  lista WinGates: .load -rs lwg.ini | listawg
+n51=  localizar nicks: set %hip %WGgate | .enable #buscahost | dns %hip | unset %hip | .timer778 1 60 .disable #buscahost
+n52=  -
+n53=  comprobar puertos
+n54=  .puerto ?: set %wgpt $$?="Puerto ?" | wgoob %WGgate %wgoob %wgpt
+n55=  .-
+n56=  .23 ( telnet ): wgoob %WGgate %wgoob 23
+n57=  .59 ( dcc ip ): wgoob %WGgate %wgoob 59
+n58=  .79 ( finger ): wgoob %WGgate %wgoob 79
+n59=  .113 ( identd ): wgoob %WGgate %wgoob 113
+n60=  .139 ( netbios ): wgoob %WGgate %wgoob 139
+n61=  .1080 ( wingate ): wgoob %WGgate %wgoob 1080
+n62=  .6667 ( irc server ): wgoob %WGgate %wgoob 6667
+n63=  -
+n64=  objetivo ( %wgoob ): set %wgoob $$?=" IP a escanear ?" | wgdat
+n65=  obtener de nick: ipa WGSCAN $$?="Nick ?"
+n66=}

@@ -1,0 +1,20 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any hp9000 running hpux version 9
+
+DESCRIPTION:
+This is the machine-dependent module for HPUX 9.
+This makes top work on (at least) the following systems:
+	hp9000s800
+	hp9000s700
+This may make top work on the following, but we aren't sure:
+	hp9000s300
+
+LIBS: 
+
+CFLAGS: -DHAVE_GETOPT
+
+AUTHOR: Kevin Schmidt <kevin@mcl.ucsb.edu> 
+adapted from Christos Zoulas <christos@ee.cornell.edu>
+

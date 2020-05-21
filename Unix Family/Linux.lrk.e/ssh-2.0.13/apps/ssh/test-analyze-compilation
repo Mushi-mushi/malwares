@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# test-analyze-compilation
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1997 SSH Communications Security, Finland
+#                    All rights reserved
+#
+# Checks whether the compilation part of automatic testing resulted in
+# errors.
+#
+# This exits with 0 if errors were found, and 1 if no errors were found.
+#
+
+if test $# -ne 1; then
+  echo 'Usage: test-analyze-compilation <filename>'
+  exit 0
+fi
+
+file="$1"
+
+egrep '^.*:[0-9][0-9]*: warning: |^[Mm]ake.*:.*Error' $file
+
+if egrep '^.*:[0-9][0-9]*: ' $file | egrep -v '^.*:[0-9][0-9]*: warning: ' >&2
+then
+  exit 0
+fi
+
+exit 1

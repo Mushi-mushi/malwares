@@ -1,0 +1,165 @@
+on 1:start: { if (%baglantimenusu == ON) { .startpen } }
+alias penikapat { dialog -c startpen startpen }
+alias startpen { dialog -m startpen startpen }
+
+dialog startpen {
+  title "Kaçak v4 - www.Kacak.net"
+  size -1 -1 420 335
+  box "Baðlantý ayarlarý menüsü",1,5 5 410 325
+  menu "Menü" , 32
+  item "» Ayarlar", 111 , 32
+  item break , 113
+  item "» Korumalar", 112 , 32
+
+  menu "Araçlar" , 33
+  item "» Tarayýcý", 120 , 33
+  item "» Mp3 çalýcý", 121 , 33
+  item "» Kelime tamamlayýcý", 122 , 33
+  item "» Script sifre", 123 , 33
+  item "» Mause Efekt", 124 , 33
+  item "» Away sistem", 125 , 33
+  item "» Nick renklendirici", 138 , 33
+
+  menu "Oyunlar" , 34
+  item "» Mario", 114 , 34
+  item "» Jezzball", 115 , 34
+  item break , 116
+  item "» Solitaire", 117 , 34
+  item "» Freecell", 118 , 34
+  item "» Hearts", 119 , 34
+
+  icon 6, 35 22 351 28, $mircdirimage\dialog.jpg
+
+  text "Nick (Rumuz):" ,2, 51 60 80 20
+  text "Yedek nick:" ,146, 63 85 80 20
+  edit "" ,3, 130 58 130 19, autohs, center
+  edit "" ,145, 130 82 130 19, autohs, center
+  button "&Baðlan !" ,5, 270 57 80 44, ok, flat
+
+  check "&Yeni pencere" ,933 , 120 120 90 20, flat
+  check "&Otomatik Ident" ,932 , 230 120 100 20, flat
+
+  button "&HaytaNet" ,7, 11 152 199 30,flat
+  button "&KacakNet" ,9, 212 152 197 30,flat
+
+  button "&Gorhele" ,139, 11 184 75 30,flat
+  button "&mIRCHayta" ,140, 87 184 62 30,flat
+  button "&KELEBEK" ,141, 150 184 60 30,flat
+  button "&E-Kolay" ,142, 211 184 60 30,flat
+  button "&YuzukNet" ,143, 272 184 61 30,flat
+  button "&SiberTr" ,144, 334 184 75 30,flat
+
+  text "Sunucular:" ,13, 50 240 60 20
+  combo 14, 110 236 145 130 ,drop edit size , flat
+  text "Port:" ,16, 260 240 30 20
+  edit "" , 17, 287 237 38 20 , edit
+  button "Gir !" ,19, 330 237 36 20,  flat
+
+  button " »   SOHBETE BAÐLAN   « " ,20, 105 288 210 29, ok, flat
+}
+
+on *:dialog:startpen:*:*:{
+  if ($devent == init) {
+    if $server != $null { did -b startpen 3 | did -b startpen 145 }
+    did -c startpen 5
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -a startpen 14 irc.sanalmuhabbet.Net
+    did -c startpen 14 1
+    did -a startpen 17 6667
+    did -c startpen 17 1
+    did -a $dname 3 $me
+    did -a $dname 145 $readini mirc.ini mirc anick
+    did -c startpen 3 1
+    did -f startpen 5
+    if (%otoident == ON) { did -c startpen 932 }
+    set %yenipen OFF
+  }
+  if ($devent == sclick) && ($did == 932) {
+    if (%otoident == OFF) { /set %otoident ON | gor Otomatik ident 4Açýk  (Artýk identinizi script kendi belirleyecek) | halt }
+    if (%otoident == ON) { /set %otoident OFF | gor Otomatik ident 4Kapalý  (Artýk sizin belirlediginiz ident gecerli olacak.) | .emailaddr $$?="Identiniz ne olsun? Örnek: isminiz@" | halt }
+  }
+  if ($devent == sclick) && ($did == 933) {
+    if (%yenipen == OFF) { /set %yenipen ON | halt }
+    if (%yenipen == ON) { /set %yenipen OFF | halt }
+  }
+  if ($devent == sclick) && ($did == 14) { /set %servername $did(14) }
+  if ($devent == sclick) && ($did == 17) { /set %serverport $did(17) }
+  if ($devent == sclick) {
+    if ($did == 5) { set %yenipennick $did(3) | set %yenipenanick $did(145) | /window -c @Scripts | bag irc.sanalmuhabbet.Net  |  penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @   } }
+    if ($did == 6) { run www.hayta.net }
+    if ($did == 7) { set %yenipennick $did(3) | set %yenipenanick $did(145) | /window -c @Scripts |  bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } }
+    if ($did == 9) { set %yenipennick $did(3) | set %yenipenanick $did(145) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | .nick $did(3) | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } }
+    if ($did == 12) { set %yenipennick $did(3) | set %yenipenanick $did(145) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } } 
+    if ($did == 19) { set %yenipennick $did(3) | set %yenipenanick $did(145) | /window -c @Scripts | bag $did(14) $+ : $+ $did(17) | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } }
+    if ($did == 20) { set %yenipennick $did(3) | set %yenipenanick $did(145) | /window -c @Scripts | bag irc.sanalmuhabbet.Net  |  penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } }
+
+    if ($did == 139) { set %yenipennick $did(3) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } } 
+    if ($did == 140) { set %yenipennick $did(3) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } } 
+    if ($did == 141) { set %yenipennick $did(3) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } } 
+    if ($did == 142) { set %yenipennick $did(3) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } } 
+    if ($did == 143) { set %yenipennick $did(3) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } } 
+    if ($did == 144) { set %yenipennick $did(3) | /window -c @Scripts | bag irc.sanalmuhabbet.Net | penikapat | if (%otoident == ON) { .emailaddr $r(A,Z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @  } } 
+
+  }
+  if ($devent == menu) {
+    if ($did == 111) { dialog -m korumalar korumalar | did -f korumalar 3 }
+    if ($did == 112) { dialog -m korumalar korumalar | did -f korumalar 1 }
+    if ($did == 114) { /run oyunlar/Mario.exe }
+    if ($did == 115) { /run oyunlar/Jezzball.exe }
+    if ($did == 117) { /run sol.exe }
+    if ($did == 118) { /run freecell.exe }
+    if ($did == 119) { /run mshearts.exe }
+    if ($did == 120) { chanscan }
+    if ($did == 121) { mp3uac }
+    if ($did == 122) { kelime }
+    if ($did == 123) { scriptsifrele }
+    if ($did == 124) { F4 }
+    if ($did == 125) { F9 }
+    if ($did == 138) { cc }
+  }
+}
+
+On 1:PART:#: {
+  if ($nick != $me) { /halt }
+  else { /part $chan %logo | halt }
+}
+
+
+menu @Scripts {
+  Kapat:/window -c @Scripts
+}
+
+alias mdx_fullpath { return $+(",system\mdx.dll,") }
+alias mdx { dll $mdx_fullpath $1- }
+alias mdxinit {
+  dll $mdx_fullpath SetMircVersion $version
+  dll $mdx_fullpath MarkDialog $dname
+}
+alias bag { if (%yenipen == OFF) { server $1- | .nick %yenipennick | .anick %yenipenanick  } | else server -m $1- | if $server !== $null) { .nick %yenipennick } }
+alias mp3uac { mcmp3 }
+alias _blacklist { dialog -m blist blist }
+alias mcmp3 { mp3player }
+alias chanscan { Ircop-scan }
+
+--

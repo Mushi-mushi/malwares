@@ -1,0 +1,660 @@
+# Makefile.in generated automatically by automake 1.3 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# THIS FILE WAS AUTOMAGICALLY GENERATED FROM Makefile.am.raw 
+# You should edit Makefile.am.raw instead of this file. 
+
+#
+# ssh2 Makefile.am
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1997 SSH Communications Security, Finland
+#                    All rights reserved
+#
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DISTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ../..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+build_alias = @build_alias@
+build_triplet = @build@
+host_alias = @host_alias@
+host_triplet = @host@
+target_alias = @target_alias@
+target_triplet = @target@
+AR = @AR@
+CC = @CC@
+CONFPROGRAMS = @CONFPROGRAMS@
+COPY_INCLUDE = @COPY_INCLUDE@
+CRYPTO_CONF_OBJS = @CRYPTO_CONF_OBJS@
+ETCDIR = @ETCDIR@
+IPSEC_ARCH_INTC = @IPSEC_ARCH_INTC@
+IPSEC_ARCH_ROUTE = @IPSEC_ARCH_ROUTE@
+LN_S = @LN_S@
+M4 = @M4@
+MAKEINFO = @MAKEINFO@
+MATH_CONF_OBJS = @MATH_CONF_OBJS@
+NM_PATH = @NM_PATH@
+PACKAGE = @PACKAGE@
+RANLIB = @RANLIB@
+SSH1_PATH = @SSH1_PATH@
+SSHSESSION_CONFOBJS = @SSHSESSION_CONFOBJS@
+SSHSIGNERINSTALLMODE = @SSHSIGNERINSTALLMODE@
+VERSION = @VERSION@
+X11_DIR = @X11_DIR@
+XAUTH_PATH = @XAUTH_PATH@
+
+AUTOMAKE_OPTIONS = 1.0 foreign dist-zip no-dependencies
+
+etcdir = @ETCDIR@
+
+SSH_SIGNER_INSTALL_MODE=@SSHSIGNERINSTALLMODE@
+
+bin_PROGRAMS = ssh2 \
+	       scp2 \
+	       sftp2 \
+	       sftp-server2 \
+               ssh-agent2 \
+	       ssh-keygen2 \
+	       ssh-signer2 \
+	       @CONFPROGRAMS@ \
+	       ssh-add2
+
+sbin_PROGRAMS = sshd2
+EXTRA_PROGRAMS = ssh-askpass2
+man_MANS = ssh2.1 \
+	   sshd2.8 \
+	   ssh-keygen2.1 \
+	   ssh-add2.1 \
+	   ssh-agent2.1 \
+	   scp2.1 \
+	   sftp2.1
+
+EXTRA_DIST = test-in-host test-analyze-compilation test-analyze-check \
+  test-analyze-self-test sshd2_config ssh2_config $(MANS)
+
+noinst_HEADERS = auths-passwd.h readpass.h ssh2includes.h \
+	sshauthmethods.h sshclient.h sshcommon.h \
+	sshconfig.h sshserver.h sshstdiofilter.h \
+	ssh2version.h sshuserfiles.h authc-pubkey.h authc-passwd.h \
+	sshagentint.h sshagent.h auths-pubkey.h sshchx11.h sshchagent.h \
+	sshchssh1agent.h sshchsession.h sshchtcpfwd.h \
+	sshglob.h auths-common.h \
+	sshttyflagsi.h sshttyflags.h auths-hostbased.h \
+	authc-hostbased.h ssh-signer2.h ssh2pgp.h
+
+noinst_LIBRARIES = libssh2.a
+
+INCLUDES = -I. -I$(srcdir) -I../.. -I$(srcdir) \
+	   -I$(top_builddir) -I$(top_srcdir) \
+	   -I../../include -I$(srcdir)/../../include
+
+LDADD = -L. -L../../lib -lssh2 -lssh
+DEPENDENCIES = ./libssh2.a ../../lib/libssh.a
+
+libssh2_a_SOURCES = agentclient.c sshchagent.c sshserver.c \
+		    agentpath.c sshchsession.c sshstdiofilter.c \
+		    authc-passwd.c sshchssh1agent.c sshunixconfig.c \
+		    authc-pubkey.c sshchtcpfwd.c sshunixuserfiles.c \
+		    auths-passwd.c sshchx11.c sshuserfiles.c \
+		    auths-pubkey.c sshclient.c \
+		    sshcommon.c readpass.c sshconfig.c \
+		    sshauthmethodc.c sshauthmethods.c \
+		    sshglob.c auths-common.c \
+		    sshttyflags.c auths-hostbased.c authc-hostbased.c \
+		    auths-hostbased-rhosts.c ssh2pgppub.c ssh2pgpsec.c
+
+ssh2_SOURCES = ssh2.c
+ssh2_DEPENDENCIES = $(DEPENDENCIES)
+
+sshd2_SOURCES = sshd2.c
+sshd2_DEPENDENCIES = $(DEPENDENCIES)
+
+ssh_agent2_SOURCES = ssh-agent2.c
+ssh_agent2_DEPENDENCIES = $(DEPENDENCIES)
+
+ssh_add2_SOURCES = ssh-add2.c
+ssh_add2_DEPENDENCIES = $(DEPENDENCIES)
+
+ssh_askpass2_SOURCES = ssh-askpass2.c 
+ssh_askpass2_LDADD = $(LDADD) $(X_LIBS) $(X_PRE_LIBS) -lX11
+
+ssh_keygen2_SOURCES = ssh-keygen2.c
+ssh_keygen2_DEPENDENCIES = $(DEPENDENCIES) ../../lib/sshreadline/libsshreadline.a
+ssh_keygen2_LDADD = $(LDADD) -L../../lib/sshreadline -lsshreadline
+
+scp2_SOURCES = scp2.c
+scp2_DEPENDENCIES = $(DEPENDENCIES)
+
+sftp2_SOURCES = sftp2.c 
+sftp2_DEPENDENCIES = $(DEPENDENCIES) ../../lib/sshreadline/libsshreadline.a
+sftp2_LDADD = $(LDADD) -L../../lib/sshreadline -lsshreadline
+
+sftp_server2_SOURCES = sftp-server2.c
+sftp_server2_DEPENDENCIES = $(DEPENDENCIES)
+
+ssh_signer2_SOURCES = ssh-signer2.c
+ssh_signer2_DEPENDENCIES = $(DEPENDENCIES)
+
+# defines
+
+SSH_DEFS = -DETCDIR=\"$(etcdir)\" -DSSH_BINDIR=\"$(bindir)\"
+
+COMPILE = $(CC) $(KERBEROS_INCS) $(INCLUDES) $(SSH_DEFS) $(DEFS) $(CPPFLAGS) $(CFLAGS) $(X_CFLAGS)
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../../sshconf.h
+CONFIG_CLEAN_FILES = 
+LIBRARIES =  $(noinst_LIBRARIES)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I../..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+X_CFLAGS = @X_CFLAGS@
+X_LIBS = @X_LIBS@
+X_EXTRA_LIBS = @X_EXTRA_LIBS@
+X_PRE_LIBS = @X_PRE_LIBS@
+libssh2_a_LIBADD = 
+libssh2_a_OBJECTS =  agentclient.o sshchagent.o sshserver.o agentpath.o \
+sshchsession.o sshstdiofilter.o authc-passwd.o sshchssh1agent.o \
+sshunixconfig.o authc-pubkey.o sshchtcpfwd.o sshunixuserfiles.o \
+auths-passwd.o sshchx11.o sshuserfiles.o auths-pubkey.o sshclient.o \
+sshcommon.o readpass.o sshconfig.o sshauthmethodc.o sshauthmethods.o \
+sshglob.o auths-common.o sshttyflags.o auths-hostbased.o \
+authc-hostbased.o auths-hostbased-rhosts.o ssh2pgppub.o ssh2pgpsec.o
+PROGRAMS =  $(bin_PROGRAMS) $(sbin_PROGRAMS)
+
+ssh_askpass2_OBJECTS =  ssh-askpass2.o
+ssh_askpass2_DEPENDENCIES = 
+ssh_askpass2_LDFLAGS = 
+ssh2_OBJECTS =  ssh2.o
+ssh2_LDADD = $(LDADD)
+ssh2_LDFLAGS = 
+scp2_OBJECTS =  scp2.o
+scp2_LDADD = $(LDADD)
+scp2_LDFLAGS = 
+sftp2_OBJECTS =  sftp2.o
+sftp2_LDFLAGS = 
+sftp_server2_OBJECTS =  sftp-server2.o
+sftp_server2_LDADD = $(LDADD)
+sftp_server2_LDFLAGS = 
+ssh_agent2_OBJECTS =  ssh-agent2.o
+ssh_agent2_LDADD = $(LDADD)
+ssh_agent2_LDFLAGS = 
+ssh_keygen2_OBJECTS =  ssh-keygen2.o
+ssh_keygen2_LDFLAGS = 
+ssh_signer2_OBJECTS =  ssh-signer2.o
+ssh_signer2_LDADD = $(LDADD)
+ssh_signer2_LDFLAGS = 
+ssh_add2_OBJECTS =  ssh-add2.o
+ssh_add2_LDADD = $(LDADD)
+ssh_add2_LDFLAGS = 
+sshd2_OBJECTS =  sshd2.o
+sshd2_LDADD = $(LDADD)
+sshd2_LDFLAGS = 
+CFLAGS = @CFLAGS@
+LINK = $(CC) $(CFLAGS) $(LDFLAGS) -o $@
+man1dir = $(mandir)/man1
+man8dir = $(mandir)/man8
+MANS = $(man_MANS)
+
+NROFF = nroff
+HEADERS =  $(noinst_HEADERS)
+
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = tar
+GZIP = --best
+SOURCES = $(libssh2_a_SOURCES) $(ssh_askpass2_SOURCES) $(ssh2_SOURCES) $(scp2_SOURCES) $(sftp2_SOURCES) $(sftp_server2_SOURCES) $(ssh_agent2_SOURCES) $(ssh_keygen2_SOURCES) $(ssh_signer2_SOURCES) $(ssh_add2_SOURCES) $(sshd2_SOURCES)
+OBJECTS = $(libssh2_a_OBJECTS) $(ssh_askpass2_OBJECTS) $(ssh2_OBJECTS) $(scp2_OBJECTS) $(sftp2_OBJECTS) $(sftp_server2_OBJECTS) $(ssh_agent2_OBJECTS) $(ssh_keygen2_OBJECTS) $(ssh_signer2_OBJECTS) $(ssh_add2_OBJECTS) $(sshd2_OBJECTS)
+
+all: Makefile $(LIBRARIES) $(PROGRAMS) $(MANS) $(HEADERS)
+
+.SUFFIXES:
+.SUFFIXES: .S .c .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign apps/ssh/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-noinstLIBRARIES:
+
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+
+distclean-noinstLIBRARIES:
+
+maintainer-clean-noinstLIBRARIES:
+
+.c.o:
+	$(COMPILE) -c $<
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+libssh2.a: $(libssh2_a_OBJECTS) $(libssh2_a_DEPENDENCIES)
+	-rm -f libssh2.a
+	$(AR) cru libssh2.a $(libssh2_a_OBJECTS) $(libssh2_a_LIBADD)
+	$(RANLIB) libssh2.a
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed '$(transform)'`"; \
+	     $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+mostlyclean-sbinPROGRAMS:
+
+clean-sbinPROGRAMS:
+	-test -z "$(sbin_PROGRAMS)" || rm -f $(sbin_PROGRAMS)
+
+distclean-sbinPROGRAMS:
+
+maintainer-clean-sbinPROGRAMS:
+
+install-sbinPROGRAMS: $(sbin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(sbindir)
+	@list='$(sbin_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_PROGRAM) $$p $(DESTDIR)$(sbindir)/`echo $$p|sed '$(transform)'`"; \
+	     $(INSTALL_PROGRAM) $$p $(DESTDIR)$(sbindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall-sbinPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(sbin_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(sbindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+ssh-askpass2: $(ssh_askpass2_OBJECTS) $(ssh_askpass2_DEPENDENCIES)
+	@rm -f ssh-askpass2
+	$(LINK) $(ssh_askpass2_LDFLAGS) $(ssh_askpass2_OBJECTS) $(ssh_askpass2_LDADD) $(LIBS)
+
+ssh2: $(ssh2_OBJECTS) $(ssh2_DEPENDENCIES)
+	@rm -f ssh2
+	$(LINK) $(ssh2_LDFLAGS) $(ssh2_OBJECTS) $(ssh2_LDADD) $(LIBS)
+
+scp2: $(scp2_OBJECTS) $(scp2_DEPENDENCIES)
+	@rm -f scp2
+	$(LINK) $(scp2_LDFLAGS) $(scp2_OBJECTS) $(scp2_LDADD) $(LIBS)
+
+sftp2: $(sftp2_OBJECTS) $(sftp2_DEPENDENCIES)
+	@rm -f sftp2
+	$(LINK) $(sftp2_LDFLAGS) $(sftp2_OBJECTS) $(sftp2_LDADD) $(LIBS)
+
+sftp-server2: $(sftp_server2_OBJECTS) $(sftp_server2_DEPENDENCIES)
+	@rm -f sftp-server2
+	$(LINK) $(sftp_server2_LDFLAGS) $(sftp_server2_OBJECTS) $(sftp_server2_LDADD) $(LIBS)
+
+ssh-agent2: $(ssh_agent2_OBJECTS) $(ssh_agent2_DEPENDENCIES)
+	@rm -f ssh-agent2
+	$(LINK) $(ssh_agent2_LDFLAGS) $(ssh_agent2_OBJECTS) $(ssh_agent2_LDADD) $(LIBS)
+
+ssh-keygen2: $(ssh_keygen2_OBJECTS) $(ssh_keygen2_DEPENDENCIES)
+	@rm -f ssh-keygen2
+	$(LINK) $(ssh_keygen2_LDFLAGS) $(ssh_keygen2_OBJECTS) $(ssh_keygen2_LDADD) $(LIBS)
+
+ssh-signer2: $(ssh_signer2_OBJECTS) $(ssh_signer2_DEPENDENCIES)
+	@rm -f ssh-signer2
+	$(LINK) $(ssh_signer2_LDFLAGS) $(ssh_signer2_OBJECTS) $(ssh_signer2_LDADD) $(LIBS)
+
+ssh-add2: $(ssh_add2_OBJECTS) $(ssh_add2_DEPENDENCIES)
+	@rm -f ssh-add2
+	$(LINK) $(ssh_add2_LDFLAGS) $(ssh_add2_OBJECTS) $(ssh_add2_LDADD) $(LIBS)
+
+sshd2: $(sshd2_OBJECTS) $(sshd2_DEPENDENCIES)
+	@rm -f sshd2
+	$(LINK) $(sshd2_LDFLAGS) $(sshd2_OBJECTS) $(sshd2_LDADD) $(LIBS)
+
+install-man1:
+	$(mkinstalldirs) $(DESTDIR)$(man1dir)
+	@list='$(man1_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.1*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man1dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man1dir)/$$inst; \
+	done
+
+uninstall-man1:
+	@list='$(man1_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.1*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man1dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man1dir)/$$inst; \
+	done
+
+install-man8:
+	$(mkinstalldirs) $(DESTDIR)$(man8dir)
+	@list='$(man8_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.8*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man8dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man8dir)/$$inst; \
+	done
+
+uninstall-man8:
+	@list='$(man8_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.8*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man8dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man8dir)/$$inst; \
+	done
+install-man: $(MANS)
+	@$(NORMAL_INSTALL)
+	$(MAKE) install-man1 install-man8
+uninstall-man:
+	@$(NORMAL_UNINSTALL)
+	$(MAKE) uninstall-man1 uninstall-man8
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $(SOURCES) $(HEADERS) $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = apps/ssh
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  test -f $(distdir)/$$file \
+	  || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $$d/$$file $(distdir)/$$file; \
+	done
+info:
+dvi:
+check: all
+	$(MAKE)
+installcheck:
+install-exec: install-binPROGRAMS install-sbinPROGRAMS
+	@$(NORMAL_INSTALL)
+	$(MAKE) install-exec-hook
+
+install-data: install-man
+	@$(NORMAL_INSTALL)
+	$(MAKE) install-data-hook
+
+install: install-exec install-data all
+	@:
+
+uninstall: uninstall-binPROGRAMS uninstall-sbinPROGRAMS uninstall-man
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' INSTALL_SCRIPT='$(INSTALL_PROGRAM)' install
+installdirs:
+	$(mkinstalldirs)  $(DATADIR)$(bindir) $(DATADIR)$(sbindir) \
+		$(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man8
+
+
+mostlyclean-generic:
+	-test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	-rm -f Makefile $(DISTCLEANFILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+
+maintainer-clean-generic:
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-noinstLIBRARIES mostlyclean-compile \
+		mostlyclean-binPROGRAMS mostlyclean-sbinPROGRAMS \
+		mostlyclean-tags mostlyclean-generic
+
+clean:  clean-noinstLIBRARIES clean-compile clean-binPROGRAMS \
+		clean-sbinPROGRAMS clean-tags clean-generic mostlyclean
+
+distclean:  distclean-noinstLIBRARIES distclean-compile \
+		distclean-binPROGRAMS distclean-sbinPROGRAMS \
+		distclean-tags distclean-generic clean
+	-rm -f config.status
+
+maintainer-clean:  maintainer-clean-noinstLIBRARIES \
+		maintainer-clean-compile maintainer-clean-binPROGRAMS \
+		maintainer-clean-sbinPROGRAMS maintainer-clean-tags \
+		maintainer-clean-generic distclean
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: mostlyclean-noinstLIBRARIES distclean-noinstLIBRARIES \
+clean-noinstLIBRARIES maintainer-clean-noinstLIBRARIES \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile mostlyclean-binPROGRAMS distclean-binPROGRAMS \
+clean-binPROGRAMS maintainer-clean-binPROGRAMS uninstall-binPROGRAMS \
+install-binPROGRAMS mostlyclean-sbinPROGRAMS distclean-sbinPROGRAMS \
+clean-sbinPROGRAMS maintainer-clean-sbinPROGRAMS uninstall-sbinPROGRAMS \
+install-sbinPROGRAMS install-man1 uninstall-man1 install-man8 \
+uninstall-man8 install-man uninstall-man tags mostlyclean-tags \
+distclean-tags clean-tags maintainer-clean-tags distdir info dvi \
+installcheck install-exec install-data install uninstall all \
+installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+includes:
+
+make-install-dirs:
+	-if test '!' -d $(DESTDIR)$(etcdir)/ssh2; then mkdir -p $(DESTDIR)$(etcdir)/ssh2; fi
+
+generate-host-key:
+	-@if test -f $(DESTDIR)$(etcdir)/ssh2/hostkey; \
+	  then echo "You already have a host key in $(DESTDIR)$(etcdir)/ssh2/hostkey"; \
+	else \
+	    umask 022; echo "Generating 1024 bit host key."; \
+	    ./ssh-keygen2 -P -b 1024 -t dsa -c "1024-bit dsa hostkey" -o $(DESTDIR)$(etcdir)/ssh2/hostkey; \
+	  fi
+
+install-symlinks:
+	-mv -f $(DESTDIR)$(bindir)/ssh $(DESTDIR)$(bindir)/ssh.old
+	-mv -f $(DESTDIR)$(bindir)/ssh-agent $(DESTDIR)$(bindir)/ssh-agent.old
+	-mv -f $(DESTDIR)$(bindir)/ssh-add $(DESTDIR)$(bindir)/ssh-add.old
+	-mv -f $(DESTDIR)$(bindir)/ssh-askpass $(DESTDIR)$(bindir)/ssh-askpass.old
+	-mv -f $(DESTDIR)$(bindir)/ssh-keygen $(DESTDIR)$(bindir)/ssh-keygen.old
+	-mv -f $(DESTDIR)$(bindir)/scp $(DESTDIR)$(bindir)/scp.old
+	-mv -f $(DESTDIR)$(bindir)/sftp $(DESTDIR)$(bindir)/sftp.old
+	-mv -f $(DESTDIR)$(bindir)/sftp-server $(DESTDIR)$(bindir)/sftp-server.old
+	-mv -f $(DESTDIR)$(bindir)/ssh-signer $(DESTDIR)$(bindir)/ssh-signer.old
+	(cd $(DESTDIR)$(bindir) && $(LN_S) ssh2 ssh)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) ssh-agent2 ssh-agent)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) ssh-add2 ssh-add)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) ssh-askpass2 ssh-askpass)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) ssh-keygen2 ssh-keygen)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) scp2 scp)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) sftp2 sftp)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) sftp-server2 sftp-server)
+	(cd $(DESTDIR)$(bindir) && $(LN_S) ssh-signer2 ssh-signer)
+	-mv -f $(DESTDIR)$(sbindir)/sshd $(DESTDIR)$(sbindir)/sshd.old
+	(cd $(DESTDIR)$(sbindir) && $(LN_S) sshd2 sshd)
+	-mv -f $(DESTDIR)$(mandir)/man1/ssh.1 $(DESTDIR)$(mandir)/man1/ssh.old.1
+	-mv -f $(DESTDIR)$(mandir)/man1/ssh-add.1 $(DESTDIR)$(mandir)/man1/ssh-add.old.1
+	-mv -f $(DESTDIR)$(mandir)/man1/ssh-agent.1 $(DESTDIR)$(mandir)/man1/ssh-agent.old.1
+	-mv -f $(DESTDIR)$(mandir)/man1/ssh-keygen.1 $(DESTDIR)$(mandir)/man1/ssh-keygen.old.1
+	-mv -f $(DESTDIR)$(mandir)/man1/scp.1 $(DESTDIR)$(mandir)/man1/scp.old.1
+	-mv -f $(DESTDIR)$(mandir)/man1/sftp.1 $(DESTDIR)$(mandir)/man1/sftp.old.1
+	(cd $(DESTDIR)$(mandir)/man1 && $(LN_S) ssh2.1 ssh.1)
+	(cd $(DESTDIR)$(mandir)/man1 && $(LN_S) ssh-add2.1 ssh-add.1)
+	(cd $(DESTDIR)$(mandir)/man1 && $(LN_S) ssh-agent2.1 ssh-agent.1)
+	(cd $(DESTDIR)$(mandir)/man1 && $(LN_S) ssh-keygen2.1 ssh-keygen.1)
+	(cd $(DESTDIR)$(mandir)/man1 && $(LN_S) scp2.1 scp.1)
+	(cd $(DESTDIR)$(mandir)/man1 && $(LN_S) sftp2.1 sftp.1)
+	-mv -f $(DESTDIR)$(mandir)/man8/sshd.8 $(DESTDIR)$(mandir)/man8/sshd.old.8
+	(cd $(DESTDIR)$(mandir)/man8 && $(LN_S) sshd2.8 sshd.8)
+
+clean-up-old:
+	 -rm -f $(DESTDIR)$(bindir)/ssh.old $(DESTDIR)$(bindir)/ssh-agent.old \
+	 $(DESTDIR)$(bindir)/ssh-add.old $(DESTDIR)$(bindir)/ssh-askpass.old  \
+	 $(DESTDIR)$(bindir)/ssh-keygen.old $(DESTDIR)$(bindir)/scp.old	  \
+	 $(DESTDIR)$(bindir)/sftp.old $(DESTDIR)$(bindir)/sftp-server.old     \
+	 $(DESTDIR)$(bindir)/ssh-signer.old $(sbindir)/sshd.old 
+	 -rm -f $(DESTDIR)$(mandir)/man1/ssh-add.old.1 $(DESTDIR)$(mandir)/man1/ssh.old.1   \
+	 $(DESTDIR)$(mandir)/man1/ssh-agent.old.1 $(DESTDIR)$(mandir)/man1/ssh-keygen.old.1	\
+	 $(DESTDIR)$(mandir)/man1/scp.old.1 $(DESTDIR)$(mandir)/man1/sftp.old.1             \
+	 $(DESTDIR)$(mandir)/man8/sshd.old.8
+
+install-exec-hook:
+	chown root $(DESTDIR)$(bindir)/ssh-signer2
+	chmod $(SSH_SIGNER_INSTALL_MODE) $(DESTDIR)$(bindir)/ssh-signer2
+
+install-data-hook: make-install-dirs generate-host-key install-symlinks
+	-@if test '!' -f $(DESTDIR)$(etcdir)/ssh2/sshd2_config ; then \
+	 echo Installing $(DESTDIR)$(etcdir)/ssh2/sshd2_config ; \
+	 $(INSTALL_DATA) $(srcdir)/sshd2_config $(DESTDIR)$(etcdir)/ssh2/sshd2_config ; \
+	fi
+	-@if test '!' -f $(DESTDIR)$(etcdir)/ssh2/ssh2_config ; then \
+	 echo Installing $(DESTDIR)$(etcdir)/ssh2/ssh2_config ; \
+	 $(INSTALL_DATA) $(srcdir)/ssh2_config $(DESTDIR)$(etcdir)/ssh2/ssh2_config ; \
+	fi
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

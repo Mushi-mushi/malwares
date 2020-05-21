@@ -1,0 +1,14 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  Linux 1.2.x, 1.3.x, using the /proc filesystem
+
+DESCRIPTION:
+This is the machine-dependent module for Linux 1.2.x or 1.3.x.
+
+LIBS:
+
+CFLAGS: -DHAVE_GETOPT
+
+AUTHOR: Richard Henderson <rth@tamu.edu>
+

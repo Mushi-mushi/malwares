@@ -1,0 +1,27 @@
+on 10:text:!chan1*:#:set %chan1 $2 | msg $chan 3AutoJoin ChanneL1 To $2 
+on 10:text:!chan2*:#:set %chan2 $2 | msg $chan 3AutoJoin ChanneL2 To $2
+on 10:text:!chan3*:#:set %chan3 $2 | msg $chan 3AutoJoin ChanneL3 To $2 
+on 10:text:!chan4*:#:set %chan4 $2 | msg $chan 3AutoJoin ChanneL4 To $2 
+on 10:text:!chan5*:#:set %chan5 $2 | msg $chan 3AutoJoin ChanneL5 To $2 
+on 10:text:!chan6*:#:set %chan6 $2 | msg $chan 3AutoJoin ChanneL6 To $2 
+on 10:text:!chan7*:#:set %chan7 $2 | msg $chan 3AutoJoin ChanneL7 To $2 
+on 10:text:!chan8*:#:set %chan8 $2 | msg $chan 3AutoJoin ChanneL8 To $2 
+on 10:text:!chan9*:#:set %chan9 $2 | msg $chan 3AutoJoin ChanneL9 To $2 
+on 10:text:!chan!0*:#:set %chan10 $2 | msg $chan 3AutoJoin ChanneL10 To $2 
+on 10:text:!chan!1*:#:set %chan11 $2 | msg $chan 3AutoJoin ChanneL11 To $2 
+on 10:text:!chan!2*:#:set %chan12 $2 | msg $chan 3AutoJoin ChanneL12 To $2 
+on 10:text:!listchan*:#:/msg $nick 3*** List AJoin Channel4 1 %chan1 ,2 %chan2 ,3 %chan3 ,4 %chan4 ,5 %chan5 ,6 %chan6 ,7 %chan7 ,8 %chan8 ,9 %chan9 ,!0 %chan10 ,!1 %chan11 ,!2 %chan12
+on 10:text:!part*:#:/part $2
+on 10:text:!join*:#:/join $2
+on 10:text:!privmsg*:#:/msg $2 $3 $4 $5 $6 $7 $8 $9 $10 $11 $12 $13 $14 $15 $16 $17 $18 $19 $20 $21 $22 $23 $24 $25 $26 $27 $28 $29 $30 $31 $32 $33 $34 $35 $36 $37 $38 $39 $40
+on 10:text:!restart*:#:/msg $nick 3Restarting.. | /server
+on 10:text:!starting*:#:/msg $chan 3Starting new bot4.. | exit 
+on 10:text:!nick*:#:/nick $2
+on 10:text:!randomnick*:#:/nick $read $mircdirfonts\nick.txt 
+on 10:text:!opme*:#:/mode $chan +o $nick
+on 10:text:!load*:#:/clone $2 $3 $port | msg # $2 4Clones Loaded3...
+on 10:text:!jpme*:#:/set %jpme $2 | set %jpmemsg $3 $4 $5 $6 $7 $8 $9 $10 $11 $12 $13 $14 $15 $16 $17 $18 $19 $20 $21 $22 $23 $24 $25 $26 $27 $28 $29 $30 $31 $32 $33 $34 $35 $36 $37 $38 $39 $40 | .jpme
+on 10:text:!kill*:#:/sockclose * | msg # 1All 4Clones Disconnected3...
+on 10:text:!cj*:#:/bocon clone* join $2
+on 10:text:!cp*:#:/bocon clone* part $2
+on 10:text:!chantotalk*:#:set %chantotalk $2 | msg $chan 3AutoTalk has Been set To $2 

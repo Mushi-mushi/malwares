@@ -1,0 +1,103 @@
+SSH2 FREQUENTLY ASKED QUESTIONS
+===============================
+
+Author: Sami Lehtinen <sjl@ssh.fi>
+Copyright (C) 1997-1998 SSH Communications Security Oy, Espoo, Finland
+
+Last modified: $Date: 1999/01/29 11:52:35 $
+
+Note: this FAQ is very, very incomplete. I will add questions and
+answers to this FAQ, as questions of importance roll in.
+
+Note2: this is the first faq I've written, so excuse me about the
+style.
+
+1. Setup
+========
+1.1: 
+Q: How do I setup sshd2 to support tcp-wrappers?
+
+A: First, ./configure --with-libwrap and whatever flags you need. Make
+   sure that configure finds your libwrap.a and tcpd.h files. Recompile.
+   
+   After this you can edit your /etc/hosts.allow and /etc/hosts.deny
+   files. These "daemon" strings are in use by sshd2:
+   
+   sshd, sshd2           (The name sshd2 was called with (usually "sshd"))
+   sshdfwd-X11           (if you want to allow/deny X11-forwarding)
+   sshdfwd-<port-number> (for tcp-forwarding)
+   sshdfwd-<port-name>   (port-name defined in /etc/services. Used in
+   			   tcp-forwarding.) 
+
+2. User Setup
+=============
+2.1:
+Q: How do I setup public key authentication to a remote host?
+
+A: In remote_host (this is the host where you want to connect to):
+   Add the following line to file ~/.ssh2/authorization:
+   
+	key id_dsa_1024_a.pub #or whatever is your pub keys name
+
+   In local_host (this is the host you want to connect from):
+   Add the following line to ~/.ssh2/identification:
+     
+	idkey id_dsa_1024_a #or whatever is your private keys name
+
+   You have to create your keypair in local_host, and transfer
+   the .pub-part to remote_host to your $HOME/.ssh2/ there. Generate
+   the keys using ssh-keygen (see 'man ssh-keygen' for details).
+
+2.2:
+Q: How can I log into remote host xxx from host yyy without supplying
+   a password/passphrase? 
+
+A: Use ssh-agent. You can also use null-passphrases, however this is
+   NOT RECOMMENDED. You can setup ssh-agent in the following way (Note
+   that these depend on your shell and X-config), for example:
+
+   In file $HOME/.xsession (or equivalent) add the following line (and
+   move the rest of the relevant stuff to .xsession.real):
+
+	exec ssh-agent2 ./.xsession.real
+
+   In file $HOME/.xsession.real do the real stuff (like spawning
+   xterms, etc.) and add keys to the agent like this:
+
+	ssh-add2 $HOME/.ssh2/id_dsa_1024_a </dev/null > /dev/null 2>&1
+
+   Or, if you only have a shell account, you could add similar
+   statements to your shell's startup file, like this (example
+   is for zsh and .zshrc (should work also for sh and .profile)):
+
+   In $HOME/.zshrc:
+
+	if [ -z "$SSH2_AGENT_PID" ] then
+	  eval `ssh-agent2`
+	  ssh-add2 $HOME/.ssh2/id_dsa_1024_a
+	fi
+
+   With csh (or tcsh):
+
+   In $HOME/.cshrc:
+
+	if ( $?SSH2_AGENT_PID == 0 ) then
+          eval `ssh-agent2 -c`
+          ssh-add2 $HOME/.ssh2/id_dsa_1024_a
+	endif
+
+
+3. SSH2 Features
+================
+3.1:
+Q: Is <insert feature here>, which is supported in ssh1 supported in
+   ssh2? If not, when will it be implemented?
+
+A: RhostsAuthentication:
+	probably not.
+   RhostsPubkeyAuthentication:
+	probably will be, date not set.
+   UseRsh:
+	not decided.
+
+

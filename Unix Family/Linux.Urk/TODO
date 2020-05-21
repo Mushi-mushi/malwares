@@ -1,0 +1,17 @@
+Cloaking will be added shortly.
+	This will involve redirection of the target's display.
+	for use with sum/md5/ls/others...
+	eg.
+	ls -l /bin/ls will translate into ls -la /usr/man/man1/xxxxxx/ls
+	and the output will be for the original ls.
+	also if there is an attempt to overwrite the filter, it will be
+	redirected to the real binary.  This will help emiminate the problems
+	assosiated with replacing system binaries.
+
+More local filters/redirection.
+	rm/mv/cp/others...
+
+Library trojuns.
+	Cross platform lib's are also planned that will be able to filter
+	requests from programs making syscalls.
+Kernel Trojuns...

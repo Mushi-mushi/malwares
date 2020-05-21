@@ -1,0 +1,35 @@
+
+top - a top users display for Unix
+NEXTSTEP v.0.3  2/14/1996 tpugh
+
+SYNOPSIS:  any m68k or intel NEXTSTEP v3.x system
+
+DESCRIPTION:
+	This is the machine-dependent module for NEXTSTEP v3.x
+	Reported to work for NEXTSTEP v3.0, v3.2, and v3.3 Mach OS:
+		NEXTSTEP v3.0 on Motorola machines.
+		NEXTSTEP v3.2 on Intel and Motorola machines.
+		NEXTSTEP v3.3 on Intel and Motorola machines.
+	Problem with command column for (Choose next40 for fix):
+		NEXTSTEP v3.2 on HP machines.
+		NEXTSTEP v3.3 on HP and Sparc machines.
+	Has not been tested for NEXTSTEP v2.x machines, although it should work.
+	Has not been tested for NEXTSTEP v3.1 machines, although it should work.
+	Install "top" with the permissions 4755.
+		hostname# chmod 4755 top
+		hostname# ls -lg top
+		-rwsr-xr-x  1 root     kmem      121408 Sep  1 10:14 top*
+	With the kmem group sticky bit set, we can read kernal memory without problems,
+	but to communicate with the Mach kernal for task and thread info, it requires
+	root privileges. Therefore, "top" must be setuid 4755 with the owner as root.
+
+LIBS: 
+
+Need the compiler flag, "-DSHOW_UTT", to see the user task and thread task
+data structures to report process info.
+
+CFLAGS: -DSHOW_UTT
+
+
+AUTHORS:		Tim Pugh <tpugh@oce.orst.edu>
+

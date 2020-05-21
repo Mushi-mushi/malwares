@@ -1,0 +1,15 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  PowerPC running AIX 4.1.2.0
+
+DESCRIPTION:
+This is the machine-dependent module for AIX 4.1.2.0
+It is currenlty only tested on PowerPC architectures.
+
+TERMCAP: -lcurses
+
+CFLAGS: -DORDER -DHAVE_GETOPT
+
+AUTHOR:  Joep Vesseur <joep@fwi.uva.nl>
+

@@ -1,0 +1,16 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a 4.4BSD system
+	      Note process resident sizes could be wrong, but ps shows
+	      zero for them too..
+
+DESCRIPTION:
+This is the machine-dependent module for BSD4.4 
+Works for:
+	hp300
+
+LIBS: -lkvm
+
+AUTHOR:  Christos Zoulas <christos@ee.cornell.edu>
+

@@ -1,0 +1,160 @@
+Development history:
++------------------+
+Version 1.3b (BUGFIX)
+	- alin@mido.ro corrected some interesting things, kudos to him! ;)
+	  (that nasty module probes in syslog etc)
+Version 1.3a (PUBLIC)
+	- Added get_kernel_syms hint to prove
+	  accuracy of the kmalloc() pattern scan in order to prevent
+	  oopsing on "bogus" 2.2.x kernels :P
+	- fixed signal delivery problems in backdoor.c, scr-bx & screen(1)
+          finally works correctly (!)
+	- we're catching segv inside kernel now, so machine don't
+	  freeze when the shit happens ...
+Version 1.2c
+	- Fixed setting $HOME variable on remote shell
+	- Fixed that nasty hangup when unlinking socket
+	- Added stealthing of COMM field in /proc/1/stat
+	- Updated doc+FAQ
+Version 1.2b (PUBLIC):
+	- Added /sbin/init stealth, just masking the fact
+	  that WE are the init, and old init executable
+	  is /sbin/init<hidesuffix>
+	- Fixed bug with ENOMEM while there is no hidden processes using
+	  sockets at given time (thanks to destruct)
+	- Rewriten getdents() functions ... simpler & faster,
+	  holes created by invisible files could be filled by next
+	  entries in directory (recursive)
+	- Better GFP_KERNEL handling -- we're using value discovered
+	  during /dev/kmem pattern scan. slab.c - 2.4.7 & 2.4.9 shouldn't oops!
+	- Added encrypted shell (ehrm, ehrm, "encrypted" ... xor+sha1)
+	  which could be accessed thru any running TCP service on server,
+	  btw, client doesn't need to be run as root, finally!
+	- doc+FAQ
+Version 1.21a:
+	- We're sniffing clients of common network services on TTYs now.
+	  It's a bit strange at the time, but hell, if you've better idea
+	  -- code it!
+	- tcp/raw/udp sockets used by hidden pids will be hidden for
+	  non-suckit users.
+Version 1.2a:
+	- No way, the code got rewritten completely from scratch again.
+	  No shell access, only pid & file hiding at the time.
+	- Removed binary-configuration ability, password, home, 
+	  hide string, all is hard-coded at the compile time.
+	- Leaved from relocating kernel object, now all kernel variables
+	  relocates themselves.
+	- Better kmalloc() handling, no overwriting of some syscall
+	  anymore!
+---------------------------------------------------------------------------
+Version 1.1c:
+        - disabled flow control in client, escape char changed to ^K
+Version 1.1b:
+        - fixed GFP_KERNEL bug with segfaulting on 2.4.0 - 2.4.5 kernels
+Version 1.1a:
+        - makefile, added SIGWINCH support + autentification of remote
+          user (but still in plain text ;( )
+Version 1.0d:
+        - added connect-back bindshell, with TTY/PTY support !
+          filtering out invisible pids, connections and philes ;)
+Version 1.0c:
+        - only one thing we're doing at this time, is to change one letter
+          in output of uname()
+Version 1.0b:
+        - first working version of new code, relocations made directly
+          from .o, as far i know, everything works on 2.4.x smoothly,
+          just add some good old features...
+          Added (read: stolen) linus' string.c and vsprintf.c in order to
+          make coding more user-phriendly ;)
+Version 1.0a:
+        - devik@cdi.cz discovered that `sidt` works on linux ... so we can
+          play a bit with int 0x80 ;)) kmalloc search engine was written by
+          devik too, many thanks to him!
+---------------------------------------------------------------------------
+Version 0.3d:
+        - I got 2.4.10 kernel and things are _totally_ fucked up,
+          nothing didn't work, kmalloc search engine was gone and so on ..
+          So i decided to rewrite code from scratch,
+          divide it to more files.
+Version 0.3c: (PUBLIC)
+        - added getdents64 (interesting for 2.4.x kernel, but compatibility
+          still not guaranted)
+Version 0.3b:
+        - added `scp` sniffing
+        - no sniffing of hidden users anymore!
+Version 0.3: (PUBLIC)
+        - Punk. Fool. We don't need LKM support anymore !!!
+          We're able to heuristically abtain (with 80% accuracy ;)
+          sys_call_table[] and kmalloc() directly from /dev/kmem !!!
+          third release under GNU/GPL
+Version 0.23a:
+        - completely rewritten new_getdents(), fixed major bugs,
+          but still sometimes crashes unpredictabely ;-(
+Version 0.22b:
+        - rcscript is executed as invisible by nature ;)
+Version 0.22a:
+        - Fixed "unhide all" bug, feature works now
+Version 0.21a:
+        - added ssh2d support
+Version 0.2a:
+        - fixed ugly bug in that suckit forgets to hide some invisible
+          pids (on high loads) without reason !!
+          (thx. to root@buggy.frogspace.net ;)
+Version 0.2: (PUBLIC)
+        - Cleanup (the suckit.h thing, etc),
+          l33t bash skripts (flares, mk, inst),
+          second (BUGFIX) release under GNU/GPL
+Version 0.13a:
+        - Filters out the syslogd's lines of us while we logginin' in/out,
+          WE'RE TOTALLY INVISIBLE NOW!
+Version 0.12a:
+        - Finally! We're able to hide our TCP/UDP/RAW sockets in netstat!
+          Everything done usin' stealth techniqe for /proc/net/tcp|udp|raw
+Version 0.11b:
+        - We hide the fact that someone sets PROMISC flag on some eth iface
+          (thru ioctl)
+Version 0.11a:
+        - Fixed the weird bug in check_names() so we're able to stay in
+          kernel for more than 2 hours without consuming a lotta of memory
+          and rebooting (thx. to root@host2.dns4ua.com)
+Version 0.1: (PUBLIC):
+        - General code cleanup, released first version under GNU/GPL
+Version 0.08a:
+        - Added suid=0 fakeshell thing, because some hosts don't like uid=0
+          users remotely logged in ;)
+Version 0.07c:
+        - Fixed bug with kernel's symbol versions (strncmp ownz! ;) while
+          we importin' symbols
+Version 0.07b:
+        - Added the `config` crap ;)
+Version 0.07a:
+        - Everything joined into one executable ;)
+          Compilation divided into three parts:
+          .C -> .S, .S -> our_parses -> .s, .s -> binary
+Version 0.06a:
+        - Fixed major bugs with small buffers, added PID hidding and our
+          PID tracking system, leaved from using 'task_struct *current'
+          and other kernel structures, so the code can work on any kernel
+          of 2.2.x without recompilation !
+Version 0.05a:
+        - solved our problem with 'who', we forbid any write to
+          utmp/wtmp/lastlog containing our username ;)
+Version 0.04a:
+        - "backdoor" over fake /etc/passwd for remote services
+          (telnet, rsh, ssh), but we are still visible in `who` ;(
+Version 0.03a:
+        - First relocatable code, we still do only one thing
+          (hiding files), divided into two parts object module
+          (normal, vanilla kernel-LKM ;) and Silvio's kinsmod
+          (which places it to kernel space thru /dev/kmem)
+Version 0.02b:
+        - Finally! We're able to allocate kernel memory thru kmalloc() !
+          But the code does nothing ;(
+Version 0.02a:
+        - First executable code, we're overwriting kernel-code at static
+          address.
+          Fixed one major bug:
+          [rewt@pikatchu ~]# ./suckit
+          bash: ./suckit: No such file or directory
+Version 0.01a:
+        - uhm, no real code, just only concept in my head

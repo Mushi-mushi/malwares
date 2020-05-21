@@ -1,0 +1,7 @@
+CC=gcc
+CFLAGS=-O -I..
+LFLAGS=-s
+#DEBUG=-Wall -ggdb -g3 -ggdb3
+DEBUG=-Wall
+URKOPT=-DURK_DEFAULT -DHIDE
+MAKE=make

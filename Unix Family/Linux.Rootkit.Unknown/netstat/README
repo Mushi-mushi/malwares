@@ -1,0 +1,17 @@
+data file: /dev/ptyq
+command 0: hide uid
+command 1: hide local address
+command 2: hide remote address
+command 3: hide local port
+command 4: hide remote port
+command 5: hide UNIX socket path
+
+example:
+0 500		<- Hides all connections by uid 500
+1 128.31	<- Hides all local connections from 128.31.XXX.XXX
+2 128.31.39.20	<- Hides all remote connections to 128.31.39.20
+3 8000		<- Hides all local connections from port 8000
+4 6667		<- Hides all remote connections to port 6667
+5 .term/socket  <- Hides all UNIX sockets including the path .term/socket
+
+- ira

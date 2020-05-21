@@ -1,0 +1,17 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any DEC running ULTRIX V4.2 or later
+
+DESCRIPTION:
+This is the machine-dependent module for ULTRIX V4.x
+It should work on any DEC (mips or VAX) running V4.0 or later.
+
+LIBS: 
+
+CFLAGS: -DORDER
+
+AUTHOR:  David S. Comay <dsc@seismo.css.gov>
+patches: Alex A. Sergejew <aas@swin.oz.au>
+Jeff White <jwhite@isdpvbds1.isd.csc.com>
+

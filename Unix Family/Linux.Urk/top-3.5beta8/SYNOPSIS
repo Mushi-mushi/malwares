@@ -1,0 +1,40 @@
+386bsd:For a 386BSD system
+aix32:POWER and POWER2 running AIX 3.2.5.0
+aix41:PowerPC running AIX 4.1.2.0
+aux3:a Mac running A/UX version 3.x
+bsd386:For a BSD/386 system
+bsd43:any generic 4.3BSD system
+bsd44:For a 4.4BSD system
+bsd44a:For a pre-release 4.4BSD system
+bsdos2:For a BSD/OS 2.X system (based on the 4.4BSD Lite system)
+convex:any C2XX running Convex OS 11.X.
+dcosx:For Pyramid DC/OSX
+decosf1:DEC Alpha AXP running OSF/1 or Digital Unix 4.0.
+dgux:for DG AViiON with DG/UX 5.4+
+dynix:any Sequent Running Dynix 3.0.x
+dynix32:any Sequent Running Dynix 3.2.x
+freebsd20:For a FreeBSD-2.0 (4.4BSD) system
+ftx:For FTX based System V Release 4
+hpux10:any hp9000 running hpux version 10.x
+hpux7:any hp9000 running hpux version 7 or earlier
+hpux8:any hp9000 running hpux version 8 (may work with 9)
+hpux9:any hp9000 running hpux version 9
+irix5:any uniprocessor, 32 bit SGI machine running IRIX 5.3
+irix62:any uniprocessor, SGI machine running IRIX 6.2
+linux:Linux 1.2.x, 1.3.x, using the /proc filesystem
+mtxinu:any VAX Running Mt. Xinu MORE/bsd
+ncr3000:For NCR 3000 series systems Release 2.00.02 and above -
+netbsd08:For a NetBSD system
+netbsd10:For a NetBSD-1.0 (4.4BSD) system
+next32:any m68k or intel NEXTSTEP v3.x system
+next40:any hppa or sparc NEXTSTEP v3.3 system
+osmp41a:any Solbourne running OS/MP 4.1A
+sco:SCO UNIX
+sunos4:any Sun running SunOS version 4.x
+sunos4mp:any multi-processor Sun running SunOS versions 4.1.2 or later
+sunos5:Any Sun running SunOS 5.x (Solaris 2.x)
+svr4:Intel based System V Release 4
+svr42:For Intel based System V Release 4.2 (DESTINY)
+ultrix4:any DEC running ULTRIX V4.2 or later
+umax:Encore Multimax running any release of UMAX 4.3
+utek:Tektronix 43xx running UTek 4.1

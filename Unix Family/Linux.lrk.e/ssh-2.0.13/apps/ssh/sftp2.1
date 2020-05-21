@@ -1,0 +1,95 @@
+.\"  -*- nroff -*-
+.\"
+.\" sftp.1
+.\"
+.\" Author:     Timo J. Rinne <tri@ssh.fi>
+.\"		Sami Lehtinen <sjl@ssh.fi>
+.\"
+.\" Copyright (c) 1998 SSH Communications Security, Finland
+.\" All rights reserved
+.\"
+.nr CO 0
+.ie \n(CO .TH SFTP 1 "June 30, 1998" "SSH2" "SSH2"
+.el  .TH SFTP 1 "June 30, 1998" "SSH2" "SSH2"
+
+.SH NAME
+sftp \- secure ftp client
+
+.SH SYNOPSIS
+.LP
+.na
+.B sftp
+[\c
+.BI \-d \ debug_level_spec\fR\c
+]
+[\c
+.BI \-c \ cipher\fR\c
+]
+[\c
+.BI \-v \fR\c
+]
+[\c
+.BI \-S \ ssh2_path\fR\c
+]
+[\c
+.BI \-p \ remote_port\fR\c
+]
+[host[#port][ user]]
+
+.SH DESCRIPTION 
+.LP
+.B Sftp
+(Secure File Transfer) is a ftp-like client that can be used in
+file transfer over the network.  Sftp uses 
+.B Ssh2
+in data connections, so the file transport is secure.
+
+.SH OPTIONS
+.LP
+.ne 3
+.TP
+.BI \-d \ debug_level_spec\fR\c
+Debug mode.  Makes
+.B sftp
+send verbose debug output to stderr. The debugging level is
+either a number (0-99), or a comma-separated list of assignments
+"ModulePattern=debug_level".
+.ne 3
+.TP
+.BI \-c \ cipher\fR\c
+Select encryption algorithm. Multiple -c options are allowed and
+a single -c flag can have only one cipher.
+.ne 3
+.TP
+.BI \-v \fR\c
+Enable verbose mode. Display verbose debugging messages. Equal to
+`-d 2'. This option can also be specified in the configuration file.
+.ne 3
+.TP
+.BI \-S \ ssh2_path\fR\c
+Specifies the path to
+.B ssh2
+used in connecting.
+.ne 3
+.TP
+.BI \-p \ remote_port\fR\c
+Specify the remote port to connect to.
+
+.SH AUTHORS
+.LP
+
+SSH Communications Security Ltd
+
+For more information, see http://www.ssh.fi.
+
+.SH SEE ALSO
+.BR ssh2 (1),
+.BR sshd2 (8),
+.BR ssh-keygen2 (1),
+.BR ssh-agent2 (1),
+.BR ssh-add2 (1),
+.BR scp2 (1)
+.BR ftp (1),
+.BR rlogin (1),
+.BR rsh (1),
+.BR telnet (1)

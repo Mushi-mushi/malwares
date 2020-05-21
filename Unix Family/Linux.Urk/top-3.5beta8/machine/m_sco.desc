@@ -1,0 +1,18 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  SCO UNIX
+
+DESCRIPTION:
+This is the machine-dependent module for SCO UNIX.
+Originally written for BSD4.3 system by Christos Zoulas.
+Works for:
+SCO UNIX 3.2v4.2
+
+CFLAGS: -iBCS2
+
+You HAVE to use compiler option: -iBCS2
+(Enforces strict Intel Binary Compatibility Standard 2 conformance.)
+
+AUTHOR:  Gregory Shilin <shilin@onyx.co.il>
+

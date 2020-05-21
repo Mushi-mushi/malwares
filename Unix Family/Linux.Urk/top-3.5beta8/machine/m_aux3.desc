@@ -1,0 +1,20 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  a Mac running A/UX version 3.x
+
+DESCRIPTION:
+This is the machine-dependent module for A/UX 3.x.
+==
+Although AUX does not generally have a renice systemcall, it can be
+implemented by tweeking kernel memory.  While such a simple hack should
+not be difficult to get right, USE THIS FEATURE AT YOUR OWN RISK!
+To turn on setpriority emulation, add "-DIMPLEMENT_SETPRIORITY" to
+the CFLAGS when prompted in the configure script.
+
+CFLAGS: -Dclear=clear_scr -DPRIO_PROCESS=0
+
+LIBS:
+
+AUTHOR:  Richard Henderson <rth@tamu.edu>
+

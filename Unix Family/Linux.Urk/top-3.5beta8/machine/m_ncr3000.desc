@@ -1,0 +1,17 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For NCR 3000 series systems Release 2.00.02 and above -
+	works on 2.03.00 and earlier (and probably later) OS releases.
+	(Intel based System V Release 4)
+
+DESCRIPTION:
+System V release 4     for NCR 3000 series OS Rel 02.03.00 and above
+
+LIBS:  -lelf
+
+AUTHORS:  Andrew Herbert     <andrew@werple.apana.org.au>
+Robert Boucher     <boucher@sofkin.ca>
+Jeff Janvrin	<jeff.janvrin@columbiasc.ncr.com>
+did the port to statfs (2.03)
+

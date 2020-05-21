@@ -1,0 +1,283 @@
+PLEASE READ THESE TERMS CAREFULLY BEFORE USING THIS SOFTWARE
+
+Copyright (C) 1995-1999 SSH Communications Security Ltd., Finland
+<http://www.ssh.fi>.  All rights reserved.  SSH, SSH2 and Secure Shell
+are trademarks or registered trademarks of SSH Communications Security Ltd.
+
+THERE IS NO WARRANTY OF ANY KIND FOR THIS SOFTWARE. THIS SOFTWARE IS FOR
+NON-COMMERCIAL USE ONLY. 
+
+Please contact Data Fellows <http://www.datafellows.com/> for commercial
+licensing.
+
+==============================================================
+
+LICENSE AGREEMENT 
+
+This LICENSE is a legal contract between you and SSH Communications
+Security Ltd.  This LICENSE grants you certain rights; without a license,
+you are not allowed to use, distribute, or modify this software.  BY
+USING, DOWNLOADING, DISTRIBUTING, OR MODIFYING THE SOFTWARE, YOU ARE
+CONSENTING TO BE BOUND BY AND ARE BECOMING A PARTY TO THIS AGREEMENT.
+
+
+SSH Communications Security may revise these terms at any time and the
+revised terms shall apply to the corresponding versions of the SOFTWARE
+distributed with the revised terms.
+
+
+For the purposes of this license agreement,
+
+SOFTWARE shall mean the SSH 2.0 (Secure Shell) software package in source
+code or compiled form, its documentation, as distributed with this license
+agreement, and any other derivative work based on it.
+
+LICENSOR shall mean SSH Communications Security Ltd.
+
+LICENSEE shall mean you, the natural or legal person or organization
+using, distributing, or modifying the SOFTWARE under this LICENSE.
+
+NON-COMMERCIAL USE shall mean the following uses of the SOFTWARE: 
+
+a) any use done outside and without connection to a commercial
+   organization and commercial activity,
+
+b) use related to leisure time activities by private individuals,
+   including hobbies, games, etc. provided however that such use is not
+   commenced with commercial companies.
+
+Uses not considered as NON-COMMERCIAL USE include, but are not
+limited to: 
+
+a) any use where commercial activity is involved and where the use
+   in any way, directly or indirectly, aims at monetary or other
+   commercial benefit,
+
+b) any use that takes place in commercial, governmental, military,
+   or similar organizations and where a salary or similar monetary
+   compensation is paid, unless the use can be considered to be 
+   EDUCATIONAL USE or is purely for charity.
+
+EDUCATIONAL USE shall include the following uses of the software:
+
+a) use for receiving education (i.e. students) with the assistance of the
+   SOFTWARE for activities directly related to studying (homework,
+   projects). A monetary or other compensation is allowed to be paid for
+   these activities as long as the primary purpose is education, 
+
+b) use for giving education (i.e. teachers), including gathering,
+   modifying, and disseminating information,
+
+c) using the SOFTWARE as teaching material, provided however that the
+   intellectual property rights of the LICENSOR are not infringed.
+
+d) use for system administration (i.e. administration of computing resources) 
+   in educational institutions.
+
+Uses not considered as EDUCATIONAL USE include, but are not limited to:
+
+a) use by students in projects or activities that are funded or otherwise
+   compensated by commercial organizations and are not directly related to
+   studying,
+
+b) use for research when the primary occupation of the researcher is not
+   teaching and little or no contribution is given to teaching activities,
+
+c) administrative tasks in educational institutions (excluding system 
+   administration) when administration is the primary purpose for using the 
+   software. 
+
+RIGHT TO USE FREE OF CHARGE
+
+The LICENSOR grants the LICENSEE a non-exclusive, non-transferable,
+royalty-free, limited right to use the SOFTWARE for NON-COMMERCIAL or
+EDUCATIONAL USE in each and every country where the SOFTWARE can be
+legally used, provided at least one of the following applies to the
+LICENSEE:
+
+EVALUATION. The LICENSEE may use the SOFTWARE for a limited time for the
+purpose of evaluating the SOFTWARE.  The evaluation period is limited to
+sixty (60) days from the date hereof for each LICENSEE.
+
+INVIDUALS.  Private natural persons may use the SOFTWARE for personal,
+NON-COMMERCIAL USE.
+
+EDUCATIONAL INSTITUTIONS.  Qualifying non-profit educational institutions
+may use the SOFTWARE for educational purposes only, and employees and
+registered students of such educational institutions may use the SOFTWARE
+on their home computers, for NON-COMMERCIAL USE or EDUCATIONAL USE.
+Research laboratories and other research institutions whose primary
+purpose is not education are not considered educational institutions for
+the purposes of this LICENSE.
+
+CHARITY ORGANIZATIONS. Institutions or funds whose intention is to help
+the needy on charity basis and which do not operate for profit,  including
+employees and volunteers of such organizations, may use  the SOFTWARE free
+of charge for NON-COMMERCIAL USE in activities directly related to the
+operations of such an organization.
+
+
+If none of the above applies to the LICENSEE, commercial licensing of the
+SOFTWARE is required before the LICENSEE can use the SOFTWARE. 
+
+
+RIGHT TO DISTRIBUTE
+
+The LICENSEE may make and distribute verbatim copies of the SOFTWARE,
+provided that the LICENSEE complies with all restrictions and obligations
+set forth in this LICENSE and that an unmodified copy of this LICENSE is
+distributed with the SOFTWARE.
+
+No fee may be charged for distribution of this SOFTWARE under this
+LICENSE.  However, as an exception, the SOFTWARE may be put on a floppy or
+CD-ROM containing other free software or evaluation software, and a modest
+fee may be charged for the floppy or CD-ROM, or for a book or magazine
+containing the floppy or CD-ROM.
+
+Bundling the SOFTWARE with a primarily commercial product, other than
+distributions of free software specifically excluded above, is not allowed
+under this LICENSE, and requires separate commercial licensing.
+
+
+RIGHT TO MAKE MODIFICATIONS AND COMPILATIONS
+
+The LICENSEE may create derived works (modified versions) based on the
+SOFTWARE, and distribute such derived works, provided that
+
+1. any modified versions are conspicuously identified as such, 
+
+2. the derived work does not without permission use the names SSH or
+   Secure Shell, or other trademarks of the LICENSOR or its distributors
+   or agents, 
+
+3. the derived work is distributed under terms identical or not more
+   favorable to this LICENSE and contains a copy of this LICENSE,
+
+4. no copyright notices or other similar intellectual property notices are
+   removed, The LICENSEE shall reproduce and apply any copyright or other
+   property rights notices included on or embedded in Licensed Software to
+   any copies or modifications, in whole or in part, in any form,
+
+5. the modifications do not introduce any security bugs, backdoors, trojan
+   horses, or other malicious code, to the best knowledge of the LICENSEE,
+   and
+
+6. the LICENSEE gives the LICENSOR a non-exclusive, royalty-free right to
+   use, modify, distribute, sublicense and otherwise exploit any such
+   modifications as part of other versions of the SOFTWARE and/or in other
+   products, without separately identifying the parties whose
+   modifications are being used. The LICENSOR shall do its best effort to
+   give due credit to any significant contributions, but gives no warranty
+   thereof. This clause also applies to any modifications to the SOFTWARE
+   (including but not limited to patches, context diffs, etc.) that are
+   published in any 0way, including but not limited to mailing lists,
+   books or other publications, newsgroups, WWW pages, letters, faxes, or
+   e-mail, or otherwise directly or indirectly communicated to SSH
+   Communications Security Ltd, even if they are stored and communicated
+   separately from the SOFTWARE. BY MODIFYING THE SOFTWARE OR DISTRIBUTING
+   SUCH MODIFICATIONS, THE LICENSEE IMPLICITLY GIVES SSH COMMUNICATIONS
+   SECURITY LTD THE RIGHTS SPECIFIED HEREIN TO ANY SUCH MODIFICATIONS.
+
+
+Modified versions of the SOFTWARE complying with the terms set out in this
+section may be distributed by the LICENSEE under the same terms and
+conditions set forth for the original SOFTWARE.
+
+
+NO WARRANTY
+
+BECAUSE THE SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR
+THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
+OTHERWISE STATED IN WRITING, THE LICENSOR PROVIDES THE SOFTWARE "AS IS"
+WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT
+NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE
+OF THE PROGRAM LIES WITH THE LICENSEE. SHOULD THE SOFTWARE PROVE
+DEFECTIVE, THE LICENSEE ALONE SHALL ASSUME THE COST OF ALL NECESSARY
+SERVICING, REPAIR OR CORRECTION.
+
+IN NO EVENT UNLESS AGREED TO IN WRITING BY LICENSOR WILL THE LICENSOR BE
+LIABLE TO THE LICENSEE OR ANY THIRD PARTY FOR DAMAGES, INCLUDING ANY
+DIRECT, INDIRECT, GENERAL, SPECIAL, INCIDENTAL, EXEMPLARY OR CONSEQUENTIAL
+DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, INFORMATION, OR PROFITS; OR BUSINESS INTERRUPTION
+OR INFRINGEMENT OF THIRD INDUSTRIAL PROPERTY RIGHT OR SIMILAR), EVEN IF
+THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+
+MAINTENANCE AND SUPPORT
+
+LICENSOR shall have no obligation to provide maintenance or support for
+the SOFTWARE.
+
+
+ADHERENCE TO LOCAL REGULATIONS REGARDING CRYPTOGRAPHIC SOFTWARE
+
+The SOFTWARE contains cryptographic algorithms and technology.  Some
+countries restrict the export, import, or use of such technologies.
+
+The LICENSEE accepts full responsibility for its compliance with any
+regulations pertaining to cryptographic technology, including but not
+limited to the United States Export Administration Act and the Wassenaar
+arrangement.  In no situation shall the LICENSOR be liable for any
+violation of such regulations by the LICENSEE.
+
+The LICENSEE shall be fully responsible for obtaining any information
+about the required permits and acquiring the necessary permits that may be
+required by local or other applicable regulations for using or
+distributing the SOFTWARE.
+
+
+PATENT LICENSES AND INDEMNIFICATION
+
+The LICENSEE shall be responsible for obtaining any patent licenses
+required for using the SOFTWARE in any particular country.  The LICENSEE
+agrees to indemnify and hold the LICENSOR harmless against any claims or
+awards arising out of LICENSEE's use of the SOFTWARE under this LICENSE.
+
+
+MISCELLANEOUS
+
+No rights are granted to the SOFTWARE except those expressly set forth
+herein.  The LICENSEE may not copy, modify, rent, lease, sublicense, or
+distribute the SOFTWARE except as expressly provided under this LICENSE.
+Any attempt otherwise to copy, modify, sublicense or distribute the
+SOFTWARE is void, and will automatically terminate LICENSEE's rights under
+this LICENSE.
+
+This LICENSE shall not affect in any way any other confidentiality,
+licensing, or other agreement between the LICENSEE and the LICENSOR.
+
+
+TERM AND TERMINATION
+
+This LICENSE is valid until terminated, and will terminate immediately
+without notice if the LICENSEE is in breach of any of its terms and
+conditions.  The LICENSEE may terminate this LICENSE at any time by
+destroying the SOFTWARE and all copies thereof.
+
+Upon termination of this LICENSE, the LICENSEE must destroy all copies of
+the SOFTWARE and any derived works thereof.  Terms and conditions
+concerning no warranty, limitation of liability, and indemnification of
+the LICENSOR shall survive any termination of this LICENSE.  People or
+organizations who received copies of the SOFTWARE from LICENSEE under this
+LICENSE before termination of the LICENSE shall not have their licenses
+terminated, as long as they remain in full compliance.
+
+
+JURISDICTION
+
+This LICENSE shall be governed by the laws of Finland.
+
+Any dispute arising out of this Agreement shall be finally settled by
+arbitration in accordance with the arbitration rules of the Finnish
+Central Chamber of Commerce in Helsinki. 
+
+The LICENSOR shall, however, have an option, notwithstanding the
+arbitration clause above, to initiate legal proceedings based on a breach
+of this Agreement in any court having jurisdiction over the LICENSEE.
+
+
+
+

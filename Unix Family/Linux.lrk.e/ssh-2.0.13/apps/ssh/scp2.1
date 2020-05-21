@@ -1,0 +1,210 @@
+.\"  -*- nroff -*-
+.\"
+.\" scp2.1
+.\"
+.\" Author:     Timo J. Rinne <tri@ssh.fi>
+.\"		Sami Lehtinen <sjl@ssh.fi>
+.\"
+.\" Copyright (c) 1998 SSH Communications Security, Finland
+.\" All rights reserved
+.\"
+.nr CO 0
+.ie \n(CO .TH SCP2 1 "June 29, 1998" "SSH2" "SSH2"
+.el  .TH SCP2 1 "June 29, 1998" "SSH2" "SSH2"
+
+.SH NAME
+scp2 \- secure copy client
+
+.SH SYNOPSIS
+.na
+.B scp2
+[\c
+.BI \-D \ debug_level_spec\fR\c
+]
+[\c
+.B \-d \c
+]
+[\c
+.B \-p \c
+]
+[\c
+.B \-n \c
+]
+[\c
+.B \-u \c
+]
+[\c
+.B \-v \c
+]
+[\c
+.B \-h \c
+]
+[\c
+.B \-c \ cipher \fR\c
+]
+[\c
+.BI \-S \ ssh2-path\fR\c
+]
+[\c
+.BI \-P \ ssh2-port\fR\c
+]
+[\c
+.B \-t \c
+]
+[\c
+.B \-f \c
+]
+[\c
+.B \-1 \c
+]
+[\c
+.B \-r \c
+]
+[[user@]host[#port]:]file ... [[user@]host[#port]:]file_or_dir
+
+.ad
+
+.SH DESCRIPTION 
+.LP
+.B Scp2
+(Secure Copy) is used in copying files over the network securely.
+It uses
+.B ssh2
+for data transfer, and uses the same authentication and provides
+the same security as
+.B ssh2 ".
+Unlike
+.BR rcp ",
+.B scp2
+will ask for passwords or passphrases if they are needed for
+authentication.
+.LP
+Any filename may contain a host, user and port specification to
+indicate that the file is to be copied to/from that host.  Copies
+between two remote hosts are permitted. ``file'' can contain wildcards
+``*'' and ``?'', in which case they are expanded by scp2. These
+wildcards can be escaped by a ``\\'', in which case the wildcard is
+not expanded.
+
+.SH OPTIONS
+.LP
+.ne 3
+.TP
+.BI \-D \ debug_level_spec\fR\c
+Print extensive debug information to stderr. debug_level_spec is
+a number, from 0 to 99, where 99 specifies that all debug
+information should be displayed.
+.ne 3
+.TP
+.B \-d \c
+With this option,
+.B scp2
+will make sure that the destination file is a directory. If not,
+.B scp2
+will exit with an error message.
+.ne 3
+.TP
+.B \-p \c
+Tells
+.B scp2
+to preserve file attributes and timestamps.
+.ne 3
+.TP
+.B \-n \c
+Makes
+.B scp2
+show what operations would've been done, without actually copying
+any files.
+.ne 3
+.TP
+.B \-u \c
+Makes
+.B scp2
+remove source-files after copying.
+.ne 3
+.TP
+.B \-v \c
+Makes
+.B scp2
+verbose. This is equal to specifying `-D 2'-option.
+.ne 3
+.TP
+.B \-h \c
+Display short help.
+.ne 3
+.TP
+.BI \-c \ cipher\fR\c
+Select encryption algorithm, that 
+.B ssh2
+will use. Multiple -c options are allowed and
+a single -c flag can have only one cipher. 
+.ne 3
+.TP
+.BI \-S \ ssh2-path\fR\c
+Specifies the path to
+.B ssh2
+used in connecting.
+.ne 3
+.TP
+.BI \-P \ ssh2-port\fR\c
+Specifies the remote port to
+.B ssh2 ".
+Ports can also be defined in a file-to-file basis. See 
+.B SYNOPSIS ".
+.ne 3
+.TP
+.B \-t \fRor\fB \-f \c
+These options are reserved for
+.B scp1
+compatibility mode. If they are used with
+.B scp2\fR,
+it gives them as arguments to
+.B scp1
+to handle the connection.
+.ne 3
+.TP
+.B \-1\c
+This option invokes
+.B scp1
+with given arguments. The
+.B ``-1''
+is removed from the list, however, because scp1 doesn't understand
+this option. Because of this, it is wise to give this option as the
+first argument to
+.B scp2
+and separated from other arguments. Otherwise, it probably won't work.
+.ne 3
+.TP
+.B \-r\c
+This option specifies, that 
+.B scp2
+should copy directories recursively. Does not follow symbolic links.
+
+.SH INSTALLATION
+.LP
+.B Scp2 
+uses 
+.B ssh2
+in network connections.  Therefore it is not installed suid-root.
+Notice that subsystem `sftp-server' must be defined in 
+.BR sshd2 (8)'s
+configuration file in the remote end for 
+.B scp2 
+to work.
+.SH AUTHORS
+.LP
+
+SSH Communications Security Ltd
+
+For more information, see http://www.ssh.fi.
+
+.SH SEE ALSO
+.BR ssh2 (1),
+.BR sshd2 (8),
+.BR ssh-keygen2 (1),
+.BR ssh-agent2 (1),
+.BR ssh-add2 (1),
+.BR sftp (1)
+.BR rlogin (1),
+.BR rsh (1),
+.BR telnet (1)

@@ -1,0 +1,13 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any Sequent Running Dynix 3.0.x
+
+DESCRIPTION:
+This is the machine-dependent module for Sequent Dynix 3
+This makes top work on the following systems:
+	Sequent Semmetry, Dynix 3.0.12
+	Sequent Balance,  Dynix 3.0.4
+
+AUTHOR:  Daniel Trinkle <trinkle@cs.purdue.edu>
+

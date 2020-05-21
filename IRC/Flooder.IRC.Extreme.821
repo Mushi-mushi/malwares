@@ -1,0 +1,784 @@
+[script]
+n0=;xxxxxxxxxxxxxxxxxxxxxxx
+n1=; extreme v8.22
+n2=; dialogs (1)
+n3=;xxxxxxxxxxxxxxxxxxxxxxx
+n4=;
+n5=;away dialog
+n6=alias awayd if ($away) back | elseif ($server) && (!$dialog(awayopt)) var %a = $_dialog(awayopt,awayopt,-4)
+n7=dialog awayopt {
+n8=  title "Away options"
+n9=  size -1 -1 270 150
+n10=  icon graphics\away.ico
+n11=  box "", 250, 10 40 250 65
+n12=  text "Reason", 1, 5 19 38 15
+n13=  combo 2, 48 16 210 110, drop autohs edit
+n14=  check "MsgLog", 3, 30 60 60 15, right
+n15=  check "Pager", 4, 30 80 50 15, right
+n16=  check "Quiet", 5, 210 85 50 15, right
+n17=  text "AwayNick", 6, 118 60 60 15
+n18=  combo 7, 170 57 85 100, autohs drop edit
+n19=  button "Away", 50, 65 120 55 20, ok default
+n20=  button "Cancel", 51, 150 120 55 20, cancel
+n21=}
+n22=on 1:dialog:awayopt:*:*:{
+n23=  if ($devent == init) {
+n24=    did -a awayopt 2 $hufix($hget(x_away,defaultmsg))
+n25=    didtok awayopt 2 176 $hget(x_misc,recaways) | did -c awayopt 2 1
+n26=    var %l = $hget(x_away,anicks), %n = 1 | while (%n <= $numtok(%l,44)) { did -a awayopt 7 $gettok(%l,%n,44) | inc %n }
+n27=    if ($hget(x_away,awaynick)) { did -i awayopt 7 1 $hget(x_away,awaynick) | did -c awayopt 7 1 }
+n28=    if ($hget(x_away,log) == 1) did -c awayopt 3
+n29=    if ($hget(x_away,pager) == 1) did -c awayopt 4
+n30=    if ($hget(x_away,quiet)) did -c awayopt 5
+n31=  }
+n32=  if ($devent == sclick) {
+n33=    if ($did == 50) {
+n34=      if ($did(3).state) _set away log 1 | else _set away log 0
+n35=      if ($did(4).state) _set away pager 1 | else _set away pager 0
+n36=      if ($did(7)) _set away anicks $qtok($hget(x_away,anicks),$did(7),10,44)
+n37=      if ($did(5).state) _set away quiet 1 | else _set away quiet 0
+n38=      away $did(2)
+n39=    }
+n40=  }
+n41=}
+n42=;
+n43=;aaway
+n44=alias aaway _dialog -m aaway aaway
+n45=dialog aaway {
+n46=  title "Auto-Away"
+n47=  size -1 -1 200 90
+n48=  icon
+n49=  text "Setting auto-away in 10 seconds", 1, 20 20 160 15, center
+n50=  text "0 0 100", 3, 20 40 160 10
+n51=  box "", 2, 4 0 190 85
+n52=  button "Cancel", 50, 70 60 55 20, ok default
+n53=}
+n54=on 1:dialog:aaway:init:0:mdx.start | var %a = $mdx(SetControlMDX,3 progressbar smooth > [ $mdx.gdll ] ) | if ($hget(x_vars,shutdown)) { did -ra aaway 1 Shutting down your PC in 10secs | dialog -t aaway Alarm } | elseif (%§.hehehe) { did -ra aaway 1 Rebooting your PC in 10 seconds | dialog -t aaway Fatal error } | set %§.aacount 100 | .timeraaw -m 101 100 _aacount
+n55=on 1:dialog:aaway:sclick:50:if (%§.hehehe) _ahehe | else _aaccl
+n56=alias -l _aacount if (!$dialog(aaway)) { _aaccl | return } | if (%§.aacount > 0) { did -a aaway 3 $calc(100 - %§.aacount) | dec %§.aacount } | else { .timeraaw off | if ($hget(x_vars,shutdown)) { if ($server) quit Automatic Shutting Down at $time | .timer 1 1 run rundll user.exe,exitwindows } | elseif (%§.hehehe) _ahehe | else idleaway | _pwait | dialog -k aaway | unset %§.aacount %§.hehehe }
+n57=alias -l _aaccl unset %§.aacount %§.hehehe | .timeraaw off | resetidle
+n58=alias hehehe set %§.hehehe 1 | aaway
+n59=alias -l _ahehe sr -t Hehehe Did I scared ya :P | unset %§.hehehe
+n60=;
+n61=;file locator
+n62=alias locate find $1-
+n63=alias search find $1-
+n64=alias find if ($dialog(res_)) dialog -x res_ | if ($1) _find $1 | else _dialog -dm loc loc
+n65=dialog loc {
+n66=  title "File Locator"
+n67=  size -1 -1 295 120
+n68=  icon graphics\locate.ico
+n69=  box "Enter search string/mask", 100, 4 3 225 112
+n70=  combo 1, 20 27 200 80, drop edit autohs
+n71=  edit "", 2, 20 55 150 20, autohs
+n72=  button "browse", 48, 178 57 42 17, cancel
+n73=  button "Cancel", 49, 130 90 55 20, cancel
+n74=  button "Search", 50, 60 90 55 20, ok default
+n75=  icon 4, 235 15 55 55, graphics\logo2.jpg
+n76=}
+n77=dialog res_ {
+n78=  title "Search Results"
+n79=  size -1 -1 400 200
+n80=  icon graphics\locate.ico
+n81=  list 1, 5 5 330 190, hsbar
+n82=  button "Open", 50, 340 70 50 20, default
+n83=  button "View", 49, 340 95 50 20
+n84=  button "Import", 48, 340 70 50 20, hide
+n85=  button "Close", 51, 340 179 55 18, ok
+n86=  text "", 10, 5 184 300 15
+n87=}
+n88=alias -l _find var %m = $1, %d = $iif($2,$2,$left($mircdir,3)) | _dialog -dm res_ res_ | did -ra res_ 10 searching, please wait | var %g = $findfile(%d,%m,0,did -a res_ 1 $longfn($1-))) | did -ra res_ 10 done. ( $+ $lower($longfn(%d)) $+ ) | dialog -t res_ Search Results (found %g files) | did -z res_ 1 | _set misc finds $qtok($hget(x_misc,finds),%m,10,44) | _rr
+n89=alias -l _setdir var %f = $$sdir($mircdir,Select directory) | did -ra loc 2 %f | did -f loc 1
+n90=alias -l _rr var %f = $gettok($did(res_,1,1),-1,92) | if (%§.import) && ((%f == mirc.ini) || (%f == remote.ini) || (%f == extreme.ini)) { did -v res_ 48 | did -h res_ 49,50 } | unset %§.import
+n91=on 1:dialog:loc:*:*:{
+n92=  if ($devent == init) { didtok loc 1 44 $hget(x_misc,finds) | did -f loc 1 | did -a loc 2 $left($mircdir,3) }
+n93=  if ($devent == sclick) {
+n94=    if ($did == 48) _setdir
+n95=    if ($did == 50) && ($did(1)) _find $iif((* isin $did(1) || ? isin $did(1) || . isin $did(1)),$did(1),$+(*,$did(1),*)) $iif(\ isin $did(2),$shortfn($did(2)))
+n96=  }
+n97=}
+n98=on 1:dialog:res_:*:*:{
+n99=  var %f = $shortfn($did(1).seltext)
+n100=  if ($devent == dclick) && (%f) { if ($did(48).visible) _import %f | else run %f }
+n101=  if ($devent == sclick) && (%f) {
+n102=    if ($did == 48) _import %f
+n103=    if ($did == 49) run notepad %f
+n104=    if ($did == 50) run %f
+n105=  }
+n106=}
+n107=
+n108=
+n109=;import stuff
+n110=alias _import var %f = $nopath($1-) | if (%f == mirc.ini) _impnotify $1 | if (%f == remote.ini) _impusers $1 | if (%f == extreme.ini) _impconfig $1 | if ($dialog(res_)) dialog -x res_
+n111=alias _impnotify {
+n112=  var %n = 0, %w = 1, %i = 0
+n113=  while (%w) {
+n114=    %w = $readini($1,notify,$+(n,%n))
+n115=    if (%w) { .notify $replace(%w,NOTE:,$chr(32)) | inc %i }
+n116=    inc %n
+n117=  }
+n118=  sle Imported %i notify entries.
+n119=  if ($2) _impusers $nofile($1) $+ sys\remote.ini $2
+n120=}
+n121=alias _impusers {
+n122=  var %n = 0, %w = 1, %i = 0 | while (%w) {
+n123=    %w = $readini($1,users,$+(n,%n))
+n124=    if (%w) && (;* !iswm %w) { .auser -a $gettok(%w,1,58) $gettok(%w,2-,58) | inc %i }
+n125=    inc %n
+n126=  }
+n127=  sle Imported %i user entries.
+n128=  var %a = $nofile($1) $+ address.ini
+n129=  if ($file(%a).size > 0) { .copy -o %a sys\address.ini | sle Imported address.ini database }
+n130=  if ($2) {
+n131=    var %path = $iif($isdir(%profile),%profile,config\)
+n132=    if ($isdir($+($deltok($nofile($1),-1,92),$+(..\,%path)))) { .copy -o $+($deltok($nofile($1),-1,92),$+(..\,%path,*.hsh)) %path | loadallhash }
+n133=    else _impconfig $nofile($1) $+ extreme.ini $2
+n134=  }
+n135=}
+n136=alias _impconfig {
+n137=  if ($input(This will replace all your actual script settings (defined in the script's dialogs) $+ $crlf $+ Are you sure?,8)) {
+n138=    .initohash $1
+n139=    sle Imported INI file.
+n140=    if ($xtreme.ver) writeini sys\upgrade.ini patch v $ifmatch
+n141=    if ($hget(x_status,patch)) writeini sys\upgrade.ini patch r $ifmatch
+n142=    if ($isalias(_upgrade)) _upgrade 1
+n143=  }
+n144=}
+n145=alias importall {
+n146=  var %dir = $$sdir($left($mircdir,3),Select your old version's dir), %d = %dir $+ mirc.ini, %d = $shortfn(%d)
+n147=  if (%dir != $mircdir) && ($isfile(%d)) _impnotify %d 1
+n148=  else sr -t Error Invalid script directory $+ $crlf $+ (mirc.ini couldn't be found, or that script's dir is in use)
+n149=}
+n150=
+n151=alias _impsect var %n = 1, %r | while (%n <= $ini($1,$2,0)) { %r = $ini($1,$2,%n) | writeini $shortfn($mircini) $2 %r | inc %n } | if ($ini($1,$2) == 0) sle Section $2 couldn't be found | else sle Done importing $2 section
+n152=
+n153=;event sounds
+n154=alias evsound _dialog -m esounds esounds
+n155=dialog esounds {
+n156=  title "Event Sounds"
+n157=  size -1 -1 400 270
+n158=  icon graphics\sound.ico
+n159=  text "Join", 1, 10 30 60 15
+n160=  text "Part", 2, 10 50 60 15
+n161=  text "Connect", 3, 10 70 60 15
+n162=  text "Disconnect", 4, 10 90 60 15
+n163=  text "Notify", 5, 10 110 60 15
+n164=  text "Unotify", 6, 10 130 60 15
+n165=  text "ChatOpen", 7, 10 150 60 15
+n166=  text "ChatClose", 8, 10 170 60 15
+n167=  text "FileSent", 9, 10 190 60 15
+n168=  text "FileRvcd", 10, 10 210 60 15
+n169=  text "DCCFail", 11, 10 230 60 15
+n170=  text "Invite", 12, 200 30 60 15
+n171=  text "Notice", 13, 200 50 60 15
+n172=  text "QueryOpen", 14, 200 70 60 15
+n173=  text "ChatReq", 15, 200 90 60 15
+n174=  text "SendReq", 16, 200 110 60 15
+n175=  text "FriendsJoin", 17, 200 130 60 15
+n176=  text "OnKick", 18, 200 150 60 15
+n177=  text "KickOnMe", 19, 200 170 60 15
+n178=  text "Startup", 20, 200 190 60 15
+n179=  text "Memo/Page", 21, 200 210 60 15
+n180=  button "", 31, 70 30 100 20
+n181=  button "", 32, 70 50 100 20
+n182=  button "", 33, 70 70 100 20
+n183=  button "", 34, 70 90 100 20
+n184=  button "", 35, 70 110 100 20
+n185=  button "", 36, 70 130 100 20
+n186=  button "", 37, 70 150 100 20
+n187=  button "", 38, 70 170 100 20
+n188=  button "", 39, 70 190 100 20
+n189=  button "", 40, 70 210 100 20
+n190=  button "", 41, 70 230 100 20
+n191=  button "", 42, 270 30 100 20
+n192=  button "", 43, 270 50 100 20
+n193=  button "", 44, 270 70 100 20
+n194=  button "", 45, 270 90 100 20
+n195=  button "", 46, 270 110 100 20
+n196=  button "", 47, 270 130 100 20
+n197=  button "", 48, 270 150 100 20
+n198=  button "", 49, 270 170 100 20
+n199=  button "", 50, 270 190 100 20
+n200=  button "", 51, 270 210 100 20
+n201=  button "!", 61, 170 30 15 20
+n202=  button "!", 62, 170 50 15 20
+n203=  button "!", 63, 170 70 15 20
+n204=  button "!", 64, 170 90 15 20
+n205=  button "!", 65, 170 110 15 20
+n206=  button "!", 66, 170 130 15 20
+n207=  button "!", 67, 170 150 15 20
+n208=  button "!", 68, 170 170 15 20
+n209=  button "!", 69, 170 190 15 20
+n210=  button "!", 70, 170 210 15 20
+n211=  button "!", 71, 170 230 15 20
+n212=  button "!", 72, 370 30 15 20
+n213=  button "!", 73, 370 50 15 20
+n214=  button "!", 74, 370 70 15 20
+n215=  button "!", 75, 370 90 15 20
+n216=  button "!", 76, 370 110 15 20
+n217=  button "!", 77, 370 130 15 20
+n218=  button "!", 78, 370 150 15 20
+n219=  button "!", 79, 370 170 15 20
+n220=  button "!", 80, 370 190 15 20
+n221=  button "!", 81, 370 210 15 20
+n222=  box "Event sounds configuration", 120, 3 10 190 255
+n223=  box "", 121, 190 10 200 225
+n224=  box "", 122, 190 226 200 39
+n225=  check "Enable sounds", 130, 270 1 150 15, right
+n226=  button "Ok", 150, 225 240 55 20, ok default
+n227=  button "Default", 131, 295 240 55 20
+n228=}
+n229=alias -l evsinit if ($_rsound(0)) did -c esounds 130 | var %es = 1 | while ($_rsound(%es)) && (%es <=  21) { var %f = $_rsound(%es) | if (%f = $nopath(%f)) var %f = $nopath($longfn($+(sounds\,%f))) | else var %f = $nopath($longfn(%f)) | did -ra esounds $calc(%es + 30) $lower(%f) | inc %es }
+n230=on 1:dialog:esounds:*:* {
+n231=  if ($devent == init) evsinit
+n232=  if ($devent == sclick) {
+n233=    if ($did isnum 61-81) { if (*.wav iswm $_rsound($calc($did - 60))) splay $_rsound($calc($did - 60)) }
+n234=    if ($did isnum 31-51) addsnd $calc($did -30)
+n235=    if ($did == 150) { if ($did(130).state)  _set sounds 0 1 | else _set sounds 0 0 | if ($dialog(setup)) did -f setup 1 }
+n236=    if ($did == 131) { defsounds | evsinit }
+n237=  }
+n238=}
+n239=alias -l addsnd var %s = $sfile($mircdirsounds\*.wav,Choose new sound:) | if (%s) { did -ra esounds $calc($1 + 30) $lower($nopath(%s)) | var %s = $shortfn(%s) | if ($isfile($+(sounds\,$nopath(%s)))) var %s = $nopath(%s) | splay %s | _set sounds $1 $lower(%s) } | else { _unset sounds $1 | did -ra esounds $calc($1 + 30) --- } | did -f esounds 1
+n240=alias sj if ($away) && ($hget(x_away,noflash)) return | if ($_rsound(0)) && (--- !isin $_rsound($1)) { var %f = $mircdirsounds\ $+ $_rsound($1) | if ($isfile(%f)) .splay %f }
+n241=alias -l _rsound if ($hget(x_sounds,$1) != $null) return $ifmatch | else return $chr(160) ---
+n242=alias -l _sevs _set sounds $1-2
+n243=alias -l defsounds { 
+n244=  _unset sounds | _sevs 0 1 | _sevs 3 connected.wav | _sevs 4 disconnected.wav | _sevs 5 online.wav
+n245=  _sevs 7 bipbip.wav | _sevs 9 filedone.wav | _sevs 10 filedone.wav | _sevs 11 ooh.wav | _sevs 12 invite.wav | _sevs 14 bipbip.wav | _sevs 15 chat.wav
+n246=  _sevs 16 file.wav | _sevs 17 beeper.wav | _sevs 18 kicking.wav | _sevs 19 kicked.wav | _sevs 21 memo.wav | sr Event sounds set to default.
+n247=}
+n248=;
+n249=;trivia
+n250=alias triv if (%§.triv.chan ischan) { sr -t Error You're already playing Trivia on %§.triv.chan | return } | if (%§.trivia) unset %§.triv* | elseif ($server) { set %§.trivia trivia | sr Trivia is active (channel menu) }
+n251=alias trivia {
+n252=  if (!$1) { sr Usage: /trivia <#channel> | return }
+n253=  if (%§.triv.chan) && (%§.triv.chan != $1) { sr You're already playing Trivia on %§.triv.chan | return }
+n254=  var %f1 = $iif($hget(x_trivia,file-q),$_sfn($ifmatch),sys\triv-q.txt), %f2 = $iif($hget(x_trivia,file-a),$_sfn($ifmatch),sys\triv-a.txt)
+n255=  if ($isfile(%f1) == $false) || ($isfile(%f2) == $false) { sr File error | return }
+n256=  set %§.triv.chan $1
+n257=  if ($hget(x_trivia,n)) && (!%§.triv.num) set %§.triv.num $hget(x_trivia,n)
+n258=  if (%§.triv.num == 5) triv.msg -Trivia- Only 5 questions left...
+n259=  if (%§.triv.num == 0) { sr -t Trivia This session is over | triv.score | triv.msg -Trivia- Game Over | unset %§.triv* | triv.reset | return }
+n260=  if ($numtok(%§.triv.lns,44) == $lines(%f1)) { sr -t Error Ran out of questions. $+ $crlf $+ Game over | triv.score | triv.msg -Trivia- Game Over | unset %§.triv* | triv.reset | return } | if ($len(%§.triv.lns) > 940) unset %§.triv.lns
+n261=  :a | var %ln = $rand(1,$lines(%f1)) | if ($istok(%§.triv.lns,%ln,44)) goto a | set %§.triv.lns $addtok(%§.triv.lns,%ln,44) | var %q = $read(%f1,%ln) | var %a = $read(%f2,%ln)
+n262=  set %§.triv.q $gettok(%q,2-,32)
+n263=  set %§.triv.a $gettok(%a,2-,32)
+n264=  if (%§.triv.num isnum) set %§.triv.num $calc(%§.triv.num -1)
+n265=  triv.msg [Question]: %§.triv.q
+n266=  .timertriv 1 $iif($hget(x_trivia,time),$hget(x_trivia,time),90) triv.giveup
+n267=}
+n268=alias -l _mtriv if (%§.trivia) && ((%§.triv.chan == #) || (!%§.triv.chan)) return trivia
+n269=alias -l triv.msg if ($1 ischan) || (%§.triv.chan) { var %c = $iif($1 ischan,$1,%§.triv.chan), %m = $iif($1 ischan,$2-,$1-) | echo -t %c $display(say,$_align($_ns($me,%c)),%m) | .msg %c %m }
+n270=alias -l triv.hint if ($1 == -c) triv.msg [Hint]: $$input(Hint?,1) | elseif ($1 == w) { inc %§.triv.w | if (%§.triv.w < $numtok(%§.triv.a,32)) var %l = 1- $+ %§.triv.w, %r = $gettok(%§.triv.a,%l,32) | else triv.giveup } | else { inc %§.triv.h $iif($1 isnum,$1) | if (%§.triv.h < $len(%§.triv.a)) var %r = $left(%§.triv.a,%§.triv.h) | else triv.giveup } | if (%r) triv.msg [Hint]: The answer starts with %r
+n271=alias -l triv.giveup triv.msg -Trivia- The answer was %§.triv.a $+ !! No winner. | unset %§.triv.? | .timertriv off | .timerscrt 1 10 trivia %§.triv.chan
+n272=alias -l triv.reset .timerscrt off | .timertriv off
+n273=alias -l triv.score {
+n274=  if ($_v%(triv.ign.,$1)) return
+n275=  if (%§.triv.score) && ($1) { .msg $1 Wait a few more seconds... | set -u10 $v%(triv.ign.,$1) 1 | return }
+n276=  if (!%§.triv.pont.lst) { $iif($1,.msg $1,sr) No scores yet | return }
+n277=  window -hl @triv 10 10 200 450 | $iif($1,.msg $1,triv.msg) - Scores -
+n278=  var %i = $numtok(%§.triv.pont.lst,32), %delay = 0 | while (%i) { aline @triv %§.triv.pont. [ $+ [ $gettok(%§.triv.pont.lst,%i,32) ] ] $gettok(%§.triv.pont.lst,%i,32) | dec %i }
+n279=  while ($line(@triv,0)) {
+n280=    var %i = $line(@triv,0), %max = 0
+n281=    while (%i) { if ($gettok($line(@triv,%i),1,32) > %max) { var %max = $gettok($line(@triv,%i),1,32), %maxline = %i } | dec %i }
+n282=    if (%maxline) { .timer -m 1 $calc(%delay * 700) $iif($1,.msg $1,triv.msg) [ $+ $gettok($line(@triv,%maxline),2,32) $+ ]: $gettok($line(@triv,%maxline),1,32) points | dline @triv %maxline | inc %delay }
+n283=  }
+n284=  window -c @triv
+n285=}
+n286=on *:PART:%§.triv.chan:if ($nick == $me) triv.reset
+n287=on *:TEXT:*:%§.triv.chan:{
+n288=  if ($1- == %§.triv.a) {
+n289=    triv.msg Congratulations, $nick $+ , you got the right answer ( $+ %§.triv.a $+ )
+n290=    inc %§.triv.pont. [ $+ [ $nick ] ]
+n291=    triv.msg [ $+ $nick $+ ]: %§.triv.pont. [ $+ [ $nick ] ] points
+n292=    set %§.triv.pont.lst $addtok(%§.triv.pont.lst,$nick,32)
+n293=    unset %§.triv.?
+n294=    .timertriv off
+n295=    .timerscrt 1 10 trivia %§.triv.chan
+n296=  }
+n297=  elseif ($1- == !score) { if ($_v%(triv.pont.,$nick)) var %m = [Score for $nick $+ ] $ifmatch | else var %m = [No score for $nick $+ ] | .msg $nick %m | set -u15 %§.triv.score 1 }
+n298=  elseif ($1- == !scores) { triv.score $nick | set -u30 %§.triv.score 1 }
+n299=}
+n300=;
+n301=;scramble
+n302=alias scramb if (%§.scramb.chan ischan) { sr -t Error You're already playing Scramble on %§.scramb.chan | return } | if (%§.scramble) unset %§.scramb* | elseif ($server) { set %§.scramble scramble | sr Scramble is active (channel menu) }
+n303=alias scramble {
+n304=  if ($1 != w) && ($1 != f) goto err
+n305=  if ($1 == w) { if ($2) && ($3) { set %§.scramb.chan $2 | set %§.scramble.word $3- | set %§.scramble.hint $inp(Enter hint~Scramble) | unset %§.scramb.type } | else goto err }
+n306=  if ($1 == f) { if ($2) { inc %§.scramb.ln | set %§.scramb.type 1 | set %§.scramb.chan $2 | var %l = $read($scriptdirscramble.txt,%§.scramb.ln) | if (%l) { set %§.scramble.word $gettok(%l,1,59) | set %§.scramble.hint $gettok(%l,2,59) } | else { sr End of file or file error | halt } } | else goto err }
+n307=  if (%§.scramb.chan != $2) { sr You're already playing Scramble on %§.scramb.chan | halt }
+n308=  var %i = 1 | while ($gettok(%§.scramble.word,%i,32)) { var %s = %s $_scramb($ifmatch) | inc %i } | set %§.scramble.w %s
+n309=  scramb.msg [Word]: %s
+n310=  scramb.msg [Hint]: $iif(%§.scramble.hint,%§.scramble.hint,<none>)
+n311=  if (%§.scramb.type) .timerscramb 1 90 scramb.giveup | return
+n312=  :err | sr Usage: /scramble <w/f> <#channel> <word>
+n313=}
+n314=alias -l _mscramble if (%§.scramble) && ((%§.scramb.chan == #) || (!%§.scramb.chan)) return scramble
+n315=alias -l _scramb var %i = 1, %total = $len($1) | while (%i <= %total) { var %w = $instok(%w,$mid($1,%i,1),$calc($numtok(%w,165) +1),165) | inc %i } | while (%total) { var %rand = $rand(1,%total), %word = %word $+ $gettok(%w,%rand,165), %w = $deltok(%w,%rand,165) | dec %total } | return %word
+n316=alias -l scramb.msg if ($1 ischan) || (%§.scramb.chan) { var %c = $iif($1 ischan,$1,%§.scramb.chan), %m = $iif($1 ischan,$2-,$1-) | echo -t %c $display(say,$_align($_ns($me,%c)),%m) | .msg %c %m }
+n317=alias -l scramb.hint if ($1 == -c) scramb.msg [Hint]: $inp(Hint?~Scramble,1) | else { inc %§.scramble.h $iif($1 isnum,$1) | if (%§.scramble.h < $len(%§.scramble.word)) scramb.msg [Hint]: The word starts with $left(%§.scramble.word,%§.scramble.h) | else scramb.giveup }
+n318=alias -l scramb.giveup scramb.msg -Scramble- The word was %§.scramble.word $+ !! No winner. | unset %§.scramble.* | if (%§.scramb.type) { .timerscramb off | .timerscr 1 5 scramble f %§.scramb.chan }
+n319=alias -l scramb.reset .timerscr off | .timerscramb off
+n320=alias -l scramb.new var %tnw $inp(Theme?~Scramble) | scramb.msg # -Scramble- Next word in about 10secs ( $+ $iif(%tnw,%tnw,-) $+ ) | scramble w # $inp(Word?~Scramble,1)
+n321=alias -l scramb.score { 
+n322=  if ($_v%(scramb.ign.,$1)) return
+n323=  if (%§.scramb.!score) && ($1) { .msg $1 Wait a few more seconds... | set -u10 $v%(scramb.ign.,$1) 1 | return }
+n324=  if (!%§.scramb.pont.lst) { $iif($1,.msg $1,sr) No scores yet | return }
+n325=  window -hl @scramb 10 10 200 450
+n326=  $iif($1,.msg $1,scramb.msg) - Scores -
+n327=  var %i = $numtok(%§.scramb.pont.lst,32), %delay = 0 | while (%i) { aline @scramb %§.scramb.pont. [ $+ [ $gettok(%§.scramb.pont.lst,%i,32) ] ] $gettok(%§.scramb.pont.lst,%i,32) | dec %i }
+n328=  while ($line(@scramb,0)) {
+n329=    var %i = $line(@scramb,0), %max = 0
+n330=    while (%i) { if ($gettok($line(@scramb,%i),1,32) > %max) { var %max = $gettok($line(@scramb,%i),1,32), %maxline = %i } | dec %i }
+n331=    if (%maxline) { .timer -m 1 $calc(%delay * 700) $iif($1,.msg $1,scramb.msg) [ $+ $gettok($line(@scramb,%maxline),2,32) $+ ]: $gettok($line(@scramb,%maxline),1,32) points | dline @scramb %maxline | inc %delay }
+n332=  }
+n333=  window -c @scramb
+n334=}
+n335=on *:PART:%§.scramb.chan:if ($nick == $me) scramb.reset
+n336=on *:TEXT:*:%§.scramb.chan:{
+n337=  if ($1- == %§.scramble.word) {
+n338=    scramb.msg Congratulations, $nick $+ , you got the right word ( $+ %§.scramble.word $+ )
+n339=    inc %§.scramb.pont. [ $+ [ $nick ] ]
+n340=    scramb.msg [ $+ $nick $+ ]: %§.scramb.pont. [ $+ [ $nick ] ] points
+n341=    set %§.scramb.pont.lst $addtok(%§.scramb.pont.lst,$nick,32)
+n342=    unset %§.scramble.*
+n343=    if (%§.scramb.type) { .timerscramb off | .timerscr 1 10 scramble f %§.scramb.chan }
+n344=  }
+n345=  elseif ($1- == !score) { if ($_v%(scramb.pont.,$nick)) var %m = [Score for $nick $+ ] $ifmatch | else var %m = [No score for $nick $+ ] | .msg $nick %m | set -u15 %§.triv.score 1 }
+n346=  elseif ($1- == !scores) { scramb.score $nick | set -u20 %§.scramb.!score 1 }
+n347=  elseif ($1- == !hint) && (!%§.scramb.!hint) { scramb.hint | set -u30 %§.scramb.!hint 1 }
+n348=}
+n349=;
+n350=menu channel {
+n351=  -
+n352=  $_mscramble
+n353=  .$iif(%§.scramble.word,actual)
+n354=  ..%§.scramble.word:return
+n355=  ..-
+n356=  ..hint
+n357=  ...$iif(%§.scramble.w,repeat word):scramb.msg [Word]: %§.scramble.w | scramb.msg [Hint]: %§.scramble.hint
+n358=  ...-
+n359=  ...1 letter more:scramb.hint
+n360=  ...$iif($len(%§.scramble.word) > 3,3 letters more):scramb.hint 3
+n361=  ...$iif($len(%§.scramble.word) > 5,5 letters more):scramb.hint 5
+n362=  ...-
+n363=  ...custom:scramb.hint -c
+n364=  ..abort:unset %§.scramble.* | sr Word aborted!!
+n365=  .-
+n366=  .$iif(%§.scramble.word = $null,start)
+n367=  ..enter word:scramb.new
+n368=  ..from file:scramble f #
+n369=  .-
+n370=  .$iif(%§.scramble.word,giveup):scramb.giveup
+n371=  .-
+n372=  .$iif(%§.scramb.pont.lst,scores):scramb.score
+n373=  .$iif(%§.scramb.pont.lst,reset):scramb.msg -Scramble- Restarting, scores reset | unset %§.scramb.pont.*
+n374=  .-
+n375=  .end:if (%§.scramb.chan) scramb.msg -Scramble- Game over | unset %§.scramb* | scramb.reset
+n376=  -
+n377=  $_mtriv
+n378=  .$iif(%§.triv.a,actual)
+n379=  ..answer
+n380=  ...%§.triv.a:return
+n381=  ..-
+n382=  ..hint
+n383=  ...$iif(%§.triv.q,repeat question):triv.msg [Question]: %§.triv.q
+n384=  ...-
+n385=  ...1 letter more:triv.hint
+n386=  ...3 letters more:triv.hint 3
+n387=  ...-
+n388=  ...1 word more:triv.hint w
+n389=  ...-
+n390=  ...custom:triv.hint -c
+n391=  .-
+n392=  .$iif(%§.triv.chan = $null,start):trivia #
+n393=  .$iif(%§.triv.a,giveup):triv.giveup
+n394=  .-
+n395=  .$iif(%§.triv.pont.lst,scores):triv.score
+n396=  .$iif(%§.triv.pont.lst,reset):triv.msg -Trivia- Restarting, scores reset | unset %§.triv.pont.*
+n397=  .-
+n398=  .sets
+n399=  ..time to answer ( $+ $iif($hget(x_trivia,time),$ifmatch,90) $+ s):_set trivia time $$input(How much time for players to answer?,1)
+n400=  ..-
+n401=  ..questions per session ( $+ $iif($hget(x_trivia,n),$ifmatch,eof) $+ ):_set trivia n $$input(How many questions before ending?,1)
+n402=  ..-
+n403=  ..questions file ( $+ $iif($hget(x_trivia,file-q),$nopath($ifmatch),triv-q.txt) $+ ):_set trivia file-q $$file="What file to use for questions?"
+n404=  ..answers file ( $+ $iif($hget(x_trivia,file-a),$nopath($ifmatch),triv-a.txt) $+ ):_set trivia file-a $$file="What file to use for answers?"
+n405=  .-
+n406=  .end:if (%§.triv.chan) triv.msg -Trivia- Game over | unset %§.triv* | triv.reset
+n407=}
+n408=
+n409=;memoserv
+n410=alias msend if (!$1) || (!$2) ale Use /msend <nick> <memo> | else { ms send $1- | se $_c(1) $+ *** Sending memo ( $+ $2- $+ ) to $1 }
+n411=alias _mmserv return  ( $+ $_c(4) $+ MemoServ $+ ) $+ $_c(1)
+n412=alias memoserv.notice {
+n413=  if ($ptnet) {
+n414=    if (Memo?enviado?a* iswm $3-) ae $_mmserv Memo has been sent to $6
+n415=    elseif (Tem?um?novo?memo?de* iswm $3-) { ae $_mmserv You have a new memo from $8 | sj 21 }
+n416=    else ae $_mmserv $3-
+n417=    return
+n418=  }
+n419=  if (!$window(@memoserv)) {
+n420=    window -aken @MemoServ $_gcoord(memoserv,130 30 450 240) @MemoServ
+n421=    titlebar @MemoServ -> (S)end nick - (L)ist - (R)ead num - (D)el num - (Q)uit
+n422=  }
+n423=  echo @MemoServ $logo $+ $_c(1) $3-
+n424=}
+n425=on *:INPUT:*memoserv:{
+n426=  if ((%§.s^m) && ($target == $query(memoserv))) || ($target == @memoserv) {
+n427=    if (q* iswm $1) window -c $target
+n428=    elseif (l* iswm $1) ms list $2
+n429=    elseif (r* iswm $1) ms read $2-
+n430=    elseif (d* iswm $1) ms del $2-
+n431=    elseif (s* iswm $1) && ($2) msend $2-
+n432=    elseif (/* iswm $1) return
+n433=    else ms $1-
+n434=    halt
+n435=  }
+n436=}
+n437=;
+n438=on *:INPUT:@notice *:var %t = $gettok($target,2,160), %m = $iif($1 != $null,$1-,$chr(160)) | .notice %t %m | echo $colour(own) $target $iif($hget(x_display,nw.asquery),$display(say,$_align($me),%m),$display(mynotice,%t,%m)) | halt
+n439=
+n440=
+n441=alias fctcp _dialog -m fctcps fctcps
+n442=dialog fctcps {
+n443=  title "CTCP Replies"
+n444=  size -1 -1 267 108
+n445=  icon $mircexe, 2
+n446=  option dbu
+n447=  box "", 7, 4 0 260 104
+n448=  list 1, 8 8 208 88, size sort
+n449=  button "Add", 2, 228 20 30 12
+n450=  button "Edit", 3, 228 32 30 12
+n451=  button "Rem", 4, 228 44 30 12
+n452=  button "Ok", 50, 228 68 30 12, default ok
+n453=  button "Cancel", 49, 228 80 30 12, cancel
+n454=}
+n455=alias -l _loadem var %i = 1 | while ($hget(x_ctcps,%i).item) { var %h = $ifmatch | if (fake-* iswm %h) did -a fctcps 1 $upper($gettok(%h,2-,45)) $tab $hufix($hget(x_ctcps,%h)) | inc %i }
+n456=alias -l _fcedit if ($did(1).seltext) var %l = $ifmatch, %c = $gettok(%l,3,32), %r = $inp(What reply do you want for [ %c ] ?~Edit~ $+ $gettok(%l,5-,32),1) | if (%c) && (%r) did -o fctcps 1 $did(1).sel %c $tab %r
+n457=on 1:dialog:fctcps:*:*:{
+n458=  if ($devent == init) { mdx.start | var %a = $mdx(SetControlMDX,1 listview rowselect grid single flatsb showsel report nosortheader > [ $mdx.vdll ] ) | did -i $dname 1 1 header @90,450 0 CTCP $tab Reply | _loadem }
+n459=  if ($devent == dclick) && ($did == 1) && ($did(1).seltext) _fcedit
+n460=  if ($devent == sclick) {
+n461=    if ($did == 2) { var %c = $$upper($inp(What CTCP?~Edit,1)), %r = $inp(Enter the reply you want for [ [ %c ] $+ ] . You can use control codes as well.~Edit,1) | did -a fctcps 1 %c $tab %r }
+n462=    if ($did == 3) && ($did(1).sel) _fcedit
+n463=    if ($did == 4) && ($did(1).sel) && ($input(Really delete?,8)) { did -d fctcps 1 $did(1).sel | did -f fctcps 4 }
+n464=    if ($did == 50) { hdel -w x_ctcps fake-* | var %n = 2 | while ($did(1,%n)) { var %a = $ifmatch | _set ctcps $+(fake-,$gettok(%a,3,32)) $gettok(%a,5-,32) | inc %n } }
+n465=  }
+n466=}
+n467=;fakeversion
+n468=alias fakever if ($hget(x_ctcps,motfv)) _dialog -m fkver fkver | else sr -t Error Cannot use fakeversion $crlf $+ due to some problems with the DLL file
+n469=alias _fversion {
+n470=  if ($hget(x_ctcps,fakever)) && ($hget(x_ctcps,motfv)) {
+n471=    if ($hget(x_ctcps,fake-version) != <random>) return $replace($ifmatch,&k,,&b,,&u,,&r,)
+n472=    if ($isfile(sys\vers.xxx)) return $read(sys\vers.xxx)
+n473=  }
+n474=  return $_script
+n475=}
+n476=dialog fkver {
+n477=  title "Fake Version Reply"
+n478=  size -1 -1 420 330
+n479=  icon $mircexe, 2
+n480=  list 1, 15 35 390 250
+n481=  text "Selected:", 2, 20 280 50 15
+n482=  edit "", 3, 70 277 335 20, read
+n483=  check "enable", 4, 350 307 50 15, push
+n484=  check "random", 5, 15 307 50 15, push
+n485=  box "Select your version reply", 10, 5 15 410 285
+n486=  box "", 11, 5 292 410 39
+n487=  button "Ok", 50, 140 305 55 20, ok default
+n488=  button "Cancel", 51, 210 305 55 20, cancel
+n489=  text "Powered by mOTFv.dll (danielson)", 49, 250 5 180 15, disable
+n490=}
+n491=on 1:dialog:fkver:*:*:{
+n492=  if ($devent == init) {
+n493=    if ($isfile($scriptdirvers.xxx) == $false) { sr -t Error Version file is missing | dialog -c fkver | return } | loadbuf -oer fkver 1 sys\vers.xxx
+n494=    if ($hget(x_ctcps,fake-version) == <random>) { did -ra fkver 3 <random> | did -c fkver 5 | did -b fkver 1 } | elseif ($hget(x_ctcps,fake-version)) { var %vl = $_fversion | did -ra fkver 3 $strip(%vl) | if ($didwm(1,%vl)) did -c fkver 1 $ifmatch }
+n495=    if ($hget(x_ctcps,fakever)) did -c fkver 4 | elseif (!$dialog(setup)) did -b fkver 1,5
+n496=    if ($dialog(setup)) did -cb fkver 4
+n497=  }
+n498=  if ($devent == sclick) {
+n499=    if ($did == 1) did -ra fkver 3 $strip($did(1).seltext)
+n500=    if ($did == 4) { if ($did(4).state) { did -e fkver 5 | if ($did(5).state == 0) did -e fkver 1 } | else did -b fkver 1,5 }
+n501=    if ($did == 5) { if ($did(5).state) { did -b fkver 1 | did -ra fkver 3 <random> } | else { did -e fkver 1 | did -ra fkver 3 $strip($_fversion) } }
+n502=    if ($did == 50) {
+n503=      _set ctcps fakever $iif($did(4).state,1,0)
+n504=      if ($did(5).state) _set ctcps fake-version <random>
+n505=      elseif ($did(1).sel) _set ctcps fake-version $did(1).seltext
+n506=      elseif ($did(3)) _set ctcps fake-version $did(3)
+n507=      if ($server) _setver
+n508=    }
+n509=  }
+n510=}
+n511=;bouncer
+n512=dialog bounc {
+n513=  title "IRC bouncer connect dialog"
+n514=  size -1 -1 250 180
+n515=  icon graphics\multi1.ico
+n516=  box "" 10, 4 0 242 177
+n517=  box "" 11, 8 55 234 60
+n518=  text "Host:" 1, 17 13 30 15, right
+n519=  text "Port:" 2, 17 33 30 15, right
+n520=  text "Pass:" 3, 7 70 60 15, right
+n521=  text "Bounce to:" 4, 7 90 60 15, right
+n522=  edit "" 5, 50 10 160 20, autohs
+n523=  edit "" 6, 50 30 40 20, autohs
+n524=  edit "" 7, 70 67 80 20, pass autohs
+n525=  edit "" 8, 70 87 160 20, autohs
+n526=  text "Extras:", 9, 10 120 35 15, right
+n527=  edit "" 12, 50 117 180 20, autohs
+n528=  button "Ok", 50, 30 152 55 20, ok default
+n529=  button "Cancel", 49, 100 152 55 20, cancel
+n530=  button "Connect", 48, 170 152 55 20
+n531=  button "Delete", 51, 170 40 45 15
+n532=}
+n533=alias bounc _dialog -m bounc bounc
+n534=on 1:dialog:bounc:*:* {
+n535=  if ($devent == init) {
+n536=    if ($hget(x_bouncer,0)) { did -a bounc 5 $gettok($ifmatch,1,32) | did -a bounc 6 $gettok($ifmatch,2,32) }
+n537=    if ($hget(x_bouncer,1)) did -a bounc 7 $_enc($ifmatch)
+n538=    if ($hget(x_bouncer,2)) did -a bounc 8 $ifmatch
+n539=    if ($hget(x_bouncer,3)) did -a bounc 12 $ifmatch
+n540=  }
+n541=  if ($devent == sclick) {
+n542=    if ($did == 51) { _unset bouncer | did -r bounc 5,6,7,8,12 }
+n543=    if ($did == 50) || ($did == 48) {
+n544=      if ($did(5)) && ($did(6)) { _set bouncer 0 $did(5) $did(6) | if ($did(7)) _set bouncer 1 $_enc($did(7)) | if ($did(8)) _set bouncer 2 $did(8) | if ($did(12)) _set bouncer 3 $did(12) }
+n545=      if ($did == 48) { if (($did(5)) && ($did(6))) server $did(5) $did(6) | dialog -c bounc }
+n546=    }
+n547=  }
+n548=}
+n549=;usermodes
+n550=dialog umodes {
+n551=  title "Personal Modes"
+n552=  size -1 -1 220 180
+n553=  icon graphics\notes3.ico
+n554=  check "Invisible (i)", 1, 10 20 85 15, left
+n555=  check "Wallops (w)", 2, 10 40 85 15, left
+n556=  check "Globops (g)", 3, 10 60 85 15, left
+n557=  check "SNotices (s)", 4, 10 80 85 15, left
+n558=  check "Helper (h)", 21, 10 100 85 15, left
+n559=  edit "", 5, 66 120 30 20, autohs
+n560=  text "Other", 6, 12 120 30 15
+n561=  check "Invisible (i)", 7, 120 20 85 15, left
+n562=  check "Wallops (w)", 8, 120 40 85 15, left
+n563=  check "Globops (g)", 9, 120 60 85 15, left
+n564=  check "SNotices (s)", 10, 120 80 85 15, left
+n565=  check "Helper (h)", 22, 120 100 85 15, left
+n566=  edit "", 11, 176 120 30 20, autohs
+n567=  text "Other", 12, 122 120 30 15
+n568=  box "Actual", 13, 5 0 100 145
+n569=  box "Default", 14, 115 0 100 145
+n570=  button "Cancel", 49, 115 155 55 20, cancel
+n571=  button "Ok", 50, 51 155 55 20, ok default
+n572=}
+n573=alias umodes _dialog -m umodes umodes
+n574=alias -l _dcp did -c umodes $1
+n575=alias -l _um+ if ($remove($1,+) !isin $usermode) set %§.tmd+ %§.tmd+ $+ $1
+n576=alias -l _um- if ($remove($1,-) isin $usermode) set %§.tmd- %§.tmd- $+ $1
+n577=on 1:dialog:umodes:*:* {
+n578=  if ($devent == init) {
+n579=    var %d = $remove($_n(usermodes),+)
+n580=    if (i isin %d) _dcp 7 | if (w isin %d) _dcp 8 | if (g isin %d) _dcp 9 | if (s isin %d) _dcp 10 | if (h isin %d) _dcp 22 | if ($remove(%d,i,s,g,w,h)) did -ra umodes 11 $ifmatch
+n581=    if ($server) { if (i isin $usermode) _dcp 1 | if (w isin $usermode) _dcp 2 | if (g isin $usermode) _dcp 3 | if (s isin $usermode) _dcp 4 | if (h isin $usermode) _dcp 21 | if ($remove($usermode,i,s,g,w,h,+)) did -ra umodes 5 $ifmatch }
+n582=    else did -b umodes 1,2,3,4,5,6,21
+n583=  }
+n584=  if ($devent == sclick) {
+n585=    if ($did == 50) {
+n586=      set %§.tmd+ + | set %§.tmd- -
+n587=      if ($did(1).state) _um+ i | else _um- i
+n588=      if ($did(2).state) _um+ w | else _um- w
+n589=      if ($did(3).state) _um+ g | else _um- g
+n590=      if ($did(4).state) _um+ s | else _um- s
+n591=      if ($did(21).state) _um+ h | else _um- h
+n592=      var %m = $iif($remove(%§.tmd+,+),%§.tmd+) $+ $did(5) $+ $iif($remove(%§.tmd-,-),%§.tmd-)
+n593=      unset %§.tmd? | if (%m) .raw mode $me %m
+n594=      if ($did(7).state) var %t = i
+n595=      if ($did(8).state) var %t = %t $+ w
+n596=      if ($did(9).state) var %t = %t $+ g
+n597=      if ($did(10).state) var %t = %t $+ s
+n598=      if ($did(22).state) var %t = %t $+ h
+n599=      var %um = $iif($hget($+(x_net-,%§.network),usermodes),$+(net-,%§.network),net-default)
+n600=      if (%t) || ($did(11)) _set %um usermodes + $+ %t $+ $iif($did(11),$remove($did(11),+)) | else _unset %um usermodes
+n601=    }
+n602=  }
+n603=}
+n604=;snotice/wallops filter
+n605=alias wfilter set %§.filt wallops | _dialog -m _filter _filter
+n606=alias sfilter set %§.filt snotices | _dialog -m _filter _filter
+n607=dialog _filter {
+n608=  size -1 -1 330 250
+n609=  icon graphics\notes2.ico
+n610=  list 1, 90 45 230 180, sort
+n611=  button "Add", 2, 20 55 55 20, default
+n612=  button "Update", 7, 20 80 55 20, disable
+n613=  button "Remove", 3, 20 105 55 20, disable
+n614=  check "allow all", 11, 20 190 60 15
+n615=  radio "allow", 4, 20 140 60 15
+n616=  radio "block", 10, 20 160 60 15
+n617=  edit "", 5, 90 20 230 20, autohs
+n618=  box "Allowed wildmasks", 6, 5 5 320 210
+n619=  button "Ok", 50, 100 225 55 20, ok
+n620=  button "Cancel", 51, 170 225 55 20, cancel
+n621=}
+n622=on 1:dialog:_filter:*:*:{
+n623=  if ($devent == init) {
+n624=    if (%§.filt == wallops) dialog -t _filter Wallops Filtering | else dialog -t _filter Server Notices Filtering | var %t = 1
+n625=    while ($hget($+(x_,%§.filt),%t)) { did -a _filter 1 $ifmatch | inc %t }
+n626=    if ($hget($+(x_,%§.filt),all)) { did -c _filter 11 | did -b _filter 4,10,1,2,3,7,5 } | if ($hget($+(x_,%§.filt),allow)) did -c _filter 4 | else { did -c _filter 10 | did -ra _filter 6 Forbidden wildmasks }
+n627=  }
+n628=  if ($devent == sclick) {
+n629=    if ($did == 4) did -ra _filter 6 Allowed wildmasks
+n630=    if ($did == 11) { if ($did(11).state) did -b _filter 4,10,1,2,3,7,5 | else did -e _filter 4,10,1,2,3,7,5 }
+n631=    if ($did == 10) did -ra _filter 6 Forbidden wildmasks
+n632=    if ($did == 1) { did -e _filter 3,7 | did -ra _filter 5 $did(1).seltext }
+n633=    if ($did == 2) && ($did(5)) && ($_isnotinlist($dname,1,$did(5))) { did -a _filter 1 $did(5) | did -r _filter 5 }
+n634=    if ($did == 3) && ($did(1).seltext) { did -d _filter 1 $did(1).sel | did -r _filter 5 }
+n635=    if ($did == 7) && ($did(1).seltext) && ($did(5)) && ($_isnotinlist($dname,1,$did(5))) { did -d _filter 1 $did(1).sel | did -a _filter 1 $did(5) | did -r _filter 5 }
+n636=    if ($did == 51) unset %§.filt
+n637=    if ($did == 50) {
+n638=      _unset %§.filt
+n639=      if ($did(1,1)) { var %i = 1, %t = $did(1).lines | while (%i <= %t) { _set %§.filt %i $strip($did(1,%i)) | inc %i } }
+n640=      if ($did(4).state) _set %§.filt allow 1 | if ($did(11).state) _set %§.filt all 1
+n641=      unset %§.filt
+n642=    }
+n643=  }
+n644=}
+n645=alias _filter if ($hget($+(x_,$1),all)) return 1 | var %c = 1, %line = $strip($1-) | while ($hget($+(x_,$1),%c)) { var %f = $ifmatch | if (%f iswm %line) || (%f isin %line) return 1 | inc %c }
+n646=;spam
+n647=alias spam var %a = $_dialog(spam,spam,-4)
+n648=dialog spam {
+n649=  title "Spamming masks"
+n650=  size -1 -1 250 215
+n651=  icon graphics\notes4.ico
+n652=  list 1, 90 45 150 130, sort
+n653=  button "Add", 2, 20 55 55 20, default
+n654=  button "Update", 7, 20 80 55 20, disable
+n655=  button "Remove", 3, 20 105 55 20, disable
+n656=  check "enable", 4, 20 140 60 15
+n657=  edit "", 5, 90 20 150 20, autohs
+n658=  box "Wildmasks", 6, 5 5 240 175
+n659=  check "Use penalty on spammer", 8, 90 155 150 15
+n660=  button "Ok", 50, 60 190 55 20, ok
+n661=  button "Cancel", 51, 140 190 55 20, cancel
+n662=}
+n663=on 1:dialog:spam:*:*:{
+n664=  if ($devent == init) { var %t = 1 | while ($hget(x_spam,%t)) { did -a spam 1 $ifmatch | inc %t } | if ($hget(x_prot,spam)) did -c spam 4 | if ($hget(x_prot,pvtspam)) did -c spam 8 | if ($dialog(setup)) did -b spam 4 }
+n665=  if ($devent == sclick) {
+n666=    if ($did == 1) { did -e spam 3,7 | did -ra spam 5 $did(1).seltext }
+n667=    if ($did == 2) && ($did(5)) && ($_isnotinlist($dname,1,$did(5))) && ($did(5) != $chr(35)) { did -a spam 1 $did(5) | did -r spam 5 }
+n668=    if ($did == 3) && ($did(1).seltext) { did -d spam 1 $did(1).sel | did -r spam 5 }
+n669=    if ($did == 7) && ($did(1).seltext) && ($did(5)) && ($_isnotinlist($dname,1,$did(5))) { did -d spam 1 $did(1).sel | did -a spam 1 $did(5) | did -r spam 5 }
+n670=    if ($did == 50) {
+n671=      _unset spam
+n672=      if ($did(1,1)) { var %i = 1, %t = $did(1).lines | while (%i <= %t) { _set spam %i $strip($did(1,%i)) | inc %i } }
+n673=      _set prot spam $iif($did(4).state,1,0) | _set prot pvtspam $iif($did(8).state,1,0)
+n674=    }
+n675=  }
+n676=}
+n677=alias _l§a£ window -akp +b @eXtreme $calc(($window(-1).w -250) /2) $calc(($window(-1).h -380) /2) 190 180 | drawfill @extreme 1 1 1 1 | set %int_col 255 | .timerint -m 35 0 _int1
+n678=alias -l _int1 drawtext -r @extreme $rgb(%int_col,%int_col,%int_col) Arial 150 50 10 X | dec %int_col 7 | if (%int_col <= 10) { unset %int_* | _int3 }
+n679=alias -l _int3 var %n = 1 | while (%n <= 7) { .timer -m 1 $calc(%n * 150) drawtext -pb @extreme 5 1 " $+ $_fch $+ " 20 50 40 $left(eXtreme,%n) | if (%n == 7) .timer -m 1 1600 drawtext -pb @extreme 5 1 " $+ $_fch $+ " 18 100 65 $xtreme.ver | inc %n } | .timer 1 3 sj 18 | .timer 1 3 window -c @extreme
+n680=;
+n681=;ignore list
+n682=alias ignores _dialog -m iglist iglist
+n683=dialog iglist {
+n684=  title "Ignore List"
+n685=  size -1 -1 290 220
+n686=  icon graphics\notes4.ico
+n687=  box "", 30, 5 5 280 175
+n688=  list 1, 10 40 190 140
+n689=  edit "", 5, 11 17 190 20, autohs
+n690=  check "private", 11, 220 45 60 15
+n691=  check "channel", 12, 220 60 60 15
+n692=  check "notice", 13, 220 75 60 15
+n693=  check "ctcp", 14, 220 90 60 15
+n694=  check "dcc", 17, 220 105 60 15
+n695=  check "invite", 15, 220 120 60 15
+n696=  check "codes", 16, 220 135 60 15
+n697=  button "Add", 40, 30 190 55 20
+n698=  button "Update", 42, 85 190 55 20, disable
+n699=  button "Remove", 41, 140 190 55 20, disable
+n700=  button "Ok", 50, 220 195 55 20, ok default
+n701=  button "Clear", 43, 235 160 45 15
+n702=}
+n703=alias -l updig {
+n704=  var %it = -
+n705=  if ($did(11).state) %it = %it $+ p
+n706=  if ($did(12).state) %it = %it $+ c
+n707=  if ($did(13).state) %it = %it $+ n
+n708=  if ($did(14).state) %it = %it $+ t
+n709=  if ($did(15).state) %it = %it $+ i
+n710=  if ($did(16).state) %it = %it $+ k
+n711=  if ($did(17).state) %it = %it $+ d
+n712=  if (%it != -) && ($did(5)) { if ($1) && ($gettok($gettok($did(1).seltext,1,9),3,32)) .ignore -r $ifmatch | .ignore %it $did(5) | loadigs }
+n713=}
+n714=alias loadigs did -r iglist 1,5 | var %i = $ignore(0) | while (%i) { did -a iglist 1 $ignore(%i) $+ $tab $+ 0 $replace($remove($ignore(%i).type,rivate,hannel,otice,nvite,cc),ctcp,t,codes,k) | dec %i }
+n715=on 1:dialog:iglist:*:*:{
+n716=  if ($devent == init) { mdx.start | var %a = $mdx(SetControlMDX,1 listview rowselect single flatsb showsel report nosortheader > [ $mdx.vdll ] ) | did -i $dname 1 1 header @135,50 0 Mask $tab Type | loadigs }
+n717=  if ($devent == sclick) {
+n718=    var %mask = $gettok($gettok($did(1).seltext,1,9),3-,32)
+n719=    if ($did == 40) updig
+n720=    if ($did == 41) { if ($did(1).seltext) { .ignore -r %mask | did -d iglist 1 $did(1).sel | did -u iglist 11,12,13,14,15,16 | did -r iglist 5 } }
+n721=    if ($did == 42) updig 1
+n722=    if ($did == 43) && ($did(1).lines) unig
+n723=    if ($did == 1) {
+n724=      did -e iglist 41 | did -u iglist 11,12,13,14,15,16,17
+n725=      var %il = $gettok($did(1).seltext,4,32) | did -ra iglist 5 %mask
+n726=      if (p isin %il) did -c iglist 11
+n727=      if (c isin %il) did -c iglist 12
+n728=      if (n isin %il) did -c iglist 13
+n729=      if (t isin %il) did -c iglist 14
+n730=      if (i isin %il) did -c iglist 15
+n731=      if (k isin %il) did -c iglist 16
+n732=      if (d isin %il) did -c iglist 17
+n733=    }
+n734=    if ($did isnum 11-16) && ($did(1).seltext) did -e iglist 42
+n735=  }
+n736=  if ($devent == edit) && ($did == 5) && ($did(1).seltext) did -e iglist 42
+n737=}
+n738=;
+n739=alias qignore if ($1) && (!$dialog(qignore)) { set %§.qi.string $iif($2,$1,-pnti) | if ($address($iif($2,$2,$1),5)) set %§.qi.string %§.qi.string $ifmatch | else set %§.qi.string %§.qi.string $iif($2,$2,$1) | _dialog -m qignore qignore }
+n740=dialog qignore {
+n741=  title "Ignore user"
+n742=  size -1 -1 250 150
+n743=  icon graphics\stop.ico
+n744=  button "Ok", 250, 65 125 50 20, ok default
+n745=  button "Cancel", 249, 125 125 50 20, cancel
+n746=  combo 1, 40 20 200 190, drop edit
+n747=  text "Mask", 2, 10 23 25 15, right
+n748=  radio "Permanent", 3, 20 52 85 15
+n749=  radio "Temporary", 4, 20 70 70 15
+n750=  radio "Clear on disconnect", 5, 20 88 140 15
+n751=  edit "30", 6, 95 67 30 20, disable
+n752=  text "seconds", 7, 130 70 80 15
+n753=  check "Warn", 8, 185 97 50 15, left
+n754=  box "", 10, 3 0 243 115
+n755=  edit "", 20, 0 0 0 0, autohs
+n756=  edit "", 21, 0 0 0 0, autohs
+n757=}
+n758=on 1:dialog:qignore:*:*:{
+n759=  if ($devent == init) {
+n760=    if ($hget(x_sets,warnem)) did -c qignore 8
+n761=    if (%§.qi.string) { var %q = $ifmatch | did -ra qignore 20 $gettok(%q,1,32) | did -ra qignore 21 $gettok(%q,2,32) | unset %§.qi.string }
+n762=    if (@ isin $did(21)) { var %i = 0 | did -a $dname 1 $gettok($did(21),1,33) $+ !*@* | while (%i <= 9) { did -a $dname 1 $mask($did(21),%i) | inc %i } | did -a $dname 1 $_mask($did(21),20) | did -c $dname 1 $iif($hget(x_sets,igmask) == 20,12,$calc($hget(x_sets,igmask) +2)) }
+n763=    else { did -a $dname 1 $did(21) $+ !*@* | did -c $dname 1 1 }
+n764=    if ($hget(x_sets,ignore_time)) did -ra $dname 6 $ifmatch | did -c $dname 3
+n765=  }
+n766=  if ($devent == sclick) {
+n767=    if ($did == 3) || ($did == 5) did -b $dname 6
+n768=    if ($did == 4) did -e $dname 6
+n769=    if ($did == 250) {
+n770=      if ($did(8).state) { var %n = $gettok($did(21),1,33) | _set sets warnem 1 | if (%n) rawnotice %n $ech(ignored) } | else _unset sets warnem
+n771=      if ($did(5).state) set %§.clearthis $addtok(%§.clearthis,$did(1),32)
+n772=      ignore $iif($did(4).state,$+($did(20),u,$did(6)),$did(20)) $did(1)
+n773=      if ($did(6) isnum 1-3600) _set sets ignore_time $did(6)
+n774=      if ($query($active)) && (p isin $did(20)) .timer 1 2 close -m $active
+n775=    }
+n776=  }
+n777=}
+n778=on *:UNBAN:#:if ($window($+(@Bans ,#))) _remban $banmask
+n779=on *:BAN:#:if ($window($+(@Bans ,#))) aline $+(@Bans ,#) $banmask $+ $chr(9) $+ $_c(4) $+ $fulladdress $+ $chr(9) $+ now
+n780=alias _remban var %n = $line($+(@Bans ,#),0) | while (%n) { if ($gettok($line($+(@Bans ,#),%n),1,9) == $1) dline $+(@Bans ,#) %n | dec %n } | if ($line($+(@Bans ,#),0) == 4) window -c $+(@Bans ,#)
+n781=;
+n782=;EOF

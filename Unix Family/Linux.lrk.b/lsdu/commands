@@ -1,0 +1,13 @@
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O version.c
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O chgrp.c
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O version.c
+gcc  -o chgrp chgrp.o ../lib/libfu.a version.o
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O chown.c
+gcc  -o chown chown.o ../lib/libfu.a version.o
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O chmod.c
+gcc  -o chmod chmod.o ../lib/libfu.a version.o
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O cp.c
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O cp-hash.c
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O cp-aux.c
+gcc -c  -DHAVE_CONFIG_H -I.. -I. -I../lib -I./../lib -g -O ls-ls.c
+gcc -o ls ls.o ls-ls.o libfu.a version.o

@@ -1,0 +1,18 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a 386BSD system
+	      Note memory statistisc and process sizes could be wrong,
+	      by ps gets them wrong too...
+
+DESCRIPTION:
+This is the machine-dependent module for BSD4.3 NET/2 386bsd
+READ THE NOTE AT THE END OF "INSTALL" BEFORE COMPILING.
+Works for:
+	i386 PC
+
+LIBS: -lutil
+
+AUTHOR:  Steve Hocking (adapted from Christos Zoulas <christos@ee.cornell.edu>)
+	    Updated by Andrew Herbert <andrew@werple.apana.org.au>
+

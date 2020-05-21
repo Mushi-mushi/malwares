@@ -1,0 +1,26 @@
+In future (I hope):
+ - VFS, ya, no more lame syscall handling, abuse VFS directly
+ - some crontab-like thing :)
+ - packet sniffer to snarf whole net segment
+ - protect binary against simple kinds of string pattern analysis
+   like `grep` or `strings`
+ - some stealth against /dev/pty, /dev/pts owned by
+   backdoor terminal ... It looks a bit suspicious when
+   owner is root but fuser have no clue who uses them :)
+ - handle int 0x80 by redirecting whole IDT table to
+   the new one, with our int 0x80, just when I will
+   get idea why that damned lidt doesn't work ;(
+
+
+Prove/fix these:
+ - better sniffer
+ - *really* lame crypto
+ - lame tty client (ya, needs more, do it for yourself :P)
+ - find out/fix *why* suckit can't work twice on one box (the 'll
+   second segv kernel)
+ - dummy/lame makefiles
+ - buy more hashish XD
+ - condition of `cp -f /root/some/backup /sbin/init` better when
+   stealthing enabled
+
+-sd

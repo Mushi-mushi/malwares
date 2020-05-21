@@ -1,0 +1,209 @@
+...:: NaughtY[MachinE] ::...
+
+======[-Auto Kick(Flooding)-]======
+#rkick on
+ON +97722326646:TEXT:*:#: {
+  halt
+}
+ON +97722326646:ACTION:*:#: {
+  halt
+}
+ON +97722326646:NOTICE:*:#: {
+  halt
+}
+ON +7552525:TEXT:*:#: { 
+  if ($nick isvo $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if ($level($nick) isin 97722326646) { halt }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u2 %repeat.text. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] 1 
+    if (%repeat.text. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] >= 4) {
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $repeat 15...14:: 7  7 %bonus 7  14::15... | /auser 97722326646 $nick | unset %kotewy2kl | halt 
+    }
+  :end }
+}
+ON +7552525:ACTION:*:#: { 
+  if ($nick isvo $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if ($level($nick) isin 97722326646) { halt }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u2 %repeat.action. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] 1 
+    if (%repeat.action. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] >= 4) {
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $repeat 15...14:: 7  7 %bonus 7  14::15... | /auser 97722326646 $nick | unset %kotewy2kn | halt 
+    }
+  :end }
+}
+ON +7552525:NOTICE:*:#: { 
+  if ($nick isvo $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if ($level($nick) isin 97722326646) { halt }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u2 %repeat.notice. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] 1 
+    if (%repeat.notice. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] >= 4) {
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $nflood 15...14:: 7  7 %bonus 7  14::15... | /auser 97722326646 $nick | unset %kotewy2nd | halt 
+    }
+  :end }
+}
+ON 1:TEXT:*:#:{ 
+  if ($nick isvo $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u2 %repeat.text. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] 1 
+    if (%repeat.text. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] >= 4) {
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /raw -q mode $chan +b $address($nick,%kurukmu)  | /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $repeat 15...14:: 7  7 %bonus 7  14::15... | .raw -q mode $chan +b $address($nick,%kurukmu) | /auser 97722326646 $nick | if (%kurukmu == 2) /auser 7552525 $address($nick,4) | unset %kotewy2kl | halt 
+    }
+  :end }
+}
+ON 1:ACTION:*:#:{ 
+  if ($nick isvo $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u2 %repeat.action. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] 1 
+    if (%repeat.action. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] >= 4) {
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /raw -q mode $chan +b $address($nick,%kurukmu)  | /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $repeat 15...14:: 7  7 %bonus 7  14::15... | .raw -q mode $chan +b $address($nick,%kurukmu) | /auser 97722326646 $nick | if (%kurukmu == 2) /auser 7552525 $address($nick,4) | unset %kotewy2kn | halt 
+    }
+  :end }
+}
+ON 1:NOTICE:*:#:{ 
+  if ($nick isvo $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u2 %repeat.notice. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] 1 
+    if (%repeat.notice. [ $+ [ $chan ] $+ [ $nick ] $+ [ $len($1-) ] $+ [ %keroberos ] ] >= 4) {
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /raw -q mode $chan +b $address($nick,%kurukmu)  | /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $nflood 15...14:: 7  7 %bonus 7  14::15... | .raw -q mode $chan +b $address($nick,%kurukmu) | /auser 97722326646 $nick | if (%kurukmu == 2) /auser 7552525 $address($nick,4) | unset %kotewy2nd | halt 
+    }
+  :end }
+}
+#rkick end
+#textfloodkick on
+ON +97722326646:TEXT:*:#: {
+  halt
+}
+ON +97722326646:ACTION:*:#: {
+  halt
+}
+ON +97722326646:NOTICE:*:#: {
+  halt
+}
+ON +7552525:TEXT:*:#: { 
+  if ($nick isvo $chan) || ($nick !ison $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if ($level($nick) isin 97722326646) { halt }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u1 %kotey [ $+ [ $address($nick,3) ] ] 
+    if (%kotey [ $+ [ $address($nick,3) ] ] > 3) { 
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $tflood 15...14:: 7  7 %bonus 7  14::15... | /auser 97722326646 $nick | halt   
+    }
+  :end }
+}
+ON +7552525:ACTION:*:#: { 
+  if ($nick isvo $chan) || ($nick !ison $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if ($level($nick) isin 97722326646) { halt }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u1 %kotey2 [ $+ [ $address($nick,3) ] ] 
+    if (%kotey2 [ $+ [ $address($nick,3) ] ] > 3) { 
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $tflood 15...14:: 7  7 %bonus 7  14::15... | /auser 97722326646 $nick | halt   
+    }
+  :end }
+}
+ON +7552525:NOTICE:*:#: { 
+  if ($nick isvo $chan) || ($nick !ison $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if ($level($nick) isin 97722326646) { halt }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u1 %kotey3 [ $+ [ $address($nick,3) ] ] 
+    if (%kotey3 [ $+ [ $address($nick,3) ] ] > 3) { 
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $tflood 15...14:: 7  7 %bonus 7  14::15... | /auser 97722326646 $nick | halt 
+    }
+  :end }
+}
+ON 1:TEXT:*:#:{ 
+  if ($nick isvo $chan) || ($nick !ison $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u1 %kotey [ $+ [ $address($nick,3) ] ] 
+    if (%kotey [ $+ [ $address($nick,3) ] ] > 3) { 
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /raw -q mode $chan +b $address($nick,%kurukmu)  | /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $tflood 15...14:: 7  7 %bonus 7  14::15... | .raw -q mode $chan +b $address($nick,%kurukmu) | /auser 97722326646 $nick | if (%kurukmu == 2) /auser 7552525 $address($nick,4) | halt  
+    }
+  :end }
+}
+ON 1:ACTION:*:#:{ 
+  if ($nick isvo $chan) || ($nick !ison $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u1 %kotey2 [ $+ [ $address($nick,3) ] ] 
+    if (%kotey2 [ $+ [ $address($nick,3) ] ] > 3) { 
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /raw -q mode $chan +b $address($nick,%kurukmu)  | /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $tflood 15...14:: 7  7 %bonus 7  14::15... | .raw -q mode $chan +b $address($nick,%kurukmu) | /auser 97722326646 $nick | if (%kurukmu == 2) /auser 7552525 $address($nick,4) | halt  
+    }
+  :end }
+}
+ON 1:NOTICE:*:#:{ 
+  if ($nick isvo $chan) || ($nick !ison $chan) { goto end }
+  if ($nick == $me) { goto end }
+  if (($nick isop $chan)) { goto end }
+  if (($me isop $chan) && ($nick ison $chan)) {
+    inc -u1 %kotey3 [ $+ [ $address($nick,3) ] ] 
+    if (%kotey3 [ $+ [ $address($nick,3) ] ] > 3) { 
+      inc -u9 %segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] 1
+      if (%segalajenisplod. [ $+ [ $chan ] $+ [ %keroberos ] ] >= 10) {  /raw -q mode $chan +b $address($nick,%kurukmu)  | /ignore -cknu13 *!*@* | halt }
+      %bonus = %bonus + 1 | /raw -q kick $chan $nick $team $tflood 15...14:: 7  7 %bonus 7  14::15... | .raw -q mode $chan +b $address($nick,%kurukmu) | /auser 97722326646 $nick | if (%kurukmu == 2) /auser 7552525 $address($nick,4) | halt 
+    }
+  :end }
+}
+#textfloodkick end
+======[-Auto Kick(Flooding)End-]======
+
+
+on +8080:DEOP:#: {
+  halt
+}
+on +8080:BAN:#: {
+  halt
+}  
+on 1:DEOP:#:{
+  if ($opnick == $me) && ($nick == Chanserv) && ($nick != $me) { 
+    msg chanserv op $chan $me | halt
+  }
+
+  if ($opnick == $me) && ($nick != %deop) && ($nick != $me) {
+    .inc -u50 %spin. [ $+ [ $nick ] ] 2
+    msg chanserv op $chan $me | /auser 8080 $address($nick,3) | set %deop $nick | timer 1 5 msg chanserv op $chan $me
+    mode $chan +b $address($nick,3)  | timer 1 5 mode $chan +b $address($nick,3) 
+    timer 1 2 .kick $chan $nick $puterateam $spin | kick $chan $nick $team $takeoverpro | timer 1 12 .unset %deop | halt   
+  }
+  else { halt }
+}

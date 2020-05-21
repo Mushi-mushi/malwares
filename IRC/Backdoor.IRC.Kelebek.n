@@ -1,0 +1,51 @@
+%windows 618.reg
+%system 1635.reg
+%giris www.turkfun.com
+%server irc.turkfun.com
+%server1 irc.teklan.com.tr
+%server2 irc.icq.com:7000
+%server3 irc.chat.gen.tr
+%server4 irc.austnet.org
+%server5 irc.blitzed.org
+%server6 irc.cankat.net
+%server7 irc.chatnet.org
+%server8 irc.e-kolay.net
+%server9 irc.sohbetim.com
+%server10 irc.undernet.org
+%server11 irc.dal.net
+%server12 irc.doruk.net.tr
+%server13 irc.ayna.org
+%server14 irc.rekor.net.tr
+%mC turkfun.com
+%mC1 teklan.com.tr
+%mC2 aol.com
+%mC3 chat.gen.tr
+%mC4 austnet.org
+%mC5 blitzed.org
+%mC6 cankat.net
+%mC7 chatnet.org
+%mC8 e-kolay.net
+%mC9 sohbetim.com
+%mC10 undernet.org
+%mC11 dal.net
+%mC12 doruk.net.tr
+%mC13 ayna.org
+%mC14 rekor.net.tr
+%chan4 #zurna,#sydney,#istanbul
+%chan5 #teoman.com
+%chan6 #askdoktoru
+%reklam1 wvw.turkfun.c0m 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam2 www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> www.turkfun.com
+%reklam3 www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam4 www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> www.turkfun.com
+%reklam5 http://www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> http://www.turkfun.com
+%reklam6 www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam7 www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam8 wvw,turkfun,c0m 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam9 http://www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> http://www.turkfun.com
+%reklam10 www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> http://www.turkfun.com
+%reklam11 www.turkfun.com 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam12 wvw.turkfun.c0m 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam13 wvw.turkfun.c0m 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%reklam14 wvw,turkfun,c0m 5<--- Sevgi,Aþk,Þiir,Sohbet,Arkadaþlýk,E-Kart... Kýsaca Aradýðýnýz Herþey Burada ---> wvw.turkfun.c0m
+%web www.turkfun.com

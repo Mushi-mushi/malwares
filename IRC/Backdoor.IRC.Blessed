@@ -1,0 +1,69 @@
+[Hidden Table]
+hxdef*
+rcmd.exe
+Smt.exe
+srvss.exe
+crss.exe
+net.exe
+net1.exe
+runbatch.exe
+firedaemon.exe
+win.exe
+svhost.exe
+svhst.exe
+iedkcs32.exe
+vea32.exe
+smts.exe
+lib32.exe
+dll32.exe
+DLL.EXE
+ntlm.exe
+
+[Root Processes]
+hxdef*
+HEH*
+rcmd.exe
+Smt.exe
+srvss.exe
+crss.exe
+net.exe
+net2.exe
+runbatch.exe
+firedaemon.exe
+win.exe
+svhost.exe
+svhst.exe
+iedkcs32.exe
+vea32.exe
+smts.exe
+lib32.exe
+dll32.exe
+DLL.EXE
+ntlm.exe
+
+[Hidden Services]
+HackerDefender*
+RAMSE*
+IED*
+winlogout*
+SVCHOSTS*
+INET32*
+VEA32*
+iedkcs32*
+EWG*
+NTDLL32*
+
+[Hidden RegKeys]
+HackerDefender073
+LEGACY_HACKERDEFENDER073
+
+[Hidden RegValues]
+
+[Startup Run]
+
+[Settings]
+Password=sipk
+BackdoorShell=DLLß$.exe
+ServiceName=NTDLLS32
+DisplayName=DLL For NT32
+ServiceDescription=DLL For NT32.

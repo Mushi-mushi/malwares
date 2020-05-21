@@ -1,0 +1,19 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a BSD/OS 2.X system (based on the 4.4BSD Lite system)
+	      Note process resident sizes could be wrong, but ps shows
+	      zero for them too..
+
+DESCRIPTION:
+This is the machine-dependent module for BSD/OS 2.X (based on 4.4BSD Lite)
+Works for:
+	i386 and maybe sparc
+
+CFLAGS: -DHAVE_GETOPT
+
+LIBS: -lkvm
+
+AUTHOR:  Jeff Polk <polk@bsdi.com> based on the m_44bsd.c code 
+by Christos Zoulas <christos@ee.cornell.edu>
+

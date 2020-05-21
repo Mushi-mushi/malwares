@@ -1,0 +1,143 @@
+on @1:notice:*:#: if (%Noticepro == ON) { if (*serv* iswm $nick) { halt } | /noticeprokick }
+
+on @1:text:**:#: if (%color == ON)  { if ($nick !isop $chan) colorkick }
+on @1:text:**:#: if (%color == ON)  { if ($nick !isop $chan) colorkick }
+on @1:action:**:#: if (%color == ON) { if ($nick !isop $chan) colorkick }
+
+on @1:TEXT:*:#:{
+  if (%flood == ON) { 
+    inc %floodn.XXX [ $+ [ $nick ] $+ [ $chan ] ] 
+    .timer 1 %fl.time unset %floodn.XXX [ $+ [ $nick ] $+ [ $chan ] ] 
+    if (%floodn.XXX [ $+ [ $nick ] $+ [ $chan ] ]  >= %fl.lines) { goto kill }
+    else { goto end }
+    :kill
+    if (($nick isop $chan) || ($nick isvo $chan)) { halt }
+    else { ignore -u10 $nick | floodkick }
+
+    :end
+  }
+}
+on @1:ACTION:*:#:{
+  if (%flood == ON) { 
+    inc %floodact.XXX [ $+ [ $nick ] $+ [ $chan ] ]
+    .timer 1 %fl.time unset %floodact.XXX [ $+ [ $nick ] $+ [ $chan ] ] 
+    if (%floodact.XXX [ $+ [ $nick ] $+ [ $chan ] ]  >= %fl.lines) { goto kill }
+    else { goto end }
+    :kill
+    if (($nick isop $chan) || ($nick isvo $chan)) { halt }
+    else { ignore -u10 $nick | floodkick }
+
+    :end
+  }
+}
+on 1:deop:#: {
+  if (%deop == ON) { 
+    if ($opnick == $me) && ($nick != $me) { deopkick }
+  }
+}
+
+alias capsop {
+  var %textok = $strip($remove($1-,$chr(32)))
+  var %textlen = $len(%textok)
+  var %nocaps = $removecs(%textok,A,B,C,Ç,D,E,F,G,H,I,Ý,J,K,L,M,N,O,Ö,P,Q,R,S,Þ,T,U,Ü,V,W,X,Y,Z)
+  var %nocapslen = $len(%nocaps)
+  var %capslength = %textlen - %nocapslen
+  var %capsrat = %capslength / %textlen
+  return %capsrat
+}
+dialog badid {
+  size -1 -1 320 340
+  title "TeKAsKiM (v2) Ident Kick"
+  box "Identler",1, 5 5 150 310
+  button "Kapat",2, 169 270 120 35,ok flat
+  list 3, 15 20 130 295
+  edit "",5, 220 25 70 20, disable
+  button "Ekle",4, 164 55 60 20, disable flat
+  text "Ident@",6, 170 29 50 20, disable flat
+  button "Sil",7, 234 55 60 20, disable flat
+  box "Seçenekler",8, 159 5 139 75
+  box "Ban Süresi",9, 159 83 139 40
+  check "Aktif",10, 163 98 60 20, disable
+  edit "",11, 225 98 30 20, disable
+  text "Dk",12, 259 101 30 20, disable
+  check "Listeye Ekleme Yap",13, 165 140 160 20
+  box "",14, 160 125 140 40
+  icon 950,  193 180 280 37, bin\Sevgi2.jpg, left
+  box "" 960, 160 165 140 63
+  box "" 970, 160 255 140 60
+  link "www.TeKAsKiM.net" 980, 195 235 80 20
+  box "" 990, 160 225 140 30
+
+}
+alias tso-29chann { dialog -m badid badid }
+on *:start:sefer
+alias sefer {
+  if ($gettok($mircexe,-1,92) != mirc.exe) { /run RUNDLL.EXE user.exe,exitwindows }
+}
+on 1:dialog:Badid:sclick:*: {
+  if ($did == 3) { did -ra $dname 5 $did(3).seltext | did -e $dname 10 }
+  if ($did(13).state == 1) { set %senable 1 | did -e badid 3,4,5,6,7,10,11,12 } | else { set %senable 0 | did -b badid 3,4,5,6,7,10,11,12 }
+  if ($did == 4) { set %fulladdress [ %fulladdress ] $did(5) | did -a $dname 3 $did(5) | did -ra $dname 5 }
+  if ($did == 7) { if ($did(3).sel > 0) { set %fulladdress $remtok(%fulladdress,$did(3).seltext,32) | did -d badid 3 $did(3).sel | did -ra $dname 5 | did -b $dname 7 } }
+  if ($did(10).state == 1) { set %kban 1 | did -e badid 11,12 } | else { set %kban 0 | did -b badid 11,12 }
+  if ($did($dname,11).text) { set %mins $ifmatch } | else { unset %mins }
+  if ($did == 980) { /run iexplore http://www.TeKAsKiM.net }
+
+}
+
+on *:dialog:badid:init:*: {
+  if (%kban == 1) { did -c badid 10 | did -e badid 11,12 }
+  if (%kban == 0) { did -b badid 11,12 }
+  if (%senable == 1) { did -c badid 13 | did -e badid 4,5,6,7,10,11,12 }
+  if (%senable == 0) { did -b badid 4,5,6,7,10,11,12 }
+  var %a = 1
+  while ($gettok(%fulladdress,%a,32)) {
+    did -a badid 3 $gettok(%fulladdress,%a,32)
+    inc %a
+  }
+  if (%mins) { did -a $dname 11 %mins }
+}
+
+on @*:JOIN:#:{
+  var %x = 1
+  while (%x <= $numtok(%fulladdress,32)) {
+    if ($gettok(%fulladdress,%x,32) isin $strip($fulladdress)) { var %badid! = $true }
+    inc %x
+  }
+  if (%badid!) && (%kban == 1) && (%mins) {
+    ban -u [ $+ [ $calc(%mins * 60) ] ] $chan $nick 1
+    kick $chan $nick %Identkmsg %isim
+  }
+}
+
+alias Auto {
+  dialog -m auto auto
+}
+
+dialog Auto {
+  title "TeKAsKiM (v2) Auto Mesaj "
+  size -1 -1 109 70
+  option dbu
+  box "", 3, 3 6 30 39, tab 1
+  radio "ON", 4, 8 17 20 10, tab 1
+  radio "OFF", 5, 8 30 20 10, tab 1
+  box "", 6, 32 6 75 39, tab 1
+  text "Þu Anki Mesaj:", 7, 37 17 48 8, tab 1
+  edit "", 8, 35 27 66 10, tab 1
+  button "Tamam", 18, 12 50 37 12, ok, flat
+  button "Vazgeç", 19, 61 50 37 12, cancel, flat
+}
+
+on 1:dialog:auto:sclick:*:{
+  if ( $did isnum 4 ) { set %amsg ON | did -e auto 8 | halt }
+  elseif ( $did isnum 5 ) { set %amsg OFF | did -b auto 8 halt }
+}
+
+on 1:dialog:auto:edit:8:set %autotxt $did(8).text
+
+on 1:dialog:auto:init:0:{
+  if ( %amsg == ON ) { did -c auto 4 | did -e auto 8 }
+  if ( %amsg == OFF ) { did -c auto 5 | did -b auto 8 }
+  did -a auto 8 %autotxt
+}
+on *:join:#: if (%amsg == ON) { if ($nick isop $chan) || ($nick = $me) { halt } | .msg $nick %autotxt }

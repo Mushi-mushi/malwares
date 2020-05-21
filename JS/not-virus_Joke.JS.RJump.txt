@@ -1,0 +1,14 @@
+<html><body>
+<script LANGUAGE="JavaScript1.2">
+<!--script by bordsenius.com@systad.com
+if (parseInt(navigator.appVersion) > 3){
+a=1;
+setInterval("Jump()",10);
+}
+function Jump(){
+a=a+.1;
+self.moveBy((Math.random()*a*2 -a),(Math.random()*a*2)-a);
+}
+//-->
+</script>
+

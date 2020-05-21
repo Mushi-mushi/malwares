@@ -1,0 +1,11 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  Encore Multimax running any release of UMAX 4.3
+
+DESCRIPTION:
+This module makes top work on the following systems:
+	Encore Multimax running UMAX 4.3 release 4.0 and later
+
+AUTHOR:  William LeFebvre <wnl@groupsys.com>
+

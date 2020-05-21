@@ -1,0 +1,27 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a NetBSD-1.0 (4.4BSD) system
+	      Note process resident sizes could be wrong, but ps shows
+	      zero for them too..
+
+DESCRIPTION:
+Originally written for BSD4.4 system by Christos Zoulas.
+Based on the FreeBSD 2.0 version by Steven Wallace && Wolfram Schneider
+NetBSD-1.0 port by Arne Helme
+.
+This is the machine-dependent module for NetBSD-1.0
+Works for:
+	NetBSD-1.0
+
+LIBS: -lkvm
+
+CFLAGS: -DHAVE_GETOPT
+
+AUTHOR:  Christos Zoulas <christos@ee.cornell.edu>
+Steven Wallace  <swallace@freebsd.org>
+Wolfram Schneider <wosch@cs.tu-berlin.de>
+	    Arne Helme <arne@acm.org>
+
+$Id: machine.c,v 1.5 1995/01/06 02:04:39 swallace Exp $
+

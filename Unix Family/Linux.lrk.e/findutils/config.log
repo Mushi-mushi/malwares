@@ -1,0 +1,9 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:1284: sys/statvfs.h: No such file or directory
+configure:1285: sys/fstyp.h: No such file or directory
+configure:1303: sys/statfs.h: No such file or directory
+configure:1304: sys/fstyp.h: No such file or directory
+configure:1323: sys/statfs.h: No such file or directory
+configure:1324: sys/vmount.h: No such file or directory

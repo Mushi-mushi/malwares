@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# copy_include
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1997 SSH Communications Security, Finland
+#                    All rights reserved
+#
+# Links or copies an include file to the include directory
+#
+
+if [ "$#" != 2 ]; then
+  echo "$0: usage: copy_include source destination"; exit 1
+fi
+
+src=$1
+dest=$2
+
+if [ -d $dest ]; then
+  base=`echo $src | sed 's-^.*/\([^/]*\)\$-\1-'`
+  dest="$dest/$base"
+fi
+
+rm -f $dest
+
+ln $src $dest 2>/dev/null || (cp -p $src $dest; chmod a-w $dest)

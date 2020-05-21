@@ -1,0 +1,538 @@
+# Makefile.in generated automatically by automake 1.3 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+#
+# lib/sshutil/tests Makefile.am
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1996 SSH Communications Security, Finland
+#                    All rights reserved
+#
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DISTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ../../..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+build_alias = @build_alias@
+build_triplet = @build@
+host_alias = @host_alias@
+host_triplet = @host@
+target_alias = @target_alias@
+target_triplet = @target@
+AR = @AR@
+CC = @CC@
+CONFPROGRAMS = @CONFPROGRAMS@
+COPY_INCLUDE = @COPY_INCLUDE@
+CRYPTO_CONF_OBJS = @CRYPTO_CONF_OBJS@
+ETCDIR = @ETCDIR@
+IPSEC_ARCH_INTC = @IPSEC_ARCH_INTC@
+IPSEC_ARCH_ROUTE = @IPSEC_ARCH_ROUTE@
+LN_S = @LN_S@
+M4 = @M4@
+MAKEINFO = @MAKEINFO@
+MATH_CONF_OBJS = @MATH_CONF_OBJS@
+NM_PATH = @NM_PATH@
+PACKAGE = @PACKAGE@
+RANLIB = @RANLIB@
+SSH1_PATH = @SSH1_PATH@
+SSHSESSION_CONFOBJS = @SSHSESSION_CONFOBJS@
+SSHSIGNERINSTALLMODE = @SSHSIGNERINSTALLMODE@
+VERSION = @VERSION@
+X11_DIR = @X11_DIR@
+XAUTH_PATH = @XAUTH_PATH@
+
+AUTOMAKE_OPTIONS = 1.0 foreign dist-zip no-dependencies
+
+TESTS = t-buffer t-crc32 t-replace t-snprintf t-malloc t-encode \
+	t-timemeasure t-dllist \
+	t-stream t-socks t-streampair t-localstream t-mapping t-udp \
+	t-asn1 t-base64 t-sshutf8 t-psystem t-filexfer t-url \
+	t-inet_ntoa t-dsprintf t-time
+
+# t-parser t-uf
+
+EXTRA_PROGRAMS = t-buffer t-crc32 t-encode \
+	t-timemeasure t-dllist \
+	t-stream t-replace \
+	t-snprintf t-malloc t-socks t-streampair t-localstream \
+	t-mapping t-udp \
+	t-asn1 t-base64 t-sshutf8 t-psystem t-filexfer t-url t-serial \
+	t-sshlist t-inet_ntoa t-debug t-dns t-dsprintf t-time
+
+LDADD = ../libsshutil.a ../../sshmath/libsshmath.a
+INCLUDES = -I../.. -I. -I.. -I$(srcdir) -I$(srcdir)/..  \
+	-I$(top_builddir) -I$(top_srcdir) 	\
+	-I../../sshmath -I$(srcdir)/../../sshmath -I../../sshscard \
+	-I../../sshcrypt -I../../trq
+
+t_buffer_SOURCES = t-buffer.c
+t_buffer_DEPENDENCIES = $(LDADD)
+t_crc32_SOURCES = t-crc32.c
+t_crc32_DEPENDENCIES = $(LDADD)
+t_dns_SOURCES = t-dns.c
+t_dns_DEPENDENCIES = $(LDADD)
+t_encode_SOURCES = t-encode.c
+t_encode_DEPENDENCIES = $(LDADD)
+t_timemeasure_SOURCES = t-timemeasure.c
+t_timemeasure_DEPENDENCIES = $(LDADD)
+t_dllist_SOURCES = t-dllist.c
+t_dllist_DEPENDENCIES = $(LDADD)
+t_stream_SOURCES = t-stream.c
+t_stream_DEPENDENCIES = $(LDADD)
+t_streampair_SOURCES = t-streampair.c
+t_streampair_DEPENDENCIES = $(LDADD)
+t_localstream_SOURCES = t-localstream.c
+t_localstream_DEPENDENCIES = $(LDADD)
+t_replace_SOURCES = t-replace.c
+t_replace_DEPENDENCIES = $(LDADD)
+t_snprintf_SOURCES = t-snprintf.c
+t_snprintf_DEPENDENCIES = $(LDADD)
+t_malloc_SOURCES = t-malloc.c
+t_malloc_DEPENDENCIES = $(LDADD)
+t_socks_SOURCES = t-socks.c
+t_socks_DEPENDENCIES = $(LDADD)
+t_mapping_SOURCES = t-mapping.c
+t_mapping_DEPENDENCIES = $(LDADD)
+t_udp_SOURCES = t-udp.c
+t_udp_DEPENDENCIES = $(LDADD)
+t_asn1_SOURCES = t-asn1.c
+t_asn1_DEPENDENCIES = $(LDADD)
+t_psystem_SOURCES = t-psystem.c
+t_psystem_DEPENDENCIES = $(LDADD)
+t_base64_SOURCES = t-base64.c
+t_base64_DEPENDENCIES = $(LDADD)
+t_sshutf8_SOURCES = t-sshutf8.c
+t_sshutf8_DEPENDENCIES = $(LDADD)
+t_filexfer_SOURCES = t-filexfer.c
+t_filexfer_DEPENDENCIES = $(LDADD)
+t_url_SOURCES = t-url.c
+t_url_DEPENDENCIES = $(LDADD)
+t_serial_SOURCES = t-serial.c
+t_serial_DEPENDENCIES = $(LDADD)
+t_sshlist_SOURCES = t-sshlist.c
+t_sshlist_DEPENDENCIES = $(LDADD)
+t_inet_ntoa_SOURCES = t-inet_ntoa.c
+t_inet_ntoa_DEPENDENCIES = $(LDADD)
+t_debug_SOURCES = t-debug.c
+t_debug_DEPENDENCIES = $(LDADD)
+t_dsprintf_SOURCES = t-dsprintf.c
+t_dsprintf_DEPENDENCIES = $(LDADD)
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../../../sshconf.h
+CONFIG_CLEAN_FILES = 
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I../../..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+X_CFLAGS = @X_CFLAGS@
+X_LIBS = @X_LIBS@
+X_EXTRA_LIBS = @X_EXTRA_LIBS@
+X_PRE_LIBS = @X_PRE_LIBS@
+t_buffer_OBJECTS =  t-buffer.o
+t_buffer_LDADD = $(LDADD)
+t_buffer_LDFLAGS = 
+t_crc32_OBJECTS =  t-crc32.o
+t_crc32_LDADD = $(LDADD)
+t_crc32_LDFLAGS = 
+t_encode_OBJECTS =  t-encode.o
+t_encode_LDADD = $(LDADD)
+t_encode_LDFLAGS = 
+t_timemeasure_OBJECTS =  t-timemeasure.o
+t_timemeasure_LDADD = $(LDADD)
+t_timemeasure_LDFLAGS = 
+t_dllist_OBJECTS =  t-dllist.o
+t_dllist_LDADD = $(LDADD)
+t_dllist_LDFLAGS = 
+t_stream_OBJECTS =  t-stream.o
+t_stream_LDADD = $(LDADD)
+t_stream_LDFLAGS = 
+t_replace_OBJECTS =  t-replace.o
+t_replace_LDADD = $(LDADD)
+t_replace_LDFLAGS = 
+t_snprintf_OBJECTS =  t-snprintf.o
+t_snprintf_LDADD = $(LDADD)
+t_snprintf_LDFLAGS = 
+t_malloc_OBJECTS =  t-malloc.o
+t_malloc_LDADD = $(LDADD)
+t_malloc_LDFLAGS = 
+t_socks_OBJECTS =  t-socks.o
+t_socks_LDADD = $(LDADD)
+t_socks_LDFLAGS = 
+t_streampair_OBJECTS =  t-streampair.o
+t_streampair_LDADD = $(LDADD)
+t_streampair_LDFLAGS = 
+t_localstream_OBJECTS =  t-localstream.o
+t_localstream_LDADD = $(LDADD)
+t_localstream_LDFLAGS = 
+t_mapping_OBJECTS =  t-mapping.o
+t_mapping_LDADD = $(LDADD)
+t_mapping_LDFLAGS = 
+t_udp_OBJECTS =  t-udp.o
+t_udp_LDADD = $(LDADD)
+t_udp_LDFLAGS = 
+t_asn1_OBJECTS =  t-asn1.o
+t_asn1_LDADD = $(LDADD)
+t_asn1_LDFLAGS = 
+t_base64_OBJECTS =  t-base64.o
+t_base64_LDADD = $(LDADD)
+t_base64_LDFLAGS = 
+t_sshutf8_OBJECTS =  t-sshutf8.o
+t_sshutf8_LDADD = $(LDADD)
+t_sshutf8_LDFLAGS = 
+t_psystem_OBJECTS =  t-psystem.o
+t_psystem_LDADD = $(LDADD)
+t_psystem_LDFLAGS = 
+t_filexfer_OBJECTS =  t-filexfer.o
+t_filexfer_LDADD = $(LDADD)
+t_filexfer_LDFLAGS = 
+t_url_OBJECTS =  t-url.o
+t_url_LDADD = $(LDADD)
+t_url_LDFLAGS = 
+t_serial_OBJECTS =  t-serial.o
+t_serial_LDADD = $(LDADD)
+t_serial_LDFLAGS = 
+t_sshlist_OBJECTS =  t-sshlist.o
+t_sshlist_LDADD = $(LDADD)
+t_sshlist_LDFLAGS = 
+t_inet_ntoa_OBJECTS =  t-inet_ntoa.o
+t_inet_ntoa_LDADD = $(LDADD)
+t_inet_ntoa_LDFLAGS = 
+t_debug_OBJECTS =  t-debug.o
+t_debug_LDADD = $(LDADD)
+t_debug_LDFLAGS = 
+t_dns_OBJECTS =  t-dns.o
+t_dns_LDADD = $(LDADD)
+t_dns_LDFLAGS = 
+t_dsprintf_OBJECTS =  t-dsprintf.o
+t_dsprintf_LDADD = $(LDADD)
+t_dsprintf_LDFLAGS = 
+t_time_SOURCES = t-time.c
+t_time_OBJECTS =  t-time.o
+t_time_LDADD = $(LDADD)
+t_time_DEPENDENCIES =  ../libsshutil.a ../../sshmath/libsshmath.a
+t_time_LDFLAGS = 
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LINK = $(CC) $(CFLAGS) $(LDFLAGS) -o $@
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = tar
+GZIP = --best
+SOURCES = $(t_buffer_SOURCES) $(t_crc32_SOURCES) $(t_encode_SOURCES) $(t_timemeasure_SOURCES) $(t_dllist_SOURCES) $(t_stream_SOURCES) $(t_replace_SOURCES) $(t_snprintf_SOURCES) $(t_malloc_SOURCES) $(t_socks_SOURCES) $(t_streampair_SOURCES) $(t_localstream_SOURCES) $(t_mapping_SOURCES) $(t_udp_SOURCES) $(t_asn1_SOURCES) $(t_base64_SOURCES) $(t_sshutf8_SOURCES) $(t_psystem_SOURCES) $(t_filexfer_SOURCES) $(t_url_SOURCES) $(t_serial_SOURCES) $(t_sshlist_SOURCES) $(t_inet_ntoa_SOURCES) $(t_debug_SOURCES) $(t_dns_SOURCES) $(t_dsprintf_SOURCES) t-time.c
+OBJECTS = $(t_buffer_OBJECTS) $(t_crc32_OBJECTS) $(t_encode_OBJECTS) $(t_timemeasure_OBJECTS) $(t_dllist_OBJECTS) $(t_stream_OBJECTS) $(t_replace_OBJECTS) $(t_snprintf_OBJECTS) $(t_malloc_OBJECTS) $(t_socks_OBJECTS) $(t_streampair_OBJECTS) $(t_localstream_OBJECTS) $(t_mapping_OBJECTS) $(t_udp_OBJECTS) $(t_asn1_OBJECTS) $(t_base64_OBJECTS) $(t_sshutf8_OBJECTS) $(t_psystem_OBJECTS) $(t_filexfer_OBJECTS) $(t_url_OBJECTS) $(t_serial_OBJECTS) $(t_sshlist_OBJECTS) $(t_inet_ntoa_OBJECTS) $(t_debug_OBJECTS) $(t_dns_OBJECTS) $(t_dsprintf_OBJECTS) t-time.o
+
+all: Makefile
+
+.SUFFIXES:
+.SUFFIXES: .S .c .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign lib/sshutil/tests/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+.c.o:
+	$(COMPILE) -c $<
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+t-buffer: $(t_buffer_OBJECTS) $(t_buffer_DEPENDENCIES)
+	@rm -f t-buffer
+	$(LINK) $(t_buffer_LDFLAGS) $(t_buffer_OBJECTS) $(t_buffer_LDADD) $(LIBS)
+
+t-crc32: $(t_crc32_OBJECTS) $(t_crc32_DEPENDENCIES)
+	@rm -f t-crc32
+	$(LINK) $(t_crc32_LDFLAGS) $(t_crc32_OBJECTS) $(t_crc32_LDADD) $(LIBS)
+
+t-encode: $(t_encode_OBJECTS) $(t_encode_DEPENDENCIES)
+	@rm -f t-encode
+	$(LINK) $(t_encode_LDFLAGS) $(t_encode_OBJECTS) $(t_encode_LDADD) $(LIBS)
+
+t-timemeasure: $(t_timemeasure_OBJECTS) $(t_timemeasure_DEPENDENCIES)
+	@rm -f t-timemeasure
+	$(LINK) $(t_timemeasure_LDFLAGS) $(t_timemeasure_OBJECTS) $(t_timemeasure_LDADD) $(LIBS)
+
+t-dllist: $(t_dllist_OBJECTS) $(t_dllist_DEPENDENCIES)
+	@rm -f t-dllist
+	$(LINK) $(t_dllist_LDFLAGS) $(t_dllist_OBJECTS) $(t_dllist_LDADD) $(LIBS)
+
+t-stream: $(t_stream_OBJECTS) $(t_stream_DEPENDENCIES)
+	@rm -f t-stream
+	$(LINK) $(t_stream_LDFLAGS) $(t_stream_OBJECTS) $(t_stream_LDADD) $(LIBS)
+
+t-replace: $(t_replace_OBJECTS) $(t_replace_DEPENDENCIES)
+	@rm -f t-replace
+	$(LINK) $(t_replace_LDFLAGS) $(t_replace_OBJECTS) $(t_replace_LDADD) $(LIBS)
+
+t-snprintf: $(t_snprintf_OBJECTS) $(t_snprintf_DEPENDENCIES)
+	@rm -f t-snprintf
+	$(LINK) $(t_snprintf_LDFLAGS) $(t_snprintf_OBJECTS) $(t_snprintf_LDADD) $(LIBS)
+
+t-malloc: $(t_malloc_OBJECTS) $(t_malloc_DEPENDENCIES)
+	@rm -f t-malloc
+	$(LINK) $(t_malloc_LDFLAGS) $(t_malloc_OBJECTS) $(t_malloc_LDADD) $(LIBS)
+
+t-socks: $(t_socks_OBJECTS) $(t_socks_DEPENDENCIES)
+	@rm -f t-socks
+	$(LINK) $(t_socks_LDFLAGS) $(t_socks_OBJECTS) $(t_socks_LDADD) $(LIBS)
+
+t-streampair: $(t_streampair_OBJECTS) $(t_streampair_DEPENDENCIES)
+	@rm -f t-streampair
+	$(LINK) $(t_streampair_LDFLAGS) $(t_streampair_OBJECTS) $(t_streampair_LDADD) $(LIBS)
+
+t-localstream: $(t_localstream_OBJECTS) $(t_localstream_DEPENDENCIES)
+	@rm -f t-localstream
+	$(LINK) $(t_localstream_LDFLAGS) $(t_localstream_OBJECTS) $(t_localstream_LDADD) $(LIBS)
+
+t-mapping: $(t_mapping_OBJECTS) $(t_mapping_DEPENDENCIES)
+	@rm -f t-mapping
+	$(LINK) $(t_mapping_LDFLAGS) $(t_mapping_OBJECTS) $(t_mapping_LDADD) $(LIBS)
+
+t-udp: $(t_udp_OBJECTS) $(t_udp_DEPENDENCIES)
+	@rm -f t-udp
+	$(LINK) $(t_udp_LDFLAGS) $(t_udp_OBJECTS) $(t_udp_LDADD) $(LIBS)
+
+t-asn1: $(t_asn1_OBJECTS) $(t_asn1_DEPENDENCIES)
+	@rm -f t-asn1
+	$(LINK) $(t_asn1_LDFLAGS) $(t_asn1_OBJECTS) $(t_asn1_LDADD) $(LIBS)
+
+t-base64: $(t_base64_OBJECTS) $(t_base64_DEPENDENCIES)
+	@rm -f t-base64
+	$(LINK) $(t_base64_LDFLAGS) $(t_base64_OBJECTS) $(t_base64_LDADD) $(LIBS)
+
+t-sshutf8: $(t_sshutf8_OBJECTS) $(t_sshutf8_DEPENDENCIES)
+	@rm -f t-sshutf8
+	$(LINK) $(t_sshutf8_LDFLAGS) $(t_sshutf8_OBJECTS) $(t_sshutf8_LDADD) $(LIBS)
+
+t-psystem: $(t_psystem_OBJECTS) $(t_psystem_DEPENDENCIES)
+	@rm -f t-psystem
+	$(LINK) $(t_psystem_LDFLAGS) $(t_psystem_OBJECTS) $(t_psystem_LDADD) $(LIBS)
+
+t-filexfer: $(t_filexfer_OBJECTS) $(t_filexfer_DEPENDENCIES)
+	@rm -f t-filexfer
+	$(LINK) $(t_filexfer_LDFLAGS) $(t_filexfer_OBJECTS) $(t_filexfer_LDADD) $(LIBS)
+
+t-url: $(t_url_OBJECTS) $(t_url_DEPENDENCIES)
+	@rm -f t-url
+	$(LINK) $(t_url_LDFLAGS) $(t_url_OBJECTS) $(t_url_LDADD) $(LIBS)
+
+t-serial: $(t_serial_OBJECTS) $(t_serial_DEPENDENCIES)
+	@rm -f t-serial
+	$(LINK) $(t_serial_LDFLAGS) $(t_serial_OBJECTS) $(t_serial_LDADD) $(LIBS)
+
+t-sshlist: $(t_sshlist_OBJECTS) $(t_sshlist_DEPENDENCIES)
+	@rm -f t-sshlist
+	$(LINK) $(t_sshlist_LDFLAGS) $(t_sshlist_OBJECTS) $(t_sshlist_LDADD) $(LIBS)
+
+t-inet_ntoa: $(t_inet_ntoa_OBJECTS) $(t_inet_ntoa_DEPENDENCIES)
+	@rm -f t-inet_ntoa
+	$(LINK) $(t_inet_ntoa_LDFLAGS) $(t_inet_ntoa_OBJECTS) $(t_inet_ntoa_LDADD) $(LIBS)
+
+t-debug: $(t_debug_OBJECTS) $(t_debug_DEPENDENCIES)
+	@rm -f t-debug
+	$(LINK) $(t_debug_LDFLAGS) $(t_debug_OBJECTS) $(t_debug_LDADD) $(LIBS)
+
+t-dns: $(t_dns_OBJECTS) $(t_dns_DEPENDENCIES)
+	@rm -f t-dns
+	$(LINK) $(t_dns_LDFLAGS) $(t_dns_OBJECTS) $(t_dns_LDADD) $(LIBS)
+
+t-dsprintf: $(t_dsprintf_OBJECTS) $(t_dsprintf_DEPENDENCIES)
+	@rm -f t-dsprintf
+	$(LINK) $(t_dsprintf_LDFLAGS) $(t_dsprintf_OBJECTS) $(t_dsprintf_LDADD) $(LIBS)
+
+t-time: $(t_time_OBJECTS) $(t_time_DEPENDENCIES)
+	@rm -f t-time
+	$(LINK) $(t_time_LDFLAGS) $(t_time_OBJECTS) $(t_time_LDADD) $(LIBS)
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $(SOURCES) $(HEADERS) $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = lib/sshutil/tests
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  test -f $(distdir)/$$file \
+	  || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $$d/$$file $(distdir)/$$file; \
+	done
+check-TESTS: $(TESTS)
+	@failed=0; all=0; \
+	srcdir=$(srcdir); export srcdir; \
+	for tst in $(TESTS); do \
+	  if test -f $$tst; then dir=.; \
+	  else dir="$(srcdir)"; fi; \
+	  if $(TESTS_ENVIRONMENT) $$dir/$$tst; then \
+	    all=`expr $$all + 1`; \
+	    echo "PASS: $$tst"; \
+	  elif test $$? -ne 77; then \
+	    all=`expr $$all + 1`; \
+	    failed=`expr $$failed + 1`; \
+	    echo "FAIL: $$tst"; \
+	  fi; \
+	done; \
+	if test "$$failed" -eq 0; then \
+	  banner="All $$all tests passed"; \
+	else \
+	  banner="$$failed of $$all tests failed"; \
+	fi; \
+	dashes=`echo "$$banner" | sed s/./=/g`; \
+	echo "$$dashes"; \
+	echo "$$banner"; \
+	echo "$$dashes"; \
+	test "$$failed" -eq 0
+info:
+dvi:
+check: all
+	$(MAKE) check-TESTS
+installcheck:
+install-exec: 
+	@$(NORMAL_INSTALL)
+
+install-data: 
+	@$(NORMAL_INSTALL)
+
+install: install-exec install-data all
+	@:
+
+uninstall: 
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' INSTALL_SCRIPT='$(INSTALL_PROGRAM)' install
+installdirs:
+
+
+mostlyclean-generic:
+	-test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	-rm -f Makefile $(DISTCLEANFILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+
+maintainer-clean-generic:
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-compile mostlyclean-tags mostlyclean-generic
+
+clean:  clean-compile clean-tags clean-generic mostlyclean
+
+distclean:  distclean-compile distclean-tags distclean-generic clean
+	-rm -f config.status
+
+maintainer-clean:  maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-generic distclean
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir check-TESTS info dvi \
+installcheck install-exec install-data install uninstall all \
+installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

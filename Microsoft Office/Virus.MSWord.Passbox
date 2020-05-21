@@ -1,0 +1,84 @@
+Attribute VB_Name = "PBox"
+Attribute VB_Base = "0{C2577ADE-A51B-11D4-8F31-DE601EB3942C}{C2577AD7-A51B-11D4-8F31-DE601EB3942C}"
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Private Sub CommandButton1_Click()
+If CommandButton1.Caption = "OK" Then Confere
+End Sub
+Private Sub TextBox1_Change()
+TextBox1.PasswordChar = "*"
+
+End Sub
+Private Sub userform_initialize()
+Label2.Caption = "Insira a senha para abrir o arquivo"
+Label1.Caption = ActiveDocument.FullName
+
+End Sub
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+On Error GoTo Final
+If CloseMode = 1 Then GoTo Final
+ActiveDocument.Close
+Unload PBox
+
+Final:
+End Sub
+

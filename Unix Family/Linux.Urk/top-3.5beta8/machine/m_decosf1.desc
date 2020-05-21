@@ -1,0 +1,44 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  DEC Alpha AXP running OSF/1 or Digital Unix 4.0.
+
+DESCRIPTION:
+This is the machine-dependent module for DEC OSF/1 
+It is known to work on OSF/1 1.2, 1.3, 2.0-T3, 3.0, and Digital Unix V4.0
+WARNING: if you use optimization with the standard "cc" compiler that
+.        comes with V3.0 the resulting executable may core dump.  If
+.        this happens, recompile without optimization.
+
+LIBS: -lmld -lmach
+
+CFLAGS: -DHAVE_GETOPT
+
+AUTHOR:  Anthony Baxter, <anthony@aaii.oz.au>
+Derived originally from m_ultrix, by David S. Comay <dsc@seismo.css.gov>, 
+although by now there is hardly any of the code from m_ultrix left.
+Helped a lot by having the source for syd(1), by Claus Kalle, and
+from several people at DEC who helped with providing information on
+some of the less-documented bits of the kernel interface.
+
+Modified: 31-Oct-94, Pat Welch, tpw@physics.orst.edu
+	changed _mpid to pidtab for compatibility with OSF/1 version 3.0
+
+Modified: 13-Dec-94, William LeFebvre, lefebvre@dis.anl.gov
+	removed used of pidtab (that was bogus) and changed things to
+	automatically detect the absence of _mpid in the nlist and
+	recover gracefully---this appears to be the only difference
+	with 3.0.
+
+
+$Id: m_decosf1.c,v 1.14 1994/01/18 07:34:42 anthony Exp $
+Theres some real icky bits in this code - you have been warned :)
+Extremely icky bits are marked with FIXME: 
+
+Theory of operation: 
+
+Use Mach calls to build up a structure that contains all the sorts
+of stuff normally found in a struct proc in a BSD system. Then
+everything else uses this structure. This has major performance wins,
+and also should work for future versions of the O/S.
+

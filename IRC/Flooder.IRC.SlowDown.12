@@ -1,0 +1,276 @@
+[aliases]
+n0=;<---------------------=º<×> °ShowDowN v12 PrO° By [-ShaD-] '2001 © <×>º=-------------------->
+n1=;  -(!)- -(!)- ! DO NOT EDIT ANYTHING HERE OR THE SCRIPT WILL NOT WORK ANYMORE ! -(!)- -(!)-
+n2=; -(!)- -(!)- ! IF YOU NEED TO ADD YOUR OWN ALIASES, CHOOSE "File/New" FROM MENU ! -(!)- -(!)-
+n3=;-=> Away System
+n4=gone {
+n5=  unset %reason.away %msgs.away %msgnum.away %pages.away %pagenum.away %time.away %date.away %privig.away %superflpr.before %pager.before %nick.before
+n6=  if (%awmsgspec == ON && %awmsgschan != $null && $me !ison %awmsgschan && %saway != YES) { join %awmsgschan } | if (%awreason == ON) { set %reason.away $$?="Enter Reason Why You Are Away?:" | if (%reason.away == $null) { %reason.away = Gone } }
+n7=  if (%superflpr == ON) { %superflpr.before = ON } | if (%awsuper == ON) { superon } | else { superoff } | if (%awmsglog == ON) { .enable #away } | else { .disable #away | .ignore -p *!*@* | .timer976 0 60 .ignore -p *!*@* | %privig.away = ON }
+n8=  if (%pager.away == ON) { %pager.before = ON } | if (%awpager == ON) { %pager.away = ON | %pageron = [On] | %pageroff = Off } | else { %pager.away = OFF | %pageron = On | %pageroff = [Off] } | if (%awnick == ON && %awnname != $null) { %nick.before = $me | nick %awnname }
+n9=  %time.away = $time(HH:nn) | %date.away = $date(mmm dd yyyy) | titlebar $titlebar [Away ON] | %away = ON | if (%awchanmsgcont == plain) { away I am [AWAY] %sd } | else { away 1I am 1[14AWAY1] 1Ÿ14 %sd 1Ÿ }
+n10=  write $shortfn($mircdirawaymsg.log) -=> AWAY ACTIVATED at: %time.away on: %date.away
+n11=  if ($dialog(qmenu) != $null) { did -o qmenu 14 1 Normal Back | did -o qmenu 15 1 Silent Back } | awaymsginit | awaypmsginit | inc %awaytot 1
+n12=}
+n13=awaymsginit {
+n14=  unset %awchanmsg
+n15=  if (%awchanmsgcont == normal) {
+n16=    %awchanmsg = I am 1[14AWAY1] Ÿ Since14: 1(14 $+ %time.away $+ 1@14 $+ %date.away $+ 1) Ÿ $+ $chr(32) | if (%awreason == ON && %reason.away != $null) { %awchanmsg = %awchanmsg Reason14: 1(14 $+ %reason.away $+ 1) Ÿ $+ $chr(32) }
+n17=    if (%awmsglog == ON) { %awchanmsg = %awchanmsg Message Log14: 1(14ON1) Ÿ $+ $chr(32) } | if (%awpager == ON) { %awchanmsg = %awchanmsg PAGEr14: 1(14ON1) Ÿ $+ $chr(32) }
+n18=    if (%awmail == ON && %awmailaddy != $null) { %awchanmsg = %awchanmsg E-mail14: 1(14 $+ %awmailaddy $+ 1) Ÿ $+ $chr(32) }
+n19=    if (%awuin == ON && %awuinvalue != $null) { %awchanmsg = %awchanmsg ICQ UIN14: 1(14 $+ %awuinvalue $+ 1) Ÿ $+ $chr(32) } | %awchanmsg = %awchanmsg 14 $+ °SD v12 PrO° Ÿ
+n20=  }
+n21=  else {
+n22=    %awchanmsg = I am [AWAY] * Since: ( $+ %time.away $+ @ $+ %date.away $+ ) * $+ $chr(32) | if (%awreason == ON && %reason.away != $null) { %awchanmsg = %awchanmsg Reason: ( $+ %reason.away $+ ) * $+ $chr(32) }
+n23=    if (%awmsglog == ON) { %awchanmsg = %awchanmsg Message Log: (ON) * $+ $chr(32) } | if (%awpager == ON) { %awchanmsg = %awchanmsg PAGEr: (ON) * $+ $chr(32) }
+n24=    if (%awmail == ON && %awmailaddy != $null) { %awchanmsg = %awchanmsg E-mail: ( $+ %awmailaddy $+ ) * $+ $chr(32) }
+n25=    if (%awuin == ON && %awuinvalue != $null) { %awchanmsg = %awchanmsg ICQ UIN: ( $+ %awuinvalue $+ ) * $+ $chr(32) } | %awchanmsg = %awchanmsg °SD v12 PrO° *
+n26=  }
+n27=  if (%saway == NO) {
+n28=    if (%awmsgspec == ON && %awmsgschan != $null && $me ison %awmsgschan) { msg %awmsgschan %awchanmsg | .timer342 0 %awchanmsgint msg %awmsgschan %awchanmsg | echo 6 -at *** %sd Your 1[14Away Systems1] Are Now14:1 (14ON1) ! 14Super Flood Protection Is (14 $+ %superflpr $+ ) ! Channel Away Message Will Be Sent To14 %awmsgschan Every14 $calc(%awchanmsgint / 60) Minutes ! }
+n29=    else { if (%awmsgall == ON) { amsg %awchanmsg | .timer342 0 %awchanmsgint amsg %awchanmsg | echo 6 -at *** %sd Your 1[14Away Systems1] Are Now14:1 (14ON1) ! 14Super Flood Protection Is (14 $+ %superflpr $+ ) ! Channel Away Message Will Be Sent To 14Channels You Are On Every14 $calc(%awchanmsgint / 60) Minutes ! } }
+n30=  }
+n31=  else { echo 6 -at *** %sd Your 1[14Away Systems1] Are Now14:1 (14ON1) ! 14Message Log Is (14 $+ %awmsglog $+ ) ! 14PAGEr Is (14 $+ %pager.away $+ ) ! 14Super Flood Protection Is (14 $+ %superflpr $+ ) ! Now Using 14Silent Away System With No Channel Messages ! }
+n32=}
+n33=back {
+n34=  away | .disable #away | .rlevel 2 | .rlevel 3 | .rlevel TEMP | .timer342 off | if (%privig.away == ON) { .timer976 off | .ignore -r *!*@* } | %away = OFF
+n35=  if (%nick.before != $null) { nick %nick.before } | if (%warmode == ON) { titlebar %wartb } | else { titlebar %normaltb }
+n36=  if (%superflpr.before == ON) { superon } | else { superoff } | if (%pager.before == ON) { %pager.away = ON | %pageron = [On] | %pageroff = Off } | else { %pager.away = OFF | %pageron = On | %pageroff = [Off] | unset %pagenick }
+n37=  backmsginit | if (%awmsglog == ON && %msgs.away == YES) { set %query $$?!"You received %msgnum.away message(s) while away ! $crlf $crlf $+ Want to read them now?:" | if (%query == $true) { run notepad $shortfn($mircdirawaymsg.log) } }
+n38=  if (%awpager == ON && %pages.away == YES && %msgs.away != YES) { set %query $$?!"You received %pagenum.away PAGE(s) while away ! $crlf $crlf $+ Want to view log now?:" | if (%query == $true) { run notepad $shortfn($mircdirawaymsg.log) } }
+n39=  if ($dialog(qmenu) != $null) { did -o qmenu 14 1 Normal Away | did -o qmenu 15 1 Silent Away } | unset %reason.away %msgs.away %msgnum.away %time.away %date.away %query %privig.away %superflpr.before %pager.before %nick.before %backchanmsg %awchanmsg %awprivmsg %temp.awfr %pages.away %pagenum.away
+n40=}
+n41=backmsginit {
+n42=  unset %backchanmsg
+n43=  if (%awchanmsgcont == normal) {
+n44=    %backchanmsg = I am 1[14BACK1] Ÿ $+ $chr(32)
+n45=    if (%awreason == ON && %reason.away != $null) { %backchanmsg = %backchanmsg I was14: 1(14 $+ %reason.away $+ 1) Ÿ $+ $chr(32) }
+n46=    %backchanmsg = %backchanmsg Since14: 1(14 $+ %time.away $+ 1@14 $+ %date.away $+ 1) Ÿ 14°SD v12 PrO° Ÿ
+n47=  }
+n48=  else {
+n49=    %backchanmsg = I am [BACK] * $+ $chr(32)
+n50=    if (%awreason == ON && %reason.away != $null) { %backchanmsg = %backchanmsg I was: ( $+ %reason.away $+ ) * $+ $chr(32) }
+n51=    %backchanmsg = %backchanmsg Since: ( $+ %time.away $+ @ $+ %date.away $+ ) * °SD v12 PrO° *
+n52=  }
+n53=  if (%saway == NO) {
+n54=    if (%awmsgspec == ON && %awmsgschan != $null && $me ison %awmsgschan) { msg %awmsgschan %backchanmsg }
+n55=    else { if (%awmsgall == ON) { amsg %backchanmsg } }
+n56=  }
+n57=  echo 6 -at *** %sd Your 1[14Away Systems1] Are Now14:1 (14OFF1) ! 14Super Flood Protection Is (14 $+ %superflpr $+ ) ! 14PAGEr Is (14 $+ %pager.away $+ ) !
+n58=}
+n59=awaypmsginit {
+n60=  unset %awprivmsg
+n61=  if (%awchanmsgcont == normal) {
+n62=    %awprivmsg = I am 1[14AWAY1] Ÿ Since14: 1(14 $+ %time.away $+ 1@14 $+ %date.away $+ 1) Ÿ $+ $chr(32)
+n63=    if (%awreason == ON && %reason.away != $null) { %awprivmsg = %awprivmsg Reason14: 1(14 $+ %reason.away $+ 1) Ÿ $+ $chr(32) }
+n64=    if (%awpager == ON) { if (%awnick == ON && %awnname != $null) { %awprivmsg = %awprivmsg PAGEr14: 1(14ON1) Type: 14/CTCP %awnname PAGE to PAGE me Ÿ $+ $chr(32) } | else { %awprivmsg = %awprivmsg PAGEr14: 1(14ON1) Type: 14/CTCP $me PAGE to PAGE me Ÿ $+ $chr(32) } }
+n65=    if (%awmail == ON && %awmailaddy != $null) { %awprivmsg = %awprivmsg E-mail14: 1(14 $+ %awmailaddy $+ 1) Ÿ $+ $chr(32) }
+n66=    if (%awuin == ON && %awuinvalue != $null) { %awprivmsg = %awprivmsg ICQ UIN14: 1(14 $+ %awuinvalue $+ 1) Ÿ $+ $chr(32) }
+n67=  }
+n68=  else {
+n69=    %awprivmsg = I am [AWAY] * Since: ( $+ %time.away $+ @ $+ %date.away $+ ) * $+ $chr(32)
+n70=    if (%awreason == ON && %reason.away != $null) { %awprivmsg = %awprivmsg Reason: ( $+ %reason.away $+ ) * $+ $chr(32) }
+n71=    if (%awpager == ON) { if (%awnick == ON && %awnname != $null) { %awprivmsg = %awprivmsg PAGEr: (ON) Type: /CTCP %awnname PAGE to PAGE me * $+ $chr(32) } | else { %awprivmsg = %awprivmsg PAGEr: (ON) Type: /CTCP $me PAGE to PAGE me * $+ $chr(32) } }
+n72=    if (%awmail == ON && %awmailaddy != $null) { %awprivmsg = %awprivmsg E-mail: ( $+ %awmailaddy $+ ) * $+ $chr(32) }
+n73=    if (%awuin == ON && %awuinvalue != $null) { %awprivmsg = %awprivmsg ICQ UIN: ( $+ %awuinvalue $+ ) * $+ $chr(32) }
+n74=  }
+n75=}
+n76=normaway { if (%away != ON) { return Normal Away ! } | else { return Normal Back ! } }
+n77=silaway { if (%away != ON) { return Silent Away ! } | else { return Silent Back ! } }
+n78=snsd { set %nsd $1- }
+n79=pageron { set %pager.away ON | set %pageron [On] | set %pageroff Off | echo 6 -a *** %sd Your 14PAGEr Is Now14:1 (14ON1) ! Now Someone Can PAGE You By Typing 14/CTCP <your nickname> PAGE And You Will Hear The 14PAGE Sound If Your 14Script Sounds Are14:1 (14ON1) ! }
+n80=pageroff { set %pager.away OFF | set %pageron On | set %pageroff [Off] | unset %pagenick | echo 6 -a *** %sd Your 14PAGEr Is Now Set To14:1 (14OFF1) ! }
+n81=chawr {
+n82=  if (%away == OFF) { echo 6 -a *** %sd %awec | halt }
+n83=  if (%saway == NO) { .timer342 off | set %reason.away $$?="Enter Your New Away Reason?:" | awaymsginit | echo 6 -a *** %sd Your 14Away Reason Is Now Set To (14 $+ %reason.away $+ ) ! }
+n84=  else { set %reason.away $$?="Enter Your New Away Reason?:" | echo 6 -a *** %sd Your 14Away Reason Is Now Set To (14 $+ %reason.away $+ ) ! }
+n85=}
+n86=schanmsg { if (%away == OFF) { echo 6 -a *** %sd %awec } | else { .timer342 off | echo 6 -a *** %sd %amoff } }
+n87=remamsgs { 
+n88=  write -c $shortfn($mircdirawaymsg.log) <= $+ $str($chr(173),22) $+ =º< $+ × $+ > $chr(176) $+ ShowDowN v12 PrO $+ $chr(176) < $+ × $+ >º= $+ $str($chr(173),22) $+ =>
+n89=  write $shortfn($mircdirawaymsg.log) $chr(160) | write $shortfn($mircdirawaymsg.log) $str($chr(160),28) ( Away Message Log ) | write $shortfn($mircdirawaymsg.log) $chr(160)
+n90=  echo 6 -a *** %sd Your 14Away Messages File Is Now 1(14Cleared1) !
+n91=}
+n92=;-=> SD PrO Games
+n93=sdquest {
+n94=  set %sdquest $rand(1,2) | set %sdguess $$?!"<=----------= °ShowDowN v12 PrO° =----------=> $crlf $crlf $+ Please take your guess, Yes or No?:"
+n95=  if (%sdquest == 1 && %sdguess == $true) { goto right } | if (%sdquest == 2 && %sdguess == $false) { goto right }
+n96=  echo 6 -a $chr(173) | echo 6 -a *** %sd Results of the 14°ShowDowN PrO° SoftWare 1[14Hard Question1] joke 14game: Your guess was... totally 4WRONG ! | if (%sounds == ON) { .splay $shortfn($mircdirsounds\ohshit.mp3) }
+n97=  unset %sdquest %sdguess | halt
+n98=  :right
+n99=  echo 6 -a $chr(173) | echo 6 -a *** %sd Results of the 14°ShowDowN PrO° SoftWare 1[14Hard Question1] joke 14game: Your guess was... absolutely 4RIGHT ! Congratulations ! | if (%sounds == ON) { .splay $shortfn($mircdirsounds\biglaugh.mp3) }
+n100=  unset %sdquest %sdguess
+n101=}
+n102=sdfortune { echo 6 -a *** %sd Now Loading The 14°ShowDowN PrO° SoftWare 1[14Fortune Teller1] Java 14Game ! | .timer 1 3 run $shortfn($mircdirutils\fortune.htm) }
+n103=sdmars { echo 6 -a *** %sd Now Loading The 14°ShowDowN PrO° SoftWare 1[14Mars Explorer1] Computer 14Game ! | .timer 1 3 run $shortfn($mircdirutils\mars.exe) }
+n104=sdpromario { echo 6 -a *** %sd Now Loading The 14°ShowDowN PrO° SoftWare 1[14Mario Bros1] Computer 14Game ! 14Remember To Read The 14Mario Bros INFO From The PopUps ! | .timer 1 3 run $shortfn($mircdirutils\sd-mario.exe) -s }
+n105=sdmemory { echo 6 -a *** %sd Now Loading The 14Symantec Corp 1[14Memory Blocks1] Brain Excersize 14Game ! | .timer 1 3 run $shortfn($mircdirutils\memory-b.exe) }
+n106=sdthegun { echo 6 -a *** %sd Now Loading The 14°ShowDowN PrO° SoftWare 1[14The Gun1] Desktop 14Shooter ! Press 1[14ESC1] To Exit When Done ! | .timer 1 3 run $shortfn($mircdirutils\the_gun.exe) }
+n107=mariowin {
+n108=  window -c %mariowin | window -aek0 +stne @ShowDowN v12 PrO Mario Bros Game Info ! 95 3 607 482 @ShowDowN v12 PrO Mario Bros Game Info ! fixedsys 9 sd-icon.ico
+n109=  aline %mariowin 15,1<0,1=15,1----0,1=15,1º<0,1×15,1> °(0,1Info About ShowDowN PrO Mario Bros Game15,1)° <0,1×15,1>º0,1=15,1----0,1=15,1>
+n110=  aline %mariowin $chr(160)
+n111=  aline %mariowin --=(2!)=- Read this to learn how to play the Mario Bros game -=(2!)=--
+n112=  aline %mariowin $chr(160)
+n113=  aline %mariowin - What is this game all about anyway and how to play it 14?
+n114=  aline %mariowin $chr(160)
+n115=  aline %mariowin - This °14ShowDowN PrO° SoftWare Mario Bros computer game is a pure
+n116=  aline %mariowin   entertainment feature of this script, and it does not have any
+n117=  aline %mariowin   relations to IRC really. But who cares, the game is much fun to
+n118=  aline %mariowin   play ! Note that this game might have it's minor bugs with the screen
+n119=  aline %mariowin   scrolling, but it boes not matter since it's fully playable ! And
+n120=  aline %mariowin   the size of the game is tried to be kept very small. Remember that
+n121=  aline %mariowin   I am NOT giving any warranties to this game, play it if you wish.
+n122=  aline %mariowin $chr(160)
+n123=  aline %mariowin - What keys can I use to control and to play the Mario Bros game 14?
+n124=  aline %mariowin $chr(160)
+n125=  aline %mariowin - Right arrow [->] moves the character forward and the left arrow [<-]
+n126=  aline %mariowin   backward. By pressing the [ALT] key you can make the character jump
+n127=  aline %mariowin   and by pressing the [spacebar] to shoot fireballs, when available.
+n128=  aline %mariowin   And REMEMBER not to press the [ALT] key at the same time with the
+n129=  aline %mariowin   [spacebar], since it will interrupt the game. However you can still
+n130=  aline %mariowin   go back to continue playing the game after this. Pressing [Ctrl]
+n131=  aline %mariowin   makes the Mario run and pressing [Esc] quits the game. Have fun !
+n132=  aline %mariowin $chr(160)
+n133=  aline %mariowin ---=(2!)=-- Right click for a control popup of this window --=(2!)=---
+n134=  aline %mariowin $chr(160)
+n135=  aline %mariowin 15,1<0,1=15,1----0,1=15,1º<0,1×15,1> °(0,1Info About ShowDowN PrO Mario Bros Game15,1)° <0,1×15,1>º0,1=15,1----0,1=15,1>
+n136=}
+n137=sdprocflip {
+n138=  window -c %cfwin | window -aek0 +stne @ShowDowN v12 PrO Coin Flip Game ! 95 115 611 258 @ShowDowN v12 PrO Coin Flip Game ! fixedsys 9 sd-icon.ico
+n139=  aline %cfwin 15,1<0,1=15,1------0,1=15,1º<0,1×15,1> °(0,1ShowDowN PrO SoftWare Coin Flip Game15,1)° <0,1×15,1>º0,1=15,1------0,1=15,1>
+n140=  aline %cfwin $chr(160)
+n141=  aline %cfwin --=(2!)=- Here you can just relax and play the Coin Flip game -=(2!)=--
+n142=  aline %cfwin $str($chr(95),72)
+n143=  aline %cfwin -=2> The result of your last guess was14:1 %cflast
+n144=  aline %cfwin $str($chr(175),72)
+n145=  aline %cfwin - The amount of right guesses in a row is now14:1 (2 $+ %cfrow $+ ) !
+n146=  aline %cfwin $str($chr(95),72)
+n147=  aline %cfwin - Your 2alltime record of right guesses in a row is14:1 (2 $+ %cfrec $+ ) !
+n148=  aline %cfwin $str($chr(175),72)
+n149=  aline %cfwin --=(2!)=- Right click with mouse to play this cool coin game -=(2!)=--
+n150=  aline %cfwin $chr(160)
+n151=  aline %cfwin 15,1<0,1=15,1------0,1=15,1º<0,1×15,1> °(0,1ShowDowN PrO SoftWare Coin Flip Game15,1)° <0,1×15,1>º0,1=15,1------0,1=15,1>
+n152=}
+n153=;-=> WaR Info Windows
+n154=warutils {
+n155=  window -c %wuwin | window -aek0 +stne @ShowDowN v12 PrO WaR Utils Info ! 93 18 617 450 @ShowDowN v12 PrO WaR Utils Info ! fixedsys 9 sd-icon.ico
+n156=  aline %wuwin 15,1<0,1=15,1-------0,1=15,1º<0,1×15,1> °(0,1ShowDowN PrO Info About WaR Utility15,1)° <0,1×15,1>º0,1=15,1-------0,1=15,1>
+n157=  aline %wuwin $chr(160)
+n158=  aline %wuwin -=(2!)=- Read this info about WaR programs/utils VERY carefully -=(2!)=-
+n159=  aline %wuwin $chr(160)
+n160=  aline %wuwin - Please REMEMBER that the external WaR programs are NOT a part of the
+n161=  aline %wuwin   °14ShowDowN PrO° script or the REGISTRATION deal of it. The programs
+n162=  aline %wuwin   are ONLY featured, and are not even included in the Normal version.
+n163=  aline %wuwin $chr(160)
+n164=  aline %wuwin - These WaR Utils are NOT made by [-ShaD-] or ShowDowN PrO SoftWare,
+n165=  aline %wuwin   and therefore I AM NOT granting that they work, or run with your
+n166=  aline %wuwin   operating system ! Use these Utils only, if you know how, why, and
+n167=  aline %wuwin   what they do. To run some of the programs, you will need some control
+n168=  aline %wuwin   files and WinSock 2 installed into your computer. If you need some
+n169=  aline %wuwin   .DLL or .OCX files (ActiveX Internet Controls includes them all) to
+n170=  aline %wuwin   start these Utils, try to find them from the internet sites for
+n171=  aline %wuwin   example at: www.activex.com, www.warforge.com Or www.microsoft.com !
+n172=  aline %wuwin $chr(160)
+n173=  aline %wuwin - And REMEMBER that DO NOT send me E-Mail about ANY matters concerning
+n174=  aline %wuwin   these WaR Utils thank you. I will not offer or give help about the
+n175=  aline %wuwin   programs, since I did not make them. With all your questions related
+n176=  aline %wuwin   to °14ShowDowN PrO° script, I will be happy to answer.
+n177=  aline %wuwin $chr(160)
+n178=  aline %wuwin ---=(2!)=-- Right click for a control popup of this window --=(2!)=---
+n179=  aline %wuwin $chr(160)
+n180=  aline %wuwin 15,1<0,1=15,1-------0,1=15,1º<0,1×15,1> °(0,1ShowDowN PrO Info About WaR Utility15,1)° <0,1×15,1>º0,1=15,1-------0,1=15,1>
+n181=}
+n182=warhacks {
+n183=  window -c %whwin | window -aek0 +stne @ShowDowN v12 PrO WaR Hacks Info ! 93 55 617 370 @ShowDowN v12 PrO WaR Hacks Info ! fixedsys 9 sd-icon.ico
+n184=  aline %whwin 15,1<0,1=15,1--------0,1=15,1º<0,1×15,1> °(0,1ShowDowN PrO Info About WaR Hacks15,1)° <0,1×15,1>º0,1=15,1--------0,1=15,1>
+n185=  aline %whwin $chr(160)
+n186=  aline %whwin --=(2!)=- Here is some useful info and a small request for you -=(2!)=--
+n187=  aline %whwin $chr(160)
+n188=  aline %whwin - Some of the backdoors and hacks listed in the WaR Hacks section are
+n189=  aline %whwin   outdated. Some of them might not be working anymore. Use them if you
+n190=  aline %whwin   find someone still voulnerable to them. I need new working backdoors
+n191=  aline %whwin   and hacks for other scripts. If you know one for a script that people
+n192=  aline %whwin   are still using, please e-mail me about it. This way I am able to
+n193=  aline %whwin   collect all the best hacks around. If you can help, send an e-mail
+n194=  aline %whwin   to me at: showdown@sci.fi please. Thank you !
+n195=  aline %whwin $chr(160)
+n196=  aline %whwin - And now a quick reminder. With °14ShowDowN PrO° you are ALWAYS safe
+n197=  aline %whwin   from any backdoor hacks. One of the reasons this is script is so
+n198=  aline %whwin   popular, is that it's SAFE to use and it contains NO backdoors of any
+n199=  aline %whwin   kind. And believe me, that is quite unique in mIRC scripts.
+n200=  aline %whwin $chr(160)
+n201=  aline %whwin ---=(2!)=-- Right click for a control popup of this window --=(2!)=---
+n202=  aline %whwin $chr(160)
+n203=  aline %whwin 15,1<0,1=15,1--------0,1=15,1º<0,1×15,1> °(0,1ShowDowN PrO Info About WaR Hacks15,1)° <0,1×15,1>º0,1=15,1--------0,1=15,1>
+n204=}
+n205=;-=> Midi Jukebox
+n206=mbutplay { if (%mplayf != $null) { .splay " $+ %mplayf $+ " | if ($dialog(midi) != $null) { did -o midi 30 1 *** Playing: %mpsel ! } } | else { did -o midi 30 1 *** Please select/open a track to play first ! } }
+n207=mbutstop { if ($dialog(midi) != $null && $inmidi == $true) { did -o midi 30 1 *** Playing stopped ! } | .splay stop }
+n208=mbutrand { %mptemp = $rand(1,2) | if (%mptemp == 1) { msong $+ $rand(1,30) } | else { mtheme $+ $rand(1,18) } | if (%mplayf != $null) { .splay " $+ %mplayf $+ " } | if ($dialog(midi) != $null) { did -o midi 30 1 *** Playing: %mpsel ! } | unset %mptemp }
+n209=mbutopen {
+n210=  %tmp.sfile = $shortfn($mididir) $+ *.mid | %mselfile = $$sfile(%tmp.sfile,- °SD v12 PrO° Select a Midi track to play !:,Play !)
+n211=  if (%mselfile != $null) {
+n212=    if (.mid isin $right(%mselfile,4)) { %mplayf = %mselfile | %mpsel = $replace($nopath(%mplayf),$chr(95),$chr(32)) | if ($dialog(midi) != $null) { did -c midi 14,18 1 | did -o midi 30 1 *** Playing: %mpsel ! } | .splay " $+ %mplayf $+ " | dialog -v midi | %mpc = 14,18 1 }
+n213=    else { dialog -v midi | run $shortfn($mircdirutils\sd-error.exe) You must select a .MID file ! }
+n214=  }
+n215=}
+n216=mprest { if ($dialog(midi) != $null) { did -c midi 18 1 } }
+n217=mptrest { if ($dialog(midi) != $null) { did -c midi 14 1 } }
+n218=mpsetpf { %mplayf = $shortfn($mircdir) $+ sounds\ $+ $replace($left(%mpsel,-7),$chr(32),$chr(95)) $+ .mid }
+n219=mptsetpf { %mplayf = $shortfn($mircdir) $+ sounds\ $+ Theme_-_ $+ $replace($left(%mpsel,-15),$chr(32),$chr(95)) $+ .mid }
+n220=mpnosel { %mplayf = $null | %mpc = 14,18 1 }
+n221=mrandp { if (%mrandp == OFF) { %mrandp = ON | %mtrandp = OFF | %mprep = OFF | if ($dialog(midi) != $null) { did -u midi 20,23 | did -c midi 16 } } | else { %mrandp = OFF } }
+n222=mtrandp { if (%mtrandp == OFF) { %mrandp = OFF | %mtrandp = ON | %mprep = OFF | if ($dialog(midi) != $null) { did -u midi 16,23 | did -c midi 20 } } | else { %mtrandp = OFF } }
+n223=mprep { if (%mprep == OFF) { %mrandp = OFF | %mtrandp = OFF | %mprep = ON | if ($dialog(midi) != $null) { did -u midi 16,20 | did -c midi 23 } } | else { %mprep = OFF } }
+n224=mtheme1 { mptrest | %mpsel = SD PrOject - ShowDowN PrO Theme [4:32] | mpsetpf | %mpc = 18 2 }
+n225=mtheme2 { mptrest | %mpsel = Descent - Theme [2:12] | mptsetpf | %mpc = 18 3 }
+n226=mtheme3 { mptrest | %mpsel = Doom 1 - Theme [1:36] | mptsetpf | %mpc = 18 4 }
+n227=mtheme4 { mptrest | %mpsel = Doom 2 - Theme [2:50] | mptsetpf | %mpc = 18 5 }
+n228=mtheme5 { mptrest | %mpsel = Duke 3D 1 - Theme [1:03] | mptsetpf | %mpc = 18 6 }
+n229=mtheme6 { mptrest | %mpsel = Duke 3D 2 - Theme [5:58] | mptsetpf | %mpc = 18 7 }
+n230=mtheme7 { mptrest | %mpsel = Ghostbusters - Theme [4:06] | mptsetpf | %mpc = 18 8 }
+n231=mtheme8 { mptrest | %mpsel = Good Bad And The Ugly - Theme [3:15] | mptsetpf | %mpc = 18 9 }
+n232=mtheme9 { mptrest | %mpsel = James Bond - Theme [1:52] | mptsetpf | %mpc = 18 10 }
+n233=mtheme10 { mptrest | %mpsel = Knight Rider - Theme [1:17] | mptsetpf | %mpc = 18 11 }
+n234=mtheme11 { mptrest | %mpsel = Mission Impossible - Theme [3:16] | mptsetpf | %mpc = 18 12 }
+n235=mtheme12 { mptrest | %mpsel = Mortal Kombat - Theme [3:06] | mptsetpf | %mpc = 18 13 }
+n236=mtheme13 { mptrest | %mpsel = Pulp Fiction - Theme [2:22] | mptsetpf | %mpc = 18 14 }
+n237=mtheme14 { mptrest | %mpsel = Tales From The Crypt - Theme [1:21] | mptsetpf | %mpc = 18 15 }
+n238=mtheme15 { mptrest | %mpsel = Terminator - Theme [1:37] | mptsetpf | %mpc = 18 16 }
+n239=mtheme16 { mptrest | %mpsel = Tetrinet - Theme [3:43] | mptsetpf | %mpc = 18 17 }
+n240=mtheme17 { mptrest | %mpsel = The Simpsons - Theme [1:28] | mptsetpf | %mpc = 18 18 }
+n241=mtheme18 { mptrest | %mpsel = X-Files - Theme [0:46] | mptsetpf | %mpc = 18 19 }
+n242=msong1 { mprest | %mpsel = Alice Deejay - Back In My Life [4:32] | mpsetpf | %mpc = 14 2 }
+n243=msong2 { mprest | %mpsel = Aqua - Barbie Girl [3:15] | mpsetpf | %mpc = 14 3 }
+n244=msong3 { mprest | %mpsel = Aqua - Roses Are Red [3:32] | mpsetpf | %mpc = 14 4 }
+n245=msong4 { mprest | %mpsel = BBE - Seven Days And One Week [4:11] | mpsetpf | %mpc = 14 5 }
+n246=msong5 { mprest | %mpsel = Britney Spears - Oops I Did It Again [3:31] | mpsetpf | %mpc = 14 6 }
+n247=msong6 { mprest | %mpsel = Chicane - Don't Give It Up [3:40] | mpsetpf | %mpc = 14 7 }
+n248=msong7 { mprest | %mpsel = Christina Aquilera - Genie In A Bottle [3:36] | mpsetpf | %mpc = 14 8 }
+n249=msong8 { mprest | %mpsel = DJ Bobo - Everybody [3:37] | mpsetpf | %mpc = 14 9 }
+n250=msong9 { mprest | %mpsel = DJ Jurgen - Better Off Alone [5:37] | mpsetpf | %mpc = 14 10 }
+n251=msong10 { mprest | %mpsel = DJ Sakin - Protect Your Mind [3:39] | mpsetpf | %mpc = 14 11 }
+n252=msong11 { mprest | %mpsel = Eiffel 65 - Blue [4:22] | mpsetpf | %mpc = 14 12 }
+n253=msong12 { mprest | %mpsel = Eiffel 65 - Move Your Body [3:33] | mpsetpf | %mpc = 14 13 }
+n254=msong13 { mprest | %mpsel = Enigma - Mea Culpa [3:52] | mpsetpf | %mpc = 14 14 }
+n255=msong14 { mprest | %mpsel = Everlast - What It's Like [5:10] | mpsetpf | %mpc = 14 15 }
+n256=msong15 { mprest | %mpsel = Haddaway - What Is Love [4:38] | mpsetpf | %mpc = 14 16 }
+n257=msong16 { mprest | %mpsel = HIM - Join Me [3:18] | mpsetpf | %mpc = 14 17 }
+n258=msong17 { mprest | %mpsel = Inner Circle - Sweat [3:28] | mpsetpf | %mpc = 14 18 }
+n259=msong18 { mprest | %mpsel = La Bouche - Be My Lover [3:40] | mpsetpf | %mpc = 14 19 }
+n260=msong19 { mprest | %mpsel = Lou Bega - Mambo No 5 [3:34] | mpsetpf | %mpc = 14 20 }
+n261=msong20 { mprest | %mpsel = Luniz - I Got Five On It [4:12] | mpsetpf | %mpc = 14 21 }
+n262=msong21 { mprest | %mpsel = Modern Talking - You're My Heart [3:31] | mpsetpf | %mpc = 14 22 }
+n263=msong22 { mprest | %mpsel = N Sync - Bye Bye Bye [3:18] | mpsetpf | %mpc = 14 23 }
+n264=msong23 { mprest | %mpsel = Prodigy - One Love [3:46] | mpsetpf | %mpc = 14 24 }
+n265=msong24 { mprest | %mpsel = Richard Marx - Hazard [4:54] | mpsetpf | %mpc = 14 25 }
+n266=msong25 { mprest | %mpsel = Robert Miles - One And One [4:03] | mpsetpf | %mpc = 14 26 }
+n267=msong26 { mprest | %mpsel = Sash - Adelante [3:46] | mpsetpf | %mpc = 14 27 }
+n268=msong27 { mprest | %mpsel = Sash - Encore Une Fois [3:41] | mpsetpf | %mpc = 14 28 }
+n269=msong28 { mprest | %mpsel = Sash - Equador [3:42] | mpsetpf | %mpc = 14 29 }
+n270=msong29 { mprest | %mpsel = Toy Box - Tarzan And Jane [3:06] | mpsetpf | %mpc = 14 30 }
+n271=msong30 { mprest | %mpsel = U96 - Das Boot [5:21] | mpsetpf | %mpc = 14 31 }
+n272=; -(!)- -(!)- ! IF YOU NEED TO ADD YOUR OWN ALIASES, CHOOSE "File/New" FROM MENU ! -(!)- -(!)-
+n273=;  -(!)- -(!)- ! DO NOT EDIT ANYTHING HERE OR THE SCRIPT WILL NOT WORK ANYMORE ! -(!)- -(!)-
+n274=;<---------------------=º<×> °ShowDowN v12 PrO° By [-ShaD-] '2001 © <×>º=-------------------->

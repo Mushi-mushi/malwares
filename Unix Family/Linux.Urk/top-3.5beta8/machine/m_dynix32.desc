@@ -1,0 +1,14 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any Sequent Running Dynix 3.2.x
+
+DESCRIPTION:
+This is the machine-dependent module for Sequent Dynix 3.2.0
+This makes top work on the following systems:
+	Dynix 3.2.0 and perhaps later versions
+
+CFLAGS: -DBSD
+
+AUTHOR:  Daniel Trinkle <trinkle@cs.purdue.edu>
+

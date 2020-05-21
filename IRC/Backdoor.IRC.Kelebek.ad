@@ -1,0 +1,831 @@
+alias asb {
+  if ($dialog(asb) ) { dialog -o asb | dialog -n asb }
+  else { dialog -m asb asb }
+}
+menu channel,menubar {
+  $iif($me isop #,» Anti Bot, $style(2) » Anti Bot) 
+  .» Ayarlar:asb
+  .-
+  .$iif(%asb.state == 1,» Baðlantýyý Kes,» Baðlan):if (%asb.state == 1) { asb.quit | if ($dialog(asb)) { did -ra asb 83 OFF | did -u asb 83 | did -ra asb 84 Disconnected } } | else { asb.start | if ($dialog(asb)) { set %asb.state 1 | did -ra asb 83 ON | did -c asb 83 } }
+  .$iif(%asb.jp == 1,» Kanala Gir,» Kanaldan Çýk):if (%asb.jp == 1) { asb.joinchans } | else { asb.partchans }
+  .» Join / Part Ýptal:.timerasbstayjoined off | .timerasbstayparted off | echo -a %logo $+ 12,0 Anti Bot Bulunduðu Kanallarda  Join / Part Yapmayacak
+  .-
+  .» Botun Durumu:asb.status -a
+  -
+  » Çýkýþ
+  .» Normal çýkýþ:/quit %version
+  .-
+  .» Sebebli çýkýþ:/quit $$?="Çýkýþ nedeniniz?."
+
+}
+
+if ($did(83).state == 1) { set %asb.state 1 | did -ra asb 83 Baðlan }
+else { set %asb.state 0 | did -ra asb 83 Vazgeç | did -ra asb 84 Baðlý Deðil }
+if (%asb.state == 1) { asb.start }
+else { asb.quit }
+
+menu @Anti-Bot {
+  » Ayarlar:/asb
+  -
+  » Ekraný Temizle:clear
+}
+
+dialog asb {
+  title "Klavye Script - Anti Bot"
+  size -1 -1 187 147
+  option dbu
+  tab "Ayarlar", 1, 0 0 186 133
+  box "Bot`un Özellikleri", 6, 5 18 84 112, tab 1
+  text "     Baþlangýç", 7, 29 27 35 8, tab 1
+  text "Nickname", 8, 10 37 24 8, tab 1
+  edit "", 9, 35 36 50 10, tab 1 autohs
+  text "Þifresi", 10, 10 47 23 8, tab 1
+  edit "", 11, 35 45 50 10, tab 1 autohs
+  text "     Yedek", 12, 29 63 36 8, tab 1
+  text "Nickname", 13, 10 73 24 8, tab 1
+  edit "", 14, 35 72 50 10, tab 1 autohs
+  text "Þifre", 15, 10 83 23 8, tab 1
+  edit "", 16, 35 82 50 10, tab 1 autohs
+  text "   Name", 17, 32 99 32 8, tab 1
+  text "Ident", 18, 10 109 12 8, tab 1
+  edit "", 19, 35 107 50 10, tab 1 autohs
+  text "Name", 20, 10 117 14 8, tab 1
+  edit "", 21, 35 117 50 10, tab 1 autohs
+  box "Listedeki Kanallara Gir", 22, 92 18 91 62, tab 1
+  combo 23, 97 27 60 50, tab 1 size
+  button "Ekle", 24, 159 39 20 10, tab 1, flat
+  button "Sil", 25, 159 53 20 10, tab 1, flat
+  box "Yazýlý Olan Servera Gir", 27, 92 83 91 47, tab 1
+  radio "Baðlandýðým Servera Gir", 28, 96 93 67 10, group tab 1
+  radio "", 29, 96 107 9 10, tab 1
+  edit "", 30, 105 107 75 11, tab 1 autohs
+  tab "Mesajlar", 2
+  edit "", 31, 3 17 27 10, tab 2 autohs
+  text "Dakikada Bir Kanaldan Çýk", 32, 31 18 120 8, tab 2
+  box "IRCop Özel!", 1000, 111 17 70 30, tab 2
+  check "Reklamcýya G-line?", 1001, 113 24 57 10, tab 2
+  check "Reklamcýya Kill?", 1002, 113 34 57 10, tab 2
+  edit "", 33, 3 27 27 10, tab 2 autohs
+  text "Dakika Sonra Kanala Tekrar Gir", 34, 31 29 80 8, tab 2
+  check "Reklamlarý @Anti-Bot Penceresine Yaz", 35, 4 38 103 10, tab 2, flat
+  check "Reklamlarý Kanala Yaz", 36, 4 49 71 10, tab 2, flat
+  edit "", 37, 90 49 50 10, tab 2 autohs
+  check "DCC Gönderimlerini Kanala Yaz", 38, 4 60 85 10, tab 2, flat
+  edit "", 39, 90 60 50 10, tab 2 autohs
+  text "Reklam Durumunda Banla", 40, 4 72 64 8, tab 2
+  text "Kick Mesajlarý", 41, 75 72 34 8, tab 2
+  text "Dk", 42, 148 72 12 8, tab 2
+  text "Host", 43, 169 72 13 8, tab 2
+  check "DCC", 44, 4 78 37 10, tab 2, flat
+  edit "", 45, 42 78 104 10, tab 2 autohs
+  edit "", 46, 147 78 20 10, tab 2 autohs
+  edit "", 47, 168 78 15 10, tab 2 autohs
+  check "Reklam", 48, 4 89 29 10, tab 2, flat
+  edit "", 49, 42 89 104 10, tab 2 autohs
+  edit "", 50, 147 89 20 10, tab 2 autohs
+  edit "", 51, 168 89 15 10, tab 2 autohs
+  check "Ýsim", 52, 4 100 26 10, tab 2, flat
+  edit "", 61, 42 100 104 10, tab 2 autohs
+  edit "", 62, 147 100 20 10, tab 2 autohs
+  edit "", 63, 168 100 15 10, tab 2 autohs
+  check "CTCP", 64, 4 111 25 10, tab 2, flat
+  edit "", 65, 42 111 104 10, tab 2 autohs
+  edit "", 66, 147 111 20 10, tab 2 autohs
+  edit "", 67, 168 111 15 10, tab 2 autohs
+  check "Kanal", 68, 4 122 26 10, tab 2, flat
+  edit "", 69, 42 122 104 10, tab 2 autohs
+  edit "", 71, 147 122 20 10, tab 2 autohs
+  edit "", 72, 168 122 15 10, tab 2 autohs
+  tab "Tanýmlar", 3
+  text "Yazý", 53, 69 19 20 14, tab 3
+  combo 54, 7 17 60 55, tab 3 sort size edit vsbar
+  button "Ekle", 55, 69 33 20 10, tab 3, flat
+  button "Sil", 56, 69 46 20 10, tab 3, flat
+  text "Ýsim", 57, 69 78 10 14, tab 3
+  combo 58, 7 75 60 55, tab 3 sort size edit vsbar
+  button "Ekle", 59, 69 91 20 10, tab 3, flat
+  button "Sil", 60, 69 104 20 10, tab 3, flat
+  combo 98, 100 17 60 55, tab 3 sort size edit vsbar
+  button "Ekle", 99, 162 33 20 10, tab 3, flat
+  button "Sil", 100, 162 46 20 10, tab 3, flat
+  text "Hariç", 101, 162 19 21 8, tab 3
+  combo 80, 100 75 60 55, tab 3 sort size edit vsbar
+  button "Ekle", 81, 162 91 20 10, tab 3, flat
+  button "Sil", 82, 162 104 20 10, tab 3, flat
+  text "Kötü Kanal", 85, 162 75 20 14, tab 3
+  tab "Bot Kontrol", 4
+  text "Nick / Kanal", 73, 18 20 40 8, tab 4
+  edit "", 74, 17 28 86 10, tab 4 autohs
+  text "Msg", 76, 5 40 10 8, tab 4
+  edit "", 77, 17 39 86 39, tab 4 multi autovs vsbar
+  button "Mesaj", 70, 107 67 25 10, tab 4, flat
+  button "Action", 78, 107 56 25 10, tab 4, flat
+  button "Notice", 102, 107 45 25 10, tab 4, flat
+  text "Nick Deðiþ", 88, 110 20 34 8, tab 4
+  button "Deðiþ", 86, 158 28 25 10, tab 4, flat
+  edit "", 87, 109 28 47 10, tab 4 autohs
+  text "Tüm Kanallardan Çýk", 90, 2 85 52 8, tab 4
+  button "Þimdi", 91, 62 84 20 10, tab 4, flat
+  text "Tüm Kanallara Gir", 92, 2 97 52 8, tab 4
+  button "Þimdi", 93, 62 96 20 10, tab 4, flat
+  text "Join / Part Ýptal", 94, 2 109 57 8, tab 4
+  button "Þimdi", 95, 62 108 20 10, tab 4, flat
+  check "Reklamlarý Kaydet", 96, 91 84 55 10, tab 4, flat
+  check "DCC`leri Kaydet ", 97, 91 96 50 9, tab 4, flat
+  button "Oku", 103, 148 84 20 10, tab 4, flat
+  button "Oku", 104, 148 96 20 10, tab 4, flat
+  check "Kanal Sayýsý", 105, 91 108 91 9, tab 4, flat
+  edit "", 106, 90 119 15 10, tab 4 autohs
+  text "Üstü Ýse Girenleri Özelden Uyar", 107, 105 120 80 8, tab 4
+  button "Cancel", 26, 192 122 10 9, hide cancel, flat
+  check "OFF", 83, 3 136 22 10, push, flat
+  edit "", 84, 29 136 157 11, read autohs
+}
+on *:dialog:asb:init:*: {
+  did -a asb 9 %asb.nick1
+  did -a asb 11 %asb.pass1
+  did -a asb 14 %asb.nick2
+  did -a asb 16 %asb.pass2
+  did -a asb 19 %asb.ident
+  did -a asb 21 %asb.name
+  did -a asb 30 %asb.selserv.spec
+  did -a asb 31 %asb.join
+  did -a asb 33 %asb.part
+  did -a asb 37 %asb.repspamto.spec
+  did -a asb 39 %asb.repdccto.spec
+  did -a asb 45 %asb.dcckb.msg
+  did -a asb 46 %asb.dcckb.mins
+  did -a asb 47 %asb.dcckb.mask
+  did -a asb 49 %asb.spamkb.msg
+  did -a asb 50 %asb.spamkb.mins
+  did -a asb 51 %asb.spamkb.mask
+  did -a asb 61 %asb.namekb.msg
+  did -a asb 62 %asb.namekb.mins
+  did -a asb 63 %asb.namekb.mask
+  did -a asb 65 %asb.ctcpkb.msg
+  did -a asb 66 %asb.ctcpkb.mins
+  did -a asb 67 %asb.ctcpkb.mask
+  did -a asb 69 %asb.spamchanskb.msg
+  did -a asb 71 %asb.spamchanskb.mins
+  did -a asb 72 %asb.spamchanskb.mask
+  did -a asb 106 %asb.badchans.n
+  if (%kline.repme == 1) { did -c asb 1002 }
+  if (%gline.repme == 1) { did -c asb 1001 }
+  if (%asb.repme == 1) { did -c asb 35 }
+  if (%asb.repspamto == 1) { did -c asb 36 }
+  if (%asb.repdccto == 1) { did -c asb 38 }
+  if (%asb.dcckb == 1) { did -c asb 44 }
+  if (%asb.spamkb == 1) { did -c asb 48 }
+  if (%asb.namekb == 1) { did -c asb 52 }
+  if (%asb.ctcpkb == 1) { did -c asb 64 }
+  if (%asb.spamchanskb == 1) { did -c asb 68 }
+  if (%asb.logspam == 1) { did -c asb 96 }
+  if (%asb.logdcc == 1) { did -c asb 97 }
+  if (%asb.autohi == 1) { did -c asb 105 }
+  if (%asb.selserv == 0 ) { did -c asb 28 }
+  else { did -c asb 29 }
+  if (%asb.state == 1 ) { did -c asb 83 | did -a asb 83 ON | asb.echostatus }
+  else { did -a asb 84 Disconnected }
+  asb.load.chans
+  asb.load.spamwords
+  asb.load.names
+  asb.load.immune
+  asb.load.badchans
+}
+on *:dialog:asb:sclick:*: {
+  if ($did == 83) {
+    if ($did(83).state == 1) { set %asb.state 1 | did -ra asb 83 ON }
+    else { set %asb.state 0 | did -ra asb 83 OFF | did -ra asb 84 Disconnected }
+    if (%asb.state == 1) { asb.start }
+    else { asb.quit }
+  }
+  if ($did == 28) { set %asb.selserv 0 }
+  if ($did == 29) { set %asb.selserv 1 }
+  if ($did == 35) {
+    if ($did(35).state == 1) { set %asb.repme 1 }
+    else { set %asb.repme 0 }
+  }
+  if ($did == 1001) {
+    if ($did(1001).state == 1) { set %gline.repme 1 | echo -a %logo $+ 12,0 Reklam atan kiþiye 4,0G-line12,0 atýlacak.. }
+    else { set %gline.repme 0 | echo -a %logo $+ 12,0 Reklam atan kiþiye 4,0G-line12,0 atýlmayacak.. }
+  }
+  if ($did == 1002) {
+    if ($did(1002).state == 1) { set %kline.repme 1 | echo -a %logo $+ 12,0 Reklam atan kiþiye 4,0Kill12,0 atýlacak.. }
+    else { set %kline.repme 0 | echo -a %logo $+ 12,0 Reklam atan kiþiye 4,0Kill12,0 atýlmayacak.. }
+  }
+  if ($did == 36) {
+    if ($did(36).state == 1) { set %asb.repspamto 1 }
+    else { set %asb.repspamto 0 }
+  }
+  if ($did == 38) {
+    if ($did(38).state == 1) { set %asb.repdccto 1 } 
+    else { set %asb.repdccto 0 }
+  }
+  if ($did == 103) { if ($isfile($scriptdirasb.spamlog.txt)) { run $scriptdirasb.spamlog.txt } }
+  if ($did == 104) { if ($isfile($mircdirasb.dcclog.txt)) { run $scriptdirasb.dcclog.txt } }
+  if ($did == 96) {
+    if ($did(96).state == 1) { set %asb.logspam 1 } 
+    else { set %asb.logspam 0 }
+  }
+  if ($did == 97) {
+    if ($did(97).state == 1) { set %asb.logdcc 1 } 
+    else { set %asb.logdcc 0 }
+  }
+
+  if ($did == 105) {
+    if ($did(105).state == 1) { set %asb.autohi 1 } 
+    else { set %asb.autohi 0 }
+  }
+  if ($did == 93) {
+    if ($sock(asb)) {
+      asb.joinchans
+    }
+  }
+  if ($did == 91) {
+    if ($sock(asb)) {
+      asb.partchans
+    }
+  }
+  if ($did == 95) {
+    if ($sock(asb)) {
+      .timerstayjoined off
+      .timerstayparted off
+      echo -a %logo $+ 12,0 Anti Bot Bulunduðu Kanallarda Join / Part Yapmayacak
+    }
+  }
+  if ($did == 44) {
+    if ($did(44).state == 1) { set %asb.dcckb 1 }
+    else { set %asb.dcckb 0 }
+  }
+  if ($did == 48) {
+    if ($did(48).state == 1) { set %asb.spamkb 1 }
+    else { set %asb.spamkb 0 }
+  }
+  if ($did == 52) {
+    if ($did(52).state == 1) { set %asb.namekb 1 }
+    else { set %asb.namekb 0 }
+  }
+  if ($did == 64) {
+    if ($did(64).state == 1) { set %asb.ctcpkb 1 }
+    else { set %asb.ctcpkb 0 }
+  }
+  if ($did == 68) {
+    if ($did(68).state == 1) { set %asb.spamchanskb 1 }
+    else { set %asb.spamchanskb 0 }
+  }
+  if ($did == 24) {
+    var %chan = $did(23).text
+    if (%chan == $null) { halt }
+    if ($chr(32) isin %chan) { halt }
+    if ($chr(44) isin %chan) { halt }
+    if ($left(%chan,1) == $chr(35)) { }
+    elseif ($left(%chan,1) == $chr(38)) { }
+    else { var %chan = $chr(35) $+ %chan }
+    set %asb.chans $addtok(%asb.chans,%chan,44)
+    asb.load.chans
+  }
+  if ($did == 25) { 
+    if ($did(23).sel == $null) { halt }
+    var %chan = $did(23, $did(23).sel)
+    set %asb.chans $deltok(%asb.chans,$findtok(%asb.chans,%chan,1,44),44)
+    asb.load.chans
+  }
+  if ($did == 55) {
+    var %word = $did(54).text
+    if (%word == $null) { halt }
+    if ($chr(32) isin %word) { halt }
+    if ($chr(44) isin %word) { halt }
+    set %asb.spamwords $addtok(%asb.spamwords,%word,44)
+    asb.load.spamwords
+  }
+  if ($did == 56) { 
+    if ($did(54).sel == $null) { halt }
+    var %word = $did(54, $did(54).sel)
+    set %asb.spamwords $deltok(%asb.spamwords,$findtok(%asb.spamwords,%word,1,44),44)
+    asb.load.spamwords
+  }
+  if ($did == 59) {
+    var %word = $did(58).text
+    if (%word == $null) { halt }
+    if ($chr(32) isin %word) { halt }
+    if ($chr(44) isin %word) { halt }
+    set %asb.names $addtok(%asb.names,%word,44)
+    asb.load.names
+  }
+  if ($did == 60) { 
+    if ($did(58).sel == $null) { halt }
+    var %word = $did(58, $did(58).sel)
+    set %asb.names $deltok(%asb.names,$findtok(%asb.names,%word,1,44),44)
+    asb.load.names
+  }
+
+  if ($did == 99) {
+    var %word = $did(98).text
+    if (%word == $null) { halt }
+    if ($chr(32) isin %word) { halt }
+    if ($chr(44) isin %word) { halt }
+    set %asb.immune $addtok(%asb.immune,%word,44)
+    asb.load.immune
+  }
+  if ($did == 100) { 
+    if ($did(98).sel == $null) { halt }
+    var %word = $did(98, $did(98).sel)
+    set %asb.immune $deltok(%asb.immune,$findtok(%asb.immune,%word,1,44),44)
+    asb.load.immune
+  }
+
+  if ($did == 86) {
+    if (($did(87).text != $null) && ($chr(32) !isin $did(87).text)) { sockwrite -n asb NICK : $+ $did(87).text }
+  }
+  if (($did == 70) || ($did == 78) || ($did == 102)) {
+    if ($sock(asb)) {
+      if (($did(74).text != $null) && ($did(77).text != $null) && ($chr(32) !isin $did(74).text)) { 
+        var %l = $did(77).lines
+        var %n = 1
+        while (%n <= %l) {
+          var %asb.txtmsg = %asb.txtmsg $did(77,%n).text
+          inc %n
+        }
+        if ($did == 70) { sockwrite -n asb PRIVMSG $did(74).text  : $+ %asb.txtmsg }
+        elseif ($did == 78) { sockwrite -n asb PRIVMSG $did(74).text  : $+ ACTION %asb.txtmsg $+  }
+        elseif ($did == 102) { sockwrite -n asb NOTICE $did(74).text  : $+ %asb.txtmsg }
+        if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4YOU » $did(74).text ( $+ %asb.txtmsg $+ 4) }
+      }
+    } 
+  }
+
+
+  if ($did == 81) {
+    var %chan = $did(80).text
+    if (%chan == $null) { halt }
+    if ($chr(32) isin %chan) { halt }
+    if ($chr(44) isin %chan) { halt }
+    if ($left(%chan,1) == $chr(35)) { }
+    elseif ($left(%chan,1) == $chr(38)) { }
+    else { var %chan = $chr(35) $+ %chan }
+    set %asb.badchans $addtok(%asb.badchans,%chan,32)
+    asb.load.badchans
+  }
+  if ($did == 82) { 
+    if ($did(80).sel == $null) { halt }
+    var %chan = $did(80, $did(80).sel)
+    set %asb.badchans $deltok(%asb.badchans,$findtok(%asb.badchans,%chan,1,32),32)
+    asb.load.badchans
+  }
+
+
+}
+
+on *:dialog:asb:edit:*: {
+  if ($did == 9) { set %asb.nick1 $did(9).text }
+  if ($did == 11) { set %asb.pass1 $did(11).text }
+  if ($did == 14) { set %asb.nick2 $did(14).text }
+  if ($did == 16) { set %asb.pass2 $did(16).text }
+  if ($did == 19) { set %asb.ident $did(19).text }
+  if ($did == 21) { set %asb.name $did(21).text }
+  if ($did == 30) { set %asb.selserv.spec $did(30).text }
+  if ($did == 37) { set %asb.repspamto.spec $did(37).text }
+  if ($did == 39) { set %asb.repdccto.spec $did(39).text }
+  if ($did == 31) { 
+    if ($did(31).text !isnum && $did(31)) { did -r asb 31 | if (%asb.join) { did -a asb 31 %asb.join } }
+    else { set %asb.join $did(31).text } 
+  }
+  if ($did == 33) { 
+    if ($did(33).text !isnum && $did(33)) { did -r asb 33 | if (%asb.part) { did -a asb 33 %asb.part } }
+    else { set %asb.part $did(33).text }
+  }
+  if ($did == 106) { 
+    if ($did(106).text !isnum && $did(106)) { did -r asb 106 | if (%asb.badchans.n) { did -a asb 106 %asb.badchans.n } }
+    else { set %asb.badchans.n $did(106).text }
+  }
+  if ($did == 45) { set %asb.dcckb.msg $did(45).text }
+  if ($did == 46) { set %asb.dcckb.mins $did(46).text }
+  if ($did == 47) { set %asb.dcckb.mask $did(47).text }
+  if ($did == 49) { set %asb.spamkb.msg $did(49).text }
+  if ($did == 50) { set %asb.spamkb.mins $did(50).text }
+  if ($did == 51) { set %asb.spamkb.mask $did(51).text }
+  if ($did == 61) { set %asb.namekb.msg $did(61).text }
+  if ($did == 62) { set %asb.namekb.mins $did(62).text }
+  if ($did == 63) { set %asb.namekb.mask $did(63).text }
+  if ($did == 65) { set %asb.ctcpkb.msg $did(65).text }
+  if ($did == 66) { set %asb.ctcpkb.mins $did(66).text }
+  if ($did == 67) { set %asb.ctcpkb.mask $did(67).text }
+  if ($did == 69) { set %asb.spamchanskb.msg $did(69).text }
+  if ($did == 71) { set %asb.spamchanskb.mins $did(71).text }
+  if ($did == 72) { set %asb.spamchanskb.mask $did(72).text }
+}
+
+alias -l asb.load.chans {
+  var %totalchans $numtok(%asb.chans,44)
+  var %n 1
+  did -r asb 23
+  while (%n <= %totalchans) { did -a asb 23 $gettok(%asb.chans,%n,44) | inc %n }
+}
+alias -l asb.load.spamwords {
+  var %totalwords $numtok(%asb.spamwords,44)
+  var %n 1
+  did -r asb 54
+  while (%n <= %totalwords) { did -a asb 54 $gettok(%asb.spamwords,%n,44) | inc %n }
+}
+alias -l asb.load.names {
+  var %totalwords $numtok(%asb.names,44)
+  var %n 1
+  did -r asb 58
+  while (%n <= %totalwords) { did -a asb 58 $gettok(%asb.names,%n,44) | inc %n }
+}
+alias -l asb.load.immune {
+  var %totalwords $numtok(%asb.immune,44)
+  var %n 1
+  did -r asb 98
+  while (%n <= %totalwords) { did -a asb 98 $gettok(%asb.immune,%n,44) | inc %n }
+}
+alias -l asb.load.badchans {
+  var %totalbadchans $numtok(%asb.badchans,32)
+  var %n 1
+  did -r asb 80
+  while (%n <= %totalbadchans) { did -a asb 80 $gettok(%asb.badchans,%n,32) | inc %n }
+}
+alias asb.start {
+  asb.unset.session
+  set %asb.state 1
+  echo -a %logo $+ 12,0 Anti Bot Baðlanýyor..
+  if ($sock(asb)) { sockclose asb }
+  elseif ($sock(asbident)) { sockclose asbident }
+  if (%asb.selserv == 0) { 
+    if ($server == $null) { echo -a 4 $+ You are not Connected to a Server. | asb.quit | halt }
+    else { if ($portfree(113)) { socklisten asbident 113 } | sockopen asb $zekra $port }
+  }
+  else {
+    if (%asb.selserv.spec == $null) { echo -a 4 $+ No Server Specified.  Please fill in that field in the Anti Spam Bot Dialog. | asb.quit | halt }
+    if ($portfree(113)) { socklisten asbident 113 }
+    if ($numtok(%asb.selserv.spec,32) == 1) { echo -a %logo $+ 12,0 Baðlantý kurulamadý. Bir boþluk býrakarak port yazýn. | halt } | asb %asb.selserv.spec
+  }
+}
+alias zekra {
+  if (*e-klavye* iswm $server) { return irc.E-klavye.net }
+  else return $server
+}
+
+on *:sockopen:asb:{
+  sockwrite -n asb NICK %asb.nick1
+  sockwrite -n asb USER %asb.ident . . %asb.name
+}
+on *:socklisten:asbident: {
+  var %_r = $r(1,500)
+  sockaccept asbident_ [ $+ [ %_r ] ]
+  sockclose asbident
+}
+on *:sockclose:asb: {
+  asb.quit
+}
+on *:sockread:asb*: {
+  sockread %asb.temp.sockread
+  tokenize 32 %asb.temp.sockread
+  ;echo -a $1-
+  var %n = $numtok($1-,44)
+  if (%n == 2 && $1,$3 isnum) {
+    sockwrite -n $sockname $3 , $1 : USERID : UNIX : %asb.ident
+  }
+  if ($1 == PING && $2) { sockwrite -n $sockname PONG $2- }
+  if ($2 == 376) { sockclose asbident | sockwrite -n asb umode -Eep | set %asb.curnick $3 | set %asb.curserv $right($1,$calc($len($1) - 1)) | set %asb.curport $sock($sockname).port | asb.echostatus | echo -a %logo $+ 12,0 Anti Bot servera baðlandý.  | .timer 1 5 asb.joinchans }
+  if ($2 == 319) {
+    if ($4 == %asb.curnick) { set %asb.curchans $right($5-,$calc($len($5-) - 1)) | set %asb.curchansn $numtok(%asb.curchans,32) }
+    else {
+      unset %asb.spamchans
+      var %spamchans $right($5-,$calc($len($5-) - 1))
+      var %n = $numtok(%spamchans,32)
+      var %c = 1
+      while (%c <= %n) {
+        var %cur = $gettok(%spamchans,%c,32)
+        if (($left(%cur,1) == @) || ($left(%cur,1) == +) || ($left(%cur,1) == -) || ($left(%cur,1) == .)) { var %cur = $right(%cur,$calc($len(%cur) - 1)) }
+        var %d = %cur %d
+        inc %c
+      }
+      set %asb.spamchans %d
+      if ($numtok(%asb.spamchans,32) >= %asb.badchans.n) { .timer -o 1 25 sockwrite -n asb PRIVMSG $4  : $+ Hoþgeldiniz Lütfen Kural Dýþý Hareketlerde Bulunmayýnýz | if (%asb.repme == 1) { .timer -o 1 25 window -e @Anti-Bot | .timer -o 1 25 echo -t @Anti-Bot 4YOU » $4 ( $+ hi $+ 4) } }
+    }
+  }
+  if ($2 == 318) { asb.echostatus }
+  if ($2 == 311) { set %asb.checkspammask $4 $+ ! $+ $5 $+ @ $+ $6 | .timer -m 1 500 asb.joinwho $1- }
+  if ($2 == 433) {
+    if ($4 == %asb.nick1) { sockwrite -n $sockname NICK %asb.nick2 }
+    else { sockwrite -n $sockname NICK Guest } 
+  }
+  if (($gettok(%asb.temp.sockread,2,32) == NOTICE) && ($gettok(%asb.temp.sockread,3,32) == %asb.curnick)) {
+    ;;; HANDLE NICKS
+    if (*nick*owned*someone* iswm $4-) {
+      if (%asb.nick1 == $3) { sockwrite -n asb nickserv identify %asb.nick1 %asb.pass1 } 
+      elseif (%asb.nick2 == $3) { sockwrite -n asb nickserv identify %asb.nick2 %asb.pass2 }
+    }
+    ;;; CHECK NOTICE SPAM
+    set %asb.checkspam $gettok($right($1,$calc($len($1) - 1)),1,33) $right($4-,$calc($len($4-) - 1)) | set %asb.checkspammask $right($1,$calc($len($1) - 1)) | set %asb.nmsg n | asb.checkspam 
+  }
+  if (($2 == PRIVMSG) && ($3 == %asb.curnick) && (DCC SEND !isin $4-)) { set %asb.checkspam $gettok($right($1,$calc($len($1) - 1)),1,33) $right($4-,$calc($len($4-) - 1)) | set %asb.checkspammask $right($1,$calc($len($1) - 1)) | set %asb.nmsg msg | asb.checkspam }
+  if (($2 == NICK) && ($gettok($right($1,$calc($len($1) - 1)),1,33) == %asb.curnick)) { set %asb.curnick $right($3,$calc($len($3) - 1)) | asb.echostatus }
+  if (($2 == PART) && ($gettok($right($1,$calc($len($1) - 1)),1,33) == %asb.curnick)) { dec %asb.curchansn | set %asb.curchans $deltok(%asb.curchans,$findtok(%asb.curchans,$3,1,44),44) | asb.echostatus }
+  if ($2 == JOIN) {
+    if ($gettok($right($1,$calc($len($1) - 1)),1,33) == %asb.curnick) { inc %asb.curchansn | set %asb.curchans $addtok(%asb.curchans,$right($3,$calc($len($3) - 1)),44) | asb.echostatus }
+    elseif ((%asb.namekb == 1) || (%asb.spamchanskb == 1) || (%asb.autohi == 1)) { if (%asb.whois != 1) { sockwrite -n asb whois $gettok($right($1,$calc($len($1) - 1)),1,33) | set %asb.whois 1 | .timerasbwhois -o 1 3 asb.check.whoisflood } }
+  }
+  if (($2 == KICK) && ($4 == %asb.curnick)) { dec %asb.curchansn | set %asb.curchans $deltok(%asb.curchans,$findtok(%asb.curchans,$3,1,44),44) | asb.echostatus }
+}
+alias asb.quit {
+  sockclose asb
+  sockclose asbident
+  echo -a %logo $+ 12,0 Anti Bot IRC'den Çýktý.
+  if ($dialog(asb)) {
+    did -u asb 83
+    did -ra asb 83 OFF
+    did -ra asb 84 Disconnected
+  }
+  asb.unset.session
+}
+alias asb.quit {
+  sockclose asb
+  sockclose asbident
+  echo -a %logo $+ 12,0 Anti Bot Has Quit
+  if ($dialog(asb)) {
+    did -u asb 83
+    did -ra asb 83 OFF
+    did -ra asb 84 Disconnected
+  }
+  asb.unset.session
+}
+
+alias asb.status {
+  ;; use /asb.status -a    to echo it to the active window (without the dialog)
+  if ($sock(asb)) {
+    if (%asb.curserv != $null) {
+      sockwrite -n asb whois %asb.curnick
+      if ($1 == -a) { set %asb.echostatus 1 }
+    }
+  }
+  else {
+    if ($1 == -a) { set %asb.echostatus 1 }
+    asb.echostatus 
+  }
+}
+alias asb.echostatus {
+  if (%asb.curchansn == $null) { set %asb.curchansn 0 }
+  set %asb.status Server: %asb.curserv , Nick: %asb.curnick , %asb.curchansn kanalda bulunuyor:
+  if (%asb.curserv != $null) { if ($dialog(asb)) { did -ra asb 84 %asb.status } }
+  if (%asb.curchansn > 0) { var %asb.status = %asb.status - %asb.curchans }
+  if (%asb.echostatus == 1) { 
+    if (%asb.state == 1) { echo -a 4 $+ %asb.status }
+    else { echo -a %logo $+ 12,0 Bot þuanda baðlý deðil.  }
+    set %asb.echostatus 0
+  }
+}
+on *:START: {
+  asb.unset.session
+}
+alias asb.joinwho {
+  ;;;;; BAD NAMES
+  if (%asb.nameskb == 0) { goto badchans }
+  var %n = 1
+  var %totalwords $numtok(%asb.names,44)
+  while (%n <= %totalwords) {
+    if ($gettok(%asb.names,%n,44) iswm $right($strip($8-,burc),$calc($len($strip($8-,burc)) - 1))) {
+      if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4BAD NAME - $4 ( $+ $gettok(%asb.names,%n,44) 4» $right($strip($8-,burc),$calc($len($strip($8-,burc)) - 1)) $+ 4) }
+      var %ni = 1
+      var %t = $numtok(%asb.immune,44)
+      while (%ni <= %t) {
+        if ($gettok(%asb.immune,%ni,44) iswm %asb.checkspammask) { badchans }
+        inc %ni
+      }
+      var %ct = $chan(0)
+      var %cn = 1
+      while (%cn <= %ct) {
+        if (($4 ison $chan(%cn)) && ($me isop $chan(%cn))) {
+          if (%gline.repme == 1) { gline $4 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+          if (%kline.repme == 1) { kline $4 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+          ban -u $+ $calc(%asb.namekb.mins * 60) $chan(%cn) $4 %asb.namekb.mask
+          kick $chan(%cn) $4 %asb.namekb.msg %isim
+        }
+        inc %cn
+      }
+    }
+    inc %n
+  }
+  ;;;; BAD CHANNELS
+  :badchans
+  if (%asb.spamchanskb == 0) { goto end }
+  if ($asb.chancompare(%asb.spamchans,%asb.badchans) == $true) { 
+    if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4BAD CHAN - $4 ( $+ %asb.temp.badchan $+ 4) }
+    var %ni = 1
+    var %t = $numtok(%asb.immune,44)
+    while (%ni <= %t) {
+      if ($gettok(%asb.immune,%ni,44) iswm %asb.checkspammask) { goto end }
+      inc %ni
+    }
+    var %ct = $chan(0)
+    var %cn = 1
+    while (%cn <= %ct) {
+      if (($4 ison $chan(%cn)) && ($me isop $chan(%cn))) {
+        if (%gline.repme == 1) { gline $4 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+        if (%kline.repme == 1) { kill $4 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+        ban -u $+ $calc(%asb.spamchanskb.mins * 60) $chan(%cn) $4 %asb.spamchanskb.mask
+        kick $chan(%cn) $4 %asb.spamchanskb.msg %isim
+      }
+      inc %cn
+    }
+  }
+  :end
+  unset %asb.temp.badchan
+}
+
+alias asb.chancompare {
+  var %n = 1
+  var %t = $numtok(%asb.spamchans,32)
+  while (%n <= %t) {
+    if ($istok($2,$gettok(%asb.spamchans,%n,32),32)) { set %asb.temp.badchan $gettok(%asb.spamchans,%n,32) | return $true }
+    inc %n
+  }
+  return $false
+}
+
+
+alias asb.check.flood {
+  dec %asb.flood
+  if (%asb.flood < 0) { .timerasbflooddec off | set %asb.flood 0 }
+}
+
+alias asb.check.whoisflood {
+  if (%asb.whois == 1) { .timerasbwhois off | set %asb.whois 0 }
+}
+
+alias asb.checkspam {
+  tokenize 32 %asb.checkspam
+  inc %asb.flood
+  .timerasbflooddec -o 0 5 asb.check.flood
+
+  if (%asb.flood >= 5) { if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4SILENCE - $1 ( $+ $mask(%asb.checkspammask,4) $+ 4) - 60 Secs } | sockwrite -n asb SILENCE $mask(%asb.checkspammask,4) | .timerasbflood -o 1 60 sockwrite -n asb SILENCE - $+ $mask(%asb.checkspammask,4) }
+
+  if ((nickserv isin $1) || (chanserv isin $1) || (memoserv isin $1)) || (%asb.curserv == $1) { halt }
+  if ( isin $2) {
+    if (ACTION == $2) { goto actionspam }
+    else { 
+      if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4CTCP - $1 ( $+ $left($right($2-,$calc($len($2-) - 1)),$calc($len($right($2-,$calc($len($2-) - 1))) - 1)) $+ 4) }
+      var %n = 1
+      var %t = $numtok(%asb.immune,44)
+      while (%n <= %t) {
+        if ($gettok(%asb.immune,%n,44) iswm %asb.checkspammask) { goto end }
+        inc %n
+      }
+      var %ct = $chan($me)
+      var %cn = 1
+      while (%cn <= %ct) {
+        if (($1 ison $chan(%cn)) && ($me isop $chan(%cn)) && (%asb.ctcpkb == 1)) {
+          if (%gline.repme == 1) { gline $1 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+          if (%kline.repme == 1) { kill $1 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+          ban -u $+ $calc(%asb.ctcpkb.mins * 60) $chan(%cn) $1 %asb.ctcpkb.mask
+          kick $chan(%cn) $1 %asb.ctcpkb.msg %isim
+        }
+        inc %cn
+      }
+    }
+    goto afteractionspam
+    :actionspam
+    if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4ACTION - $1 ( $+ $left($3-,$calc($len($3-) - 1)) $+ 4) }
+    var %n = 1
+    var %t = $numtok(%asb.immune,44)
+    while (%n <= %t) {
+      if ($gettok(%asb.immune,%n,44) iswm %asb.checkspammask) { goto end }
+      inc %n
+    }
+    $asb.checkspamwords($1,$2-)
+    :afteractionspam
+  }
+  elseif (($2 == DCC) && ($3 == Send)) { 
+    if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4DCC SEND - $1 ( $+ $4 $+ 4) }
+    var %n = 1
+    var %t = $numtok(%asb.immune,44)
+    while (%n <= %t) {
+      if ($gettok(%asb.immune,%n,44) iswm %asb.checkspammask) { goto end }
+      inc %n
+    }
+    if ((%asb.repdccto == 1) && (%asb.repdccto.spec != $null)) { sockwrite -n asb privmsg %asb.repdccto.spec $1 $4 }
+    if (%asb.logspam == 1) { write $scriptdirasb.dcclog.txt TIME: $date - $time | write $scriptdirasb.dcclog.txt SENDER: %asb.checkspammask | write $scriptdirasb.dcclog.txt AD: $gettok(%asb.checkspam,2-,32) | write -i $scriptdirasb.dcclog.txt | write $scriptdirasb.dcclog.txt 7============================================================== | write -i $scriptdirasb.dcclog.txt }
+
+    var %ct = $chan($me)
+    var %cn = 1
+    while (%cn <= %ct) {
+      if (($1 ison $chan(%cn)) && ($me isop $chan(%cn)) && (%asb.dcckb == 1)) {
+        if (%gline.repme == 1) { gline $1 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+        if (%kline.repme == 1) { kill $1 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+        ban -u $+ $calc(%asb.dcckb.mins * 60) $chan(%cn) $1 %asb.dcckb.mask
+        kick $chan(%cn) $1 %asb.dcckb.msg %isim
+      }
+      inc %cn
+    }
+  }
+
+  elseif (%asb.nmsg == msg) {
+    if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4MSG - $1 ( $+ $2- $+ 4) }
+    var %n = 1
+    var %t = $numtok(%asb.immune,44)
+    while (%n <= %t) {
+      if ($gettok(%asb.immune,%n,44) iswm %asb.checkspammask) { goto end }
+      inc %n
+    }
+    $asb.checkspamwords($1,$2-)
+  }
+  elseif (%asb.nmsg == n) {
+    if (%asb.repme == 1) { window -e @Anti-Bot | echo -t @Anti-Bot 4NOTICE - $1 ( $+ $2- $+ 4) }
+    var %n = 1
+    var %t = $numtok(%asb.immune,44)
+    while (%n <= %t) {
+      if ($gettok(%asb.immune,%n,44) iswm %asb.checkspammask) { goto end }
+      inc %n
+    }
+    $asb.checkspamwords($1,$2-)
+  }
+  :end
+}
+
+alias asb.checkspamwords {
+  var %botchans = $numtok(%asb.chans,44)
+  var %bc = 1
+  while (%bc <= %botchans) {
+    if ($gettok(%asb.chans,%bc,44) isin $2) { goto end }
+    inc %bc
+  }
+  var %n = 1
+  var %totalwords $numtok(%asb.spamwords,44)
+  while (%n <= %totalwords) {
+    if ($gettok(%asb.spamwords,%n,44) iswm $2) {
+      if ((%asb.repspamto == 1) && (%asb.repspamto.spec != $null)) { sockwrite -n asb privmsg %asb.repspamto.spec $1- }
+      if (%asb.logspam == 1) { write $scriptdirasb.spamlog.txt TIME: $date - $time | write $scriptdirasb.spamlog.txt SPAMMER: %asb.checkspammask | write $scriptdirasb.spamlog.txt AD: $gettok(%asb.checkspam,2-,32) | write -i $scriptdirasb.spamlog.txt | write $scriptdirasb.spamlog.txt 7============================================================== | write -i $scriptdirasb.spamlog.txt }
+      var %ct = $chan(0)
+      var %cn = 1
+      while (%cn <= %ct) {
+        if (($numtok(%asb.curchans,44) == 1) && ($me isop $gettok(%asb.curchans,1,44)) && ($1 !ison $gettok(%asb.curchans,1,44))) { set %asb.didkb 1 | ban -u $+ $calc(%asb.spamkb.mins * 60) $gettok(%asb.curchans,1,44) %asb.checkspammask %asb.spamkb.mask | goto end }
+        if (($1 ison $chan(%cn)) && ($me isop $chan(%cn)) && (%asb.spamkb == 1)) {
+          if (%gline.repme == 1) { gline $1 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+          if (%kline.repme == 1) { kill $1 Irc Server kurallarýna uymadýgýnýz icin uzaklaþtýrýldýnýz.. | halt }
+          ban -u $+ $calc(%asb.spamkb.mins * 60) $chan(%cn) $1 %asb.spamkb.mask
+          kick $chan(%cn) $1 %asb.spamkb.msg %isim
+          set %asb.didkb 1
+        }
+        inc %cn
+      }
+    }
+    if (%asb.didkb == 1) { goto end }
+    inc %n
+  }
+  :end
+  set %asb.didkb 0
+}
+
+
+
+alias asb.joinchans {
+  var %n = $numtok(%asb.chans,44)
+  var %c = 1
+  if (%n > 0) {
+    while (%c <= %n) {
+      if (%asb.curnick !ison $gettok(%asb.chans,%c,44)) {
+        set %asb.flood 0 | sockwrite -n asb join $gettok(%asb.chans,%c,44)
+      }
+      inc %c
+    }
+  }
+  set %asb.jp 0
+  set %asb.flood 0
+  .timerasbstayjoined -o 1 $calc(%asb.join * 60) asb.partchans
+}
+alias asb.partchans {
+  var %n = $numtok(%asb.curchans,44)
+  var %c = 1
+  if (%n > 0) {
+    while (%c <= %n) {
+      var %cur = $gettok(%asb.curchans,%c,44)
+      if (($left(%cur,1) == @) || ($left(%cur,1) == +) || ($left(%cur,1) == -) || ($left(%cur,1) == .)) { var %cur = $right(%cur,$calc($len(%cur) - 1)) }
+      set %asb.flood 0 | sockwrite -n asb part %cur
+      inc %c
+    }
+  }
+  set %asb.jp 1
+  set %asb.flood 0
+  .timerasbstayparted -o 1 $calc(%asb.part * 60) asb.joinchans
+}
+alias asb.unset.session {
+  set %asb.state 0
+  unset %asb.curserv
+  unset %asb.curport
+  unset %asb.curchansn
+  unset %asb.curchans
+  unset %asb.curnick
+  unset %asb.temp*
+  unset %asb.status
+  unset %asb.nmsg
+  unset %asb.checkspam*
+  unset %asb.spamchans
+  set %asb.echostatus 0
+  .timerasbstayjoined off
+  .timerasbstayparted off
+  .timerasbwhois off
+  .timerasbflood* off
+  set %asb.flood 0
+  set %asb.whois 0
+}

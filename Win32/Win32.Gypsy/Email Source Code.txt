@@ -1,0 +1,75 @@
+                               Email Source code
+                               ==================
+
+Tip:
+====
+
+ Well if your going to use the sendKeys method to email then you will need to disable some of 
+ outlook express`s pop up boxes that will appear when your trying to send an email                                   
+
+
+
+
+Dim WShell, UserIdent, DefaultUser, RegKey, OutlookVer, RegStrValue, PrgmFiles
+Dim Mail_To, Mail_Subject, Mail_Attachment, Mail_Body 
+
+
+Set WShell = CreateObject("WScript.Shell")
+
+
+ UserIdent = "HKCU\Identities\"
+ DefaultUser = WShell.RegRead(UserIdent & "Default User ID")
+ RegKey = UserIdent & DefaultUser & "\Software\Microsoft\Outlook Express\5.0\Dont Show Dialogs\"
+If InStr(RegKey, "6.0") Then
+ OutlookVer = "6.0\"
+ RegKey = "HKCU\Identities\" & DefaultUser _
+  & "\Software\Microsoft\Outlook Express\" & OutlookVer
+ElseIf InStr(RegKey, "5.0") Then
+ OutlookVer = "5.0\"
+ RegKey = "HKCU\Identities\" & DefaultUser _
+  & "\Software\Microsoft\Outlook Express\" & OutlookVer
+End If
+ RegStrValue = WShell.RegRead(RegKey & "Compact Do not Ask Again")
+
+If RegStrValue <> 1 Then
+ Open "C:\Outlook.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_CURRENT_USER\Identities\" & DefaultUser & "\Software\Microsoft\Outlook Express\" & OutlookVer & "\Dont Show Dialogs]"
+ Print #1, Chr(34) & "Compact Do not Ask Again" & Chr(34) & "=dword:00000001"
+ Print #1, Chr(34) & "Delete Thread Warning" & Chr(34) & "=dword:00000006"
+ Print #1, Chr(34) & "Mail Empty Subject Warning" & Chr(34) & "=dword:00000001"
+ Print #1, Chr(34) & "Send Mail Warning" & Chr(34) & "=dword:00000001"
+ Close #1
+  Shell "regedit /s C:\Outlook.reg"
+End If
+
+
+ PrgmFiles = Environ("ProgramFiles") & "\"
+
+
+ Shell (PrgmFiles & "Outlook Express\msimn.exe"), vbHide
+
+SendKeys "%F+N+M"
+
+ Mail_To = "Mail address"
+ Mail_Subject = "Mail Subject here"
+ Mail_Attachment = "Mail attachment here"
+
+ Mail_Body = "Line 1{ENTER}"
+ Mail_Body = Mail_Body & "Line 2{ENTER}"
+    
+SendKeys Mail_To
+SendKeys "{TAB}"
+SendKeys "{TAB}" & Mail_Subject
+SendKeys "{TAB}" & Mail_Body
+SendKeys "%I+A" & Mail_Attachment
+SendKeys "%A"
+SendKeys "%F+E"
+SendKeys "{ENTER}"
+
+
+ Mail_To = ""
+ Mail_Subject = ""
+ Mail_Attachment = ""
+ Mail_Body = ""

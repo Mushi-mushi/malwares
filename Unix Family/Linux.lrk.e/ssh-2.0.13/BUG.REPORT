@@ -1,0 +1,16 @@
+	System: 
+		i386-unknown-netbsd1.3.2 , 
+		NetBSD johto.ssh.fi 1.3.2 NetBSD 1.3.2
+
+	Description of bug:
+		Ssh2 works perfectly.
+
+	How to repeat:
+		Just run 
+			% ssh2 -l user host
+
+	Config.log:
+		[attached config.log]
+
+	Make.log:
+		I didn't run to any compilation problems, so no log.

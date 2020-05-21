@@ -1,0 +1,16 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a pre-release 4.4BSD system
+	      Note memory statistisc and process sizes could be wrong,
+	      by ps gets them wrong too...
+
+DESCRIPTION:
+This is the machine-dependent module for BSD4.4 (prerelease alpha)
+Works for:
+	hp300
+
+LIBS: -lkvm
+
+AUTHOR:  Christos Zoulas <christos@ee.cornell.edu>
+

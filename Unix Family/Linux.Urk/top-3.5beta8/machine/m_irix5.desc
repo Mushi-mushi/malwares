@@ -1,0 +1,17 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any uniprocessor, 32 bit SGI machine running IRIX 5.3
+
+DESCRIPTION:
+This is the machine-dependent module for IRIX 5.3.
+It has been tested on Indys running 5.3 and Indigos running 5.3XFS
+
+LIBS: -lmld
+CFLAGS: -DHAVE_GETOPT
+
+AUTHOR: Sandeep Cariapa <cariapa@sgi.com>
+This is not a supported product of Silicon Graphics, Inc.
+Please do not call SGI for support.
+
+

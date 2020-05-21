@@ -1,0 +1,16 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a NetBSD system
+
+DESCRIPTION:
+This is the machine-dependent module for NetBSD
+READ THE NOTE AT THE END OF "INSTALL" BEFORE COMPILING.
+Tested only with a:
+	i386
+
+LIBS: -lkvm
+
+AUTHOR:  Christos Zoulas <christos@ee.cornell.edu>
+	    [originally from m_386bsd.c]
+

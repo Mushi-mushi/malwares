@@ -1,0 +1,2 @@
+#!/bin/sh
+gcc -o ark ark.c md5.o

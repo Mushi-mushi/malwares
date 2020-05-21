@@ -1,0 +1,110 @@
+function get(murl,name)
+{
+	source=murl;
+	var reg = new RegExp("(^|\\?|&)"+ name +"=([^&]*)(\\s|&|$)", "i");  
+	if (reg.test(source)) return RegExp.$2; return "";
+}
+var strreferrer=document.location;
+var krview=get(strreferrer,"krview");
+var cid,username,adid_ary,ad_replace,width,height,codetype,playtime,strreferrer,isnum;
+if(!playtime){playtime=5}
+playtime=60;
+function get_cookie(Name) {
+	var search = Name + "="
+	var returnvalue = "";
+	if (document.cookie.length > 0) {
+		offset = document.cookie.indexOf(search)
+		if (offset != -1) {
+			offset += search.length
+			end = document.cookie.indexOf(";", offset);
+			if (end == -1)
+			{
+				returnvalue=unescape(document.cookie.substring(offset, document.cookie.length))
+			}
+			else
+			{
+				returnvalue=unescape(document.cookie.substring(offset, end))
+			}
+		}
+	} 
+	return returnvalue;
+}
+canopen=false;
+isnum=get_cookie('kcc_'+cid+username);
+if (isnum==''){
+	isnum=Math.floor(Math.random()*100);
+	var Then = new Date();
+	Then.setTime(Then.getTime() + 120*60000);
+	document.cookie='kcc_'+cid+username+'='+isnum+';expires='+ Then.toGMTString();
+	canopen=true;
+	//document.write('<img width=0 height=0 style="display:none" src="http://ww.keyrun.com/code/p.php?c='+cid+'&t=2">');
+}
+canopen=true;
+var p="cid="+cid+"&username="+username+"&adid_ary="+adid_ary+"&ad_replace="+ad_replace+"&width="+width+"&height="+height+"&codetype="+codetype+"&krview="+krview+"&isnum="+isnum+"&strreferrer="+strreferrer;
+var paypopupURL="http://u.keyrun.com/code/o.php?"+p;
+document.write('<a href="http://www.keyrun.com/web.html?user='+username+'" target="_blank"><img src="http://union.keyrun.com/img/default.gif" style="cursor: hand;" title="麒润网络广告，网络广告多种模式、多站式投放，实时查询精确统计数据！" width="88" height="31" border=0></a>');
+
+var usingActiveX = true;
+function blockError(){return true;}
+window.onerror = blockError;
+if (window.SymRealWinOpen){window.open = SymRealWinOpen;}
+if (window.NS_ActualOpen) {window.open = NS_ActualOpen;}
+if (typeof(usingClick) == 'undefined') {var usingClick = false;}
+if (typeof(usingActiveX) == 'undefined') {var usingActiveX = false;}
+if (typeof(popwin) == 'undefined') {var popwin = null;}
+if (typeof(poped) == 'undefined') {var poped = false;}
+var blk = 1;
+var setupClickSuccess = false;
+var googleInUse = false;
+var myurl = location.href+'/';
+var MAX_TRIED = 20;
+var activeXTried = false;
+var tried = 0;
+var randkey = '0';  
+var myWindow;
+var popWindow;
+var setupActiveXSuccess = 0;
+
+
+function setupActiveX() {if (usingActiveX) {try{if (setupActiveXSuccess < 5) {document.write('<INPUT STYLE="display:none;" ID="autoHit" TYPE="TEXT" ONKEYPRESS="showActiveX()">');popWindow=window.createPopup();popWindow.document.body.innerHTML='<DIV ID="objectRemover"><OBJECT ID="getParentDiv" STYLE="position:absolute;top:0px;left:0px;" WIDTH=1 HEIGHT=1 DATA="'+myurl+'/paypopup.html" TYPE="text/html"></OBJECT></DIV>';document.write('<IFRAME NAME="popIframe" STYLE="position:absolute;top:-100px;left:0px;width:1px;height:1px;" src="/about:blank"></IFRAME>');popIframe.document.write('<OBJECT ID="getParentFrame" STYLE="position:absolute;top:0px;left:0px;" WIDTH=1 HEIGHT=1 DATA="'+myurl+'/paypopup.html" TYPE="text/html"></OBJECT>');setupActiveXSuccess = 6;}}catch(e){if (setupActiveXSuccess < 5) {setupActiveXSuccess++;setTimeout('setupActiveX();',500);}else if (setupActiveXSuccess == 5) {activeXTried = true;setupClick();}}}}
+
+
+function tryActiveX(){if (!activeXTried && !poped) {if (setupActiveXSuccess == 6 && googleInUse && popWindow && popWindow.document.getElementById('getParentDiv') && popWindow.document.getElementById('getParentDiv').object && popWindow.document.getElementById('getParentDiv').object.parentWindow) {myWindow=popWindow.document.getElementById('getParentDiv').object.parentWindow;}else if (setupActiveXSuccess == 6 && !googleInUse && popIframe && popIframe.getParentFrame && popIframe.getParentFrame.object && popIframe.getParentFrame.object.parentWindow){myWindow=popIframe.getParentFrame.object.parentWindow;popIframe.location.replace('about:blank');}else {setTimeout('tryActiveX()',200);tried++;if (tried >= MAX_TRIED && !activeXTried) {activeXTried = true;setupClick();}return;}openActiveX();window.windowFired=true;self.focus();}}
+
+
+function openActiveX(){if (!activeXTried && !poped) {if (myWindow && window.windowFired){window.windowFired=false;document.getElementById('autoHit').fireEvent("onkeypress",(document.createEventObject().keyCode=escape(randkey).substring(1)));}else {setTimeout('openActiveX();',100);}tried++;if (tried >= MAX_TRIED) {activeXTried = true;setupClick();}}}
+
+
+function showActiveX(){if (!activeXTried && !poped) {if (googleInUse) {window.daChildObject=popWindow.document.getElementById('objectRemover').children(0);window.daChildObject=popWindow.document.getElementById('objectRemover').removeChild(window.daChildObject);}newWindow=myWindow.open(paypopupURL,'asdfzxcv');if (newWindow) {newWindow.blur();self.focus();activeXTried = true;poped = true;}else {if (!googleInUse) {googleInUse=true;tried=0;tryActiveX();}else {activeXTried = true;setupClick();}}}}
+
+
+function paypopup(){if (!poped) {if(!usingClick && !usingActiveX) {popwin = window.open(paypopupURL,'asdfzxcv');if (popwin) {poped = true;}self.focus();}}if (!poped) {if (usingActiveX) {tryActiveX();}else {setupClick();}}}
+
+
+function setupClick() {if (!poped && !setupClickSuccess){if (window.Event) document.captureEvents(Event.CLICK);prePaypopOnclick = document.onclick;document.onclick = gopop;self.focus();setupClickSuccess=true;}}
+
+
+function gopop() {if (!poped) {popwin = window.open(paypopupURL,'asdfzxcv');if (popwin) {poped = true;}self.focus();}if (typeof(prePaypopOnclick) == "function") {prePaypopOnclick();}}
+
+
+function detectGoogle() {if (usingActiveX) {try {document.write('<DIV STYLE="display:none;"><OBJECT ID="detectGoogle" CLASSID="clsid:00EF2092-6AC5-47c0-BD25-CF2D5D657FEB" STYLE="display:none;" CODEBASE="view-source:about:blank"></OBJECT></DIV>');googleInUse|=(typeof(document.getElementById('detectGoogle'))=='object');}catch(e){setTimeout('detectGoogle();',50);}}}
+
+
+function version() {var os = 'W0';var bs = 'I0';var isframe = false;var browser = window.navigator.userAgent;if (browser.indexOf('Win') != -1) {os = 'W1';}if (browser.indexOf("SV1") != -1) {bs = 'I2';}else if (browser.indexOf("Opera") != -1) {bs = "I0";}else if (browser.indexOf("Firefox") != -1) {bs = "I0";}else if (browser.indexOf(" Microsoft") != -1 || browser.indexOf("MSIE") != -1) {bs = 'I1';}if (top.location != this.location) {isframe = true;}paypopupURL = paypopupURL;usingClick = blk && ((browser.indexOf("SV1") != -1) || (browser.indexOf("Opera") != -1) || (browser.indexOf("Firefox") != -1));usingActiveX = blk && (browser.indexOf("SV1") != -1) && !(browser.indexOf("Opera") != -1) && ((browser.indexOf(" Microsoft") != -1) || (browser.indexOf("MSIE") != -1));detectGoogle();}
+
+
+version();
+
+
+function loadingPop() {
+        if(!usingClick && !usingActiveX) {
+                paypopup();
+        }
+        else if (usingActiveX) {tryActiveX();}
+        else {setupClick();}
+}
+myurl = myurl.substring(0, myurl.indexOf('/',8));
+if (myurl == '') {myurl = '.';}
+setupActiveX();
+if(canopen==true && codetype<6)loadingPop();
+self.focus();

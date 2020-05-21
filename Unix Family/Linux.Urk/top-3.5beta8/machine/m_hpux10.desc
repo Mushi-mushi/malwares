@@ -1,0 +1,21 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any hp9000 running hpux version 10.x
+
+DESCRIPTION:
+This is the machine-dependent module for HPUX 10 that uses pstat.
+It has not been tested on HPUX 10.1.
+This makes top work on (at least) the following systems:
+	hp9000s800
+This may make top work on the following, but we aren't sure:
+	hp9000s700
+	hp9000s300
+
+CFLAGS: -DHAVE_GETOPT
+
+LIBS: 
+
+AUTHOR: Rich Holland <holland@synopsys.com>
+AUTHOR: adapted from Kevin Schmidt <kevin@mcl.ucsb.edu> 
+

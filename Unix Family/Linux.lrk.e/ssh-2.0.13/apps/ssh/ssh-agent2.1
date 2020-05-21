@@ -1,0 +1,153 @@
+.\"  -*- nroff -*-
+.\"
+.\" ssh-agent2.1
+.\"
+.\" Author:     Tatu Ylonen <ylo@ssh.fi>
+.\"             Markku-Juhani Saarinen <mjos@ssh.fi>
+.\"
+.\" Copyright (c) 1997 SSH Communications Security, Finland
+.\" All rights reserved
+.\"
+.nr CO 0
+.ie \n(CO .TH SSH-AGENT2 1 "May 30, 1998" "SSH 2" "SSH 2"
+.el .TH SSH-AGENT2 1 "May 30, 1998" "SSH2" "SSH2"
+
+.SH NAME
+ssh-agent2 \- authentication agent
+
+.SH SYNOPSIS
+.LP
+.B ssh-agent2 
+.I command
+
+.B eval `ssh-agent2
+[\c
+.BR \-s \c
+]
+[\c
+.BR \-c \c
+]
+[\c
+.BR \-1 \c
+]`
+
+.SH DESCRIPTION 
+.LP
+.B ssh-agent2 
+is a program to hold authentication private keys.  The
+idea is that
+.B ssh-agent2
+is started in the beginning of an X-session or a login session, and
+all other windows or programs are started as children of the ssh-agent2
+program (the
+.IR command
+normally starts X or is the user shell).  Programs started under
+the agent inherit a connection to the agent, and the agent is
+automatically used for public key authentication when logging to other
+machines using
+.B ssh.
+.LP
+If the ssh-agent2 is started without any arguments (no command) it will
+fork and start agent as background process. The agent also prints
+command that can be evaluated in sh or csh like shells, that will set
+the
+.B \s-1SSH2_AUTH_SOCK\s0
+and
+.B \s-1SSH2_AGENT_PID\s0
+environment variables.
+The
+.B \s-1SSH2_AGENT_PID\s0
+environment variable can be used to kill agent away
+when it is no longer needed (you logout from X-session etc). If no
+options are given the ssh-agent2 uses SHELL environment variable the
+detect what kind of shell you have (*csh or sh-style shell). The
+.BI \-c
+option will force csh-style shell, and
+.BI \-s
+option will force sh-style shell.
+.LP
+Note that in SysV variants (at least IRIX and Solaris)
+the environment variable SHELL might not contain the
+actual value of the shell executing the evaluation.
+If ALTSHELL is set to YES in /etc/default/login, the SHELL
+environment variable is set to the login shell of the user.
+.LP
+The agent initially does not have any private keys.  Keys are added
+using
+.B ssh-add2.
+Several identities can be stored in the
+agent; the agent can automatically use any of these identities.
+.B "ssh-add2 \-l
+displays the identities currently held by the agent.
+.LP
+The idea is that the agent is run in the user's local PC, laptop, or
+terminal.  Authentication data need not be stored on any other
+machine, and authentication passphrases never go over the network.
+However, the connection to the agent is forwarded over
+.B ssh
+remote logins, and the user can thus use the privileges given by the
+identities anywhere in the network in a secure way.
+.LP
+A connection to the agent is inherited by child programs.  A
+unix-domain socket is created
+(\fI/tmp/ssh-$USER/agent-socket-<pid>\fR), where the <pid> is the process
+id of the listener (agent or sshd proxying the agent). The name of
+this socket is stored in the
+.B \s-1SSH2_AUTH_SOCK\s0
+environment variable.  The socket is made accessible only to the
+current user.  This method is easily abused by root or another
+instance of the same user. Older versions of ssh used inherited
+file descriptors for contacting the agent and used the unix-domain
+sockets in an incompatible way.
+.LP
+If the command is given as argument to ssh-agent2 the agent exits
+automatically when the command given on the command line terminates.
+The command is executed even if agent fails to start it's key-storing
+and challenge-processing services.
+
+.SH COMPATIBILITY
+With option
+.BI \-1
+ssh-agent2 can also serve old ssh1 applications and can also be
+accessed with ssh-add program in ssh1 releases.  If option
+.BI \-1
+is given to the ssh-agent2, the program will also set environment
+variables 
+.B \s-1SSH_AUTH_SOCK\s0
+and
+.B \s-1SSH_AGENT_PID\s0
+and share keys with both protocols.
+
+.SH FILES
+.TP
+.I \&$HOME/\s+2.\s0ssh2/id_KEYTYPE_KEYLEN_XX
+Contains the private key authentication identity of the user.  This file
+should not be readable by anyone but the user.  It is possible to
+specify a passphrase when generating the key; that passphrase will be
+used to encrypt the private part of this file.  This file
+is not used by
+.B ssh-agent2,
+but is normally added to the agent using
+.B ssh-add2
+at login time.
+.TP
+.I \&/tmp/ssh-$USER/agent-socket-<pid>
+Unix-domain sockets used to contain the connection to the
+authentication agent.  These sockets should only be readable by the
+owner.  The sockets should get automatically removed when the agent
+exits. The parent directory of ssh2-$USER must have it's sticky bit
+set.
+
+.SH AUTHORS
+.LP
+
+SSH Communications Security Oy
+
+For more information, see http://www.ssh.fi.
+
+.SH SEE ALSO
+.BR ssh-add2 (1),
+.BR ssh-keygen2 (1),
+.BR ssh2 (1),
+.BR sshd2 (8),
+.BR sftp (1)

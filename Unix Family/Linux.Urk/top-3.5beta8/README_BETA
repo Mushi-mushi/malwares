@@ -1,0 +1,26 @@
+BETA TESTING NOTES
+
+DEADLINE FOR COMMENTS: Friday June 5.  At that point this will be
+turned in to release 3.5.
+
+This is a beta release of top version 3.5.  Please return your
+comments to wnl@groupsys.com as soon as possible.
+
+Some have complained that top will not compile under IRIX 6.4 (or, one
+user reported, 6.3).  Not having access to IRIX, I need someone to
+investigate what it would take to retrofit irix62.c to make it work
+under 6.4.
+
+I moved the definition of _KMEMUSER in m_sunos5.c.  This makes top
+compile cleanly under Solaris 2.6 with gcc without needing to apply
+the gcc patch.  I can't determine for certain if this affects
+compilation under any of the earlier revisions of SunOS 5.x.
+
+Module sunos5 should work for SunOS 5.7beta, thanks to Casper.
+
+Module sunos5 has changed the way it presents priority values.  It now
+matches what ps says.
+
+This release contains a "Year 2000" statement.  It's the only one I've
+ever written.  Comments welcome.
+

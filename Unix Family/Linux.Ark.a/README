@@ -1,0 +1,65 @@
+[--ARK version 1.0 - Ambient's Rootkit for Linux--]
+
+THIS PACKAGE IS STRICTLY PRIVATE
+**DO NOT SPREAD THIS AROUND**
+
+This package includes backdoored versions of:
+
+syslogd
+login
+sshd
+ls
+du
+ps
+pstree
+killall
+top
+netstat
+
+
+Quick explanation:
+
+syslogd		Prevents logging if they match a certain string in
+		/dev/ptyxx/.log
+login		Login: arkd00r , Password: <yourpassword>
+		and you got a rootshell.
+sshd		Login: root , Password: <yourpassword>
+		will spawn a .. guess what?
+ls		File hiding using /dev/ptyxx/.file as the index
+du		eq. ls
+ps		Hide processes saved in /dev/ptyxx/.proc
+		(LRK style, explanation stolen too ;-) w00h, evil me!)
+		Example data file:
+		0 0             Strips all processes running under root
+		1 p0            Strips tty p0
+		2 sniffer       Strips all programs with the name sniffer
+		3 hack          Strips all programs with 'hack' in them
+                		ie. proghack1, hack.scan, snhack etc.
+pstree		eq. ps
+killall		eq. ps
+top		eq. ps
+netstat		For hiding Ports, Connections, etc. saved in /dev/ptyxx/.addr
+		(LRK style, explanation stolen too ;-) w00h, evil me!)
+		type 0: hide uid
+		type 1: hide local address
+		type 2: hide remote address
+		type 3: hide local port
+		type 4: hide remote port
+		type 5: hide UNIX socket path
+
+		Example data file:
+		0 500           <- Hides all connections by uid 500
+		1 128.31        <- Hides all local connections from 128.31.X.X
+		2 128.31.39.20  <- Hides all remote connections to 128.31.39.20
+		3 8000          <- Hides all local connections from port 8000  
+		4 6667          <- Hides all remote connections to port 6667
+		5 .term/socket  <- Hides all UNIX sockets including the path
+				   .term/socket
+
+
+Gr33tZ (in no particulair order) fly out 2:
+  ice-devil, Beast|E, togooz, orangehaw, CuCc`, mo`,
+  ^Trance^, [dG], deaddrokz, Annihi|aT, Leentje..
+  and ofcourse whoever i forgot to mention..
+  not that you're forgotten though ;-)
+					- |Ambient|

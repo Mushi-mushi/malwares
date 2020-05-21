@@ -1,0 +1,15 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  POWER and POWER2 running AIX 3.2.5.0
+
+DESCRIPTION:
+This is the machine-dependent module for AIX 3.2.5.0
+It is tested on all POWER architectures.
+
+TERMCAP: -lcurses
+
+CFLAGS: -DORDER -DHAVE_GETOPT
+
+AUTHOR:  Erik Deumens <deumens@qtp.ufl.edu>
+

@@ -1,0 +1,12 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any VAX Running Mt. Xinu MORE/bsd
+
+DESCRIPTION:
+This is the machine-dependent module for Sequent Dynix 3
+This makes top work on the following systems:
+	Mt. Xinu MORE/bsd
+
+AUTHOR:  Daniel Trinkle <trinkle@cs.purdue.edu>
+

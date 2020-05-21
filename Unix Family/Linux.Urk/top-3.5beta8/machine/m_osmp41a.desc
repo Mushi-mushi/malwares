@@ -1,0 +1,15 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any Solbourne running OS/MP 4.1A
+
+DESCRIPTION:
+This is the machine-dependent module for OS/MP 4.1A
+This makes top work on the following systems:
+	Solbourne machines running OS/MP 4.1A only
+
+LIBS:  -lkvm
+
+AUTHOR:  William LeFebvre <wnl@groupsys.com>
+Brett McCoy <brtmac@maverick.ksu.ksu.edu>
+

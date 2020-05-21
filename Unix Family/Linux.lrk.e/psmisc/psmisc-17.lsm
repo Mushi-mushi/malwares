@@ -1,0 +1,14 @@
+Begin3
+Title:		psmisc
+Version:	17
+Entered-date:	February 17, 1998
+Description:	miscellaneous proc FS tools: fuser, killall, pidof, and pstree
+Keywords:	psmisc, fuser, killall, pidof, pstree
+Author:		Werner Almesberger <werner.almesberger@lrc.di.epfl.ch>
+Maintained-by:	Werner Almesberger <werner.almesberger@lrc.di.epfl.ch>
+Primary-site:	lrcftp.epfl.ch /pub/linux/local/psmisc
+		20 kB psmisc-17.tar.gz
+Alternate-site:	sunsite.unc.edu /pub/Linux/system/status/ps
+Platforms:	Should work with most kernels. Requires /proc
+Copying-Policy:	BSD-like
+End

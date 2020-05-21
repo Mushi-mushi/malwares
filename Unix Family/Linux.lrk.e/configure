@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+
+#lame script, humor me, im tired and lazy
+
+if (!@ARGV[0]) {
+ print "-s = install shadow\n";
+ print "-n = install normal\n";
+ exit;
+}
+
+print "lrk5 -- made unshitty by bill\n\n\n\n";
+require "Makefile.in";
+exec "make ; cls";
+exec 

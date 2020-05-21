@@ -1,0 +1,157 @@
+# Generated automatically from Makefile.in by configure.
+# Makefile for library files used by GNU file utilities.
+# Copyright (C) 1990, 1991, 1992, 1993, 1994 Free Software Foundation, Inc.
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+SHELL = /bin/sh
+
+srcdir = .
+
+CC = gcc
+AR = ar
+RANLIB = ranlib
+DEFS = -DHAVE_CONFIG_H
+CFLAGS = -g -O
+YACC = bison -y
+
+exec_prefix = ${prefix}
+libdir = $(exec_prefix)/lib
+
+SOURCES = getdate.y posixtm.y \
+argmatch.c dirname.c euidaccess.c \
+error.c filemode.c getopt.c getopt1.c idcache.c \
+obstack.c savedir.c \
+xgetcwd.c xmalloc.c xstrdup.c \
+fileblocks.c fnmatch.c stpcpy.c \
+strdup.c strstr.c alloca.c 
+
+OBJECTS = getdate.o posixtm.o \
+argmatch.o dirname.o \
+error.o filemode.o getopt.o getopt1.o idcache.o \
+obstack.o savedir.o \
+xgetcwd.o xmalloc.o xstrdup.o \
+ euidaccess.o  
+
+DISTFILES = Makefile.in getopt.h long-options.h modechange.h \
+fnmatch.h fsusage.h group-member.h makepath.h mountlist.h obstack.h pathmax.h \
+safe-xstat.cin safe-xstat.hin getdate.c posixtm.c $(SOURCES)
+
+all: libfu.a
+
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+.c.o:
+	$(CC) -c $(CPPFLAGS) $(DEFS) -I. -I.. -I$(srcdir) $(CFLAGS) $<
+
+subdir = lib
+
+installdirs:
+
+install: all
+
+uninstall:
+
+TAGS: $(SOURCES)
+	etags $(SOURCES)
+
+check:
+
+clean:
+	rm -f *.a *.o
+
+mostlyclean: clean
+
+distclean: clean
+	rm -f Makefile *.tab.c tposixtm.c \
+	  safe-stat.c safe-stat.h safe-lstat.c safe-lstat.h
+
+realclean: distclean
+	rm -f TAGS getdate.c posixtm.c
+
+distdir = ../`cat ../distname`/$(subdir)
+dist: $(DISTFILES)
+	for file in $(DISTFILES); do \
+	  ln $$file $(distdir) \
+	    || { echo copying $$file instead; cp -p $$file $(distdir);}; \
+	done
+
+libfu.a: $(OBJECTS)
+	rm -f $@
+	$(AR) cr $@ $(OBJECTS)
+	-$(RANLIB) $@
+
+extract_stat = sed 's/@l@//g; s/@L@//g; /@LSTAT_ONLY@/d'
+extract_lstat = sed 's/@l@/l/g; s/@L@/L/g; s/	*@LSTAT_ONLY@//'
+
+safe-lstat.c: safe-xstat.cin
+	$(extract_lstat) $(srcdir)/safe-xstat.cin > $@-t
+	mv $@-t $@
+
+safe-lstat.h: safe-xstat.hin
+	$(extract_lstat) $(srcdir)/safe-xstat.hin > $@-t
+	mv $@-t $@
+
+safe-stat.c: safe-xstat.cin
+	$(extract_stat) $(srcdir)/safe-xstat.cin > $@-t
+	mv $@-t $@
+
+safe-stat.h: safe-xstat.hin
+	$(extract_stat) $(srcdir)/safe-xstat.hin > $@-t
+	mv $@-t $@
+
+safe-stat.o: safe-stat.h
+safe-lstat.o: safe-lstat.h safe-stat.h
+
+# Since this directory contains two parsers, we have to be careful to avoid
+# running two $(YACC)s during parallel makes.  See below.
+getdate.c: getdate.y
+	@echo expect 10 shift/reduce conflicts
+	$(YACC) $(srcdir)/getdate.y
+	mv y.tab.c getdate.c
+
+# Make the rename atomic, in case sed is interrupted and later rerun.
+# The artificial dependency on getdate.c keeps the two parsers from being
+# built in parallel.  Enforcing this little bit of sequentiality lets
+# everyone (even those without bison) still run mostly parallel builds.
+posixtm.c: posixtm.y getdate.c
+	$(YACC) $(srcdir)/posixtm.y
+	mv y.tab.c posixtm.tab.c
+	sed -e 's/yy/zz/g' posixtm.tab.c > tposixtm.c
+	mv tposixtm.c posixtm.c
+	rm -f posixtm.tab.c
+
+rename.o: rename.c
+	$(CC) -c $(CPPFLAGS) -DMVDIR="\"$(libdir)/mvdir\"" $(DEFS) \
+	    -I.. -I$(srcdir) $(CFLAGS) $(srcdir)/rename.c
+
+$(OBJECTS): ../config.h
+
+backupfile.o getversion.o: backupfile.h
+fnmatch.o: fnmatch.h
+fsusage.o: fsusage.h
+getopt1.o: getopt.h
+modechange.o: modechange.h
+mountlist.o: mountlist.h
+xgetcwd.o: pathmax.h
+euidaccess.o fsusage.o isdir.o makepath.o mkdir.o rename.o: safe-stat.h
+makepath.o: makepath.h
+obstack.o: obstack.h
+group-member.o: group-member.h
+
+# Tell versions [3.59,3.63) of GNU make not to export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

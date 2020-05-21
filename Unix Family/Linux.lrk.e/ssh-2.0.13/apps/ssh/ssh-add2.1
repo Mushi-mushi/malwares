@@ -1,0 +1,216 @@
+.\"  -*- nroff -*-
+.\"
+.\" ssh-add2.1
+.\"
+.\" Author:     Tatu Ylonen <ylo@ssh.fi>
+.\"             Markku-Juhani Saarinen <mjos@ssh.fi>
+.\"
+.\" Copyright (c) 1997 SSH Communications Security, Finland
+.\" All rights reserved
+.\"
+.nr CO 0
+.ie \n(CO .TH SSH-ADD2 1 "May 30, 1998" "SSH 2" "SSH 2"
+.el .TH SSH-ADD2 1 "May 30, 1998" "SSH2" "SSH2"
+
+.SH NAME
+ssh-add2 \- adds identities for the authentication agent
+
+.SH SYNOPSIS
+.B ssh-add2
+[\c
+.B \-p\
+]
+[\c
+.B \-l\
+]
+[\c
+.B \-N\
+]
+[\c
+.B \-P\
+]
+[\c
+.B \-I\
+]
+[\c
+.B \-d\c
+]
+[\c
+.B \-D\c
+]
+[\c
+.B \-L\c
+]
+[\c
+.B \-U\c
+]
+[\c
+.B \-1\c
+]
+[\c
+.B \-u\c
+]
+[\c
+.B \-f forwarding steps\c
+]
+[\c
+.B \-F forwarding constraint\c
+]
+[\c
+.B \-t key timeout in minutes\c
+]
+[\c
+.B \-R OpenPGP keyring\c
+]
+[\c
+.B files\c
+\&.\|.\|.\|]
+
+.SH DESCRIPTION 
+.LP
+.B ssh-add2
+adds identities to the authentication agent,
+.B ssh-agent2.
+If any file requires a passphrase,
+.B ssh-add2
+asks for the passphrase from the user.  If the -p option is given then
+the passphrase is read from stdin, otherwise if the user is using X11,
+the passphrase is requested using a small X11 program; otherwise it is
+read from the user's tty.  (Note: it may be necessary to redirect stdin
+from /dev/null to get the passphrase requested using X11.)
+.LP
+The authentication agent must be running and must be an ancestor of
+the current process for
+.B ssh-add2
+to work.
+
+If
+.B ssh-add2
+needs a passphrase, it will read the passphrase from the current
+terminal if it was run from a terminal.  If
+.B ssh-add2
+does not have a terminal associated with it but
+.SM DISPLAY\s0
+is set, it
+will open an X11 window to read the passphrase.  This is particularly
+useful when calling
+.B ssh-add2
+from a .Xsession or related script.  (Note that on some machines it
+may be necessary to redirect the input from /dev/null to make this work.)
+
+
+.SH OPTIONS
+.TP 0.5i
+.B \-p
+Read passphrase from stdin (or pipe).
+.TP
+.B \-l
+Lists all identities currently represented by the agent.
+.TP
+.B \-N
+Keys added/deleted are stored in the OpenPGP keyring and identified by key 
+name string.
+.TP
+.B \-P
+Keys added/deleted are stored in the OpenPGP keyring and identified by key 
+fingerprint.
+.TP
+.B \-F
+Keys added/deleted are stored in the OpenPGP keyring and identified by key 
+id number.
+.TP
+.B \-d
+Instead of adding the identity, removes the identity from the agent.
+.TP
+.B \-D
+Deletes all identities from the agent.
+.TP
+.B \-L
+Temporarily locks the agent with a password.
+.TP
+.B \-U
+Unlocks the locked agent.
+.TP
+.B \-1
+Agent is not allowed to use keys added with this command
+in ssh1 compatibility operations.	
+.TP
+.B \-u
+The keys added are not read from the file, but instead the key is 
+given to the agent as URL.  With this functionality, agent can get
+information about the additional key sources, like smartcards.
+.TP
+.B \-f forwarding steps
+Key can be used only through as many forwarding steps as directed by
+the argument.  Argument 0 states that key can only be used locally.
+Be aware, that ssh1 does not submit forwarding information, so with
+ssh1 compatibility, this constraint may not work as expected.
+.TP
+.B \-F forwarding constraint
+The argument is a comma separated list, through which kind of steps
+the key can be forwarded.  For example constraint string
+"*.ssh.fi,rinne.iki.fi" 
+states that key can be forwarded to any host in domain 
+.I ssh.fi
+and also to host
+.I rinne.iki.fi
+and used locally.
+Be aware, that ssh1 does not submit forwarding information, so with
+ssh1 compatibility, this constraint may not work as expected.
+.TP
+.B \-t timeout
+The agent is advised to delete the key after timeout.  Timeout is
+given in minutes.
+.TP
+.B \-R OpenPGP keyring
+Argument identifies OpenPGP secret keyring file.
+
+.SH RETURN STATUS
+
+.B ssh-add2
+returns one of the following exit statuses.  These may be useful in scripts.
+.IP 0
+The requested operation was performed successfully.
+.IP 1
+No connection could be made to the authentication agent.  Presumably
+there is no authentication agent active in the execution environment
+of
+.B ssh-add2.
+.IP 2
+The user did not supply a required passphrase.
+.IP 3
+An identify file could not be found, was not readable, or was in
+bad format.
+.IP 4
+The agent does not have the requested identity.
+.IP 5
+An unspecified error has occurred; this is a catch-all for errors not
+listed above.
+.RT
+
+.SH FILES
+.TP 
+.I \&$HOME/\s+2.\s0ssh2/identification
+Contains names of the private keys that are to be used in authentication.
+See 
+.BR ssh2 (1)
+for more information.
+.TP
+.I \&$HOME/\s+2.\s0ssh2/id_KEYTYPE_KEYLEN_X
+.TP
+.I \&$HOME/\s+2.\s0ssh2/id_KEYTYPE_KEYLEN_X.pub
+Standard private and public identification key files.
+
+
+.SH AUTHORS
+.LP
+
+SSH Communications Security Oy
+
+For more information, see http://www.ssh.fi.
+
+.SH SEE ALSO
+.BR ssh-agent2 (1),
+.BR ssh-keygen2 (1),
+.BR ssh2 (1),
+.BR sshd2 (8)

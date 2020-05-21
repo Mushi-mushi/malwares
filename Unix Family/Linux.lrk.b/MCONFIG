@@ -1,0 +1,38 @@
+# Define LOCALTIME to your local time zone:
+LOCALTIME=US/Eastern
+POSIXRULES=America/New_York
+
+# Support for shadow passwords
+HAVE_SHADOW=no
+#HAVE_SHADOW=yes
+
+# SYS V style initialisation
+HAVE_SYSVINIT=no
+#HAVE_SYSVINIT=yes
+
+# Standard Sys V utils
+HAVE_SYSVINIT_UTILS=no
+#HAVE_SYSVINIT_UTILS=yes
+
+# GNU Strings
+HAVE_STRINGS=no
+#HAVE_STRINGS=yes
+
+# Clear (a version is supplied with ncurses)
+HAVE_CLEAR=no
+#HAVE_CLEAR=yes
+
+CC=		gcc
+OPT=		-pipe -O2 -m486 -fomit-frame-pointer
+LDFLAGS=	-s -N
+CFLAGS=		$(OPT) -I. -I$(BSD) \
+			-DSBINDIR=\"$(SBINDIR)\" \
+			-DUSRSBINDIR=\"$(USRSBINDIR)\" \
+			-DLOGDIR=\"$(LOGDIR)\" \
+			-DVARPATH=\"$(VARPATH)\"
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+%: %.cc
+	$(CXX) $(CFLAGS) $< -o $@

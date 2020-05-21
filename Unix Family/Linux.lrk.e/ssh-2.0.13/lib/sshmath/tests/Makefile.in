@@ -1,0 +1,341 @@
+# Makefile.in generated automatically by automake 1.3 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# THIS FILE WAS AUTOMAGICALLY GENERATED FROM Makefile.am.raw 
+# You should edit Makefile.am.raw instead of this file. 
+
+#
+# lib/sshmath/tests Makefile.am
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1996 SSH Communications Security, Finland
+#                    All rights reserved
+#
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DISTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ../../..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+build_alias = @build_alias@
+build_triplet = @build@
+host_alias = @host_alias@
+host_triplet = @host@
+target_alias = @target_alias@
+target_triplet = @target@
+AR = @AR@
+CC = @CC@
+CONFPROGRAMS = @CONFPROGRAMS@
+COPY_INCLUDE = @COPY_INCLUDE@
+CRYPTO_CONF_OBJS = @CRYPTO_CONF_OBJS@
+ETCDIR = @ETCDIR@
+IPSEC_ARCH_INTC = @IPSEC_ARCH_INTC@
+IPSEC_ARCH_ROUTE = @IPSEC_ARCH_ROUTE@
+LN_S = @LN_S@
+M4 = @M4@
+MAKEINFO = @MAKEINFO@
+MATH_CONF_OBJS = @MATH_CONF_OBJS@
+NM_PATH = @NM_PATH@
+PACKAGE = @PACKAGE@
+RANLIB = @RANLIB@
+SSH1_PATH = @SSH1_PATH@
+SSHSESSION_CONFOBJS = @SSHSESSION_CONFOBJS@
+SSHSIGNERINSTALLMODE = @SSHSIGNERINSTALLMODE@
+VERSION = @VERSION@
+X11_DIR = @X11_DIR@
+XAUTH_PATH = @XAUTH_PATH@
+
+AUTOMAKE_OPTIONS = 1.0 foreign dist-zip no-dependencies
+
+TESTS = t-mathtest \
+t-mathspeed t-sophie-germain
+# factor
+
+EXTRA_PROGRAMS = t-mathtest t-test-ec t-mathspeed t-sophie-germain factor
+
+EXTRA_DIST = 
+
+noinst_HEADERS = timeit.h
+
+LDADD = ../libsshmath.a ../../sshutil/libsshutil.a
+INCLUDES = -I../.. -I. -I.. -I$(srcdir) -I$(srcdir)/.. \
+	-I$(top_builddir) -I$(top_srcdir) \
+	-I../../sshmath \
+	-I$(srcdir)/../../sshmath -I../../sshutil -I$(srcdir)/../../sshutil \
+	-I../../zlib -I$(srcdir)/../../zlib
+
+t_mathtest_SOURCES = t-mathtest.c
+t_mathtest_DEPENDENCIES = $(LDADD)
+t_mathspeed_SOURCES = t-mathspeed.c
+t_mathspeed_DEPENDENCIES = $(LDADD)
+
+t_sophie_germain_SOURCES = t-sophie-germain.c
+t_sophie_germain_DEPENDENCIES = $(LDADD)
+factor_SOURCES = factor.c
+factor_DEPENDENCIES = $(LDADD)
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../../../sshconf.h
+CONFIG_CLEAN_FILES = 
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I../../..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+X_CFLAGS = @X_CFLAGS@
+X_LIBS = @X_LIBS@
+X_EXTRA_LIBS = @X_EXTRA_LIBS@
+X_PRE_LIBS = @X_PRE_LIBS@
+t_mathtest_OBJECTS =  t-mathtest.o
+t_mathtest_LDADD = $(LDADD)
+t_mathtest_LDFLAGS = 
+t_test_ec_SOURCES = t-test-ec.c
+t_test_ec_OBJECTS =  t-test-ec.o
+t_test_ec_LDADD = $(LDADD)
+t_test_ec_DEPENDENCIES =  ../libsshmath.a ../../sshutil/libsshutil.a
+t_test_ec_LDFLAGS = 
+t_mathspeed_OBJECTS =  t-mathspeed.o
+t_mathspeed_LDADD = $(LDADD)
+t_mathspeed_LDFLAGS = 
+t_sophie_germain_OBJECTS =  t-sophie-germain.o
+t_sophie_germain_LDADD = $(LDADD)
+t_sophie_germain_LDFLAGS = 
+factor_OBJECTS =  factor.o
+factor_LDADD = $(LDADD)
+factor_LDFLAGS = 
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LINK = $(CC) $(CFLAGS) $(LDFLAGS) -o $@
+HEADERS =  $(noinst_HEADERS)
+
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = tar
+GZIP = --best
+SOURCES = $(t_mathtest_SOURCES) t-test-ec.c $(t_mathspeed_SOURCES) $(t_sophie_germain_SOURCES) $(factor_SOURCES)
+OBJECTS = $(t_mathtest_OBJECTS) t-test-ec.o $(t_mathspeed_OBJECTS) $(t_sophie_germain_OBJECTS) $(factor_OBJECTS)
+
+all: Makefile $(HEADERS)
+
+.SUFFIXES:
+.SUFFIXES: .S .c .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign lib/sshmath/tests/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+.c.o:
+	$(COMPILE) -c $<
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+t-mathtest: $(t_mathtest_OBJECTS) $(t_mathtest_DEPENDENCIES)
+	@rm -f t-mathtest
+	$(LINK) $(t_mathtest_LDFLAGS) $(t_mathtest_OBJECTS) $(t_mathtest_LDADD) $(LIBS)
+
+t-test-ec: $(t_test_ec_OBJECTS) $(t_test_ec_DEPENDENCIES)
+	@rm -f t-test-ec
+	$(LINK) $(t_test_ec_LDFLAGS) $(t_test_ec_OBJECTS) $(t_test_ec_LDADD) $(LIBS)
+
+t-mathspeed: $(t_mathspeed_OBJECTS) $(t_mathspeed_DEPENDENCIES)
+	@rm -f t-mathspeed
+	$(LINK) $(t_mathspeed_LDFLAGS) $(t_mathspeed_OBJECTS) $(t_mathspeed_LDADD) $(LIBS)
+
+t-sophie-germain: $(t_sophie_germain_OBJECTS) $(t_sophie_germain_DEPENDENCIES)
+	@rm -f t-sophie-germain
+	$(LINK) $(t_sophie_germain_LDFLAGS) $(t_sophie_germain_OBJECTS) $(t_sophie_germain_LDADD) $(LIBS)
+
+factor: $(factor_OBJECTS) $(factor_DEPENDENCIES)
+	@rm -f factor
+	$(LINK) $(factor_LDFLAGS) $(factor_OBJECTS) $(factor_LDADD) $(LIBS)
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $(SOURCES) $(HEADERS) $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = lib/sshmath/tests
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  test -f $(distdir)/$$file \
+	  || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $$d/$$file $(distdir)/$$file; \
+	done
+check-TESTS: $(TESTS)
+	@failed=0; all=0; \
+	srcdir=$(srcdir); export srcdir; \
+	for tst in $(TESTS); do \
+	  if test -f $$tst; then dir=.; \
+	  else dir="$(srcdir)"; fi; \
+	  if $(TESTS_ENVIRONMENT) $$dir/$$tst; then \
+	    all=`expr $$all + 1`; \
+	    echo "PASS: $$tst"; \
+	  elif test $$? -ne 77; then \
+	    all=`expr $$all + 1`; \
+	    failed=`expr $$failed + 1`; \
+	    echo "FAIL: $$tst"; \
+	  fi; \
+	done; \
+	if test "$$failed" -eq 0; then \
+	  banner="All $$all tests passed"; \
+	else \
+	  banner="$$failed of $$all tests failed"; \
+	fi; \
+	dashes=`echo "$$banner" | sed s/./=/g`; \
+	echo "$$dashes"; \
+	echo "$$banner"; \
+	echo "$$dashes"; \
+	test "$$failed" -eq 0
+info:
+dvi:
+check: all
+	$(MAKE) check-TESTS
+installcheck:
+install-exec: 
+	@$(NORMAL_INSTALL)
+
+install-data: 
+	@$(NORMAL_INSTALL)
+
+install: install-exec install-data all
+	@:
+
+uninstall: 
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' INSTALL_SCRIPT='$(INSTALL_PROGRAM)' install
+installdirs:
+
+
+mostlyclean-generic:
+	-test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	-rm -f Makefile $(DISTCLEANFILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+
+maintainer-clean-generic:
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-compile mostlyclean-tags mostlyclean-generic
+
+clean:  clean-compile clean-tags clean-generic mostlyclean
+
+distclean:  distclean-compile distclean-tags distclean-generic clean
+	-rm -f config.status
+
+maintainer-clean:  maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-generic distclean
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir check-TESTS info dvi \
+installcheck install-exec install-data install uninstall all \
+installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

@@ -1,0 +1,687 @@
+/* sshconf.h.in.  Generated automatically from configure.in by autoheader.  */
+
+/* Define to empty if the keyword does not work.  */
+#undef const
+
+/* Define if you have <sys/wait.h> that is POSIX.1 compatible.  */
+#undef HAVE_SYS_WAIT_H
+
+/* Define as __inline if that's what the C compiler calls it.  */
+#undef inline
+
+/* Define to `int' if <sys/types.h> doesn't define.  */
+#undef mode_t
+
+/* Define to `long' if <sys/types.h> doesn't define.  */
+#undef off_t
+
+/* Define if you need to in order for stat and other things to work.  */
+#undef _POSIX_SOURCE
+
+/* Define as the return type of signal handlers (int or void).  */
+#undef RETSIGTYPE
+
+/* Define to `unsigned' if <sys/types.h> doesn't define.  */
+#undef size_t
+
+/* Define if the `S_IS*' macros in <sys/stat.h> do not work properly.  */
+#undef STAT_MACROS_BROKEN
+
+/* Define if you have the ANSI C header files.  */
+#undef STDC_HEADERS
+
+/* Define if you can safely include both <sys/time.h> and <time.h>.  */
+#undef TIME_WITH_SYS_TIME
+
+/* Define if your processor stores words with the most significant
+   byte first (like Motorola and SPARC, unlike Intel and VAX).  */
+#undef WORDS_BIGENDIAN
+
+/* Define if the X Window System is missing or not being used.  */
+#undef X_DISPLAY_MISSING
+
+/* Package name. */
+#undef PACKAGE
+
+/* Package version. */
+#undef VERSION
+
+/* EFENCE memory debugger */
+#undef EFENCE
+
+/* Light debugging */
+#undef DEBUG_LIGHT
+
+/* Heavy debugging */
+#undef DEBUG_HEAVY
+
+/* Inet addr is broken on this system */
+#undef BROKEN_INET_ADDR
+
+/* Define this to the canonical name of your host type (e.g., 
+   "sparc-sun-sunos4.0.3"). */
+#undef HOSTTYPE
+
+/* Define this to be the path of the xauth program. */
+#undef XAUTH_PATH
+
+/* Define this if sys/syslog.h needs to be included in addition to syslog.h.
+   This is the case on some Ultrix versions. */
+#undef NEED_SYS_SYSLOG_H
+
+/* Define this to include libwrap (tcp_wrappers) support. */
+#undef LIBWRAP
+#undef HAVE_LIBWRAP
+
+/* This is defined to pw_encrypt on Linux when using John Faugh's shadow 
+   password implementation. */
+#undef crypt
+
+/* Define this if you want to support Security Dynammics SecurID
+   cards. */
+#undef HAVE_SECURID
+
+/* Define this if you want to support TIS Authentication scheme. */
+#undef HAVE_TIS
+
+/* Additionally define this if on SCO 3.2v5 Unix */
+#undef SCO5
+
+/* Define this if you want to disable port forwardings */
+#undef DISABLE_PORT_FORWARDING
+
+/* Define this if you want to disable X11 forwarding */
+#undef DISABLE_X11_FORWARDING
+
+/* Set this to allow group writeability of $HOME, .ssh and authorized_keys */
+#undef ALLOW_GROUP_WRITEABILITY
+
+/* Define this if inet_network should be used instead of inet_addr.  This is
+   the case on DGUX 5.4. */
+#undef BROKEN_INET_ADDR
+
+/* Define this if there is a compatible ssh 1.x, and SSH1_PATH, SCP1_PATH,
+   and SSHD1_PATH have been set to the appropriate path. */
+#undef SSH1_COMPATIBILITY
+
+/* Path for compatible ssh 1.x. */
+#undef SSH1_PATH
+
+/* Path for compatible sshd 1.x. */
+#undef SSHD1_PATH
+
+/* Path for compatible scp 1.x. */
+#undef SCP1_PATH
+
+/* Enable ssh-agent1 compatibility in ssh-agent2. */
+#undef WITH_SSH_AGENT1_COMPAT
+
+/* Default socks server for the client. */
+#undef SOCKS_DEFAULT_SERVER
+
+/* Enable the assembler crypt code. */
+#undef WITH_CRYPT_ASM
+
+/* Defined if compiled symbols are _not_ prepended with underscore `_' */
+#undef HAVE_NO_SYMBOL_UNDERSCORE
+/* Define this to use assembler routines in sshmath library. */
+#undef SSHMATH_ASSEMBLER_SUBROUTINES
+
+/* Define this to use Digital CC V5.3 assembler inline macros in sshmath
+library. */
+#undef SSHMATH_ALPHA_DEC_CC_ASM
+
+/* Define this, if /usr/xpg4/include/term.h is to be used instead of
+   /usr/include/term.h */
+#undef HAVE_USR_XPG4_INCLUDE_TERM_H
+
+/* Define this if O_NONBLOCK does not work on your system (e.g., Ultrix). */
+#undef O_NONBLOCK_BROKEN
+
+/* Define this if speed_t is defined in stdtypes.h or otherwise gets included
+   into ttymodes.c from system headers. */
+#undef SPEED_T_IN_STDTYPES_H
+
+/* If defines, this overrides "tty" as the terminal group. */
+#undef TTY_GROUP
+
+/* Define if you have SIA, Security Integration Architecture (as in
+   Tru64 UNIX). */
+#undef HAVE_SIA
+
+/* Define this if your system has minor */
+#undef HAVE_MINOR
+
+/* Define this if spwd has member sp_expire*/
+#undef HAVE_STRUCT_SPWD_EXPIRE
+
+/* Define this if spwd has member sp_inact */
+#undef HAVE_STRUCT_SPWD_INACT
+
+/* Define this if utmpx has member ut_syslen */
+#undef HAVE_SYSLEN_IN_UTMPX
+
+/* Define if utmp structure has addr field. */
+#undef HAVE_ADDR_IN_UTMP
+
+/* Define if utmp structure has id field. */
+#undef HAVE_ID_IN_UTMP
+
+/* Define if utmp structure has name field. */
+#undef HAVE_NAME_IN_UTMP
+
+/* Define if utmp structure has pid field. */
+#undef HAVE_PID_IN_UTMP
+
+/* Define if you have shadow passwords in /etc/security/passwd (AIX style). */
+#undef HAVE_ETC_SECURITY_PASSWD
+
+/* Define if you have shadow passwords in /etc/security/passwd.adjunct
+   (SunOS style). */
+#undef HAVE_ETC_SECURITY_PASSWD_ADJUNCT
+
+  
+/* Define if you have shadow passwords in /etc/shadow (Solaris style). */
+#undef HAVE_ETC_SHADOW
+
+/* Define if you have system login defaults in /etc/default/login. */
+#undef HAVE_ETC_DEFAULT_LOGIN
+
+/* Define these if on SCO Unix. */
+#undef HAVE_SCO_ETC_SHADOW
+#undef SCO
+
+/* Define this if compiling on Ultrix.  Defining this does not actually require
+   shadow passwords to be present; this just includes support for them. */
+#undef HAVE_ULTRIX_SHADOW_PASSWORDS
+
+/* Define this for HP-UX 10.x shadow passwords */
+#undef HAVE_HPUX_TCB_AUTH
+
+/* Define if utmp structure has host field. */
+#undef HAVE_HOST_IN_UTMP
+
+/* Default path for utmp.  Determined by configure. */
+#undef SSH_UTMP
+
+/* Default path for wtmp.  Determined by configure. */
+#undef SSH_WTMP
+
+/* Default path for lastlog.  Determined by configure. */
+#undef SSH_LASTLOG
+
+/* This is defined if we found a lastlog file.  The presence of lastlog.h
+   alone is not a sufficient indicator (at least newer BSD systems have
+   lastlog but no lastlog.h. */
+#undef HAVE_LASTLOG
+
+/* Define if /var/adm/lastlog or whatever it is called is a directory
+   (e.g. SGI IRIX). */
+#undef LASTLOG_IS_DIR
+
+/* Define this if libutil.a contains BSD 4.4 compatible login(), logout(),
+   and logwtmp() calls. */
+#undef HAVE_LIBUTIL_LOGIN
+
+/* Location of system mail spool directory. */
+#undef MAIL_SPOOL_DIRECTORY
+
+/* Name of user's mail spool file if stored in user's home directory. */
+#undef MAIL_SPOOL_FILE
+
+/* Support for NIS+ */
+#undef NIS_PLUS
+
+/* This is defined if /var/run exists. */
+#undef HAVE_VAR_RUN
+
+/* Define this to enable setting TCP_NODELAY for tcp sockets. */
+#undef ENABLE_TCP_NODELAY
+
+/* Define this if connect(2) system call fails with nonblocking sockets. */
+#undef NO_NONBLOCKING_CONNECT
+
+/* Define this if S_IFSOCK is defined */
+#undef HAVE_S_IFSOCK
+
+/* Define this if you are using HPSUX.  HPUX uses non-standard shared
+   memory communication for X, which seems to be enabled by the display name
+   matching that of the local host.  This circumvents it by using the IP
+   address instead of the host name in DISPLAY. */
+#undef HPSUX_NONSTANDARD_X11_KLUDGE
+
+/* Support for Secure RPC */
+#undef SECURE_RPC
+
+/* Support for Secure NFS */
+#undef SECURE_NFS
+
+/* Does struct tm have tm_gmtoff member? */
+#undef HAVE_TM_GMTOFF_IN_STRUCT_TM
+
+/* Does struct tm have tm_isdst member? */
+#undef HAVE_TM_ISDST_IN_STRUCT_TM
+
+/* Should sshtime routines avoid using system provided gmtime(3)
+   and localtime(3) functions? */
+#undef USE_SSH_INTERNAL_LOCALTIME
+
+/* Enable PGP library. */
+#undef WITH_PGP
+
+/* The number of bytes in a int.  */
+#undef SIZEOF_INT
+
+/* The number of bytes in a long.  */
+#undef SIZEOF_LONG
+
+/* The number of bytes in a long long.  */
+#undef SIZEOF_LONG_LONG
+
+/* The number of bytes in a short.  */
+#undef SIZEOF_SHORT
+
+/* Define if you have the _getpty function.  */
+#undef HAVE__GETPTY
+
+/* Define if you have the authenticate function.  */
+#undef HAVE_AUTHENTICATE
+
+/* Define if you have the chmod function.  */
+#undef HAVE_CHMOD
+
+/* Define if you have the chown function.  */
+#undef HAVE_CHOWN
+
+/* Define if you have the clock function.  */
+#undef HAVE_CLOCK
+
+/* Define if you have the crypt function.  */
+#undef HAVE_CRYPT
+
+/* Define if you have the ctime function.  */
+#undef HAVE_CTIME
+
+/* Define if you have the daemon function.  */
+#undef HAVE_DAEMON
+
+/* Define if you have the endgrent function.  */
+#undef HAVE_ENDGRENT
+
+/* Define if you have the endpwent function.  */
+#undef HAVE_ENDPWENT
+
+/* Define if you have the fchmod function.  */
+#undef HAVE_FCHMOD
+
+/* Define if you have the fchown function.  */
+#undef HAVE_FCHOWN
+
+/* Define if you have the fstat function.  */
+#undef HAVE_FSTAT
+
+/* Define if you have the ftruncate function.  */
+#undef HAVE_FTRUNCATE
+
+/* Define if you have the futimes function.  */
+#undef HAVE_FUTIMES
+
+/* Define if you have the getenv function.  */
+#undef HAVE_GETENV
+
+/* Define if you have the geteuid function.  */
+#undef HAVE_GETEUID
+
+/* Define if you have the getgid function.  */
+#undef HAVE_GETGID
+
+/* Define if you have the getgrgid function.  */
+#undef HAVE_GETGRGID
+
+/* Define if you have the gethostname function.  */
+#undef HAVE_GETHOSTNAME
+
+/* Define if you have the getopt function.  */
+#undef HAVE_GETOPT
+
+/* Define if you have the getpgrp function.  */
+#undef HAVE_GETPGRP
+
+/* Define if you have the getpid function.  */
+#undef HAVE_GETPID
+
+/* Define if you have the getppid function.  */
+#undef HAVE_GETPPID
+
+/* Define if you have the getpt function.  */
+#undef HAVE_GETPT
+
+/* Define if you have the getpwuid function.  */
+#undef HAVE_GETPWUID
+
+/* Define if you have the getrlimit function.  */
+#undef HAVE_GETRLIMIT
+
+/* Define if you have the getrusage function.  */
+#undef HAVE_GETRUSAGE
+
+/* Define if you have the getservbyname function.  */
+#undef HAVE_GETSERVBYNAME
+
+/* Define if you have the getservbyport function.  */
+#undef HAVE_GETSERVBYPORT
+
+/* Define if you have the getspnam function.  */
+#undef HAVE_GETSPNAM
+
+/* Define if you have the gettimeofday function.  */
+#undef HAVE_GETTIMEOFDAY
+
+/* Define if you have the getuid function.  */
+#undef HAVE_GETUID
+
+/* Define if you have the initgroups function.  */
+#undef HAVE_INITGROUPS
+
+/* Define if you have the innetgr function.  */
+#undef HAVE_INNETGR
+
+/* Define if you have the localtime function.  */
+#undef HAVE_LOCALTIME
+
+/* Define if you have the lockf function.  */
+#undef HAVE_LOCKF
+
+/* Define if you have the lstat function.  */
+#undef HAVE_LSTAT
+
+/* Define if you have the lutimes function.  */
+#undef HAVE_LUTIMES
+
+/* Define if you have the makeutx function.  */
+#undef HAVE_MAKEUTX
+
+/* Define if you have the memcpy function.  */
+#undef HAVE_MEMCPY
+
+/* Define if you have the memmove function.  */
+#undef HAVE_MEMMOVE
+
+/* Define if you have the memset function.  */
+#undef HAVE_MEMSET
+
+/* Define if you have the minor function.  */
+#undef HAVE_MINOR
+
+/* Define if you have the nanosleep function.  */
+#undef HAVE_NANOSLEEP
+
+/* Define if you have the openpty function.  */
+#undef HAVE_OPENPTY
+
+/* Define if you have the popen function.  */
+#undef HAVE_POPEN
+
+/* Define if you have the putenv function.  */
+#undef HAVE_PUTENV
+
+/* Define if you have the pw_encrypt function.  */
+#undef HAVE_PW_ENCRYPT
+
+/* Define if you have the random function.  */
+#undef HAVE_RANDOM
+
+/* Define if you have the remove function.  */
+#undef HAVE_REMOVE
+
+/* Define if you have the revoke function.  */
+#undef HAVE_REVOKE
+
+/* Define if you have the setlogin function.  */
+#undef HAVE_SETLOGIN
+
+/* Define if you have the setluid function.  */
+#undef HAVE_SETLUID
+
+/* Define if you have the setpgid function.  */
+#undef HAVE_SETPGID
+
+/* Define if you have the setpgrp function.  */
+#undef HAVE_SETPGRP
+
+/* Define if you have the setrlimit function.  */
+#undef HAVE_SETRLIMIT
+
+/* Define if you have the setsid function.  */
+#undef HAVE_SETSID
+
+/* Define if you have the signal function.  */
+#undef HAVE_SIGNAL
+
+/* Define if you have the sleep function.  */
+#undef HAVE_SLEEP
+
+/* Define if you have the snprintf function.  */
+#undef HAVE_SNPRINTF
+
+/* Define if you have the strcasecmp function.  */
+#undef HAVE_STRCASECMP
+
+/* Define if you have the strchr function.  */
+#undef HAVE_STRCHR
+
+/* Define if you have the strerror function.  */
+#undef HAVE_STRERROR
+
+/* Define if you have the strncasecmp function.  */
+#undef HAVE_STRNCASECMP
+
+/* Define if you have the times function.  */
+#undef HAVE_TIMES
+
+/* Define if you have the truncate function.  */
+#undef HAVE_TRUNCATE
+
+/* Define if you have the ttyslot function.  */
+#undef HAVE_TTYSLOT
+
+/* Define if you have the ulimit function.  */
+#undef HAVE_ULIMIT
+
+/* Define if you have the umask function.  */
+#undef HAVE_UMASK
+
+/* Define if you have the uname function.  */
+#undef HAVE_UNAME
+
+/* Define if you have the usleep function.  */
+#undef HAVE_USLEEP
+
+/* Define if you have the utime function.  */
+#undef HAVE_UTIME
+
+/* Define if you have the utimes function.  */
+#undef HAVE_UTIMES
+
+/* Define if you have the vhangup function.  */
+#undef HAVE_VHANGUP
+
+/* Define if you have the waitpid function.  */
+#undef HAVE_WAITPID
+
+/* Define if you have the <arpa/inet.h> header file.  */
+#undef HAVE_ARPA_INET_H
+
+/* Define if you have the <curses.h> header file.  */
+#undef HAVE_CURSES_H
+
+/* Define if you have the <dirent.h> header file.  */
+#undef HAVE_DIRENT_H
+
+/* Define if you have the <endian.h> header file.  */
+#undef HAVE_ENDIAN_H
+
+/* Define if you have the <grp.h> header file.  */
+#undef HAVE_GRP_H
+
+/* Define if you have the <lastlog.h> header file.  */
+#undef HAVE_LASTLOG_H
+
+/* Define if you have the <libutil.h> header file.  */
+#undef HAVE_LIBUTIL_H
+
+/* Define if you have the <login_cap.h> header file.  */
+#undef HAVE_LOGIN_CAP_H
+
+/* Define if you have the <machine/endian.h> header file.  */
+#undef HAVE_MACHINE_ENDIAN_H
+
+/* Define if you have the <machine/spl.h> header file.  */
+#undef HAVE_MACHINE_SPL_H
+
+/* Define if you have the <ndir.h> header file.  */
+#undef HAVE_NDIR_H
+
+/* Define if you have the <netdb.h> header file.  */
+#undef HAVE_NETDB_H
+
+/* Define if you have the <netgroup.h> header file.  */
+#undef HAVE_NETGROUP_H
+
+/* Define if you have the <netinet/in.h> header file.  */
+#undef HAVE_NETINET_IN_H
+
+/* Define if you have the <netinet/in_systm.h> header file.  */
+#undef HAVE_NETINET_IN_SYSTM_H
+
+/* Define if you have the <paths.h> header file.  */
+#undef HAVE_PATHS_H
+
+/* Define if you have the <pwd.h> header file.  */
+#undef HAVE_PWD_H
+
+/* Define if you have the <rusage.h> header file.  */
+#undef HAVE_RUSAGE_H
+
+/* Define if you have the <sgtty.h> header file.  */
+#undef HAVE_SGTTY_H
+
+/* Define if you have the <shadow.h> header file.  */
+#undef HAVE_SHADOW_H
+
+/* Define if you have the <sia.h> header file.  */
+#undef HAVE_SIA_H
+
+/* Define if you have the <sys/callout.h> header file.  */
+#undef HAVE_SYS_CALLOUT_H
+
+/* Define if you have the <sys/conf.h> header file.  */
+#undef HAVE_SYS_CONF_H
+
+/* Define if you have the <sys/dir.h> header file.  */
+#undef HAVE_SYS_DIR_H
+
+/* Define if you have the <sys/ioctl.h> header file.  */
+#undef HAVE_SYS_IOCTL_H
+
+/* Define if you have the <sys/mkdev.h> header file.  */
+#undef HAVE_SYS_MKDEV_H
+
+/* Define if you have the <sys/ndir.h> header file.  */
+#undef HAVE_SYS_NDIR_H
+
+/* Define if you have the <sys/resource.h> header file.  */
+#undef HAVE_SYS_RESOURCE_H
+
+/* Define if you have the <sys/select.h> header file.  */
+#undef HAVE_SYS_SELECT_H
+
+/* Define if you have the <sys/stream.h> header file.  */
+#undef HAVE_SYS_STREAM_H
+
+/* Define if you have the <sys/time.h> header file.  */
+#undef HAVE_SYS_TIME_H
+
+/* Define if you have the <sys/un.h> header file.  */
+#undef HAVE_SYS_UN_H
+
+/* Define if you have the <sys/utsname.h> header file.  */
+#undef HAVE_SYS_UTSNAME_H
+
+/* Define if you have the <term.h> header file.  */
+#undef HAVE_TERM_H
+
+/* Define if you have the <termcap.h> header file.  */
+#undef HAVE_TERMCAP_H
+
+/* Define if you have the <termio.h> header file.  */
+#undef HAVE_TERMIO_H
+
+/* Define if you have the <termios.h> header file.  */
+#undef HAVE_TERMIOS_H
+
+/* Define if you have the <ulimit.h> header file.  */
+#undef HAVE_ULIMIT_H
+
+/* Define if you have the <unistd.h> header file.  */
+#undef HAVE_UNISTD_H
+
+/* Define if you have the <usersec.h> header file.  */
+#undef HAVE_USERSEC_H
+
+/* Define if you have the <util.h> header file.  */
+#undef HAVE_UTIL_H
+
+/* Define if you have the <utime.h> header file.  */
+#undef HAVE_UTIME_H
+
+/* Define if you have the <utmp.h> header file.  */
+#undef HAVE_UTMP_H
+
+/* Define if you have the <utmpx.h> header file.  */
+#undef HAVE_UTMPX_H
+
+/* Define if you have the auth library (-lauth).  */
+#undef HAVE_LIBAUTH
+
+/* Define if you have the bsd library (-lbsd).  */
+#undef HAVE_LIBBSD
+
+/* Define if you have the crypt library (-lcrypt).  */
+#undef HAVE_LIBCRYPT
+
+/* Define if you have the gen library (-lgen).  */
+#undef HAVE_LIBGEN
+
+/* Define if you have the inet library (-linet).  */
+#undef HAVE_LIBINET
+
+/* Define if you have the ncurses library (-lncurses).  */
+#undef HAVE_LIBNCURSES
+
+/* Define if you have the nsl library (-lnsl).  */
+#undef HAVE_LIBNSL
+
+/* Define if you have the s library (-ls).  */
+#undef HAVE_LIBS
+
+/* Define if you have the sec library (-lsec).  */
+#undef HAVE_LIBSEC
+
+/* Define if you have the seq library (-lseq).  */
+#undef HAVE_LIBSEQ
+
+/* Define if you have the shadow library (-lshadow).  */
+#undef HAVE_LIBSHADOW
+
+/* Define if you have the socket library (-lsocket).  */
+#undef HAVE_LIBSOCKET
+
+/* Define if you have the sun library (-lsun).  */
+#undef HAVE_LIBSUN
+
+/* Define if you have the termcap library (-ltermcap).  */
+#undef HAVE_LIBTERMCAP
+
+/* Define if you have the xcurses library (-lxcurses).  */
+#undef HAVE_LIBXCURSES

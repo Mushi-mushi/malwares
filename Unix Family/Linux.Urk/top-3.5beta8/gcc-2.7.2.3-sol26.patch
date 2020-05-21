@@ -1,0 +1,10 @@
+--- fixinc.svr4.orig	Thu Jun 15 14:03:29 1995
++++ fixinc.svr4	Wed Oct 15 23:06:49 1997
+@@ -189,6 +189,7 @@
+ 	  s/__STDC__[ 	][ 	]*==[ 	][ 	]*1/defined (__STRICT_ANSI__)/g
+ 	  s/__STDC__[ 	][ 	]*!=[ 	][ 	]*0/defined (__STRICT_ANSI__)/g
+ 	  s/__STDC__ - 0 == 0/!defined (__STRICT_ANSI__)/g
++	  s/__STDC__ - 0 == 1/defined (__STRICT_ANSI__)/g
+ 	  /^typedef[ 	][ 	]*[unsigned 	]*long[ 	][ 	]*[u_]*longlong_t;/s/long/long long/
+ 	' $2/$file > $2/$file.sed
+ 	mv $2/$file.sed $2/$file

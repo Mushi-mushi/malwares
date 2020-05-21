@@ -1,0 +1,17 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any uniprocessor, SGI machine running IRIX 6.2
+
+DESCRIPTION:
+This is the machine-dependent module for IRIX 6.2.
+It has been tested on an Indy running 6.2
+
+LIBS: -lelf
+CFLAGS: -DHAVE_GETOPT
+
+AUTHOR: Sandeep Cariapa <cariapa@sgi.com> (6.2 mods by tda10@cam.ac.uk)
+This is not a supported product of Silicon Graphics, Inc.
+Please do not call SGI for support.
+
+

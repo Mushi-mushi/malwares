@@ -1,0 +1,13 @@
+alloc.o: alloc.c
+compare.o: compare.c ../proc/readproc.h ../proc/tree.h
+devname.o: devname.c
+ksym.o: ksym.c ../proc/psdata.h ../proc/ps.h ../proc/version.h
+output.o: output.c
+pwcache.o: pwcache.c
+readproc.o: readproc.c ../proc/version.h ../proc/readproc.h \
+ ../proc/devname.h ../proc/ps.h
+signals.o: signals.c ../proc/signals.h signames.h
+status.o: status.c ../proc/ps.h ../proc/readproc.h
+sysinfo.o: sysinfo.c ../proc/sysinfo.h
+version.o: version.c
+whattime.o: whattime.c ../proc/whattime.h ../proc/sysinfo.h

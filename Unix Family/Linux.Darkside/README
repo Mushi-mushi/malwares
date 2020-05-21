@@ -1,0 +1,22 @@
+This is a simple FreeBSD kernel module, result of the period of time when I
+was analizing the source code of FreeBSD kernel. This module isn't final product - 
+I wrote, it is  only for showing what we can do with system using kernel modules. 
+It contains small hacks and simple solutions, which someone can classify as a
+"rootkit" functions. Why not? Every API-function or shell-command can be
+used for cracking the system and my rootkit also can be used this way....
+
+So... now we have:
+1)Functions which can hide any process and it's children from the system.
+2)Functions which can Hide any files from the system.
+3)Functions for manipulations with uids, euids etc.
+4)Small TCP/IP stack modifications for the purpose of hiding active connections.
+
+I have tested module on FreeBSD 4.2, 4.3 and 4.4. I think it SHOULD work in 
+all 4.x family.
+
+Good luck :-)
+
+babka (mail@doesnt.exists)
+
+=============================
+http://lbyte.host.sk

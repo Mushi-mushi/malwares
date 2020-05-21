@@ -1,0 +1,38 @@
+                      ___      ______      _       _
+                    /     \   |   _   \   |  \   /  |
+                   |  / \  |  |  |  \  |  |   \_/   |
+                   | |___| |  |  |_ /  |  |   \_/   |
+..oO  THE          |  ---  |  |       /   |  |   |  |         CreW Oo..
+                   '''   '''   '''''''    ''''   ''''
+                               presents
+			
+
+              	            ADMsniff v0.1b
+
+
+
+
+			by: 	antilove
+				zlib support by plaguez	
+
+
+	ADMsniff is a libpcap-based sniffer, designed to be
+	portable and powerful.
+
+	
+Installation:
+	- edit the makefile,
+	- run make
+	(btw I'm too lazy to include zlibc in this distro so you'll
+	have to build zlibc yourself.)
+
+Notes about logs compression:
+	- To enable log file compress, edit the Makefile and uncomment
+	the appropriate line. You must have zlib installed.
+	- For compression purposes, the log file is not flushed when
+	compression is enabled. To flush it at any time, send a HUP
+	signal to ADMsniff. To quit the sniffer and cleanly close the
+	logfile, send the TERM signal.
+ 
+
+	

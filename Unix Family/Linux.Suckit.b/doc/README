@@ -1,0 +1,149 @@
+  SucKIT v1.3b, (c) 2002 by sd <sd@cdi.cz> & devik <devik@cdi.cz>
+  +-------------------------------------------------------------+
+
+  Code:		by sd, with a lot of help from devik <devik@cdi.cz>
+  Concepts:	by Silvio Cesare - /dev/kmem, devik - kmalloc & IDT
+  		http://phrack.org/p58/phrack-09
+  Tested:	by hundreds of script kiddos around the globe :)
+  Targets:	i386-Linux boxen, kernels 2.2.x, 2.4.x without
+		security patches/modules.
+  Downloads:	http://sd.g-art.nl/sk
+
+    The SucKIT is easy-to-use, Linux-i386 kernel-based rootkit. The code
+  stays in memory through /dev/kmem trick, without help of LKM support
+  nor System.map or such things. Everything is done on the fly. It can
+  hide PIDs, files, tcp/udp/raw sockets, sniff TTYs. Next, it have
+  integrated TTY shell access (xor+sha1) which can be invoked through
+  any running service on a server. No compiling on target box needed,
+  one binary can work on any of 2.2.x & 2.4.x kernels precompiled (libc-free)
+
+  You could find details about technical background in 'src' directory.
+
+  Compiling
+  +-------+
+
+    To configure parameters (where is your home, which suffix will hide
+  files, and of course, access password) must be given before compiling
+  by:
+  
+  $ make skconfig
+  
+    Then you could compile the all of stuff by:
+  
+  $ make
+  
+  You will get a file, probably called 'inst' in current directory.
+  It's a script you upload to target box, exec it and then try to remotely
+  login to that host using './login' and password you supplied in skconfig.
+
+
+  FAQ
+  +-+
+
+  Q: When I try to load suckit, it will segfault with kernel oops, wtf ?
+  A: Fire up gdb and send me a bug report where is problem :)
+
+  Q: How I can login to machine running suckit from my Win95 ?
+  A: Dunno, btw, I'm interested in how many people ported
+     suckit to cygwin :)
+
+  Q: How I can make suckit to run automatically each reboot of machine ?
+  A: The generic way (as the install script does) is to
+     rename /sbin/init to /sbin/init<hidesuffix>, and place sk binary
+     instead of /sbin/init, so suckit will get resident imediatelly
+     after boot. However, when it will get resident, all of such changes
+     will be stealthed ;) If you can't fiddle with /sbin/init, you
+     still can place binary to somewhere into /etc/rc.d/rc3.d/S##<hidesuffix>
+     or such.
+
+  Q: When I make some pid invisible, it still appears in `ps` and `top`
+     listing, what's wrong ?
+  A: Filtering out /proc records is only for non-suckit, regular, users.
+     That means, it doesn't affect you when your shell is invisible.
+     *KEEP IN THE MIND* that suckit doesn't twist informations
+     in system for you, it does only for rest of the world :P
+
+  Q: How I can beat rootkits of such kind ?
+  A: There is many ways today. You should remove writing ability from
+     /dev/kmem (which will might make some lowlevel software angry, Xfree,
+     for example) in conjuction with disabling LKM support. Or load some
+     anti-lkm LKM (that doesn't work when sk alread installed),
+     such as StMichael (yes, this module can beat us :)
+     Also note that best thing to do is simple; don't allow kids
+     to enter your servers ;p
+
+  Q: I recompiled sk and it loses contact with kernel instance
+     running somewhere, what I could do ?
+  A: Please! Use ONE binary at the time! Each iteration of skconfig
+     will generate unique version which can not be used with any
+     later nor further iterations![btw, that will crash at the time anyway]
+
+  Q: Loggin' to machine takes a lot of time, how to speed up this process ?
+  A: Ports on given box were filtered, and client is waiting for TCP
+     handshake, so you have to specify explicitly destination port, f.e.
+     ./login -h your.loved.box.cz -d 80
+     dns (53), www(80) ssh(22) is the probably most good choices.
+
+  Q: I want to execute some init script each boot of a box, what I should do ?
+  A: Create shell script called '.rc' in your sk home directory. Take into
+     account that it will get executed imediately with sk (=init), so
+     putting sleep 300 there would be good idea before doing something.
+
+  Q: Where sniffer puts it's logs ?
+  A: ~/.sniffer, note that this file *must* be at least 222, coz sniffed
+     pids writes to this file with their [e]uid.
+
+
+  Distribution, future versions and such bullshit
+  +---------------------------------------------+
+
+    As SucKIT took a good success in script-kiddo community,
+  I decided to continue in this project. All suckit versions, from
+  the oldest to the current one you could find at:
+
+  http://sd.g-art.nl/sk
+
+  Of course, any code, flames, ideas, patches, "bug-reports", loveletters,
+  pr0n, passwordz and other feedback will be appreciated at sd@cdi.cz
+
+
+  Thanks
+  +----+
+
+  I would like thank to:
+
+  - alin@mido.ro, lstat() bugfix, interesting discussions on new
+    features ;)
+
+  - devik <devik@cdi.cz>
+    For the most important contributions to this code,
+    moral, mental, material support ;)
+  
+  - mqe <mqe@bboy.com>
+    For catching the bugs, ideas about encryption,
+    and other feedback.
+
+  - coolvibe <coolvibe@hackerheaven.org> and rest of the g-art.nl guys
+    Shell account, hosting the site ...
+  
+  - thement, fis, destruct_ ...
+    For betatesting all of my rootkit creations ;)
+
+    and to a lot of other IRC people who given
+    valuable comments/ideas in field of this code.
+    btw, if you will get lucky, you could, reach me in realtime
+    with any feedback on IRCNet unless I am not away.
+
+  Last words
+  +--------+
+
+    What to say there ? If you still didn't get what the hell is all
+  of this about, you're probably reading bad file, maybe, you
+  downloaded bad tar archive. By the way, I got some sort of
+  funny "feedback" from "security experts"/admins or such getrewted
+  people. They claims, that I or devik are those evil h4x0r3rs
+  who compromised theyr machines. NO! We're coders and we'll
+  take NO RESPONSABILITY what someone else did with our code.
+
+  As always, Have fun!
+  	-sd

@@ -1,0 +1,219 @@
+;Notify List v1.4 - by darth^maul
+
+alias -l aboutmsn.anim {
+  if (($dialog(aboutmsn) == $null) || (%.anim._i > 150)) { .timer_anim off | unset %.anim.tmp* %.anim._i | return }
+  :1 | %.anim.tmpx = $calc(($window(-1).w / 2) - %.anim._i) | %.anim.tmpy = $calc(($window(-1).h / 2) - %.anim._i) | %.anim.tmpw = $calc(%.anim._i * 2) | %.anim.tmph = $calc(%.anim._i * 2)
+  dialog -s aboutmsn %.anim.tmpx %.anim.tmpy %.anim.tmpw %.anim.tmph | inc %.anim._i 5
+}
+alias -l dccnick { 
+  if ($status == connected) {
+    did -i notify 2 1 page event
+    tokenize 32 $did(notify,2,1,1)
+    if (!$5) { halt }
+    else {
+      .dcc chat $notify($calc($5 - 1))
+    }
+  }
+}
+alias -l n.whois { 
+  if ($status == connected) {
+    did -i notify 2 1 page event
+    tokenize 32 $did(notify,2,1,1)
+    if (!$5) { halt }
+    else {
+      .whois $notify($calc($5 - 1))
+    }
+  }
+}
+alias -l n.query { 
+  if ($status == connected) {
+    did -i notify 2 1 page event
+    tokenize 32 $did(notify,2,1,1)
+    if (!$5) { halt }
+    else {
+      .msg $notify($calc($5 - 1)) $$?="Type message"
+    }
+  }
+}
+alias -l rem.contact2 { .notify -r $$?="Hangi Nicki Silmek Ýstiyorsunuz?" | did -r notify 2 | .timer 1 1 msn.notify }
+alias -l rem.contact {
+  did -i notify 2 1 page event
+  tokenize 32 $did(notify,2,1,1)
+  if (!$5) { halt }
+  else {
+    .notify -r $notify($calc($5 - 1))
+    did -r notify 2
+    .timer 1 1 msn.notify
+  }
+}
+alias -l msn.notify {
+  did -r notify 2
+  did -i notify 2 1 iconsize normal small
+  did -i notify 2 1 seticon normal 0, $+ Notify\icons\Notify.ico
+  did -i notify 2 1 seticon normal 0, $+ Notify\icons\online.ico
+  did -i notify 2 1 seticon normal 0, $+ Notify\icons\offline.ico
+  var %y = 1
+  while (%y <= $scid(0)) {
+    scon %y
+    did -i notify 2 1 cb root
+    did -a notify 2 +eb 1 1 $iif($status == connected,$me $chr(40) Online $chr(41),$me $chr(40) Offline $chr(41) )
+    did -i notify 2 1 cb last
+    did -a notify 2 +eb 2 2 Online 
+    did -i notify 2 1 cb last
+    var %x = 1
+    while (%x <= $notify(0)) { 
+      if ($notify(%x).ison == $true ) {
+        did -a notify 2 + 2 2 $notify(%x)
+      }
+      inc %x
+    } 
+    did -i notify 2 1 cb up
+    did -a notify 2 +eb 3 3 Offline
+    did -i notify 2 1 cb last
+    var %x = 1
+    while (%x <= $notify(0)) {
+      if ($notify(%x).ison == $false) { 
+        did -a notify 2 + 3 3 $notify(%x) 
+      }
+      inc %x
+    }
+    inc %y
+  }
+  did -i notify 2 1 cb up
+}
+
+alias -l baca.file { if ($isfile(notify\settings.ini) == $true) return $readini notify\settings.ini $1 $2- }
+alias -l tulis.file { writeini notify\settings.ini $$1- }
+alias pop tokenize 32 $dll($pdll.notify,Popup,$1-) | if ($isid) return $1- | $iif($4- != did not select a menu item,$4-)
+alias popup return $shortfn($scriptdirdll\popups.dll)
+alias -l aboutmsn dialog -m aboutmsn aboutmsn
+alias -l add.contact { .notify $$?="Hangi Nicki Eklemek Ýstiyorsunuz?" | did -r notify 2 | .timer  1 1 msn.notify }
+alias pdll.notify { return $+(",$scriptdirdll\popups.dll,") }
+alias mdx.notify { return $+(",$scriptdirdll\mdx.dll,") }
+alias views.notify { return Notify\dll\views.mdx }
+alias ddll.notify { return Notify\dll\dialog.mdx }
+alias nlist { if ($dialog(notify)) { dialog -v notify notify } | else { dialog -m notify notify } }
+
+on *:LOAD: {
+  if ($version >= 6.0) { clear -s | echo -s Welcome to 4Notify List v1.4 by darth^maul | echo -s contact: darth^maul@mp3zs.net | echo -s website: http://www.mp3zs.net | nlist }
+  else { echo -a Sorry, you can't use This Script with version $version of mIRC, get the latest version at http://www.mirc.com/ | .unload -rs Notify\notify.mrc }
+}
+
+dialog aboutmsn {
+  title "Notify Listesi"
+  size -1 -1 1 1
+  icon $scriptdiricons\about.ico
+  text "", 1, 50 20 150 15 
+  icon 71, 10 8 32 32, " $+ $scriptdiricons\msn.ico $+ "
+  button "Notify Listesi Ne Ýþe Yarar?", 2, 10 60 280 50, center flat
+  text "Website:", 3, 10 134 50 15
+  edit "http://www.TurkMircs.Com", 4, 60 130 150 22, autohs read
+  button "Gir!", 5, 220 130 50 22, center flat
+  edit "", 6, 10 160 280 80, read multi return autohs autovs
+  box "", 7, -10 40 320 210
+  button "Kapa", 200, 120 260 60 30, ok flat
+}
+
+dialog notify {
+  title "Notify Listesi"
+  option dbu
+  size -1 -1 120 160
+  icon $scriptdiricons\msn.ico
+  list 2, 1 2 119 158
+
+  menu "&Menü", 20
+  item "&Yenile", 12, 20
+  item "&Notify Sesleri",14,20
+  item "break", 13, 20
+  item "&Kapa", 11, 20
+
+  menu "&Mail", 30
+  item "Mail Yolla", 23, 30
+
+  menu "&Notify", 40
+  item "&Nick Ekle", 31, 40
+  item "&Nick Sil", 32, 40
+
+  menu "&Yardým", 50
+  item "&Yardým", 45, 50
+  button ok,1, 0 0 0 0,cancel
+  button positioner,10, 0 0 0 0
+}
+
+on *:dialog:aboutmsn:init:*: {
+  did -o aboutmsn 6 1 Not: | did -o aboutmsn 6 2 Menüye /notlist yazarak ulaþabilirsiniz.
+  did -o aboutmsn 6 3  NickServ gibi servisleri eklemenizde yararlý olabilir
+  did -a aboutmsn 1 Kelebek 7.3 Kiþi Listesi 
+  %.anim._i = 0 | .timer_anim -m 0 1 aboutmsn.anim
+}
+
+on *:dialog:aboutmsn:sclick:2:.timer 1 0 echo -a %noreklam 1Notify paneli eklemiþ olduðunuz herhangi bir nick online olduðu zaman size otomatikman uyarý yapar. Böylece herhangi bir kanala girmenize gerek dahi kalmaz. Notify listenize eklediðiniz nick online olur olmaz size uyarý gelir ve böylece arkadaþlarýnýzý kolayca bulabilirsiniz. Notify Listenizi kýsaca 4/notlist 1veya 4/notifylist 1yazarakta açabilirsiniz... 
+on *:dialog:aboutmsn:sclick:5:.url http://www.TurkMircs.Com
+
+on *:dialog:notify:menu:*:{
+  if ($did == 11) { dialog -x notify notify }
+  if ($did == 12) { msn.notify }
+  if ($did == 14) { 
+    $iif($baca.file(sound,on) == on,tulis.file sound on off,tulis.file sound on on) 
+    if ($baca.file(sound,on) == on) { did -c notify 14 }
+    if ($baca.file(sound,on) == off) { did -u notify 14 }
+  }
+  if ($did == 21) { dccnick | dcc send %dccnick $sfile($mircdir) | unset %dccnick }
+  ; if ($did == 22) { list $$?="Chat Rooms to Search?" }
+  if ($did == 23) { run mailto: }
+  if ($did == 31) { add.contact }
+  if ($did == 32) { rem.contact2 }
+  if ($did == 41) { run $+(",$scriptdirreadme.txt,") }
+  if ($did == 42) { url http://www.TurkMircs.Com }
+  if ($did == 44) { run mailto:darth^maul@mp3zs.net?subject=Notify List v1.4. }
+  if ($did == 45) { aboutmsn }
+}
+on *:dialog:notify:sclick:*:{
+  if ($did == 10) {
+    var %action = $gettok($did($dname,10),1,32)
+    if (%action == size) {
+      var %w = $dialog($dname).cw,%h = $dialog($dname).ch
+      dll $mdx.notify MoveControl $dname 2 * * $calc(%w -6) $calc(%h -2)
+    }
+  }
+  if ($did == 2) {
+    if ($gettok($did($dname,2,1),1,32) != rclick) halt
+    dll $popup New MSNnotify 16 16
+    dll $popup LoadImg MSNnotify icon small $scriptdir/icons/add.ico
+    dll $popup LoadImg MSNnotify icon small $scriptdir/icons/del.ico
+    dll $popup LoadImg MSNnotify icon small $scriptdir/icons/whois.ico
+    dll $popup LoadImg MSNnotify icon small $scriptdir/icons/query.ico
+    dll $popup LoadImg MSNnotify icon small $scriptdir/icons/chat.ico
+    dll $popup LoadImg MSNnotify icon small $scriptdir/icons/refresh.ico
+    dll $popup LoadImg MSNnotify icon small $scriptdir/icons/about.ico
+    dll $popup AddItem MSNnotify end 1 1 &Nick Ekle $cr add.contact
+    dll $popup AddItem MSNnotify end $iif($status == connected,+,+d) 2 2 &Nicki Sil $cr rem.contact
+    dll $popup AddItem MSNnotify end 
+    dll $popup AddItem MSNnotify end $iif($status == connected,+,+d) 3 3 &Whois Çek $cr n.whois
+    dll $popup AddItem MSNnotify end $iif($status == connected,+,+d) 4 4 &Özele Al $cr n.query
+    dll $popup AddItem MSNnotify end 
+    dll $popup AddItem MSNnotify end 6 6 Yenile $cr msn.notify
+    dll $popup AddItem MSNnotify end 7 7 Hakkýnda $cr aboutmsn
+    pop MSNnotify $mouse.dx $mouse.dy
+  }
+}
+
+on *:dialog:notify:init:*:{
+  dll $mdx.notify SetMircVersion $version
+  dll $mdx.notify MarkDialog $dname
+  dll $mdx.notify SetDialog $dname style border title sysmenu minbox
+  dll $mdx.notify SetControlMDX $dname 10 positioner size minbox maxbox > $ddll.notify
+  dll $mdx.notify SetControlMDX $dname 2 treeview hasbuttons showsel rowselect insertdroptarget > $views.notify
+  if ($baca.file(sound,on) == on) { did -c notify 14 }
+  msn.notify
+}
+on *:NOTIFY:{
+  if ($dialog(notify)) { msn.notify }
+  echo -a %sign 4Dikkat:14 ( $+ $nick $+ ) 2Þu an chatte ... 
+  if ($baca.file(sound,on) == on) { splay -w $scriptdirsounds\online.wav }
+  /halt 
+}
+
+on *:CONNECT:{ if ($dialog(notify)) { msn.notify } }
+on *:DISCONNECT:{ if ($dialog(notify)) { msn.notify } }
+on *:UNOTIFY:{ if ($dialog(notify)) { msn.notify } }

@@ -1,0 +1,27 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  For a FreeBSD-2.0 (4.4BSD) system
+	      Note process resident sizes could be wrong, but ps shows
+	      zero for them too..
+
+DESCRIPTION:
+Originally written for BSD4.4 system by Christos Zoulas.
+Ported to FreeBSD 2.0 by Steven Wallace && Wolfram Schneider
+
+This is the machine-dependent module for FreeBSD 2.x
+Works for:
+	FreeBSD 2.0
+	FreeBSD 2.1.5
+	FreeBSD 2.2
+
+LIBS: -lkvm
+
+CFLAGS: -DHAVE_GETOPT
+
+AUTHOR:  Christos Zoulas <christos@ee.cornell.edu>
+Steven Wallace  <swallace@freebsd.org>
+Wolfram Schneider <wosch@cs.tu-berlin.de>
+
+$Id: machine.c,v 1.5 1995/01/06 02:04:39 swallace Exp $
+

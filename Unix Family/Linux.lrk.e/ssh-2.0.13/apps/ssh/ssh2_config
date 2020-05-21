@@ -1,0 +1,30 @@
+# ssh2_config
+# SSH 2.0 Client Configuration File
+
+*:
+	Port				22
+	Ciphers				AnyStdCipher 
+	IdentityFile			identification
+	AuthorizationFile		authorization
+	RandomSeedFile			random_seed
+	VerboseMode			no
+	#PasswordPrompt			"%U@%H's password: "
+	PasswordPrompt			"%U's password: "
+	#LocalForward			"110:pop3.ssh.fi:110"
+	#RemoteForward			"3000:foobar:22"
+	Ssh1AgentCompatibility		none
+	#Ssh1AgentCompatibility		traditional
+	#Ssh1AgentCompatibility		ssh2
+	#SshSignerPath			ssh-signer2
+	NoDelay				no
+	KeepAlive			yes
+	
+#alpha*:
+#	Host				alpha.oof.fi
+#	User				user
+#	PasswordPrompt			"%U:s password at %H: "
+#	Ciphers				idea
+#
+#foobar:
+#	Host				foo.bar
+#	User				foo_user

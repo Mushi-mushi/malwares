@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# test-analyze-self-test
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1997 SSH Communications Security, Finland
+#                    All rights reserved
+#
+# Checks whether the self test part of automatic testing resulted in
+# errors.
+#
+# This exits with 0 if errors were found, and 1 if no errors were found.
+#
+
+if test $# -ne 1; then
+  echo 'Usage: test-analyze-self-test <filename>'
+  exit 0
+fi
+
+file="$1"
+
+if egrep '^ERROR: ' $file >&2; then
+  exit 0
+fi
+
+exit 1

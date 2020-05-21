@@ -1,0 +1,3 @@
+@set UPDATED 30 November 1996
+@set EDITION 1.16
+@set VERSION 1.16

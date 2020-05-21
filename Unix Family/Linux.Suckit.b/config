@@ -1,0 +1,25 @@
+#
+#  $Id: config, common config for all makefiles
+#
+
+#escape character - ^K by default
+ECHAR	=	0x0b
+
+#directories
+INCLUDE	=	include
+SRC	=	src
+# cheating chkproc striped msgs	1.3b
+VER	=	1.3b
+
+#files
+BINARY	=	sk
+
+#compile flags
+CC	=	gcc
+LD	=	ld
+CFLAGS	=	-Wall -O2 -fno-unroll-all-loops \
+		-I../$(INCLUDE) -I../$(ARCH) -DECHAR=$(ECHAR)
+LDFLAGS	=	-s
+
+.c.o:
+	$(CC) $(CFLAGS) -c $<

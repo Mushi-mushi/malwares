@@ -1,0 +1,16 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any generic 4.3BSD system
+
+DESCRIPTION:
+This is the machine-dependent module for BSD4.3 
+Works for:
+4.3 BSD
+	AOS4.3,	IBM rt/pc
+	mtXinu, vax
+
+LIBS: 
+
+AUTHOR:  Christos Zoulas <christos@ee.cornell.edu>
+

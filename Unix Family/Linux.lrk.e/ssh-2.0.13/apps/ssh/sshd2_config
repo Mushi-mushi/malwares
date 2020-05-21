@@ -1,0 +1,51 @@
+# sshd2_config
+# SSH 2.0 Server Configuration File
+
+*:
+	Port				22
+	ListenAddress			0.0.0.0
+	Ciphers				AnyStd
+#	Ciphers				AnyCipher
+#	Ciphers				AnyStdCipher
+#	Ciphers				3des
+	IdentityFile			identification
+	AuthorizationFile		authorization
+	HostKeyFile			hostkey
+	PublicHostKeyFile		hostkey.pub
+	RandomSeedFile			random_seed
+	ForwardAgent			yes
+	ForwardX11			yes
+# DEPRECATED	PasswordAuthentication		yes
+	PasswordGuesses			3
+#	MaxConnections			50
+# 0 == number of connections not limited 
+	MaxConnections			0 
+#	PermitRootLogin			nopwd
+	PermitRootLogin			yes
+# DEPRECATED	PubkeyAuthentication		yes
+#	AllowedAuthentications		publickey,password,hostbased
+	AllowedAuthentications		publickey,password
+#	RequiredAuthentications		publickey,password
+	ForcePTTYAllocation		no
+	VerboseMode			no
+	PrintMotd			yes
+	CheckMail			yes
+	UserConfigDirectory		"%D/.ssh2"
+#	UserConfigDirectory		"/etc/ssh2/auth/%U"
+	SyslogFacility			AUTH
+#	SyslogFacility			LOCAL7
+	Ssh1Compatibility		yes
+#	Sshd1Path			<set by	configure>
+#	AllowHosts			localhost, foobar.com, friendly.org
+#	DenyHosts			evil.org, aol.com
+#	AllowSHosts			trusted.host.org
+#	DenySHosts			not.quite.trusted.org
+#	NoDelay				yes
+
+#	KeepAlive			yes
+	RequireReverseMapping		yes
+	UserKnownHosts			yes
+
+# subsystem definitions
+
+	subsystem-sftp                  sftp-server

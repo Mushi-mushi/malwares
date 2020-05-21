@@ -1,0 +1,27 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  any Sun running SunOS version 4.x
+
+DESCRIPTION:
+This is the machine-dependent module for SunOS 4.x.
+This makes top work on the following systems:
+	SunOS 4.0
+	SunOS 4.0.1
+	SunOS 4.0.2 (including 386i architecture)
+	SunOS 4.0.3
+	SunOS 4.1
+	SunOS 4.1.1
+	SunOS 4.1.2 (including MP architectures)
+	SunOS 4.1.3 (including MP architectures)
+SunOS 4.1.3_U1 (including MP architectures)
+SunOS 4.1.4 (including MP architectures)
+	Solbourne OS/MP PRIOR to 4.1A
+
+LIBS:  -lkvm
+
+CFLAGS: -DHAVE_GETOPT -DORDER
+
+AUTHOR:  William LeFebvre <wnl@groupsys.com>
+Solbourne support by David MacKenzie <djm@eng.umd.edu>
+

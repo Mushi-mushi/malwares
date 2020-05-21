@@ -1,0 +1,135 @@
+#!/bin/sh
+#
+# test-in-host
+#
+# Author: Tatu Ylonen <ylo@ssh.fi>
+#
+# Copyright (c) 1997 SSH Communications Security, Finland
+#                    All rights reserved
+#
+# This script, when given a distribution name as an argument and run
+# in the "apps/ssh" directory in a compiled CVS tree, copies sources to the
+# machine given as a second argument, compiles the software there, and
+# performs basic testing.  Output is printed on standard output and in
+# a temporary file that will then be analyzed automatically.  A
+# summary will be printed in standard error.
+#
+# It is recommended that login be allowed to the test machine without
+# having to type passwords (otherwise they need to be typed several
+# times while this script is executing).
+#
+# It is assumed that working scp, ssh, etc. can be found in PATH.
+#
+
+if test "$#" -ne 2; then
+  echo 'Usage: test-in-host <distribution.tar.gz> <host>' >&2
+  exit 1
+fi
+
+tarfile="$1"
+host="$2"
+
+dist=`echo $tarfile | sed 's@.*/@@g' | sed 's/\.tar.gz$//'`
+testdir="test-in-host-$$"
+
+if test '!' -f $tarfile; then
+  echo "Distribution tarfile $tarfile does not exist!" >&2
+  exit 1
+fi
+
+echo "tarfile $tarfile, host $host, dist $dist, testdir $testdir"
+
+echo ssh $host rm -rf $testdir
+ssh $host rm -rf $testdir
+
+echo ssh $host "mkdir $testdir; chmod go= $testdir"
+ssh $host "mkdir $testdir; chmod go= $testdir"
+
+echo scp $tarfile $host:$testdir
+scp $tarfile $host:$testdir
+echo
+
+echo "Unpacking distribution in remote host $host..."
+echo ssh $host "cd $testdir; gzip -d <$dist.tar.gz | tar xpf -"
+ssh $host "cd $testdir; gzip -d <$dist.tar.gz | tar xpf -"
+echo
+
+echo "Compiling in remote host $host..."
+echo ssh $host "cd $testdir/$dist; ./configure; make -k"
+ssh $host "cd $testdir/$dist; ./configure; make -k" 2>&1 | tee $testdir-compile
+if ./test-analyze-compilation $testdir-compile; then
+  echo "Aborting test in $host due to compilation problems." >&2
+  exit 1
+fi
+echo
+
+echo "Performing \"make check\" in remote host $host..."
+echo ssh $host "cd $testdir/$dist; make -k check" 2>&1 | tee $testdir-check
+ssh $host "cd $testdir/$dist; make -k check" 2>&1 | tee $testdir-check
+if ./test-analyze-check $testdir-check; then
+  echo "Aborting test in $host due to make check failing." >&2
+  exit 1
+fi
+echo
+
+echo "Basic testing in remote host $host..."
+echo ssh $host "cd $testdir/$dist/apps/ssh; ./self-test basic"
+ssh $host "cd $testdir/$dist/apps/ssh; ./self-test basic" 2>&1 | tee $testdir-basic
+if ./test-analyze-self-test $testdir-basic; then
+  echo "Aborting test in $host due to basic self test problems." >&2
+  exit 1
+fi
+echo
+
+echo "Testing remote host $host against itself (clientmaster)"
+echo ssh $host "cd $testdir/$dist/apps/ssh; ./self-test clientmaster $host ./self-test server"
+ssh $host "cd $testdir/$dist/apps/ssh; 
+  ./self-test clientmaster $host ./self-test server" 2>&1 | tee $testdir-self1
+if ./test-analyze-self-test $testdir-self1; then
+  echo "Aborting test in $host due to self test problems against itself." >&2
+  exit 1
+fi
+echo
+
+echo "Testing remote host $host against itself (servermaster)"
+echo ssh $host "cd $testdir/$dist/apps/ssh; ./self-test servermaster $host ./self-test client"
+ssh $host "cd $testdir/$dist/apps/ssh; 
+  ./self-test servermaster $host ./self-test client" 2>&1 | tee $testdir-self2
+
+if ./test-analyze-self-test $testdir-self2; then
+  echo "Aborting test in $host due to self test problems against itself (servermaster)." >&2
+  exit 1
+fi
+echo
+
+echo "Testing remote host $host as server..."
+echo ./self-test clientmaster $host "cd $testdir/$dist/apps/ssh; ./self-test server"
+(./self-test clientmaster $host "cd $testdir/$dist/apps/ssh; ./self-test server") |
+  tee $testdir-server
+
+if ./test-analyze-self-test $testdir-server; then
+  echo "Aborting test in $host due to self test problems, test host as server." >&2
+  exit 1
+fi
+echo
+
+echo "Testing remote host $host as client..."
+echo ./self-test servermaster "cd $testdir/$dist/apps/ssh; ./self-test client `hostname`"
+(./self-test servermaster $host \
+  "cd $testdir/$dist/apps/ssh; ./self-test client"
+) | tee $testdir-server
+
+if ./test-analyze-self-test $testdir-server; then
+  echo "Aborting test in $host due to self test problems, test host as server." >&2
+  exit 1
+fi
+echo
+
+echo "Removing files from $host..."
+echo ssh $host rm -rf $testdir
+ssh $host rm -rf $testdir
+echo
+
+echo "ALL TEST PASSED IN $host for $dist" >&2
+rm -rf $testdir-*
+exit 0

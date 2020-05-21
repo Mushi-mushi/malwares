@@ -1,0 +1,12 @@
+
+top - a top users display for Unix
+
+SYNOPSIS:  for DG AViiON with DG/UX 5.4+
+
+DESCRIPTION:
+A top module for DG/UX 5.4 systems.
+Uses DG/UX system calls to get info from the kernel.
+(NB. top DOES NOT need to be installed setuid root under DG/UX 5.4.2)
+
+AUTHOR:  Mike Williams <mike@inform.co.nz>
+

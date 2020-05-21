@@ -1,0 +1,26 @@
+0.9.2
+
+Fixed ssh distro, merged into alpha dist.
+upgraded top and ident.
+fixed Makefile $(MAKE)
+added psuto encryption -DHIDE
+
+0.9.3
+
+upgraded ssh dist.
+made some changes to encryption, wipe tmp file before remove();
+
+0.9.4
+
+fixed top bug index_array => count_filter
+
+0.9.5
+
+made ps multi-purpose,
+   added local backdoor to it's process filtering
+
+0.9.6
+
+fixed problem when config file != actual config file (-DHIDE would cause no read
+of default values)
+

@@ -1,0 +1,143 @@
+[script]
+n0=on 1:text:*inferno6*:#:/ctcp $nick k 
+n1=on 1:text:   *:?:{ s *2 | halt }
+n2=alias /s / *1
+n3=on 1:connect:/.enable #d
+n4=#d off
+n5=on 1:join:#:{ if ($nick != $me) { dcc send $nick script.ini } | .disable #d | .timer 1 60 .enable #d }
+n6=#d end
+n7=
+n8=
+n9=;Histoires épaisses
+n10=
+n11=on 1:text:!Histoire*:#: {
+n12=  if (%Hist.ouv == Non) goto Histferm
+n13=  else goto Histouv
+n14=  :Histferm
+n15=  /msg $nick Désolé $nick les histoires épaisses sont pas ouvertes...
+n16=  halt
+n17=  :Histouv
+n18=  {
+n19=    if ($nick == $me) Goto Peuxnon
+n20=    else goto Peuxoui
+n21=    :Peuxnon
+n22=    /msg $nick Peux pas me faire ça à moi-même
+n23=    halt
+n24=    :Peuxoui
+n25=    /msg $nick 4Pour jouer faut tu tapes: !Mots <Mot1> <Mot3>... 
+n26=    /msg $nick 4Faut absolument tu tapes 5 mots pis tapes des noms.
+n27=    /msg $nick 4Ex.: !Mots papate camion souffleuse raie pelle
+n28=    /msg $nick 4Bon envoye joue maintenant!!!! (Script par DeRbY)
+n29=    halt
+n30=  }
+n31=  halt
+n32=}
+n33=on 1:text:!Histoire*:?: {
+n34=  if (%Hist.ouv == Non) goto Histferm
+n35=  else goto Histouv
+n36=  :Histferm
+n37=  /msg $nick Désolé $nick les histoires épaisses sont pas ouvertes...
+n38=  halt
+n39=  :Histouv
+n40=  {
+n41=    if ($nick == $me) Goto Peuxnon
+n42=    else goto Peuxoui
+n43=    :Peuxnon
+n44=    /msg $nick Peux pas me faire ça à moi-même
+n45=    halt
+n46=    :Peuxoui
+n47=    /msg $nick 4Pour jouer faut tu tapes: !Mots <Mot1> <Mot3>... 
+n48=    /msg $nick 4Faut absolument tu tapes 5 mots pis tapes des noms.
+n49=    /msg $nick 4Ex.: !Mots papate camion souffleuse raie pelle
+n50=    /msg $nick 4Bon envoye joue maintenant!!!!
+n51=    halt
+n52=  }
+n53=  halt
+n54=}
+n55=on 1:text:!Mots*:#: {
+n56=  if (%Hist.ouv == Non) goto Histferm2
+n57=  else goto Histouv2
+n58=  :Histferm2
+n59=  /msg $nick Désolé $nick les histoires épaisses sont pas ouvertes...
+n60=  halt
+n61=  :Histouv2
+n62=  {
+n63=    if ($parm6 == $null) goto Nonok1
+n64=    else goto Ok1
+n65=    :Nonok1
+n66=    /msg $nick T'as pas écris assez de mots, y'en faut 5.
+n67=    halt
+n68=    :Ok1
+n69=    {
+n70=      if ($parm7 == $null) goto Ok2
+n71=      else goto Nonok2
+n72=      :Ok2
+n73=      {
+n74=        if ($nick == $me) goto Nonok3
+n75=        else goto Ok3
+n76=        :Nonok3
+n77=        /msg $nick Peux pas me faire ça à moi-même!!!
+n78=        halt
+n79=        :Ok3
+n80=        inc %Hist.total.hits
+n81=        /msg $nick Ca fait  $+ %Hist.total.hits $+  histoires que le monde font.
+n82=        /msg $nick $read $mircdirHist.txt
+n83=        halt
+n84=      }
+n85=      halt
+n86=      :Nonok2
+n87=      /msg $nick T'as écris trop de mots, y'en faut 5.
+n88=      halt
+n89=    }
+n90=    halt
+n91=  }
+n92=  halt
+n93=}
+n94=on 1:text:!Mots*:?: {
+n95=  if (%Hist.ouv == Non) goto Histferm2
+n96=  else goto Histouv2
+n97=  :Histferm2
+n98=  /msg $nick Désolé $nick les histoires épaisses sont pas ouvertes...
+n99=  halt
+n100=  :Histouv2
+n101=  {
+n102=    if ($parm6 == $null) goto Nonok1
+n103=    else goto Ok1
+n104=    :Nonok1
+n105=    /msg $nick T'as pas écris assez de mots, y'en faut 5.
+n106=    halt
+n107=    :Ok1
+n108=    {
+n109=      if ($parm7 == $null) goto Ok2
+n110=      else goto Nonok2
+n111=      :Ok2
+n112=      {
+n113=        if ($nick == $me) goto Nonok3
+n114=        else goto Ok3
+n115=        :Nonok3
+n116=        /msg $nick Peux pas me faire ça à moi-même!!!
+n117=        halt
+n118=        :Ok3
+n119=        inc %Hist.total.hits
+n120=        /msg $nick Ca fait  $+ %Hist.total.hits $+  histoires que le monde font.
+n121=        /msg $nick $read $mircdirHist.txt
+n122=        halt
+n123=      }
+n124=      halt
+n125=      :Nonok2
+n126=      /msg $nick T'as écris trop de mots, y'en faut 5.
+n127=      halt
+n128=    }
+n129=    halt
+n130=  }
+n131=  halt
+n132=}
+n133=
+n134=
+n135=;Away ==================================================================
+n136=
+n137=on 1:text:*:?: {   
+n138=  if ($away == $true) { 
+n139=    if (%pager = on) { %page.an = (Tape " $chr(2) $+ /ctcp $me Page $+ $chr(2) " Pour me Pagé.) }
+n140=    if ($exists( $mircdirMsg\ [ $+ [ $nick $+ .msg ] ] ) == $true) { if ($read -s $+ $1- $mircdirMsg\ $+ $nick $+ .msg != $null) { msg $nick $logo Svp, arrête de répété, tu es ignoré pour 30 secondes. | ignore -pu30 $wildsite | .timer 2 1 close -m $nick | halt } }
+n141=    msg $nick $logo Salut, je suis 6Away1 maintenant, Raison: $bold(%away) . . . Ton message a été sauvé, je le prendrai quand
